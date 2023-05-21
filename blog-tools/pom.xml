@@ -13,16 +13,7 @@
     <name>工具模块</name>
 
     <properties>
-        <mail.version>1.4.7</mail.version>
-        <qiniu.version>[7.2.0, 7.2.99]</qiniu.version>
-        <alipay.version>4.9.153.ALL</alipay.version>
-        <aliyun.oss.version>3.8.0</aliyun.oss.version>
-        <qcloud.cos.version>5.6.19</qcloud.cos.version>
-        <baidubce.bos.version>0.10.82</baidubce.bos.version>
-        <jsch.version>0.1.54</jsch.version>
-        <minio.version>8.2.2</minio.version>
     </properties>
-
     <dependencies>
         <!-- 同时需要common模块和logging模块只需要引入logging模块即可 -->
         <dependency>
@@ -35,21 +26,18 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>${mail.version}</version>
         </dependency>
 
         <!--七牛云KODO存储-->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
-            <version>${qiniu.version}</version>
         </dependency>
 
         <!--支付宝依赖-->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
-            <version>${alipay.version}</version>
             <scope>compile</scope><!-- provided-->
         </dependency>
 
@@ -57,21 +45,18 @@
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>${aliyun.oss.version}</version>
         </dependency>
 
         <!-- 腾讯云COS存储 -->
         <dependency>
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
-            <version>${qcloud.cos.version}</version>
         </dependency>
 
         <!--百度云 BOS-->
         <dependency>
             <groupId>com.baidubce</groupId>
             <artifactId>bce-java-sdk</artifactId>
-            <version>${baidubce.bos.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>logback-classic</artifactId>
@@ -93,14 +78,12 @@
         <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
-            <version>${jsch.version}</version>
         </dependency>
 
         <!--minio 分布式文件存储-->
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
-            <version>${minio.version}</version>
         </dependency>
     </dependencies>
 </project>
