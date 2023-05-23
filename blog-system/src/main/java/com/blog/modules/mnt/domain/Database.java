@@ -15,11 +15,11 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import lombok.experimental.Accessors;
 import com.blog.base.CommonEntity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
 */
 @Data
 @Builder
@@ -29,6 +29,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @TableName("mnt_database")
 public class Database extends CommonEntity<Database> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "ID")

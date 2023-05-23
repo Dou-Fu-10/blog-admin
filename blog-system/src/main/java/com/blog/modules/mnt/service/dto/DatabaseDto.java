@@ -5,16 +5,17 @@ import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
 import com.blog.base.CommonDto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
 */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class DatabaseDto extends CommonDto implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String id;

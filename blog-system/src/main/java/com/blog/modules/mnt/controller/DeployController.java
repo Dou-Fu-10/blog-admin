@@ -1,4 +1,4 @@
-package com.blog.modules.mnt.rest;
+package com.blog.modules.mnt.controller;
 
 import com.blog.modules.logging.annotation.Log;
 import com.blog.modules.mnt.domain.DeployHistory;

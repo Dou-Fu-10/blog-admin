@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 日志实体类
 * @author ty
 */
 @Data

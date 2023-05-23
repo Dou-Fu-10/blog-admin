@@ -13,12 +13,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import com.blog.base.CommonModel;
 
+import java.io.Serial;
 import java.io.Serializable;
 
-/**
- *
- * Created by jinjin on 2020-09-30.
- */
 @Data
 @Builder
 @AllArgsConstructor
@@ -29,6 +26,7 @@ import java.io.Serializable;
 @TableName("mnt_deploy_server")
 // @ApiModel(value="DeploysServers对象", description="应用与服务器部署关联")
 public class DeploysServers extends CommonModel<DeploysServers> implements Serializable{
+    @Serial
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "部署ID")

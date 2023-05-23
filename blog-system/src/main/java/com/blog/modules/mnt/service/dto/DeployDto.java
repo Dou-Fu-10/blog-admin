@@ -5,18 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.blog.base.CommonDto;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
 */
 @Data
 @NoArgsConstructor
 public class DeployDto extends CommonDto implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
 

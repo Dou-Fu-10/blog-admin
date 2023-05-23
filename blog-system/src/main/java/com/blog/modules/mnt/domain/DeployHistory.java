@@ -16,12 +16,12 @@ import lombok.experimental.Accessors;
 import com.blog.base.CommonModel;
 
 import javax.validation.constraints.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
 */
 @Data
 @Builder
@@ -31,6 +31,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @TableName("mnt_deploy_history")
 public class DeployHistory extends CommonModel<DeployHistory> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
 

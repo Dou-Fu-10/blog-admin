@@ -1,4 +1,4 @@
-package com.blog.modules.security.rest;
+package com.blog.modules.security.controller;
 
 import cn.hutool.core.util.IdUtil;
 import com.wf.captcha.base.Captcha;
@@ -31,14 +31,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Zheng Jie
- * @date 2018-11-23
+ * @author ty
  * 授权、根据token获取用户详细信息
  */
 @Slf4j

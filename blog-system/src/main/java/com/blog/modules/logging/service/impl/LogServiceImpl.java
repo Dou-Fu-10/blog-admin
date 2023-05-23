@@ -32,17 +32,14 @@ import java.lang.reflect.Parameter;
 import java.util.*;
 
 /**
-* @author jinjin
-* @date 2020-09-27
-*/
+ * @author ty
+ */
 @Slf4j
 @Service
 @AllArgsConstructor
-// @CacheConfig(cacheNames = LogService.CACHE_KEY)
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.modules.logging.domain.Log> implements LogService {
 
-    // private final RedisUtils redisUtils;
     private final LogMapper logMapper;
 
     @Override
@@ -57,7 +54,7 @@ public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.module
     }
 
     @Override
-    public List<com.blog.modules.logging.domain.Log> queryAll(LogQueryParam query){
+    public List<com.blog.modules.logging.domain.Log> queryAll(LogQueryParam query) {
         return logMapper.selectList(QueryHelpMybatisPlus.getPredicate(query));
     }
 
@@ -69,7 +66,6 @@ public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.module
     }
 
     @Override
-    // @Cacheable(key = "'id:' + #p0")
     public com.blog.modules.logging.domain.Log findById(Long id) {
         return getById(id);
     }
@@ -79,7 +75,7 @@ public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.module
     public boolean removeByLogType(String logType) {
         return lambdaUpdate().eq(com.blog.modules.logging.domain.Log::getLogType, logType).remove();
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, com.blog.modules.logging.domain.Log log) {
@@ -90,14 +86,14 @@ public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.module
 
         // 方法路径
         String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
-        
+
         // 描述
         if (log != null) {
             log.setDescription(aopLog.value());
         }
         assert log != null;
         log.setRequestIp(ip);
-        
+
         log.setAddress(StringUtils.getCityInfo(log.getRequestIp()));
         log.setMethod(methodName);
         log.setUsername(username);
@@ -109,7 +105,7 @@ public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.module
             logMapper.updateById(log);
         }
     }
-    
+
     /**
      * 根据方法和传入的参数获取请求参数
      */
@@ -139,7 +135,7 @@ public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.module
         }
         return argList.size() == 1 ? JSONUtil.toJsonStr(argList.get(0)) : JSONUtil.toJsonStr(argList);
     }
-    
+
     @Override
     public Object findByErrDetail(Long id) {
         com.blog.modules.logging.domain.Log log = findById(id);

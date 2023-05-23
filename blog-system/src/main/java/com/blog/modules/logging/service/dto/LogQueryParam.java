@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
 */
 @Data
 public class LogQueryParam{

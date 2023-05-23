@@ -17,6 +17,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
+ * 日志 注解切面
  * @author ty
  */
 @Component
