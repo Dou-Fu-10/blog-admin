@@ -1,21 +1,5 @@
-/*
- *  Copyright 2019-2020 Zheng Jie
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
 package com.blog.rest;
 
-import com.blog.annotation.Log;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import com.blog.domain.LocalStorage;
@@ -29,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-//import io.swagger.annotations.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -46,7 +29,6 @@ public class LocalStorageController {
 
     private final LocalStorageService localStorageService;
 
-    // @ApiOperation("查询文件")
     @GetMapping
     @PreAuthorize("@el.check('storage:list')")
     public ResponseEntity<Object> query(LocalStorageQueryParam criteria, Pageable pageable){
@@ -79,8 +61,7 @@ public class LocalStorageController {
         LocalStorage localStorage = localStorageService.create(null, file);
         return new ResponseEntity<>(localStorage, HttpStatus.OK);
     }
-    
-    @Log("修改文件")
+
     // @ApiOperation("修改文件")
     @PutMapping
     @PreAuthorize("@el.check('storage:edit')")
@@ -89,7 +70,6 @@ public class LocalStorageController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @Log("删除文件")
     @DeleteMapping
     // @ApiOperation("多选删除")
     public ResponseEntity<Object> delete(@RequestBody Long[] ids) {

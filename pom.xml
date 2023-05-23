@@ -11,7 +11,6 @@
 
     <modules>
         <module>blog-common</module>
-        <module>blog-logging</module>
         <module>blog-system</module>
         <module>blog-tools</module>
     </modules>

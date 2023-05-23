@@ -1,18 +1,3 @@
-/*
- *  Copyright 2019-2020 Zheng Jie
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
 package com.blog.modules.system.rest;
 
 import cn.hutool.core.lang.Dict;
@@ -20,11 +5,9 @@ import com.blog.modules.system.service.RoleService;
 import com.blog.modules.system.service.dto.RoleDto;
 import com.blog.modules.system.service.dto.RoleQueryParam;
 import com.blog.modules.system.service.dto.RoleSmallDto;
-//import io.swagger.annotations.Api;
-//import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import com.blog.base.CommonEntity;
-import com.blog.annotation.Log;
+import com.blog.modules.logging.annotation.Log;
 import com.blog.exception.BadRequestException;
 import com.blog.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;

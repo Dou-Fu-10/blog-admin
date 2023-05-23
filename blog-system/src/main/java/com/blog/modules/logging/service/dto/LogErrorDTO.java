@@ -13,19 +13,35 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.blog.annotation;
+package com.blog.modules.logging.service.dto;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
- * @author Zheng Jie
- * @date 2018-11-24
- */
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Log {
-    String value() default "";
+* @author Zheng Jie
+* @date 2019-5-22
+*/
+@Data
+public class LogErrorDTO implements Serializable {
+
+    private Long id;
+
+    private String username;
+
+    private String description;
+
+    private String method;
+
+    private String params;
+
+    private String browser;
+
+    private String requestIp;
+
+    private String address;
+
+    private Date createTime;
 }

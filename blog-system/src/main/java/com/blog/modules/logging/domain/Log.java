@@ -1,27 +1,18 @@
-package com.blog.domain;
+package com.blog.modules.logging.domain;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.IdType;
-//import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.annotation.*;
 import com.blog.base.CommonModel;
+import lombok.*;
+import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
 */
 @Data
 @Builder
@@ -31,9 +22,9 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_log")
 public class Log extends CommonModel<Log> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    // @ApiodelProperty(value = "ID")
     @TableId(value = "log_id", type= IdType.AUTO)
     private Long id;
 

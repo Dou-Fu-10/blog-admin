@@ -13,11 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.blog.service.dto;
+package com.blog.modules.logging.service.dto;
 
 import lombok.Data;
+
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**

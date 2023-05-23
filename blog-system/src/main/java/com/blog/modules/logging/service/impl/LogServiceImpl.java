@@ -1,32 +1,28 @@
-package com.blog.service.impl;
+package com.blog.modules.logging.service.impl;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.blog.annotation.Log;
+import com.blog.base.PageInfo;
+import com.blog.base.QueryHelpMybatisPlus;
+import com.blog.base.impl.CommonServiceImpl;
+import com.blog.modules.logging.annotation.Log;
+import com.blog.modules.logging.service.LogService;
+import com.blog.modules.logging.service.dto.LogErrorDTO;
+import com.blog.modules.logging.service.dto.LogQueryParam;
+import com.blog.modules.logging.service.dto.LogSmallDTO;
+import com.blog.modules.logging.service.mapper.LogMapper;
 import com.blog.utils.*;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.blog.base.PageInfo;
-import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
-import com.blog.service.dto.LogErrorDTO;
-import com.blog.service.dto.LogSmallDTO;
-import com.blog.service.LogService;
-import com.blog.service.dto.LogQueryParam;
-import com.blog.service.mapper.LogMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,49 +40,49 @@ import java.util.*;
 @AllArgsConstructor
 // @CacheConfig(cacheNames = LogService.CACHE_KEY)
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.domain.Log> implements LogService {
+public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.modules.logging.domain.Log> implements LogService {
 
     // private final RedisUtils redisUtils;
     private final LogMapper logMapper;
 
     @Override
     public Object queryAll(LogQueryParam query, Pageable pageable) {
-        IPage<com.blog.domain.Log> page = PageUtil.toMybatisPage(pageable);
-        IPage<com.blog.domain.Log> pageList = logMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
+        IPage<com.blog.modules.logging.domain.Log> page = PageUtil.toMybatisPage(pageable);
+        IPage<com.blog.modules.logging.domain.Log> pageList = logMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
         String status = "ERROR";
         if (status.equals(query.getLogType())) {
             return ConvertUtil.convertPage(pageList, LogErrorDTO.class);
         }
-        return ConvertUtil.convertPage(pageList, com.blog.domain.Log.class);
+        return ConvertUtil.convertPage(pageList, com.blog.modules.logging.domain.Log.class);
     }
 
     @Override
-    public List<com.blog.domain.Log> queryAll(LogQueryParam query){
+    public List<com.blog.modules.logging.domain.Log> queryAll(LogQueryParam query){
         return logMapper.selectList(QueryHelpMybatisPlus.getPredicate(query));
     }
 
     @Override
     public PageInfo<LogSmallDTO> queryAllByUser(LogQueryParam query, Pageable pageable) {
-        IPage<com.blog.domain.Log> page = PageUtil.toMybatisPage(pageable);
-        IPage<com.blog.domain.Log> pageList = logMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
+        IPage<com.blog.modules.logging.domain.Log> page = PageUtil.toMybatisPage(pageable);
+        IPage<com.blog.modules.logging.domain.Log> pageList = logMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
         return ConvertUtil.convertPage(pageList, LogSmallDTO.class);
     }
 
     @Override
     // @Cacheable(key = "'id:' + #p0")
-    public com.blog.domain.Log findById(Long id) {
+    public com.blog.modules.logging.domain.Log findById(Long id) {
         return getById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean removeByLogType(String logType) {
-        return lambdaUpdate().eq(com.blog.domain.Log::getLogType, logType).remove();
+        return lambdaUpdate().eq(com.blog.modules.logging.domain.Log::getLogType, logType).remove();
     }
     
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, com.blog.domain.Log log) {
+    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, com.blog.modules.logging.domain.Log log) {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
@@ -146,16 +142,16 @@ public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.domain
     
     @Override
     public Object findByErrDetail(Long id) {
-        com.blog.domain.Log log = findById(id);
+        com.blog.modules.logging.domain.Log log = findById(id);
         ValidationUtil.isNull(log.getId(), "Log", "id", id);
         byte[] details = log.getExceptionDetail();
         return Dict.create().set("exception", new String(ObjectUtil.isNotNull(details) ? details : "".getBytes()));
     }
 
     @Override
-    public void download(List<com.blog.domain.Log> logs, HttpServletResponse response) throws IOException {
+    public void download(List<com.blog.modules.logging.domain.Log> logs, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
-        for (com.blog.domain.Log log : logs) {
+        for (com.blog.modules.logging.domain.Log log : logs) {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("用户名", log.getUsername());
             map.put("IP", log.getRequestIp());

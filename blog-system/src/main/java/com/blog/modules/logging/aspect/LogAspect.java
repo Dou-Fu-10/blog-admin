@@ -1,28 +1,13 @@
-/*
- *  Copyright 2019-2020 Zheng Jie
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-package com.blog.aspect;
+package com.blog.modules.logging.aspect;
 
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import com.blog.domain.Log;
-import com.blog.service.LogService;
+import com.blog.modules.logging.domain.Log;
+import com.blog.modules.logging.service.LogService;
 import com.blog.utils.RequestHolder;
 import com.blog.utils.SecurityUtils;
 import com.blog.utils.StringUtils;
 import com.blog.utils.ThrowableUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -32,8 +17,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Zheng Jie
- * @date 2018-11-24
+ * @author ty
  */
 @Component
 @Aspect
@@ -51,7 +35,7 @@ public class LogAspect {
     /**
      * 配置切入点
      */
-    @Pointcut("@annotation(com.blog.annotation.Log)")
+    @Pointcut("@annotation(com.blog.modules.logging.annotation.Log)")
     public void logPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }

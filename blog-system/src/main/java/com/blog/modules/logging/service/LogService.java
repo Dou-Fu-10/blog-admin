@@ -1,21 +1,20 @@
-package com.blog.service;
+package com.blog.modules.logging.service;
 
-import com.blog.domain.Log;
-import com.blog.service.dto.LogQueryParam;
-import com.blog.service.dto.LogSmallDTO;
 import com.blog.base.CommonService;
 import com.blog.base.PageInfo;
+import com.blog.modules.logging.domain.Log;
+import com.blog.modules.logging.service.dto.LogQueryParam;
+import com.blog.modules.logging.service.dto.LogSmallDTO;
 import jakarta.servlet.http.HttpServletResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 
-import java.util.List;
 import java.io.IOException;
+import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
 */
 public interface LogService  extends CommonService<Log>{
 

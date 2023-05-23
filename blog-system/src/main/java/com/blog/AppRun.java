@@ -1,22 +1,6 @@
-/*
- *  Copyright 2019-2020 Zheng Jie
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
 package com.blog;
 
 import com.blog.storage.cloud.config.*;
-//import io.swagger.annotations.Api;
 import com.blog.annotation.rest.AnonymousGetMapping;
 import com.blog.utils.SpringContextHolder;
 import org.mybatis.spring.annotation.MapperScan;
@@ -26,7 +10,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,21 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 开启审计功能 -> @EnableJpaAuditing
  *
- * @author Zheng Jie
- * @date 2018/11/15 9:20:19
+ * @author ty
  */
 @EnableAsync
 @RestController
 // @Apii(hidden = true)
 @SpringBootApplication
-@MapperScan(basePackages = {"com.blog.modules.mnt.mapper",
+@MapperScan(basePackages = {
+        "com.blog.modules.logging.service.mapper",
+        "com.blog.modules.mnt.mapper",
         "com.blog.modules.quartz.service.mapper",
         "com.blog.modules.system.service.mapper",
         "com.blog.service.mapper",
-        "com.blog.modules.test.service.mapper"
 })
 @EnableTransactionManagement
-@EnableConfigurationProperties(value = {AliyunOssConfig.class, BaiduBosConfig.class,MinioConfig.class,QiniuKodoConfig.class,TencentCosConfig.class})
+@EnableConfigurationProperties(value = {AliyunOssConfig.class, BaiduBosConfig.class, MinioConfig.class, QiniuKodoConfig.class, TencentCosConfig.class})
 public class AppRun {
 
     public static void main(String[] args) {
