@@ -19,6 +19,7 @@ import cn.hutool.extra.template.Template;
 import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.config.thread.ThreadPoolExecutorUtil;
 import com.blog.domain.vo.EmailVo;
 import com.blog.modules.quartz.domain.QuartzJob;
@@ -26,7 +27,6 @@ import com.blog.modules.quartz.domain.QuartzLog;
 import com.blog.modules.quartz.service.mapper.QuartzLogMapper;
 import com.blog.modules.quartz.service.QuartzJobService;
 import com.blog.service.EmailService;
-import com.blog.utils.RedisUtils;
 import com.blog.utils.SpringContextHolder;
 import com.blog.utils.StringUtils;
 import com.blog.utils.ThrowableUtil;
@@ -53,7 +53,7 @@ public class ExecutionJob extends QuartzJobBean {
         // 获取spring bean
         QuartzLogMapper quartzLogRepository = SpringContextHolder.getBean(QuartzLogMapper.class);
         QuartzJobService quartzJobService = SpringContextHolder.getBean(QuartzJobService.class);
-        RedisUtils redisUtils = SpringContextHolder.getBean(RedisUtils.class);
+        RedisService redisService = SpringContextHolder.getBean(RedisService.class);
         
         String uuid = quartzJob.getUuid();
 
@@ -75,7 +75,7 @@ public class ExecutionJob extends QuartzJobBean {
             long times = System.currentTimeMillis() - startTime;
             log.setTime(times);
             if(StringUtils.isNotBlank(uuid)) {
-                redisUtils.set(uuid, true);
+                redisService.set(uuid, true);
             }
             // 任务状态
             log.setIsSuccess(true);
@@ -89,7 +89,7 @@ public class ExecutionJob extends QuartzJobBean {
             }
         } catch (Exception e) {
             if(StringUtils.isNotBlank(uuid)) {
-                redisUtils.set(uuid, false);
+                redisService.set(uuid, false);
             }
             System.out.println("任务执行失败，任务名称：" + quartzJob.getJobName());
             System.out.println("--------------------------------------------------------------");

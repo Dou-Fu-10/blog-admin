@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.modules.system.service.DeptService;
 import com.blog.modules.system.service.UserService;
 import com.blog.modules.system.service.UsersJobsService;
@@ -39,7 +40,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> implements UserService {
 
     private final FileProperties properties;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
     private final UserCacheClean userCacheClean;
     private final OnlineUserService onlineUserService;
 
@@ -225,9 +225,9 @@ public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> impleme
         //usersRolesService.getUsersRoleList(resources.getId());
         // 如果用户的角色改变
         //if (!resources.getRoles().equals(xxxx.getRoles())) {
-            redisUtils.del(CacheKey.DATA_USER + resources.getId());
-            redisUtils.del(CacheKey.MENU_USER + resources.getId());
-            redisUtils.del(CacheKey.ROLE_AUTH + resources.getId());
+            redisService.del(CacheKey.DATA_USER + resources.getId());
+            redisService.del(CacheKey.MENU_USER + resources.getId());
+            redisService.del(CacheKey.ROLE_AUTH + resources.getId());
         //}
 
         // 如果用户名称修改
@@ -334,7 +334,7 @@ public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> impleme
         userUpdate.setGender(resources.getGender());
         userUpdate.setNickName(resources.getNickName());
         lambdaUpdate().eq(User::getId, resources.getId()).update(userUpdate);
-        redisUtils.del("user::username:" + resources.getUsername());
+        redisService.del("user::username:" + resources.getUsername());
     }
 
     @Override
@@ -389,7 +389,7 @@ public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> impleme
      * @param id /
      */
     public void delCaches(Long id, String username) {
-        redisUtils.del(CacheKey.USER_ID + id);
+        redisService.del(CacheKey.USER_ID + id);
         flushCache(username);
     }
 

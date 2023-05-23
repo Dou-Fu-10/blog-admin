@@ -20,7 +20,7 @@ import com.blog.modules.system.service.mapper.JobMapper;
 import com.blog.utils.ConvertUtil;
 import com.blog.utils.FileUtil;
 import com.blog.utils.PageUtil;
-import com.blog.utils.RedisUtils;
+import com.blog.commom.redis.service.RedisService;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +28,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
@@ -51,7 +50,7 @@ public class JobServiceImpl extends CommonServiceImpl<JobMapper, Job> implements
     private final JobMapper jobMapper;
     private final UsersJobsMapper usersJobsMapper;
     private final UsersJobsService usersJobsService;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
 
     @Override
     public PageInfo<JobDto> queryAll(JobQueryParam query, Pageable pageable) {
@@ -68,7 +67,7 @@ public class JobServiceImpl extends CommonServiceImpl<JobMapper, Job> implements
     @Override
     public List<JobDto> queryAll() {
         List<JobDto> list = ConvertUtil.convertList(jobMapper.selectList(Wrappers.emptyWrapper()), JobDto.class);
-        redisUtils.set("job::all", list);
+        redisService.set("job::all", list);
         return list;
     }
 

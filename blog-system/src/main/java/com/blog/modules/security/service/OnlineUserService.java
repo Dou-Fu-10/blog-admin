@@ -1,5 +1,6 @@
 package com.blog.modules.security.service;
 
+import com.blog.commom.redis.service.RedisService;
 import com.blog.utils.*;
 import lombok.extern.slf4j.Slf4j;
 import com.blog.base.PageInfo;
@@ -22,11 +23,11 @@ import java.util.*;
 public class OnlineUserService {
 
     private final SecurityProperties properties;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
 
-    public OnlineUserService(SecurityProperties properties, RedisUtils redisUtils) {
+    public OnlineUserService(SecurityProperties properties, RedisService redisService) {
         this.properties = properties;
-        this.redisUtils = redisUtils;
+        this.redisService = redisService;
     }
 
     /**
@@ -46,7 +47,7 @@ public class OnlineUserService {
         } catch (Exception e) {
             log.error(e.getMessage(),e);
         }
-        redisUtils.set(properties.getOnlineKey() + token, onlineUserDto, properties.getTokenValidityInSeconds()/1000);
+        redisService.set(properties.getOnlineKey() + token, onlineUserDto, properties.getTokenValidityInSeconds()/1000);
     }
 
     /**
@@ -69,11 +70,11 @@ public class OnlineUserService {
      * @return /
      */
     public List<OnlineUserDto> getAll(String filter){
-        List<String> keys = redisUtils.scan(properties.getOnlineKey() + "*");
+        List<String> keys = redisService.scan(properties.getOnlineKey() + "*");
         Collections.reverse(keys);
         List<OnlineUserDto> onlineUserDtos = new ArrayList<>();
         for (String key : keys) {
-            OnlineUserDto onlineUserDto = (OnlineUserDto) redisUtils.get(key);
+            OnlineUserDto onlineUserDto = (OnlineUserDto) redisService.get(key);
             if(StringUtils.isNotBlank(filter)){
                 if(onlineUserDto.toString().contains(filter)){
                     onlineUserDtos.add(onlineUserDto);
@@ -92,7 +93,7 @@ public class OnlineUserService {
      */
     public void kickOut(String key){
         key = properties.getOnlineKey() + key;
-        redisUtils.del(key);
+        redisService.del(key);
     }
 
     /**
@@ -101,7 +102,7 @@ public class OnlineUserService {
      */
     public void logout(String token) {
         String key = properties.getOnlineKey() + token;
-        redisUtils.del(key);
+        redisService.del(key);
     }
 
     /**
@@ -131,7 +132,7 @@ public class OnlineUserService {
      * @return /
      */
     public OnlineUserDto getOne(String key) {
-        return (OnlineUserDto)redisUtils.get(key);
+        return (OnlineUserDto) redisService.get(key);
     }
 
     /**

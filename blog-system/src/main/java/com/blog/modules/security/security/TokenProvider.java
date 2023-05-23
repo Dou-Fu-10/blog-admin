@@ -4,12 +4,12 @@ import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.modules.security.config.bean.SecurityProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import com.blog.utils.RedisUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,7 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
@@ -36,14 +36,14 @@ import java.util.stream.Collectors;
 public class TokenProvider implements InitializingBean {
 
     private final SecurityProperties properties;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
     public static final String AUTHORITIES_KEY = "user";
     private JwtParser jwtParser;
     private JwtBuilder jwtBuilder;
 
-    public TokenProvider(SecurityProperties properties, RedisUtils redisUtils) {
+    public TokenProvider(SecurityProperties properties, RedisService redisService) {
         this.properties = properties;
-        this.redisUtils = redisUtils;
+        this.redisService = redisService;
     }
 
     @Override
@@ -111,14 +111,14 @@ public class TokenProvider implements InitializingBean {
      */
     public void checkRenewal(String token) {
         // 判断是否续期token,计算token的过期时间
-        long time = redisUtils.getExpire(properties.getOnlineKey() + token) * 1000;
+        long time = redisService.getExpire(properties.getOnlineKey() + token) * 1000;
         Date expireDate = DateUtil.offset(new Date(), DateField.MILLISECOND, (int) time);
         // 判断当前时间与过期时间的时间差
         long differ = expireDate.getTime() - System.currentTimeMillis();
         // 如果在续期检查的范围内，则续期
         if (differ <= properties.getDetect()) {
             long renew = time + properties.getRenew();
-            redisUtils.expire(properties.getOnlineKey() + token, renew, TimeUnit.MILLISECONDS);
+            redisService.expire(properties.getOnlineKey() + token, renew, TimeUnit.MILLISECONDS);
         }
     }
 

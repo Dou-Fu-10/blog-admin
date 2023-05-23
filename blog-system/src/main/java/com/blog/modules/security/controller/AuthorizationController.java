@@ -1,6 +1,7 @@
 package com.blog.modules.security.controller;
 
 import cn.hutool.core.util.IdUtil;
+import com.blog.commom.redis.service.RedisService;
 import com.wf.captcha.base.Captcha;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,6 @@ import com.blog.modules.security.service.dto.AuthUserDto;
 import com.blog.modules.security.service.dto.JwtUserDto;
 import com.blog.modules.security.service.OnlineUserService;
 import com.blog.utils.RsaUtils;
-import com.blog.utils.RedisUtils;
 import com.blog.utils.SecurityUtils;
 import com.blog.utils.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 // @Api(tags = "系统：系统授权接口")
 public class AuthorizationController {
     private final SecurityProperties properties;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
     private final OnlineUserService onlineUserService;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -62,9 +62,9 @@ public class AuthorizationController {
         // 开启验证码
         if(loginProperties.getLoginCode().getEnabled()) {
             // 查询验证码
-            String code = (String) redisUtils.get(authUser.getUuid());
+            String code = (String) redisService.get(authUser.getUuid());
             // 清除验证码
-            redisUtils.del(authUser.getUuid());
+            redisService.del(authUser.getUuid());
             if (StringUtils.isBlank(code)) {
                 throw new BadRequestException("验证码不存在或已过期");
             }
@@ -118,9 +118,9 @@ public class AuthorizationController {
             captchaValue = captchaValue.split("\\.")[0];
         }
         // 保存
-        redisUtils.set(uuid, captchaValue, loginProperties.getLoginCode().getExpiration(), TimeUnit.MINUTES);
+        redisService.set(uuid, captchaValue, loginProperties.getLoginCode().getExpiration(), TimeUnit.MINUTES);
         // 验证码信息
-        Map<String, Object> imgResult = new HashMap<String, Object>(2) {{
+        Map<String, Object> imgResult = new HashMap<>(2) {{
             put("enabled", 1);
             put("img", captcha.toBase64());
             put("uuid", uuid);

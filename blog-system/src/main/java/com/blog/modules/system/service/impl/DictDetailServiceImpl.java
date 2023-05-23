@@ -15,7 +15,7 @@ import com.blog.modules.system.service.DictDetailService;
 import com.blog.modules.system.service.dto.DictDetailDto;
 import com.blog.modules.system.service.dto.DictDetailQueryParam;
 import com.blog.utils.PageUtil;
-import com.blog.utils.RedisUtils;
+import com.blog.commom.redis.service.RedisService;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -39,7 +39,7 @@ public class DictDetailServiceImpl extends CommonServiceImpl<DictDetailMapper, D
 
     private final DictDetailMapper dictDetailMapper;
     private final DictMapper dictMapper;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
 
     @Override
     //@Cacheable
@@ -59,7 +59,7 @@ public class DictDetailServiceImpl extends CommonServiceImpl<DictDetailMapper, D
     public List<DictDetailDto> getDictByName(String dictName) {
         Dict dict = dictMapper.lambdaQuery().eq(Dict::getName, dictName).one();
         List<DictDetailDto> ret = dictDetailMapper.getDictDetailsByDictName(dictName);
-        redisUtils.set(CacheKey.DICTDEAIL_DICTID + dict.getId(), ret);
+        redisService.set(CacheKey.DICTDEAIL_DICTID + dict.getId(), ret);
         return ret;
     }
 
@@ -110,6 +110,6 @@ public class DictDetailServiceImpl extends CommonServiceImpl<DictDetailMapper, D
     }
 
     private void delCaches(Long dictId){
-        redisUtils.del(CacheKey.DICTDEAIL_DICTID + dictId);
+        redisService.del(CacheKey.DICTDEAIL_DICTID + dictId);
     }
 }

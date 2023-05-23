@@ -2,6 +2,7 @@ package com.blog.modules.quartz.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.blog.commom.redis.service.RedisService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.blog.base.PageInfo;
@@ -17,7 +18,6 @@ import com.blog.modules.quartz.service.QuartzJobService;
 import com.blog.modules.quartz.service.dto.QuartzJobQueryParam;
 import com.blog.modules.quartz.service.mapper.QuartzJobMapper;
 import com.blog.utils.PageUtil;
-import com.blog.utils.RedisUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -46,7 +46,7 @@ public class QuartzJobServiceImpl extends CommonServiceImpl<QuartzJobMapper, Qua
     private final QuartzManage quartzManage;
     private final QuartzJobMapper jobMapper;
     private final QuartzLogMapper logMapper;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
 
     @Override
     public PageInfo<QuartzJob> queryAll(QuartzJobQueryParam criteria, Pageable pageable){
@@ -142,14 +142,14 @@ public class QuartzJobServiceImpl extends CommonServiceImpl<QuartzJobMapper, Qua
             // 执行任务
             execution(quartzJob);
             // 获取执行状态，如果执行失败则停止后面的子任务执行
-            Boolean result = (Boolean) redisUtils.get(uuid);
+            Boolean result = (Boolean) redisService.get(uuid);
             while (result == null) {
                 // 休眠5秒，再次获取子任务执行情况
                 Thread.sleep(5000);
-                result = (Boolean) redisUtils.get(uuid);
+                result = (Boolean) redisService.get(uuid);
             }
             if(!result){
-                redisUtils.del(uuid);
+                redisService.del(uuid);
                 break;
             }
         }

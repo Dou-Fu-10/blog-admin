@@ -10,10 +10,12 @@
     <version>1.0</version>
 
     <modules>
-        <module>blog-common</module>
+        <module>blog-common-core</module>
         <module>blog-system</module>
         <module>blog-tools</module>
         <module>blog-api</module>
+        <module>blog-common-redis</module>
+        <module>blog-common-log</module>
     </modules>
 
     <name>IKun 博客后台管理</name>
@@ -25,7 +27,7 @@
         <spring-boot.version>3.0.2</spring-boot.version>
         <log4jdbc.version>1.16</log4jdbc.version>
         <swagger.version>2.9.2</swagger.version>
-        <fastjson2.version>2.0.32</fastjson2.version>
+        <fastjson.version>2.0.32</fastjson.version>
         <druid.version>1.2.18</druid.version>
         <commons-pool2.version>2.11.1</commons-pool2.version>
         <mapstruct.version>1.3.1.Final</mapstruct.version>
@@ -217,9 +219,9 @@
 
             <!-- fastjson -->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson2.version}</version>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
             <!-- mybatis -->

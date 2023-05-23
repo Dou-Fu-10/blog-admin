@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.blog.commom.redis.service.RedisService;
 import lombok.AllArgsConstructor;
 import com.blog.base.QueryHelpMybatisPlus;
 import com.blog.base.impl.CommonServiceImpl;
@@ -23,7 +24,6 @@ import com.blog.modules.system.service.mapper.UserMapper;
 import com.blog.utils.CacheKey;
 import com.blog.utils.ConvertUtil;
 import com.blog.utils.FileUtil;
-import com.blog.utils.RedisUtils;
 import com.blog.utils.SecurityUtils;
 import com.blog.utils.enums.DataScopeEnum;
 import org.springframework.cache.annotation.CacheConfig;
@@ -55,7 +55,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
     private final UserMapper userMapper;
     private final RoleMapper roleMapper;
     private final DeptMapper deptMapper;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
     private final RolesDeptsService rolesDeptsService;
 
     @Override
@@ -146,7 +146,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
         int ret = deptMapper.insert(resources);
         resources.setSubCount(0);
         if (resources.getPid() != null) {
-            redisUtils.del(CacheKey.DEPT_PID + resources.getPid());
+            redisService.del(CacheKey.DEPT_PID + resources.getPid());
             updateSubCnt(resources.getPid());
             // 清理缓存
             delCaches(resources.getId(), null, resources.getPid());
@@ -339,10 +339,10 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
     public void delCaches(Long id, Long pidOld, Long pidNew) {
         List<User> users = userMapper.findByRoleDeptId(id);
         // 删除数据权限
-        redisUtils.delByKeys(CacheKey.DATA_USER, users.stream().map(User::getId).collect(Collectors.toSet()));
-        redisUtils.del(CacheKey.DEPT_ID + id);
-        redisUtils.del(CacheKey.DEPT_PID + (pidOld == null ? 0 : pidOld));
-        redisUtils.del(CacheKey.DEPT_PID + (pidNew == null ? 0 : pidNew));
+        redisService.delByKeys(CacheKey.DATA_USER, users.stream().map(User::getId).collect(Collectors.toSet()));
+        redisService.del(CacheKey.DEPT_ID + id);
+        redisService.del(CacheKey.DEPT_PID + (pidOld == null ? 0 : pidOld));
+        redisService.del(CacheKey.DEPT_PID + (pidNew == null ? 0 : pidNew));
     }
 
 }

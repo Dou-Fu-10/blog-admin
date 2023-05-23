@@ -3,6 +3,7 @@ package com.blog.modules.system.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.modules.security.service.UserCacheClean;
 import com.blog.modules.system.domain.*;
 import com.blog.modules.system.service.DeptService;
@@ -32,7 +33,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
@@ -62,7 +62,7 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
     private final RolesDeptsMapper rolesDeptsMapper;
     private final RolesMenusMapper rolesMenusMapper;
 
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
     
     private final UserCacheClean userCacheClean;
 
@@ -161,8 +161,8 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
         // 清理缓存
         List<User> users = userMapper.findByRoleId(resources.getId());
         Set<Long> userIds = users.stream().map(User::getId).collect(Collectors.toSet());
-        redisUtils.delByKeys("menu::user:", userIds);
-        redisUtils.del("role::id:" + resources.getId());
+        redisService.delByKeys("menu::user:", userIds);
+        redisService.del("role::id:" + resources.getId());
         //this.saveOrUpdate(resources);
         
         RolesMenus rm = new RolesMenus();
@@ -264,10 +264,10 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
     private void delCaches(Long id) {
         List<User> users = userMapper.findByRoleId(id);
         Set<Long> userIds = users.stream().map(User::getId).collect(Collectors.toSet());
-        redisUtils.delByKeys("data::user:", userIds);
-        redisUtils.delByKeys("menu::user:", userIds);
-        redisUtils.delByKeys("role::auth:", userIds);
-        redisUtils.del(CacheKey.ROLE_ID + id);
+        redisService.delByKeys("data::user:", userIds);
+        redisService.delByKeys("menu::user:", userIds);
+        redisService.delByKeys("role::auth:", userIds);
+        redisService.del(CacheKey.ROLE_ID + id);
     }
 
     @Override

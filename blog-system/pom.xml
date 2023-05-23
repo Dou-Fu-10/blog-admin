@@ -23,6 +23,12 @@
             <artifactId>blog-tools</artifactId>
             <version>1.0</version>
         </dependency>
+        <!-- tools 模块包含了 common 和 logging 模块 -->
+        <dependency>
+            <groupId>com.blog</groupId>
+            <artifactId>blog-common-redis</artifactId>
+            <version>1.0</version>
+        </dependency>
 
         <!-- Spring boot websocket -->
 		<dependency>

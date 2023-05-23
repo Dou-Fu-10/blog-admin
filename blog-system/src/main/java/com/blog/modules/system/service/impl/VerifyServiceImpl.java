@@ -21,11 +21,11 @@ import cn.hutool.extra.template.Template;
 import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
+import com.blog.commom.redis.service.RedisService;
 import lombok.RequiredArgsConstructor;
 import com.blog.domain.vo.EmailVo;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.system.service.VerifyService;
-import com.blog.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +41,7 @@ public class VerifyServiceImpl implements VerifyService {
 
     @Value("${code.expiration}")
     private Long expiration;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -52,11 +52,11 @@ public class VerifyServiceImpl implements VerifyService {
         // 如果不存在有效的验证码，就创建一个新的
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
         Template template = engine.getTemplate("email/email.ftl");
-        Object oldCode =  redisUtils.get(redisKey);
+        Object oldCode =  redisService.get(redisKey);
         if(oldCode == null){
             String code = RandomUtil.randomNumbers (6);
             // 存入缓存
-            if(!redisUtils.set(redisKey, code, expiration)){
+            if(!redisService.set(redisKey, code, expiration)){
                 throw new BadRequestException("服务异常，请联系网站负责人");
             }
             content = template.render(Dict.create().set("code",code));
@@ -71,11 +71,11 @@ public class VerifyServiceImpl implements VerifyService {
 
     @Override
     public void validated(String key, String code) {
-        Object value = redisUtils.get(key);
+        Object value = redisService.get(key);
         if(value == null || !value.toString().equals(code)){
             throw new BadRequestException("无效验证码");
         } else {
-            redisUtils.del(key);
+            redisService.del(key);
         }
     }
 }

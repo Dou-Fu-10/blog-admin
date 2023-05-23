@@ -24,7 +24,7 @@ import com.blog.modules.system.service.mapper.UserMapper;
 import com.blog.utils.CacheKey;
 import com.blog.utils.ConvertUtil;
 import com.blog.utils.FileUtil;
-import com.blog.utils.RedisUtils;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.utils.StringUtils;
 import com.blog.utils.ValidationUtil;
 import com.blog.utils.enums.MenuType;
@@ -35,7 +35,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
@@ -59,7 +58,7 @@ public class MenuServiceImpl extends CommonServiceImpl<MenuMapper, Menu> impleme
     private final RoleService roleService;
     private final UserMapper userMapper;
     private final MenuMapper menuMapper;
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
     private final RolesMenusService rolesMenusService;
 
     @Override
@@ -137,9 +136,9 @@ public class MenuServiceImpl extends CommonServiceImpl<MenuMapper, Menu> impleme
             // 清理缓存
             updateSubCnt(resources.getPid());
         }
-        redisUtils.del("menu::pid:" + (resources.getPid() == null ? 0 : resources.getPid()));
-        List<String> keys = redisUtils.scan("menu::user:*");
-        keys.forEach(item -> redisUtils.del(item));
+        redisService.del("menu::pid:" + (resources.getPid() == null ? 0 : resources.getPid()));
+        List<String> keys = redisService.scan("menu::user:*");
+        keys.forEach(item -> redisService.del(item));
         return ret > 0;
     }
 
@@ -404,9 +403,9 @@ public class MenuServiceImpl extends CommonServiceImpl<MenuMapper, Menu> impleme
      */
     public void delCaches(Long id, Long pid) {
         List<User> users = userMapper.findByMenuId(id);
-        redisUtils.del(CacheKey.MENU_ID + id);
-        redisUtils.delByKeys(CacheKey.MENU_USER, users.stream().map(User::getId).collect(Collectors.toSet()));
-        redisUtils.del(CacheKey.MENU_PID + (pid == null ? 0 : pid));
+        redisService.del(CacheKey.MENU_ID + id);
+        redisService.delByKeys(CacheKey.MENU_USER, users.stream().map(User::getId).collect(Collectors.toSet()));
+        redisService.del(CacheKey.MENU_PID + (pid == null ? 0 : pid));
     }
     
     @Override

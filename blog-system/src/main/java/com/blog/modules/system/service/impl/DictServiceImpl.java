@@ -1,6 +1,7 @@
 package com.blog.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.modules.system.service.mapper.DictDetailMapper;
 import com.blog.modules.system.service.mapper.DictMapper;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,6 @@ import com.blog.modules.system.service.DictService;
 import com.blog.modules.system.service.dto.DictDto;
 import com.blog.modules.system.service.dto.DictQueryParam;
 import com.blog.utils.PageUtil;
-import com.blog.utils.RedisUtils;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -29,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
@@ -45,7 +44,7 @@ import java.util.*;
 public class DictServiceImpl extends CommonServiceImpl<DictMapper, Dict> implements DictService {
 
     public static final String CACHE_KEY = "${changeClassName}";
-    private final RedisUtils redisUtils;
+    private final RedisService redisService;
     private final DictMapper dictMapper;
     private final DictDetailMapper detailMapper;
 
@@ -125,8 +124,8 @@ public class DictServiceImpl extends CommonServiceImpl<DictMapper, Dict> impleme
     }
 
     private void delCaches(Dict dict){
-        redisUtils.del(CacheKey.DICTDEAIL_DICTNAME + dict.getName());
-        redisUtils.del(CacheKey.DICTDEAIL_DICTID + dict.getId());
-        redisUtils.del(CacheKey.DICT_ID + dict.getId());
+        redisService.del(CacheKey.DICTDEAIL_DICTNAME + dict.getName());
+        redisService.del(CacheKey.DICTDEAIL_DICTID + dict.getId());
+        redisService.del(CacheKey.DICT_ID + dict.getId());
     }
 }
