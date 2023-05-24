@@ -1,8 +1,8 @@
 package com.blog.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.domain.QiniuConfig;
 import com.blog.domain.QiniuContent;
-
 import com.blog.service.dto.QiniuContentQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,6 @@ import java.util.List;
 
 /**
  * @author ty
- * @date 2018-12-31
  */
 public interface QiNiuService extends IService<QiniuContent> {
 

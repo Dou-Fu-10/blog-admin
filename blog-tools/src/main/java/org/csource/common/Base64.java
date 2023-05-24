@@ -75,12 +75,12 @@ public class Base64 {
    * max chars per line, excluding lineSeparator.  A multiple of 4.
    */
   private int lineLength = 72;
-  private char[] valueToChar = new char[64];
+  private final char[] valueToChar = new char[64];
   /**
    * binary value encoded by a given letter of the alphabet 0..63
    */
-  private int[] charToValue = new int[256];
-  private int[] charToPad = new int[4];
+  private final int[] charToValue = new int[256];
+  private final int[] charToPad = new int[4];
 
   /* constructor */
   public Base64() {
@@ -109,7 +109,7 @@ public class Base64 {
       if (count == 8) {
         System.out.print("  ");
       } else if (count == 16) {
-        System.out.println("");
+        System.out.println();
         count = 0;
         continue;
       }
@@ -287,7 +287,7 @@ public class Base64 {
 
       // get next three bytes in unsigned form lined up,
       // in big-endian order
-      int combined = b[i + 0] & 0xff;
+      int combined = b[i] & 0xff;
       combined <<= 8;
       combined |= b[i + 1] & 0xff;
       combined <<= 8;
@@ -333,7 +333,7 @@ public class Base64 {
         // Handle this recursively with a faked complete triple.
         // Throw away last two chars and replace with ==
         sb.append(encode(new byte[]{b[len], 0, 0}
-        ).substring(0, 2));
+        ), 0, 2);
         sb.append("==");
         break;
 
@@ -350,7 +350,7 @@ public class Base64 {
         // Handle this recursively with a faked complete triple.
         // Throw away last char and replace with =
         sb.append(encode(new byte[]{b[len], b[len + 1], 0}
-        ).substring(0, 3));
+        ), 0, 3);
         sb.append("=");
         break;
 

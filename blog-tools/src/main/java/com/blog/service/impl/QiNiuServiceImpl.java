@@ -2,12 +2,20 @@ package com.blog.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.blog.base.PageInfo;
+import com.blog.base.QueryHelpMybatisPlus;
 import com.blog.domain.QiniuConfig;
 import com.blog.domain.QiniuContent;
+import com.blog.exception.BadRequestException;
 import com.blog.service.QiNiuService;
 import com.blog.service.dto.QiniuContentDto;
 import com.blog.service.dto.QiniuContentQueryParam;
+import com.blog.service.mapper.QiniuConfigMapper;
 import com.blog.service.mapper.QiniuContentMapper;
+import com.blog.utils.ConvertUtil;
+import com.blog.utils.FileUtil;
+import com.blog.utils.PageUtil;
 import com.blog.utils.QiNiuUtil;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -19,14 +27,6 @@ import com.qiniu.storage.model.FileInfo;
 import com.qiniu.util.Auth;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import com.blog.base.PageInfo;
-import com.blog.base.QueryHelpMybatisPlus;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.blog.utils.ConvertUtil;
-import com.blog.utils.FileUtil;
-import com.blog.utils.PageUtil;
-import com.blog.service.mapper.QiniuConfigMapper;
-import com.blog.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
@@ -35,12 +35,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ty
- * @date 2018-12-31
  */
 @Service
 @RequiredArgsConstructor
@@ -181,7 +184,7 @@ public class QiNiuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
             //处理获取的file list结果
             QiniuContent qiniuContent;
             FileInfo[] items = fileListIterator.next();
-            if (items == null || items.length == 0) {
+            if (items == null) {
                 continue;
             }
             for (FileInfo item : items) {

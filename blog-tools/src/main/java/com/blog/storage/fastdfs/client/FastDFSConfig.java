@@ -14,7 +14,7 @@ import java.util.Properties;
 @ConfigurationProperties(prefix = "fdfs")
 public class FastDFSConfig {
 
-    private static Logger logger = LoggerFactory.getLogger(FastDFSConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(FastDFSConfig.class);
 
     private String trackerServers;
 

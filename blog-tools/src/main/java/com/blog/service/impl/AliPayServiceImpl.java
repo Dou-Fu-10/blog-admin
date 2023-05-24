@@ -4,13 +4,13 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.domain.AlipayConfig;
 import com.blog.domain.vo.TradeVo;
+import com.blog.exception.BadRequestException;
 import com.blog.service.AliPayService;
 import com.blog.service.mapper.AlipayConfigMapper;
 import lombok.RequiredArgsConstructor;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.blog.exception.BadRequestException;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author ty
- * @date 2018-12-31
  */
 @Service
 @RequiredArgsConstructor

@@ -1,12 +1,12 @@
 package com.blog.service;
 
 
-import com.blog.domain.vo.EmailVo;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.domain.EmailConfig;
+import com.blog.domain.vo.EmailVo;
 
 /**
  * @author ty
- * @date 2018-12-26
  */
 public interface EmailService extends IService<EmailConfig> {
 

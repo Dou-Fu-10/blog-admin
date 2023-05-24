@@ -2,14 +2,14 @@ package com.blog.service.impl;
 
 import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.domain.EmailConfig;
 import com.blog.domain.vo.EmailVo;
+import com.blog.exception.BadRequestException;
 import com.blog.service.EmailService;
 import com.blog.service.mapper.EmailConfigMapper;
-import lombok.RequiredArgsConstructor;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.blog.exception.BadRequestException;
 import com.blog.utils.EncryptUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author ty
- * @date 2018-12-26
  */
 @Service
 @RequiredArgsConstructor

@@ -1,19 +1,14 @@
 package com.blog.domain;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.IdType;
-//import io.swagger.annotations.ApiModelProperty;
-import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.blog.base.CommonModel;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -44,7 +39,7 @@ public class AlipayConfig extends CommonModel<AlipayConfig> implements Serializa
     private String charset= "utf-8";
 
     // @ApiiModelProperty(value = "类型 固定格式json")
-    private String format = "JSON";;
+    private String format = "JSON";
 
     // @ApiiModelProperty(value = "支付宝开放安全地址", hidden = true)
     private String gatewayUrl = "https://openapi.alipaydev.com/gateway.do";

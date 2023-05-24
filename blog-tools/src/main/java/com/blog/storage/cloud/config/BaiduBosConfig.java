@@ -8,8 +8,7 @@ import java.io.Serializable;
 /**
  * 百度云Bos存储配置
  *
- * @author fanglei
- * @date 2021/08/05 23:29
+ * @author ty
  **/
 @Data
 @ConfigurationProperties(prefix = "baidu.bos")

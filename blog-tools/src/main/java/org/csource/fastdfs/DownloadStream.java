@@ -10,7 +10,7 @@ import java.io.OutputStream;
  * @version Version 1.11
  */
 public class DownloadStream implements DownloadCallback {
-  private OutputStream out;
+  private final OutputStream out;
   private long currentBytes = 0;
 
   public DownloadStream(OutputStream out) {

@@ -8,7 +8,7 @@ package com.blog.storage.fastdfs.exception;
 public class FastDFSException extends Exception {
     private static final long serialVersionUID = -1848618491499044704L;
 
-    private String code;
+    private final String code;
     private String description;
 
 

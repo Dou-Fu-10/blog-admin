@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class AliyunOssStorageService extends CloudStorageService {
 
-    private AliyunOssConfig config;
+    private final AliyunOssConfig config;
 
     public AliyunOssStorageService(AliyunOssConfig config){
         this.config = config;

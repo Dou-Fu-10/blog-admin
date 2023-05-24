@@ -11,7 +11,7 @@ import java.io.OutputStream;
  * @version Version 1.11
  */
 public class UploadStream implements UploadCallback {
-  private InputStream inputStream; //input stream for reading
+  private final InputStream inputStream; //input stream for reading
   private long fileSize = 0;  //size of the uploaded file
 
   /**

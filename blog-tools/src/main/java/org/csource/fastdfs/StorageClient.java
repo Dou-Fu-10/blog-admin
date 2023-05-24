@@ -755,7 +755,7 @@ public class StorageClient {
                 offset = hexLenBytes.length;
             } else {
                 masterFilenameBytes = null;
-                sizeBytes = new byte[1 + 1 * ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE];
+                sizeBytes = new byte[1 + ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE];
                 body_len = sizeBytes.length + ProtoCommon.FDFS_FILE_EXT_NAME_MAX_LEN + file_size;
 
                 sizeBytes[0] = (byte) this.storageServer.getStorePathIndex();
@@ -1776,9 +1776,9 @@ public class StorageClient {
      * @version Version 1.12
      */
     public static class UploadBuff implements UploadCallback {
-        private byte[] fileBuff;
-        private int offset;
-        private int length;
+        private final byte[] fileBuff;
+        private final int offset;
+        private final int length;
 
         /**
          * constructor

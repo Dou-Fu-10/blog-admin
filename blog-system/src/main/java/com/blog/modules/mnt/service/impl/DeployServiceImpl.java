@@ -3,42 +3,33 @@ package com.blog.modules.mnt.service.impl;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.blog.base.PageInfo;
+import com.blog.base.QueryHelpMybatisPlus;
+import com.blog.exception.BadRequestException;
 import com.blog.modules.mnt.domain.*;
+import com.blog.modules.mnt.mapper.DeployMapper;
+import com.blog.modules.mnt.mapper.DeploysServersMapper;
+import com.blog.modules.mnt.mapper.ServerMapper;
 import com.blog.modules.mnt.service.*;
 import com.blog.modules.mnt.service.dto.AppDto;
 import com.blog.modules.mnt.service.dto.DeployDto;
 import com.blog.modules.mnt.service.dto.DeployQueryParam;
 import com.blog.modules.mnt.service.dto.ServerDto;
+import com.blog.modules.mnt.util.ExecuteShellUtil;
+import com.blog.modules.mnt.util.ScpClientUtil;
 import com.blog.modules.mnt.websocket.MsgType;
 import com.blog.modules.mnt.websocket.SocketMsg;
 import com.blog.modules.mnt.websocket.WebSocketServer;
+import com.blog.utils.*;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.blog.base.PageInfo;
-import com.blog.base.QueryHelpMybatisPlus;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.blog.exception.BadRequestException;
-import com.blog.modules.mnt.mapper.DeploysServersMapper;
-import com.blog.modules.mnt.mapper.ServerMapper;
-import com.blog.modules.mnt.util.ExecuteShellUtil;
-import com.blog.modules.mnt.util.ScpClientUtil;
-import com.blog.utils.BeanCopyUtil;
-import com.blog.utils.ConvertUtil;
-import com.blog.utils.FileUtil;
-import com.blog.modules.mnt.mapper.DeployMapper;
-import com.blog.utils.PageUtil;
-import com.blog.utils.SecurityUtils;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Pageable;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
@@ -268,7 +259,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
 
     private void sleep(int second) {
         try {
-            Thread.sleep(second * 1000);
+            Thread.sleep(second * 1000L);
         } catch (InterruptedException e) {
             log.error(e.getMessage(),e);
         }
@@ -281,7 +272,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
         sb.append("mkdir -p ").append(backupPath);
         sb.append("mv -f ").append(fileSavePath);
         sb.append(appName).append(" ").append(backupPath);
-        log.info("备份应用脚本:" + sb.toString());
+        log.info("备份应用脚本:" + sb);
         executeShellUtil.execute(sb.toString());
         //还原信息入库
         DeployHistory deployHistory = new DeployHistory();

@@ -1,12 +1,9 @@
 package com.blog.storage.fastdfs.exception;
 
 /**
- *
+ * @author ty
  * @ClassName: ERRORS
  * @Description: 应用异常枚举类
- * @author 孤傲苍狼 290603672@qq.com
- * @date 2017年10月22日 下午22:31:29
- *
  */
 public enum ERRORS {
 

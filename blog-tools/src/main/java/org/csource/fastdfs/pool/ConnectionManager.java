@@ -18,24 +18,24 @@ public class ConnectionManager {
     /**
      * total create connection pool
      */
-    private AtomicInteger totalCount = new AtomicInteger();
+    private final AtomicInteger totalCount = new AtomicInteger();
 
     /**
      * free connection count
      */
-    private AtomicInteger freeCount = new AtomicInteger();
+    private final AtomicInteger freeCount = new AtomicInteger();
 
     /**
      * lock
      */
-    private ReentrantLock lock = new ReentrantLock(true);
+    private final ReentrantLock lock = new ReentrantLock(true);
 
-    private Condition condition = lock.newCondition();
+    private final Condition condition = lock.newCondition();
 
     /**
      * free connections
      */
-    private LinkedList<Connection> freeConnections = new LinkedList<Connection>();
+    private final LinkedList<Connection> freeConnections = new LinkedList<Connection>();
 
     private ConnectionManager() {
 

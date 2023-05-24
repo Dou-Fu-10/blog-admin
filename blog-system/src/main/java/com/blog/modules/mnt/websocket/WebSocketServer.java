@@ -7,7 +7,6 @@ import jakarta.websocket.server.ServerEndpoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -22,7 +21,7 @@ public class WebSocketServer {
 	/**
 	 * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
 	 */
-	private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
+	private static final CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
 
 	/**
 	 * 与某个客户端的连接会话，需要通过它来给客户端发送数据

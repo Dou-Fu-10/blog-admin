@@ -5,6 +5,7 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.blog.domain.AlipayConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,8 +13,8 @@ import java.util.Map;
 
 /**
  * 支付宝工具类
- * @author zhengjie
- * @date 2018/09/30 14:04:35
+ *
+ * @author rt
  */
 @Component
 public class AlipayUtils {

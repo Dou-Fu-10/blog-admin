@@ -23,5 +23,5 @@ public interface DownloadCallback {
    * @param bytes     data bytes
    * @return 0 success, return none zero(errno) if fail
    */
-  public int recv(long file_size, byte[] data, int bytes);
+  int recv(long file_size, byte[] data, int bytes);
 }

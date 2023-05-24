@@ -29,7 +29,7 @@ public class QiniuKodoStorageService extends CloudStorageService {
     private BucketManager bucketManager;
     private String token;
 
-    private QiniuKodoConfig config;
+    private final QiniuKodoConfig config;
 
     public QiniuKodoStorageService(QiniuKodoConfig config){
         this.config = config;
@@ -145,7 +145,7 @@ public class QiniuKodoStorageService extends CloudStorageService {
             savePath = buildSavePath(config.getRootPath(),savePath);
             Response res = uploadManager.put(data, savePath, token);
             if (!res.isOK()) {
-                throw new RuntimeException("上传七牛出错：" + res.toString());
+                throw new RuntimeException("上传七牛出错：" + res);
             }
         } catch (Exception e) {
             throw new RuntimeException("上传文件失败，请核对七牛配置信息", e);

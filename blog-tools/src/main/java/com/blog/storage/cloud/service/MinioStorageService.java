@@ -1,18 +1,10 @@
 package com.blog.storage.cloud.service;
 
 import com.blog.storage.cloud.config.MinioConfig;
-import io.minio.BucketExistsArgs;
-import io.minio.GetObjectArgs;
-import io.minio.GetObjectResponse;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
-import io.minio.RemoveBucketArgs;
-import io.minio.RemoveObjectArgs;
-import io.minio.RemoveObjectsArgs;
+import com.blog.utils.StringUtils;
+import io.minio.*;
 import io.minio.messages.DeleteObject;
 import lombok.extern.slf4j.Slf4j;
-import com.blog.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
@@ -23,8 +15,7 @@ import java.util.List;
 /**
  * Minio 文件服务
  *
- * @author fanglei
- * @date 2021/08/09
+ * @author ty
  **/
 @Slf4j
 public class MinioStorageService extends CloudStorageService {

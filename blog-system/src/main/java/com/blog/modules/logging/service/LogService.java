@@ -19,7 +19,7 @@ import java.util.List;
 */
 public interface LogService  extends IService<Log> {
 
-    static final String CACHE_KEY = "log";
+    String CACHE_KEY = "log";
 
     /**
     * 查询数据分页

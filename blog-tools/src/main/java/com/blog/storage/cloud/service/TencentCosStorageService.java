@@ -7,14 +7,7 @@ import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.exception.CosServiceException;
 import com.qcloud.cos.exception.MultiObjectDeleteException;
-import com.qcloud.cos.model.Bucket;
-import com.qcloud.cos.model.CannedAccessControlList;
-import com.qcloud.cos.model.CreateBucketRequest;
-import com.qcloud.cos.model.DeleteObjectsRequest;
-import com.qcloud.cos.model.DeleteObjectsResult;
-import com.qcloud.cos.model.ObjectMetadata;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.StorageClass;
+import com.qcloud.cos.model.*;
 import com.qcloud.cos.region.Region;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +26,7 @@ public class TencentCosStorageService extends CloudStorageService {
 
     private COSClient cosClient;
 
-    private TencentCosConfig config;
+    private final TencentCosConfig config;
 
     public TencentCosStorageService(TencentCosConfig config){
         this.config = config;

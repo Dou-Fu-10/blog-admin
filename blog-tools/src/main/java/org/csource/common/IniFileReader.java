@@ -12,7 +12,7 @@ import java.util.Hashtable;
  */
 public class IniFileReader {
   private Hashtable paramTable;
-  private String conf_filename;
+  private final String conf_filename;
 
   /**
    * @param conf_filename config filename

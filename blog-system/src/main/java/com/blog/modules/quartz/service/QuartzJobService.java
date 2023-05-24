@@ -1,16 +1,16 @@
 package com.blog.modules.quartz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.quartz.service.dto.QuartzJobQueryParam;
-import com.blog.modules.quartz.service.dto.QuartzLogQueryParam;
 import com.blog.base.PageInfo;
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.domain.QuartzLog;
-import org.springframework.data.domain.Pageable;
+import com.blog.modules.quartz.service.dto.QuartzJobQueryParam;
+import com.blog.modules.quartz.service.dto.QuartzLogQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public interface QuartzJobService extends IService<QuartzJob> {
 
-    static final String CACHE_KEY = "quartzJob";
+    String CACHE_KEY = "quartzJob";
 
     /**
      * 查询数据分页

@@ -3,21 +3,17 @@ package com.blog.storage.sftp;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.MD5;
-import com.jcraft.jsch.SftpException;
-import com.jcraft.jsch.SftpProgressMonitor;
 import com.blog.storage.sftp.bean.JschUploadResult;
 import com.blog.storage.sftp.client.SSH2Client;
 import com.blog.storage.sftp.client.SSH2Config;
 import com.blog.utils.FileUtil;
 import com.blog.utils.StringUtils;
+import com.jcraft.jsch.SftpException;
+import com.jcraft.jsch.SftpProgressMonitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +24,11 @@ import java.util.Map;
  */
 public class JschService {
 
-    private static Logger logger = LoggerFactory.getLogger(JschService.class);
+    private static final Logger logger = LoggerFactory.getLogger(JschService.class);
 
-    private SSH2Client ssh2Client;
+    private final SSH2Client ssh2Client;
 
-    private SSH2Config ssh2Config;
+    private final SSH2Config ssh2Config;
 
     public JschService(SSH2Client ssh2Client){
         this.ssh2Client = ssh2Client;

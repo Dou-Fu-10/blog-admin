@@ -1,11 +1,13 @@
 package com.blog.utils;
 
 import cn.hutool.json.JSONArray;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author ty
@@ -19,7 +21,7 @@ public class TranslatorUtil {
                     "client=gtx&" +
                     "sl=en" +
                     "&tl=zh-CN" +
-                    "&dt=t&q=" + URLEncoder.encode(word, "UTF-8");
+                    "&dt=t&q=" + URLEncoder.encode(word, StandardCharsets.UTF_8);
 
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();

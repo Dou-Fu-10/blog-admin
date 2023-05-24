@@ -1,6 +1,7 @@
 package com.blog.modules.mnt.util;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -116,7 +117,7 @@ public class ZipUtils {
 			ZipEntry entry = ((ZipEntry) entries.nextElement());
 			InputStream in = zf.getInputStream(entry);
 			String str = folderPath;
-			File desFile = new File(str, java.net.URLEncoder.encode(entry.getName(), "UTF-8"));
+			File desFile = new File(str, java.net.URLEncoder.encode(entry.getName(), StandardCharsets.UTF_8));
 
 			if (!desFile.exists()) {
 				File fileParentDir = desFile.getParentFile();

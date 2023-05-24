@@ -29,7 +29,7 @@ public class TrackerGroup {
    */
   public TrackerGroup(InetSocketAddress[] tracker_servers) {
     this.tracker_servers = tracker_servers;
-    this.lock = new Integer(0);
+    this.lock = Integer.valueOf(0);
     this.tracker_server_index = 0;
   }
 

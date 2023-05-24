@@ -1,9 +1,9 @@
 package com.blog.rest;
 
-import lombok.RequiredArgsConstructor;
-import com.blog.domain.vo.EmailVo;
 import com.blog.domain.EmailConfig;
+import com.blog.domain.vo.EmailVo;
 import com.blog.service.EmailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 发送邮件
- * @author 郑杰
- * @date 2018/09/28 6:55:53
+ *
+ * @author ty
  */
 @RestController
 @RequiredArgsConstructor

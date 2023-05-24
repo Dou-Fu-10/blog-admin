@@ -1,33 +1,31 @@
 package com.blog.modules.mnt.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.blog.base.PageInfo;
 import com.blog.modules.mnt.domain.Deploy;
 import com.blog.modules.mnt.domain.DeployHistory;
 import com.blog.modules.mnt.service.dto.DeployDto;
 import com.blog.modules.mnt.service.dto.DeployQueryParam;
-
-import com.blog.base.PageInfo;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
-* @author ty
-* 
-*/
-public interface DeployService  extends IService<Deploy>{
+ * @author ty
+ */
+public interface DeployService extends IService<Deploy> {
 
-    static final String CACHE_KEY = "deploy";
+    String CACHE_KEY = "deploy";
 
     /**
-    * 查询数据分页
-    * @param query 条件
-    * @param pageable 分页参数
-    * @return PageInfo<DeployDto>
-    */
+     * 查询数据分页
+     * @param query 条件
+     * @param pageable 分页参数
+     * @return PageInfo<DeployDto>
+     */
     PageInfo<DeployDto> queryAll(DeployQueryParam query, Pageable pageable);
 
     /**

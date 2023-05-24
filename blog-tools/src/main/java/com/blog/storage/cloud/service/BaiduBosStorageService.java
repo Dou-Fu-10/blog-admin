@@ -18,8 +18,7 @@ import java.util.List;
 /**
  * 百度云BOS储存
  *
- * @author fanglei
- * @date 2021/08/05 23:28
+ * @author ty
  **/
 public class BaiduBosStorageService extends CloudStorageService {
     

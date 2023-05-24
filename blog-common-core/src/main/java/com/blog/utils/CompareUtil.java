@@ -5,13 +5,7 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
 * 实体类差异化比较器，可以比较类变化字段，方便针对变化的数据进行日志记录
@@ -28,11 +22,7 @@ public class CompareUtil {
         Map<String, List<Object>> resultMap=compareFields(oldObject,newObject,null);
 
         //System.out.println("resultMap------------"+resultMap);
-        if(resultMap.size()>0) {
-            return false;
-        }else {
-            return true;
-        }
+        return resultMap.size() <= 0;
     }
 
     /**

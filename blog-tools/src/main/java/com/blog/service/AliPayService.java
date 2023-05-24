@@ -7,7 +7,6 @@ import com.blog.domain.vo.TradeVo;
 
 /**
  * @author ty
- * @date 2018-12-31
  */
 public interface AliPayService extends IService<AlipayConfig> {
 

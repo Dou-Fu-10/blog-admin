@@ -1,29 +1,26 @@
 package com.blog.rest;
 
+import com.blog.annotation.AnonymousAccess;
+import com.blog.annotation.rest.AnonymousGetMapping;
+import com.blog.domain.AlipayConfig;
+import com.blog.domain.vo.TradeVo;
+import com.blog.service.AliPayService;
+import com.blog.utils.AliPayStatusEnum;
+import com.blog.utils.AlipayUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import com.blog.annotation.AnonymousAccess;
-import com.blog.annotation.rest.AnonymousGetMapping;
-import com.blog.domain.vo.TradeVo;
-import com.blog.domain.AlipayConfig;
-import com.blog.utils.AliPayStatusEnum;
-import com.blog.utils.AlipayUtils;
-import com.blog.service.AliPayService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-//import springfox.documentation.annotations.ApiIgnore;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
  * @author ty
- * @date 2018-12-31
  */
 @Slf4j
 @RestController

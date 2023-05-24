@@ -4,28 +4,13 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.MD5;
 import com.blog.storage.sftp.bean.JschUploadResult;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-import com.jcraft.jsch.SftpATTRS;
-import com.jcraft.jsch.SftpException;
-import com.jcraft.jsch.SftpProgressMonitor;
 import com.blog.utils.StringUtils;
+import com.jcraft.jsch.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Vector;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by gacl on 2017/10/16.
@@ -44,17 +29,16 @@ public class SSH2Client {
      */
     private SSH2Config config;
 
-    public SSH2Client(SSH2Config SSH2Config){
-        this.config = SSH2Config;
-    }
-
     /**
      * ThreadLocal是解决线程安全问题一个很好的思路，它通过为每个线程提供一个独立的变量副本解决了变量并发访问的冲突问题。
      * 在很多情况下，ThreadLocal比直接使用synchronized同步机制解决线程安全问题更简单，更方便，且结果程序拥有更高的并发性。
      */
     //使用ThreadLocal解决线程安全问题
-    private static ThreadLocal<Session> sessionThreadLocal = new ThreadLocal<>();
-    private static ThreadLocal<ChannelSftp> channelSftpThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Session> sessionThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<ChannelSftp> channelSftpThreadLocal = new ThreadLocal<>();
+    public SSH2Client(SSH2Config SSH2Config) {
+        this.config = SSH2Config;
+    }
 
     /**
      * 在多线程环境中，单例模式会造成session和channelSftp（在类中属于全局变量）资源竞争，并且对属性有写操作，就可能会出现数据同步问题。
@@ -64,7 +48,6 @@ public class SSH2Client {
     //private static Session session = null;
 
     //private static ChannelSftp channelSftp = new ChannelSftp();
-
     private boolean isEmpty(String str) {
         return str == null || str.length() == 0;
     }
@@ -126,7 +109,6 @@ public class SSH2Client {
         logger.debug("===============Disconnecting Jsch session===============");
     }
 
-
     /**
      * 创建目录
      * @param createPath
@@ -138,7 +120,7 @@ public class SSH2Client {
                 logger.debug(createPath + "目录已经存在，不需要创建");
                 channelSftp.cd(createPath);
             }
-            String pathArry[] = createPath.split("/");
+            String[] pathArry = createPath.split("/");
             StringBuffer filePath = new StringBuffer("/");
             for (String path : pathArry) {
                 if (StringUtils.isEmpty(path)) {
@@ -149,7 +131,7 @@ public class SSH2Client {
                     channelSftp.cd(filePath.toString());
                 } else {
                     channelSftp.mkdir(filePath.toString());
-                    logger.debug(createPath + "目录不存在，需要创建" + filePath.toString() + "目录");
+                    logger.debug(createPath + "目录不存在，需要创建" + filePath + "目录");
                     channelSftp.cd(filePath.toString());
                 }
             }
@@ -169,11 +151,7 @@ public class SSH2Client {
         ChannelSftp channelSftp = channelSftpThreadLocal.get();
         try {
             Vector<?> vector = channelSftp.ls(dir);
-            if (null == vector) {
-                return false;
-            } else {
-                return true;
-            }
+            return null != vector;
         } catch (SftpException e) {
             return false;
         }
@@ -192,7 +170,7 @@ public class SSH2Client {
             isDirExistFlag = true;
             return sftpATTRS.isDir();
         } catch (Exception e) {
-            if ("no such file".equals(e.getMessage().toLowerCase())) {
+            if ("no such file".equalsIgnoreCase(e.getMessage())) {
                 isDirExistFlag = false;
             }
             //logger.error(e.getMessage(),e);

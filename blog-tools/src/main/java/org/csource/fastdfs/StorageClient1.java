@@ -73,7 +73,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_file1(String local_filename, String file_ext_name,
                              NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_file(local_filename, file_ext_name, meta_list);
+    String[] parts = this.upload_file(local_filename, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -93,7 +93,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_file1(String group_name, String local_filename, String file_ext_name,
                              NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_file(group_name, local_filename, file_ext_name, meta_list);
+    String[] parts = this.upload_file(group_name, local_filename, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -112,7 +112,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_file1(byte[] file_buff, String file_ext_name,
                              NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_file(file_buff, file_ext_name, meta_list);
+    String[] parts = this.upload_file(file_buff, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -132,7 +132,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_file1(String group_name, byte[] file_buff, String file_ext_name,
                              NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_file(group_name, file_buff, file_ext_name, meta_list);
+    String[] parts = this.upload_file(group_name, file_buff, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -154,7 +154,7 @@ public class StorageClient1 extends StorageClient {
   public String upload_file1(String group_name, long file_size,
                              UploadCallback callback, String file_ext_name,
                              NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_file(group_name, file_size, callback, file_ext_name, meta_list);
+    String[] parts = this.upload_file(group_name, file_size, callback, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -173,7 +173,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_appender_file1(String local_filename, String file_ext_name,
                                       NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_appender_file(local_filename, file_ext_name, meta_list);
+    String[] parts = this.upload_appender_file(local_filename, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -193,7 +193,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_appender_file1(String group_name, String local_filename, String file_ext_name,
                                       NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_appender_file(group_name, local_filename, file_ext_name, meta_list);
+    String[] parts = this.upload_appender_file(group_name, local_filename, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -212,7 +212,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_appender_file1(byte[] file_buff, String file_ext_name,
                                       NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_appender_file(file_buff, file_ext_name, meta_list);
+    String[] parts = this.upload_appender_file(file_buff, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -232,7 +232,7 @@ public class StorageClient1 extends StorageClient {
    */
   public String upload_appender_file1(String group_name, byte[] file_buff, String file_ext_name,
                                       NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_appender_file(group_name, file_buff, file_ext_name, meta_list);
+    String[] parts = this.upload_appender_file(group_name, file_buff, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {
@@ -254,7 +254,7 @@ public class StorageClient1 extends StorageClient {
   public String upload_appender_file1(String group_name, long file_size,
                                       UploadCallback callback, String file_ext_name,
                                       NameValuePair[] meta_list) throws IOException, MyException {
-    String parts[] = this.upload_appender_file(group_name, file_size, callback, file_ext_name, meta_list);
+    String[] parts = this.upload_appender_file(group_name, file_size, callback, file_ext_name, meta_list);
     if (parts != null) {
       return parts[0] + SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + parts[1];
     } else {

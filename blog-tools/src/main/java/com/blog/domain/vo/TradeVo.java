@@ -1,15 +1,16 @@
 package com.blog.domain.vo;
 
 //import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
  * 交易详情，按需应该存入数据库，这里存入数据库，仅供临时测试
  * @author ty
- * @date 2018-12-31
  */
 @Data
 public class TradeVo {

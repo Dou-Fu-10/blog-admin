@@ -12,7 +12,7 @@ import java.net.Socket;
 public class Connection {
 
     private Socket sock;
-    private InetSocketAddress inetSockAddr;
+    private final InetSocketAddress inetSockAddr;
     private Long lastAccessTime = System.currentTimeMillis();
 
     private boolean needActiveTest = false;
@@ -111,10 +111,7 @@ public class Connection {
             if (sock.isInputShutdown()) {
                 return false;
             }
-            if (sock.isOutputShutdown()) {
-                return false;
-            }
-            return true;
+            return !sock.isOutputShutdown();
         }
         return false;
     }

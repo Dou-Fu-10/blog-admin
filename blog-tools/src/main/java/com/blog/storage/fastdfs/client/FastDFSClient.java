@@ -3,8 +3,8 @@ package com.blog.storage.fastdfs.client;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.crypto.digest.MD5;
-import com.blog.storage.fastdfs.bean.FastDFSUploadResult;
 import com.blog.storage.fastdfs.bean.FastDFSFile;
+import com.blog.storage.fastdfs.bean.FastDFSUploadResult;
 import com.blog.storage.fastdfs.exception.ERRORS;
 import com.blog.storage.fastdfs.exception.FastDFSException;
 import org.csource.common.MyException;
@@ -20,25 +20,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
+ * @author ty
  * @ClassName: FastDFSClient
- * @Description: fastdfs文件操作,实现文件的上传与下载、删除;
- * @author 孤傲苍狼 290603672@qq.com
- * @date 2017年10月19日 上午10:21:46
- *
+ * @Description: fastdfs文件操作, 实现文件的上传与下载、删除;
  */
 public class FastDFSClient {
 
-    private static Logger logger = LoggerFactory.getLogger(FastDFSClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(FastDFSClient.class);
 
-    private FastDFSConfig fastDFSConfig;
+    private final FastDFSConfig fastDFSConfig;
 
     public FastDFSClient(FastDFSConfig fastDFSConfig){
         this.fastDFSConfig = fastDFSConfig;
