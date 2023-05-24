@@ -1,6 +1,7 @@
 package com.blog.modules.mnt.service;
 
-import com.blog.base.CommonService;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.base.PageInfo;
 import com.blog.modules.mnt.domain.App;
 import com.blog.modules.mnt.service.dto.AppDto;
@@ -14,10 +15,10 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
-public interface AppService  extends CommonService<App>{
+public interface AppService  extends IService<App> {
 
     static final String CACHE_KEY = "app";
 

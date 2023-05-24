@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.utils.ConvertUtil;
 import com.blog.utils.FileUtil;
@@ -31,15 +31,15 @@ import java.io.IOException;
 import java.util.*;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Slf4j
 @Service
 @AllArgsConstructor
 // @CacheConfig(cacheNames = AppService.CACHE_KEY)
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class AppServiceImpl extends CommonServiceImpl<AppMapper, App> implements AppService {
+public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppService {
 
     // private final RedisUtils redisUtils;
 //    @Autowired

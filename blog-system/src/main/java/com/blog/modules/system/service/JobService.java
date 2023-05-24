@@ -1,8 +1,9 @@
 package com.blog.modules.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.service.dto.JobDto;
 import com.blog.modules.system.service.dto.JobQueryParam;
-import com.blog.base.CommonService;
+
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.Job;
 import org.springframework.data.domain.Pageable;
@@ -13,10 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface JobService  extends CommonService<Job>{
+public interface JobService  extends IService<Job> {
 
     PageInfo<JobDto> queryAll(JobQueryParam query, Pageable pageable);
 

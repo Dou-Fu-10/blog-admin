@@ -1,8 +1,8 @@
 package com.blog.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.system.service.mapper.UsersRolesMapper;
 import lombok.AllArgsConstructor;
-import com.blog.base.impl.CommonServiceImpl;
 import com.blog.modules.system.domain.UsersRoles;
 import com.blog.modules.system.service.UsersRolesService;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by jinjin on 2020-09-25.
+ * @author ty
  */
 @AllArgsConstructor
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class UsersRolesServiceImpl extends CommonServiceImpl<UsersRolesMapper, UsersRoles> implements UsersRolesService {
+public class UsersRolesServiceImpl extends ServiceImpl<UsersRolesMapper, UsersRoles> implements UsersRolesService {
 
     private final UsersRolesMapper usersRolesMapper;
 

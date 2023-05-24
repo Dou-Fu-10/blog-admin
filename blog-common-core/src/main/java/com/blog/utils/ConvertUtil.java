@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 /**
  * 转换
- * Created by jinjin on 2020-09-22.
+ * @author ty
  */
 public class ConvertUtil {
     public static <T, S> T convert(final S s, Class<T> clz) {

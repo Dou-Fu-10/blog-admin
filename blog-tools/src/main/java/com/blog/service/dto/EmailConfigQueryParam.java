@@ -3,8 +3,8 @@ package com.blog.service.dto;
 import lombok.Data;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Data
 public class EmailConfigQueryParam{

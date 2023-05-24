@@ -2,7 +2,7 @@ package com.blog.modules.mnt.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.mnt.domain.DeploysServers;
 import com.blog.modules.mnt.mapper.DeploysServersMapper;
 import com.blog.modules.mnt.service.DeploysServersService;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DeploysServersServiceImpl extends CommonServiceImpl<DeploysServersMapper, DeploysServers> implements DeploysServersService {
+public class DeploysServersServiceImpl extends ServiceImpl<DeploysServersMapper, DeploysServers> implements DeploysServersService {
     private final DeploysServersMapper deploysServersMapper;
 
     @Override

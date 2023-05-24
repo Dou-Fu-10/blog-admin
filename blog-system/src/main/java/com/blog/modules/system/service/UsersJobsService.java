@@ -1,15 +1,13 @@
 package com.blog.modules.system.service;
 
-import com.blog.base.CommonService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.domain.UsersJobs;
-
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface UsersJobsService extends CommonService<UsersJobs> {
+public interface UsersJobsService extends IService<UsersJobs> {
     List<Long> queryUserIdByJobId(Long id);
     List<Long> queryJobIdByUserId(Long id);
     boolean removeByUserId(Long id);

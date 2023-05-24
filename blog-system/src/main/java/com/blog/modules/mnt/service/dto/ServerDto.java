@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Data
 @NoArgsConstructor

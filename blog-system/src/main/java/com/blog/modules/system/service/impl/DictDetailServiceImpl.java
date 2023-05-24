@@ -6,7 +6,7 @@ import com.blog.modules.system.service.mapper.DictMapper;
 import lombok.AllArgsConstructor;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.system.domain.Dict;
 import com.blog.utils.CacheKey;
 import com.blog.utils.ConvertUtil;
@@ -25,24 +25,23 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.cache.annotation.CacheEvict;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-24
-*/
+ * @author ty
+ */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "dictDetail")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DictDetailServiceImpl extends CommonServiceImpl<DictDetailMapper, DictDetail> implements DictDetailService {
+public class DictDetailServiceImpl extends ServiceImpl<DictDetailMapper, DictDetail> implements DictDetailService {
 
     private final DictDetailMapper dictDetailMapper;
     private final DictMapper dictMapper;
     private final RedisService redisService;
 
     @Override
-    //@Cacheable
     public PageInfo<DictDetailDto> queryAll(DictDetailQueryParam query, Pageable pageable) {
         IPage<DictDetail> page = PageUtil.toMybatisPage(pageable);
         IPage<DictDetail> pageList = dictDetailMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
@@ -50,8 +49,7 @@ public class DictDetailServiceImpl extends CommonServiceImpl<DictDetailMapper, D
     }
 
     @Override
-    //@Cacheable
-    public List<DictDetailDto> queryAll(DictDetailQueryParam query){
+    public List<DictDetailDto> queryAll(DictDetailQueryParam query) {
         return ConvertUtil.convertList(dictDetailMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), DictDetailDto.class);
     }
 
@@ -82,7 +80,7 @@ public class DictDetailServiceImpl extends CommonServiceImpl<DictDetailMapper, D
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean save(DictDetailDto resources){
+    public boolean save(DictDetailDto resources) {
         DictDetail detail = ConvertUtil.convert(resources, DictDetail.class);
         detail.setDictId(resources.getDict().getId());
         boolean ret = dictDetailMapper.insert(detail) > 0;
@@ -109,7 +107,7 @@ public class DictDetailServiceImpl extends CommonServiceImpl<DictDetailMapper, D
         return ret;
     }
 
-    private void delCaches(Long dictId){
+    private void delCaches(Long dictId) {
         redisService.del(CacheKey.DICTDEAIL_DICTID + dictId);
     }
 }

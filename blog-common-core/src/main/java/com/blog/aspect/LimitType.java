@@ -2,7 +2,7 @@ package com.blog.aspect;
 
 /**
  * 限流枚举
- * @author /
+ * @author ty
  */
 public enum LimitType {
     // 默认

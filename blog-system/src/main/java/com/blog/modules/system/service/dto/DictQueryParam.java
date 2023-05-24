@@ -4,8 +4,7 @@ import lombok.Data;
 import com.blog.annotation.Query;
 
 /**
-* @author jinjin
-* @date 2020-09-24
+* @author ty
 */
 @Data
 public class DictQueryParam{

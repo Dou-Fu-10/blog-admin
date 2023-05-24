@@ -1,15 +1,15 @@
 package com.blog.modules.mnt.service;
 
 import com.blog.modules.mnt.domain.DeploysServers;
-import com.blog.base.CommonService;
+
 
 import java.util.List;
 
 /**
-* @author jinjin
+* @author ty
 * @date 2020-09-25
 */
-public interface DeploysServersService extends CommonService<DeploysServers> {
+public interface DeploysServersService extends IService<DeploysServers> {
     List<Long> queryDeployIdByServerId(Long id);
     List<Long> queryServerIdByDeployId(Long id);
     boolean removeByDeployId(Long id);

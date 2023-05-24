@@ -1,15 +1,15 @@
 package com.blog.service.mapper;
 
 import com.blog.domain.EmailConfig;
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Mapper
-public interface EmailConfigMapper extends CommonMapper<EmailConfig> {
+public interface EmailConfigMapper extends BaseMapper<EmailConfig> {
 
 }

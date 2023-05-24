@@ -10,7 +10,7 @@
 ///**
 // * 异步调用日志服务
 // *
-// * @author ruoyi
+// * @author ty
 // */
 //@Service
 //public class AsyncLogService

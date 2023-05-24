@@ -15,7 +15,7 @@ import com.blog.utils.*;
 import lombok.RequiredArgsConstructor;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.exception.EntityExistException;
 import com.blog.modules.system.service.dto.MenuDto;
@@ -34,24 +34,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
-
 /**
-* @author jinjin
-* @date 2020-09-25
-*/
+ * @author ty
+ */
 @Service
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "role")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> implements RoleService {
+public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
 
     private final RoleMapper roleMapper;
     private final MenuMapper menuMapper;
@@ -63,7 +58,7 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
     private final RolesMenusMapper rolesMenusMapper;
 
     private final RedisService redisService;
-    
+
     private final UserCacheClean userCacheClean;
 
     @Override
@@ -79,7 +74,7 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
     }
 
     @Override
-    public List<RoleDto> queryAll(RoleQueryParam query){
+    public List<RoleDto> queryAll(RoleQueryParam query) {
         return ConvertUtil.convertList(roleMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), RoleDto.class);
     }
 
@@ -130,7 +125,7 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
     @Override
     @CacheEvict(key = "'id:' + #p0.id")
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(RoleDto resources){
+    public boolean updateById(RoleDto resources) {
         Role roleOld = getById(resources.getId());
         Role role1 = lambdaQuery().eq(Role::getName, resources.getName()).one();
         if (role1 != null && !role1.getId().equals(resources.getId())) {
@@ -164,7 +159,7 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
         redisService.delByKeys("menu::user:", userIds);
         redisService.del("role::id:" + resources.getId());
         //this.saveOrUpdate(resources);
-        
+
         RolesMenus rm = new RolesMenus();
         List<Long> oldMenuIds = rolesMenusService.queryMenuIdByRoleId(resources.getId());
         List<Long> menuIds = resources.getMenus().stream().map(MenuDto::getId).collect(Collectors.toList());
@@ -187,7 +182,7 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
+    public boolean removeByIds(Set<Long> ids) {
         int ret = roleMapper.deleteBatchIds(ids);
         for (Long id : ids) {
             // 更新相关缓存
@@ -197,10 +192,10 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
         }
         return ret > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> ids = new HashSet<>(1);
         ids.add(id);
         return this.removeByIds(ids);
@@ -255,7 +250,7 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
         }
         return permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
-    
+
     /**
      * 清理缓存
      *
@@ -284,19 +279,19 @@ public class RoleServiceImpl extends CommonServiceImpl<RoleMapper, Role> impleme
 
     @Override
     public void download(List<RoleDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (RoleDto role : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("名称", role.getName());
-              map.put("角色级别", role.getLevel());
-              map.put("描述", role.getDescription());
-              map.put("数据权限", role.getDataScope());
-              map.put("创建者", role.getCreateBy());
-              map.put("更新者", role.getUpdateBy());
-              map.put("创建日期", role.getCreateTime());
-              map.put("更新时间", role.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (RoleDto role : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("名称", role.getName());
+            map.put("角色级别", role.getLevel());
+            map.put("描述", role.getDescription());
+            map.put("数据权限", role.getDataScope());
+            map.put("创建者", role.getCreateBy());
+            map.put("更新者", role.getUpdateBy());
+            map.put("创建日期", role.getCreateTime());
+            map.put("更新时间", role.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 }

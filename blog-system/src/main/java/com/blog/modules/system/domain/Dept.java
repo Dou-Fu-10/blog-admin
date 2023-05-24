@@ -18,8 +18,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Data
 @Builder

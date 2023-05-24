@@ -18,8 +18,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * @author Zheng Jie
- * @date 2019-6-4 14:59:48
+ * @author ty
  */
 @Slf4j
 public class QueryHelpMybatisPlus {

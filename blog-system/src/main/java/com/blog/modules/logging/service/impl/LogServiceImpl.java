@@ -6,7 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.logging.annotation.Log;
 import com.blog.modules.logging.service.LogService;
 import com.blog.modules.logging.service.dto.LogErrorDTO;
@@ -38,7 +38,7 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class LogServiceImpl extends CommonServiceImpl<LogMapper, com.blog.modules.logging.domain.Log> implements LogService {
+public class LogServiceImpl extends ServiceImpl<LogMapper, com.blog.modules.logging.domain.Log> implements LogService {
 
     private final LogMapper logMapper;
 

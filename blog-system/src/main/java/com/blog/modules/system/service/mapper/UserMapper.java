@@ -2,20 +2,18 @@ package com.blog.modules.system.service.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.system.domain.User;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Mapper
-public interface UserMapper extends CommonMapper<User> {
+public interface UserMapper extends BaseMapper<User> {
 
     /**
      * ${ew.customSqlSegment}” （自定义sql段），wrapper不能为null

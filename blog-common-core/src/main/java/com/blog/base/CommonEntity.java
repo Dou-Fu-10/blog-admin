@@ -12,8 +12,7 @@ import java.util.Date;
 
 /**
 * 抽象实体类 ：带有公共字段
-* @author fanglei
-* @date 2021/07/28
+* @author ty
 */
 @EqualsAndHashCode(callSuper = true)
 @Data

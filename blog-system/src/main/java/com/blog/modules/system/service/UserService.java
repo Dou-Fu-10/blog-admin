@@ -1,8 +1,8 @@
 package com.blog.modules.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.service.dto.UserDto;
 import com.blog.modules.system.service.dto.UserQueryParam;
-import com.blog.base.CommonService;
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.User;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +15,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface UserService  extends CommonService<User>{
+public interface UserService  extends IService<User> {
 
     /**
     * 查询数据分页

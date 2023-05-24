@@ -1,17 +1,17 @@
 package com.blog.modules.mnt.mapper;
 
 import com.blog.modules.mnt.domain.Server;
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Mapper
-public interface ServerMapper extends CommonMapper<Server> {
+public interface ServerMapper extends BaseMapper<Server> {
     List<Server> selectAllByDeployId(Long id);
 }

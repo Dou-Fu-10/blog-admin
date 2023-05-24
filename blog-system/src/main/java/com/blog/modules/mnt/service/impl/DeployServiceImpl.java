@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.mnt.mapper.DeploysServersMapper;
 import com.blog.modules.mnt.mapper.ServerMapper;
@@ -43,15 +43,15 @@ import java.io.IOException;
 import java.util.*;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Slf4j
 @Service
 @AllArgsConstructor
 // @CacheConfig(cacheNames = DeployService.CACHE_KEY)
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DeployServiceImpl extends CommonServiceImpl<DeployMapper, Deploy> implements DeployService {
+public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> implements DeployService {
 
     private final String FILE_SEPARATOR = "/";
     // private final RedisUtils redisUtils;

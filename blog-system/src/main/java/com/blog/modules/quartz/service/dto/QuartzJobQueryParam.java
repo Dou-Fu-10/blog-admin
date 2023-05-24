@@ -8,8 +8,8 @@ import com.blog.annotation.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Data
 public class QuartzJobQueryParam{

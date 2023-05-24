@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Data
 public class MenuDto extends CommonDto implements Serializable {

@@ -11,11 +11,9 @@ import com.blog.annotation.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Data
-// @DataPermission(fieldName = "dept_id")
 public class UserQueryParam{
 
     /** 精确 */

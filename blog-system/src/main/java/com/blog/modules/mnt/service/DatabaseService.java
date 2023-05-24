@@ -2,7 +2,7 @@ package com.blog.modules.mnt.service;
 
 import com.blog.modules.mnt.service.dto.DatabaseDto;
 import com.blog.modules.mnt.service.dto.DatabaseQueryParam;
-import com.blog.base.CommonService;
+
 import com.blog.base.PageInfo;
 import com.blog.modules.mnt.domain.Database;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
-public interface DatabaseService  extends CommonService<Database>{
+public interface DatabaseService  extends IService<Database>{
 
     static final String CACHE_KEY = "database";
 

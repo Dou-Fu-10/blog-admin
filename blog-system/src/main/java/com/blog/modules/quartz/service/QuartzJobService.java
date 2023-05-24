@@ -1,44 +1,45 @@
 package com.blog.modules.quartz.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.quartz.service.dto.QuartzJobQueryParam;
 import com.blog.modules.quartz.service.dto.QuartzLogQueryParam;
-import com.blog.base.CommonService;
 import com.blog.base.PageInfo;
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.domain.QuartzLog;
 import org.springframework.data.domain.Pageable;
-
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.util.List;
 import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-27
-*/
-public interface QuartzJobService extends CommonService<QuartzJob>{
+ * @author ty
+ */
+public interface QuartzJobService extends IService<QuartzJob> {
 
     static final String CACHE_KEY = "quartzJob";
 
     /**
-    * 查询数据分页
-    * @param query 条件
-    * @param pageable 分页参数
-    * @return PageInfo<QuartzJobDto>
-    */
+     * 查询数据分页
+     *
+     * @param query    条件
+     * @param pageable 分页参数
+     * @return PageInfo<QuartzJobDto>
+     */
     PageInfo<QuartzJob> queryAll(QuartzJobQueryParam query, Pageable pageable);
 
     /**
-    * 查询所有数据不分页
-    * @param query 条件参数
-    * @return List<QuartzJobDto>
-    */
+     * 查询所有数据不分页
+     *
+     * @param query 条件参数
+     * @return List<QuartzJobDto>
+     */
     List<QuartzJob> queryAll(QuartzJobQueryParam query);
 
     /**
      * 分页查询日志
+     *
      * @param criteria 条件
      * @param pageable 分页参数
      * @return /
@@ -47,6 +48,7 @@ public interface QuartzJobService extends CommonService<QuartzJob>{
 
     /**
      * 查询全部
+     *
      * @param criteria 条件
      * @return /
      */
@@ -59,25 +61,31 @@ public interface QuartzJobService extends CommonService<QuartzJob>{
      */
     @Override
     boolean save(QuartzJob resources);
+
     @Override
     boolean updateById(QuartzJob resources);
+
     boolean removeById(Long id);
+
     boolean removeByIds(Set<Long> ids);
 
     /**
      * 更改定时任务状态
+     *
      * @param quartzJob /
      */
     void updateIsPause(QuartzJob quartzJob);
 
     /**
      * 立即执行定时任务
+     *
      * @param quartzJob /
      */
     void execution(QuartzJob quartzJob);
 
     /**
      * 执行子任务
+     *
      * @param tasks /
      * @throws InterruptedException /
      */
@@ -85,6 +93,7 @@ public interface QuartzJobService extends CommonService<QuartzJob>{
 
     /**
      * 导出定时任务
+     *
      * @param queryAll 待导出的数据
      * @param response /
      * @throws IOException /
@@ -93,8 +102,9 @@ public interface QuartzJobService extends CommonService<QuartzJob>{
 
     /**
      * 导出定时任务日志
+     *
      * @param queryAllLog 待导出的数据
-     * @param response /
+     * @param response    /
      * @throws IOException /
      */
     void downloadLog(List<QuartzLog> queryAllLog, HttpServletResponse response) throws IOException;

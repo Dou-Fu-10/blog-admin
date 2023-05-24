@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.exception.EntityExistException;
 import com.blog.modules.system.domain.Job;
@@ -32,20 +32,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
-
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "job")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class JobServiceImpl extends CommonServiceImpl<JobMapper, Job> implements JobService {
+public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobService {
 
     private final JobMapper jobMapper;
     private final UsersJobsMapper usersJobsMapper;
@@ -77,7 +71,6 @@ public class JobServiceImpl extends CommonServiceImpl<JobMapper, Job> implements
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional
     public boolean save(Job resources) {
         Job job = lambdaQuery().eq(Job::getName, resources.getName()).one();
@@ -88,7 +81,6 @@ public class JobServiceImpl extends CommonServiceImpl<JobMapper, Job> implements
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional
     public boolean updateById(Job resources){
         Job job = lambdaQuery().eq(Job::getName, resources.getName()).one();
@@ -99,7 +91,6 @@ public class JobServiceImpl extends CommonServiceImpl<JobMapper, Job> implements
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional
     public boolean removeByIds(Set<Long> ids){
         int ret = jobMapper.deleteBatchIds(ids);

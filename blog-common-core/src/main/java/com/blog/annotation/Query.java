@@ -62,7 +62,7 @@ public @interface Query {
     }
 
     /**
-     * @author Zheng Jie
+     * @author ty
      * 适用于简单连接查询，复杂的请自定义该注解，或者使用sql查询
      */
     enum Join {

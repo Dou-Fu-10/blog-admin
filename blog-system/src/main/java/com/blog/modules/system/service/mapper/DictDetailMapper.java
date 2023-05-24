@@ -1,18 +1,17 @@
 package com.blog.modules.system.service.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.base.CommonMapper;
 import com.blog.modules.system.domain.DictDetail;
 import com.blog.modules.system.service.dto.DictDetailDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-24
+* @author ty
 */
 @Mapper
 public interface DictDetailMapper extends CommonMapper<DictDetail> {

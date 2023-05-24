@@ -1,15 +1,14 @@
 package com.blog.modules.system.service;
 
-import com.blog.base.CommonService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.domain.RolesDepts;
 
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface RolesDeptsService extends CommonService<RolesDepts> {
+public interface RolesDeptsService extends IService<RolesDepts> {
 
     List<Long> queryDeptIdByRoleId(Long id);
     List<Long> queryRoleIdByDeptId(Long id);

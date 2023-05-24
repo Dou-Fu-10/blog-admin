@@ -1,4 +1,4 @@
-package com.blog.modules.system.rest;
+package com.blog.modules.system.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.blog.modules.system.service.DictDetailService;
@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author Zheng Jie
-* @date 2019-04-10
+* @author ty
 */
 @RestController
 @RequiredArgsConstructor

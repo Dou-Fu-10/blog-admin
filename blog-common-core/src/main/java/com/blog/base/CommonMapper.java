@@ -10,8 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
 * 公共抽象Mapper接口类
-* @author fanglei
-* @date 2021/07/28
+* @author ty
 */
 @Mapper
 public interface CommonMapper<E> extends BaseMapper<E> {

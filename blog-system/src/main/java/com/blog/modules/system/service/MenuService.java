@@ -1,8 +1,8 @@
 package com.blog.modules.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.service.dto.MenuDto;
 import com.blog.modules.system.service.dto.MenuQueryParam;
-import com.blog.base.CommonService;
 import com.blog.modules.system.domain.Menu;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface MenuService  extends CommonService<Menu>{
+public interface MenuService  extends IService<Menu> {
 
     /**
     * 查询数据分页

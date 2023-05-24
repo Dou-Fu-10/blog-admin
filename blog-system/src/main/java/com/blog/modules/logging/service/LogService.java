@@ -1,6 +1,7 @@
 package com.blog.modules.logging.service;
 
-import com.blog.base.CommonService;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.base.PageInfo;
 import com.blog.modules.logging.domain.Log;
 import com.blog.modules.logging.service.dto.LogQueryParam;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
 * @author ty
 */
-public interface LogService  extends CommonService<Log>{
+public interface LogService  extends IService<Log> {
 
     static final String CACHE_KEY = "log";
 

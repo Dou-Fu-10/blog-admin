@@ -20,8 +20,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Data
 @Builder

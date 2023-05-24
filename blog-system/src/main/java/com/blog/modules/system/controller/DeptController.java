@@ -1,4 +1,4 @@
-package com.blog.modules.system.rest;
+package com.blog.modules.system.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.blog.modules.system.domain.Dept;
@@ -14,13 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
-* @author Zheng Jie
-* @date 2019-03-25
+* @author ty
 */
 @RestController
 @RequiredArgsConstructor

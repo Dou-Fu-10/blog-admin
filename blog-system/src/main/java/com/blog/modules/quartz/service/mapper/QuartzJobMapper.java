@@ -1,6 +1,6 @@
 package com.blog.modules.quartz.service.mapper;
 
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.quartz.domain.QuartzJob;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Mapper
-public interface QuartzJobMapper extends CommonMapper<QuartzJob> {
+public interface QuartzJobMapper extends BaseMapper<QuartzJob> {
 
     List<QuartzJob> findByIsPauseIsFalse();
 }

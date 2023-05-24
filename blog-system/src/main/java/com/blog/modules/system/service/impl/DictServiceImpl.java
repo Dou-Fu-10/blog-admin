@@ -7,7 +7,7 @@ import com.blog.modules.system.service.mapper.DictMapper;
 import lombok.AllArgsConstructor;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.system.domain.DictDetail;
 import com.blog.utils.CacheKey;
 import com.blog.utils.ConvertUtil;
@@ -34,14 +34,13 @@ import java.io.IOException;
 import java.util.*;
 
 /**
-* @author jinjin
-* @date 2020-09-24
+* @author ty
 */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = DictServiceImpl.CACHE_KEY)
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DictServiceImpl extends CommonServiceImpl<DictMapper, Dict> implements DictService {
+public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
 
     public static final String CACHE_KEY = "${changeClassName}";
     private final RedisService redisService;
@@ -49,7 +48,6 @@ public class DictServiceImpl extends CommonServiceImpl<DictMapper, Dict> impleme
     private final DictDetailMapper detailMapper;
 
     @Override
-    //@Cacheable
     public PageInfo<DictDto> queryAll(DictQueryParam query, Pageable pageable) {
         IPage<Dict> page = PageUtil.toMybatisPage(pageable);
         IPage<Dict> pageList = dictMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
@@ -57,7 +55,6 @@ public class DictServiceImpl extends CommonServiceImpl<DictMapper, Dict> impleme
     }
 
     @Override
-    //@Cacheable
     public List<DictDto> queryAll(DictQueryParam query){
         return ConvertUtil.convertList(dictMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), DictDto.class);
     }
@@ -80,15 +77,12 @@ public class DictServiceImpl extends CommonServiceImpl<DictMapper, Dict> impleme
     }
 
     @Override
-    // @CacheEvict(allEntries = true)
-    @CacheEvict(key = "'id:' + #p0.id")
     @Transactional(rollbackFor = Exception.class)
     public boolean updateById(Dict resources){
         return dictMapper.updateById(resources) > 0;
     }
 
     @Override
-    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public boolean removeByIds(Set<Long> ids){
         List<Dict> dicts = dictMapper.selectBatchIds(ids);

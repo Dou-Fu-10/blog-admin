@@ -1,8 +1,8 @@
 package com.blog.modules.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.service.dto.DeptDto;
 import com.blog.modules.system.service.dto.DeptQueryParam;
-import com.blog.base.CommonService;
 import com.blog.modules.system.domain.Dept;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface DeptService  extends CommonService<Dept>{
+public interface DeptService  extends IService<Dept> {
     /**
     * 查询所有数据不分页
     * @param query 条件参数

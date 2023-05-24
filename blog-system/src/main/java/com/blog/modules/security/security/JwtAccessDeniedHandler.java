@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * 拒绝访问处理程序
- * @author Zheng Jie
+ * @author ty
  */
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {

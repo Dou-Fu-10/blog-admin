@@ -39,7 +39,7 @@ import java.util.*;
 @AllArgsConstructor
 // @CacheConfig(cacheNames = ${className}Service.CACHE_KEY)
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class ${className}ServiceImpl extends CommonServiceImpl<${className}Mapper, ${className}> implements ${className}Service {
+public class ${className}ServiceImpl extends ServiceImpl<${className}Mapper, ${className}> implements ${className}Service {
 
     // private final RedisUtils redisUtils;
     private final ${className}Mapper ${changeClassName}Mapper;

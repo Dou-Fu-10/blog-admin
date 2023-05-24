@@ -1,8 +1,8 @@
 package com.blog.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.system.service.mapper.UsersJobsMapper;
 import lombok.AllArgsConstructor;
-import com.blog.base.impl.CommonServiceImpl;
 import com.blog.modules.system.domain.UsersJobs;
 import com.blog.modules.system.service.UsersJobsService;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class UsersJobsServiceImpl extends CommonServiceImpl<UsersJobsMapper, UsersJobs> implements UsersJobsService {
+public class UsersJobsServiceImpl extends ServiceImpl<UsersJobsMapper, UsersJobs> implements UsersJobsService {
 
     private final UsersJobsMapper usersJobsMapper;
 

@@ -1,7 +1,8 @@
 package com.blog.modules.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.service.dto.DictQueryParam;
-import com.blog.base.CommonService;
+
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.Dict;
 import com.blog.modules.system.service.dto.DictDto;
@@ -13,10 +14,9 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-24
+* @author ty
 */
-public interface DictService  extends CommonService<Dict>{
+public interface DictService  extends IService<Dict> {
 
     /**
     * 查询数据分页

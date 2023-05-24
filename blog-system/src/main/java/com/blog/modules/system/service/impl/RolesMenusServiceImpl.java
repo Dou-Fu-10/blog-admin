@@ -2,7 +2,7 @@ package com.blog.modules.system.service.impl;
 
 import com.blog.modules.system.service.mapper.RolesMenusMapper;
 import lombok.AllArgsConstructor;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.system.domain.RolesMenus;
 import com.blog.modules.system.service.RolesMenusService;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by jinjin on 2020-09-25.
+ * @author ty
  */
 @AllArgsConstructor
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class RolesMenusServiceImpl extends CommonServiceImpl<RolesMenusMapper, RolesMenus> implements RolesMenusService {
+public class RolesMenusServiceImpl extends ServiceImpl<RolesMenusMapper, RolesMenus> implements RolesMenusService {
 
     private final RolesMenusMapper rolesMenusMapper;
 

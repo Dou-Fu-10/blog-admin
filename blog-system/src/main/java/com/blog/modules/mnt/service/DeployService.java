@@ -4,7 +4,7 @@ import com.blog.modules.mnt.domain.Deploy;
 import com.blog.modules.mnt.domain.DeployHistory;
 import com.blog.modules.mnt.service.dto.DeployDto;
 import com.blog.modules.mnt.service.dto.DeployQueryParam;
-import com.blog.base.CommonService;
+
 import com.blog.base.PageInfo;
 import org.springframework.data.domain.Pageable;
 
@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
-public interface DeployService  extends CommonService<Deploy>{
+public interface DeployService  extends IService<Deploy>{
 
     static final String CACHE_KEY = "deploy";
 

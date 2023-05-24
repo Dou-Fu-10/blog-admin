@@ -1,6 +1,6 @@
 package com.blog.modules.logging.service.mapper;
 
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.logging.domain.Log;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 * @author ty
 */
 @Mapper
-public interface LogMapper extends CommonMapper<Log> {
+public interface LogMapper extends BaseMapper<Log> {
 
 }

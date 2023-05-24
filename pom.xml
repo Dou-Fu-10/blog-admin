@@ -16,6 +16,8 @@
         <module>blog-api</module>
         <module>blog-common-redis</module>
         <module>blog-common-log</module>
+        <module>blog-common-swagger</module>
+        <module>blog-common-securty</module>
     </modules>
 
     <name>IKun 博客后台管理</name>

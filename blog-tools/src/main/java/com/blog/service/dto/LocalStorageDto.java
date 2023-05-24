@@ -8,8 +8,8 @@ import com.blog.base.CommonDto;
 import java.io.Serializable;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Data
 @NoArgsConstructor

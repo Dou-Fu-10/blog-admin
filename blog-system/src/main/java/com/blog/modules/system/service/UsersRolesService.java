@@ -1,15 +1,13 @@
 package com.blog.modules.system.service;
 
-import com.blog.base.CommonService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.domain.UsersRoles;
-
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface UsersRolesService extends CommonService<UsersRoles> {
+public interface UsersRolesService extends IService<UsersRoles> {
     List<Long> queryUserIdByRoleId(Long id);
     List<Long> queryRoleIdByUserId(Long id);
     boolean removeByRoleId(Long id);

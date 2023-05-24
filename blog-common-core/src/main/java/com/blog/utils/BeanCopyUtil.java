@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Bean复制工具类
  *
- * @author fanglei
- * @date 2021/08/09
+ * @author ty
  **/
 public class BeanCopyUtil {
     public static <T> T copy(final Object source, final Class<T> clazz) {

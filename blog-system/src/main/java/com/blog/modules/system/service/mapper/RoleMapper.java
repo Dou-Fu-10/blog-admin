@@ -1,6 +1,6 @@
 package com.blog.modules.system.service.mapper;
 
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.system.domain.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -11,11 +11,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Mapper
-public interface RoleMapper extends CommonMapper<Role> {
+public interface RoleMapper extends BaseMapper<Role> {
     @Select("SELECT r.role_id as id, r.* FROM sys_role r LEFT OUTER JOIN sys_users_roles ur ON r.role_id=ur.role_id LEFT OUTER JOIN sys_user u ON ur.user_id=u.user_id WHERE u.user_id=#{userId}")
     Set<Role> selectLink(Long userId);
 

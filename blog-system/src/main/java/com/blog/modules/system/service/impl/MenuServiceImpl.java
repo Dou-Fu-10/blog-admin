@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.exception.EntityExistException;
 import com.blog.modules.system.domain.Menu;
@@ -40,20 +40,14 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
-
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "menu")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class MenuServiceImpl extends CommonServiceImpl<MenuMapper, Menu> implements MenuService {
+public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 
     private final RoleService roleService;
     private final UserMapper userMapper;
@@ -62,7 +56,6 @@ public class MenuServiceImpl extends CommonServiceImpl<MenuMapper, Menu> impleme
     private final RolesMenusService rolesMenusService;
 
     @Override
-    //@Cacheable
     public List<MenuDto> queryAll(MenuQueryParam query, boolean isQuery) {
         if (isQuery) {
             query.setPidIsNull(true);
@@ -82,7 +75,6 @@ public class MenuServiceImpl extends CommonServiceImpl<MenuMapper, Menu> impleme
     }
 
     @Override
-    //@Cacheable
     public List<MenuDto> queryAll(MenuQueryParam query){
         return queryAll(query, true);
     }
@@ -93,7 +85,6 @@ public class MenuServiceImpl extends CommonServiceImpl<MenuMapper, Menu> impleme
     }
 
     @Override
-    @Cacheable(key = "'id:' + #p0")
     public MenuDto findById(Long id) {
         return ConvertUtil.convert(getById(id), MenuDto.class);
     }

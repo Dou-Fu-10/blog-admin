@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.quartz.domain.QuartzLog;
 import com.blog.modules.quartz.service.mapper.QuartzLogMapper;
 import com.blog.modules.quartz.service.dto.QuartzLogQueryParam;
@@ -22,10 +22,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,15 +29,14 @@ import java.io.IOException;
 import java.util.*;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Slf4j
 @Service
 @AllArgsConstructor
-// @CacheConfig(cacheNames = QuartzJobService.CACHE_KEY)
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class QuartzJobServiceImpl extends CommonServiceImpl<QuartzJobMapper, QuartzJob> implements QuartzJobService {
+public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob> implements QuartzJobService {
 
     private final QuartzManage quartzManage;
     private final QuartzJobMapper jobMapper;
@@ -79,7 +74,6 @@ public class QuartzJobServiceImpl extends CommonServiceImpl<QuartzJobMapper, Qua
 
 
     @Override
-    // @Cacheable(key = "'id:' + #p0")
     public QuartzJob findById(Long id) {
         return jobMapper.selectById(id);
     }

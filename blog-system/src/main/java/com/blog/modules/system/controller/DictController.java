@@ -1,4 +1,4 @@
-package com.blog.modules.system.rest;
+package com.blog.modules.system.controller;
 
 import com.blog.modules.system.domain.Dict;
 import com.blog.modules.system.service.DictService;
@@ -12,14 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author Zheng Jie
-* @date 2019-04-10
+* @author ty
 */
 @RestController
 @RequiredArgsConstructor

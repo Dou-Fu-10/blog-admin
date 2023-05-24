@@ -1,4 +1,4 @@
-package com.blog.modules.system.rest;
+package com.blog.modules.system.controller;
 
 import cn.hutool.core.lang.Dict;
 import com.blog.modules.system.service.RoleService;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
@@ -25,8 +24,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @author Zheng Jie
- * @date 2018-12-03
+ * @author ty
  */
 @RestController
 @RequiredArgsConstructor

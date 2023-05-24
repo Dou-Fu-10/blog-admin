@@ -5,8 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
-* @author jinjin
-* @date 2020-09-24
+* @author ty
 */
 @Data
 public class DictDetailDto implements Serializable {

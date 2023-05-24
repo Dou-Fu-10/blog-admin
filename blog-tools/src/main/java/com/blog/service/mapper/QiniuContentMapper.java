@@ -1,16 +1,16 @@
 package com.blog.service.mapper;
 
 import com.blog.domain.QiniuContent;
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
 @Mapper
-public interface QiniuContentMapper extends CommonMapper<QiniuContent> {
+public interface QiniuContentMapper extends BaseMapper<QiniuContent> {
 
     QiniuContent findByKey(String key);
 }

@@ -1,19 +1,17 @@
 package com.blog.modules.system.service.mapper;
 
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.system.domain.Dept;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Mapper
-public interface DeptMapper extends CommonMapper<Dept> {
+public interface DeptMapper extends BaseMapper<Dept> {
 
     @Select("select d.dept_id as id, d.* from sys_dept d where dept_id = #{id}")
     Dept selectLink(Long id);

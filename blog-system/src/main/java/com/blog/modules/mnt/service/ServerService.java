@@ -3,7 +3,7 @@ package com.blog.modules.mnt.service;
 import com.blog.modules.mnt.domain.Server;
 import com.blog.modules.mnt.service.dto.ServerDto;
 import com.blog.modules.mnt.service.dto.ServerQueryParam;
-import com.blog.base.CommonService;
+
 import com.blog.base.PageInfo;
 import org.springframework.data.domain.Pageable;
 
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-27
+* @author ty
+* 
 */
-public interface ServerService  extends CommonService<Server>{
+public interface ServerService  extends IService<Server>{
 
     static final String CACHE_KEY = "server";
 

@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.blog.utils.SecurityUtils;
 
 /**
- * Created by jinjin on 2020-09-21.
+ * @author ty
  */
 @Configuration
 public class MybatisPlusFillHandler implements MetaObjectHandler{

@@ -14,7 +14,7 @@ import com.blog.utils.*;
 import lombok.AllArgsConstructor;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.config.FileProperties;
 import com.blog.exception.BadRequestException;
 import com.blog.exception.EntityExistException;
@@ -47,20 +47,14 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
-
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "user")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     private final FileProperties properties;
     private final RedisService redisService;
@@ -75,7 +69,6 @@ public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> impleme
     private final UsersJobsMapper usersJobsMapper;
 
     @Override
-    //@Cacheable
     public PageInfo<UserDto> queryAll(UserQueryParam query, Pageable pageable) {
         IPage<User> page = PageUtil.toMybatisPage(pageable);
         IPage<User> pageData = userMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
@@ -118,7 +111,6 @@ public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> impleme
     }
 
     @Override
-    //@Cacheable
     public List<UserDto> queryAll(UserQueryParam query){
         return ConvertUtil.convertList(userMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), UserDto.class);
     }
@@ -129,7 +121,6 @@ public class UserServiceImpl extends CommonServiceImpl<UserMapper, User> impleme
     }
 
     @Override
-    @Cacheable(key = "'id:' + #p0")
     public UserDto findById(Long id) {
         return ConvertUtil.convert(getById(id), UserDto.class);
     }

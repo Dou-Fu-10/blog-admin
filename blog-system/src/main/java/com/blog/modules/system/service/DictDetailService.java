@@ -1,7 +1,7 @@
 package com.blog.modules.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.service.dto.DictDetailDto;
-import com.blog.base.CommonService;
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.DictDetail;
 import com.blog.modules.system.service.dto.DictDetailQueryParam;
@@ -9,10 +9,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-24
+* @author ty
 */
-public interface DictDetailService  extends CommonService<DictDetail>{
+public interface DictDetailService  extends IService<DictDetail> {
 
     /**
     * 查询数据分页

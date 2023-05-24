@@ -15,8 +15,7 @@ import java.util.Objects;
 
 /**
 * 实体类差异化比较器，可以比较类变化字段，方便针对变化的数据进行日志记录
-* @author fanglei
-* @date 2021/10/12
+* @author ty
 */
 public class CompareUtil {
     /**

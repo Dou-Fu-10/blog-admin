@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 /**
-* @author Zheng Jie
+* @author ty
 * @date 2019-09-05
 */
 @RestController

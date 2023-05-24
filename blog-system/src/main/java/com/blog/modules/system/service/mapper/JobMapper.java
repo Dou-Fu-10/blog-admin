@@ -1,17 +1,15 @@
 package com.blog.modules.system.service.mapper;
 
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.system.domain.Job;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Mapper
-public interface JobMapper extends CommonMapper<Job> {
+public interface JobMapper extends BaseMapper<Job> {
     @Select("select j.job_id as id, j.* from sys_job where job_id = #{id}")
     Job selectLink(Long id);
 }

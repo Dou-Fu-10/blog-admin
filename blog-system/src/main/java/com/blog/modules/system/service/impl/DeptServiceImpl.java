@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.blog.commom.redis.service.RedisService;
 import lombok.AllArgsConstructor;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.blog.base.impl.CommonServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.system.domain.Dept;
 import com.blog.modules.system.domain.User;
@@ -32,25 +32,21 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
 
 /**
-* @author jinjin
-* @date 2020-09-25
-*/
+ * @author ty
+ */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "dept")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> implements DeptService {
+public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements DeptService {
 
     private final UserMapper userMapper;
     private final RoleMapper roleMapper;
@@ -59,8 +55,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
     private final RolesDeptsService rolesDeptsService;
 
     @Override
-    //@Cacheable
-    public List<DeptDto> queryAll(DeptQueryParam query, Boolean isQuery){
+    public List<DeptDto> queryAll(DeptQueryParam query, Boolean isQuery) {
         if (isQuery) {
             query.setPidIsNull(true);
         }
@@ -69,7 +64,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
         if (isQuery && notEmpty) {
             query.setPidIsNull(null);
         }
-        
+
         return ConvertUtil.convertList(deptMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), DeptDto.class);
     }
 
@@ -108,6 +103,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
         }
         return list;
     }
+
     private List<DeptDto> deduplication(List<DeptDto> list) {
         List<DeptDto> deptDtos = new ArrayList<>();
         for (DeptDto deptDto : list) {
@@ -118,7 +114,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
                     break;
                 }
             }
-            if (flag){
+            if (flag) {
                 deptDtos.add(deptDto);
             }
         }
@@ -126,7 +122,6 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
     }
 
     @Override
-    // @Cacheable
     public List<DeptDto> queryAll() {
         return ConvertUtil.convertList(deptMapper.selectList(Wrappers.emptyWrapper()), DeptDto.class);
     }
@@ -135,6 +130,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
     public Dept getById(Long id) {
         return deptMapper.selectById(id);
     }
+
     @Override
     public DeptDto findById(Long id) {
         return ConvertUtil.convert(getById(id), DeptDto.class);
@@ -156,7 +152,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(Dept resources){
+    public boolean updateById(Dept resources) {
         // 旧的部门
         Long pidOld = getById(resources.getId()).getPid();
         if (resources.getPid() != null && resources.getId().equals(resources.getPid())) {
@@ -180,7 +176,7 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
         deptLambdaQueryWrapper.eq(Dept::getPid, deptId);
         int count = (int) count(deptLambdaQueryWrapper);
 
-        
+
         Dept dept = new Dept();
         dept.setSubCount(count);
         if (parent != null) {
@@ -192,8 +188,8 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
-        for (Long id: ids) {
+    public boolean removeByIds(Set<Long> ids) {
+        for (Long id : ids) {
             Dept dept = getById(id);
             // 清理缓存
             delCaches(id, dept.getPid(), null);
@@ -202,16 +198,14 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
         }
         return deptMapper.deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> ids = new HashSet<>(1);
         ids.add(id);
         return removeByIds(ids);
     }
-
-    // @Cacheable(key = "'pid:' + #p0")
     @Override
     public List<Dept> findByPid(long pid) {
         return lambdaQuery().eq(Dept::getPid, pid).list();
@@ -314,21 +308,21 @@ public class DeptServiceImpl extends CommonServiceImpl<DeptMapper, Dept> impleme
 
     @Override
     public void download(List<DeptDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (DeptDto dept : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("上级部门", dept.getPid());
-              map.put("子部门数目", dept.getSubCount());
-              map.put("名称", dept.getName());
-              map.put("排序", dept.getDeptSort());
-              map.put("状态", dept.getEnabled());
-              map.put("创建者", dept.getCreateBy());
-              map.put("更新者", dept.getUpdateBy());
-              map.put("创建日期", dept.getCreateTime());
-              map.put("更新时间", dept.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (DeptDto dept : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("上级部门", dept.getPid());
+            map.put("子部门数目", dept.getSubCount());
+            map.put("名称", dept.getName());
+            map.put("排序", dept.getDeptSort());
+            map.put("状态", dept.getEnabled());
+            map.put("创建者", dept.getCreateBy());
+            map.put("更新者", dept.getUpdateBy());
+            map.put("创建日期", dept.getCreateTime());
+            map.put("更新时间", dept.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 
     /**

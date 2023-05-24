@@ -1,15 +1,13 @@
 package com.blog.modules.system.service;
 
-import com.blog.base.CommonService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.system.domain.RolesMenus;
-
 import java.util.List;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
-public interface RolesMenusService extends CommonService<RolesMenus> {
+public interface RolesMenusService extends IService<RolesMenus> {
     List<Long> queryMenuIdByRoleId(Long id);
     List<Long> queryRoleIdByMenuId(Long id);
     boolean removeByRoleId(Long id);

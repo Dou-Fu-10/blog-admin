@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * @author /
+ * @author ty
  */
 public class TokenFilter extends GenericFilterBean {
     private static final Logger log = LoggerFactory.getLogger(TokenFilter.class);

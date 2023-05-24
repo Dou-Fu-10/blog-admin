@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 * @date ${date}
 */
 @Repository
-public interface ${className}Mapper extends CommonMapper<${className}> {
+public interface ${className}Mapper extends BaseMapper<${className}> {
 
 }

@@ -1,21 +1,19 @@
 package com.blog.modules.system.service.mapper;
 
-import com.blog.base.CommonMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.system.domain.Menu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Mapper
-public interface MenuMapper extends CommonMapper<Menu> {
+public interface MenuMapper extends BaseMapper<Menu> {
 
     @Select("SELECT m.menu_id as id, m.* FROM sys_roles_menus rm INNER JOIN sys_menu m ON rm.menu_id=m.menu_id WHERE rm.role_id=#{roleId}")
     Set<Menu> selectLink(Long roleId);

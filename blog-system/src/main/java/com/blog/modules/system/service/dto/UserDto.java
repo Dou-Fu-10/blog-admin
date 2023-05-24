@@ -10,8 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
-* @author jinjin
-* @date 2020-09-25
+* @author ty
 */
 @Data
 public class UserDto extends CommonDto implements Serializable {

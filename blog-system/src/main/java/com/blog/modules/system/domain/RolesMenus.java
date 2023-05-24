@@ -16,7 +16,8 @@ import java.io.Serializable;
 
 /**
  * 用户角色关联
- * Created by jinjin on 2020-09-25.
+ *
+ * @author ty
  */
 @Data
 @Builder

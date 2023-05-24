@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @apiNote 配置文件转换Pojo类的 统一配置 类
- * @author: ty
+ * @author ty
  */
 @Configuration
 public class ConfigBeanConfiguration {

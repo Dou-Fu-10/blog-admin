@@ -13,7 +13,7 @@ import java.util.Set;
 * @author ${author}
 * @date ${date}
 */
-public interface ${className}Service extends CommonService<${className}>  {
+public interface ${className}Service extends IService<${className}>  {
 
     static final String CACHE_KEY = "${changeClassName}";
 
