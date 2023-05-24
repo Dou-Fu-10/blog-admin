@@ -91,7 +91,6 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
     }
 
     @Override
-    // @Cacheable(key = "'id:' + #p0")
     public DeployDto findById(Long id) {
         DeployDto deployDto = ConvertUtil.convert(deployMapper.selectById(id), DeployDto.class);
         AppDto appDto = appService.findById(deployDto.getAppId());

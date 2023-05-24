@@ -58,7 +58,6 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
     }
     
     @Override
-    // @Cacheable(key = "'id:' + #p0")
     public AppDto findById(Long id) {
         return ConvertUtil.convert(getById(id), AppDto.class);
     }

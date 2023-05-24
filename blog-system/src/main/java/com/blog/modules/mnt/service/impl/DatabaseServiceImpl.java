@@ -61,7 +61,6 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, Database> i
     }
 
     @Override
-    // @Cacheable(key = "'id:' + #p0")
     public DatabaseDto findById(String id) {
         return ConvertUtil.convert(getById(id), DatabaseDto.class);
     }

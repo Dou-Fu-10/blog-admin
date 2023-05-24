@@ -28,7 +28,6 @@ public class AliPayServiceImpl extends ServiceImpl<AlipayConfigMapper, AlipayCon
     private final AlipayConfigMapper alipayConfigMapper;
 
     @Override
-    @Cacheable(key = "'config'")
     public AlipayConfig find() {
         return getById(1L);
     }

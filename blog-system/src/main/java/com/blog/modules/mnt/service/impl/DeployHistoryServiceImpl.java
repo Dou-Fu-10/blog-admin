@@ -60,7 +60,6 @@ public class DeployHistoryServiceImpl extends ServiceImpl<DeployHistoryMapper, D
     }
 
     @Override
-    // @Cacheable(key = "'id:' + #p0")
     public DeployHistoryDto findById(Long id) {
         return ConvertUtil.convert(getById(id), DeployHistoryDto.class);
     }

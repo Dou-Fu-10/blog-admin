@@ -40,7 +40,6 @@ public class EmailServiceImpl extends ServiceImpl<EmailConfigMapper, EmailConfig
     }
 
     @Override
-    @Cacheable(key = "'config'")
     public EmailConfig find() {
         return getById(1L);
     }

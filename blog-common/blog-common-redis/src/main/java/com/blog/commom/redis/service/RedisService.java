@@ -2,6 +2,7 @@ package com.blog.commom.redis.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings({"unchecked", "all"})
 public class RedisService {
     private static final Logger log = LoggerFactory.getLogger(RedisService.class);
-    private RedisTemplate<Object, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
     @Value("${jwt.online-key}")
     private String onlineKey;
 
@@ -147,7 +148,7 @@ public class RedisService {
      */
     public boolean hasKey(String key) {
         try {
-            return redisTemplate.hasKey(key);
+            return Boolean.TRUE.equals(redisTemplate.hasKey(key));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return false;
@@ -157,19 +158,19 @@ public class RedisService {
     /**
      * 删除缓存
      *
-     * @param key 可以传一个值 或多个
+     * @param keys 可以传一个值 或多个
      */
     public void del(String... keys) {
         if (keys != null && keys.length > 0) {
             if (keys.length == 1) {
-                boolean result = redisTemplate.delete(keys[0]);
+                boolean result = Boolean.TRUE.equals(redisTemplate.delete(keys[0]));
                 log.debug("--------------------------------------------");
-                log.debug(new StringBuilder("删除缓存：").append(keys[0]).append("，结果：").append(result).toString());
+                log.debug("删除缓存：" + keys[0] + "，结果：" + result);
                 log.debug("--------------------------------------------");
             } else {
                 Set<Object> keySet = new HashSet<>();
                 for (String key : keys) {
-                    keySet.addAll(redisTemplate.keys(key));
+                    keySet.addAll(Objects.requireNonNull(redisTemplate.keys(key)));
                 }
                 long count = redisTemplate.delete(keySet);
                 log.debug("--------------------------------------------");
@@ -199,8 +200,8 @@ public class RedisService {
      * @return
      */
     public List<Object> multiGet(List<String> keys) {
-        List list = redisTemplate.opsForValue().multiGet(Sets.newHashSet(keys));
-        List resultList = Lists.newArrayList();
+        List<Object> list = redisTemplate.opsForValue().multiGet(Sets.newHashSet(keys));
+        List<@Nullable Object> resultList = Lists.newArrayList();
         Optional.ofNullable(list).ifPresent(e-> list.forEach(ele-> Optional.ofNullable(ele).ifPresent(resultList::add)));
         return resultList;
     }
@@ -440,7 +441,7 @@ public class RedisService {
      */
     public boolean sHasKey(String key, Object value) {
         try {
-            return redisTemplate.opsForSet().isMember(key, value);
+            return Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(key, value));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return false;
@@ -684,7 +685,7 @@ public class RedisService {
     public void delByKeys(String prefix, Set<Long> ids) {
         Set<Object> keys = new HashSet<>();
         for (Long id : ids) {
-            keys.addAll(redisTemplate.keys(new StringBuffer(prefix).append(id).toString()));
+            keys.addAll(Objects.requireNonNull(redisTemplate.keys(prefix + id)));
         }
         long count = redisTemplate.delete(keys);
         // 此处提示可自行删除

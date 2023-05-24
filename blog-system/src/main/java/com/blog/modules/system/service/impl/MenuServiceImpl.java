@@ -249,7 +249,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     // @Override
-    @Cacheable(key = "'tree'")
     public Object getMenuTree(Long pid) {
         Map<Long, List<Menu>> allMap = menuMapper.selectList(Wrappers.emptyWrapper()).stream().collect(Collectors.groupingBy(Menu::getPid));
         return buildMenuTree(allMap, pid);
@@ -273,7 +272,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     @Override
-    @Cacheable(key = "'pid:' + #p0")
     public List<MenuDto> getMenus(Long pid) {
         List<Menu> menus;
         if (pid != null && !pid.equals(0L)) {

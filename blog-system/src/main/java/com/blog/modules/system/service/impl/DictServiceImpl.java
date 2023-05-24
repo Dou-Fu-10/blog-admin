@@ -65,7 +65,6 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     }
 
     @Override
-    @Cacheable(key = "'id:' + #p0")
     public DictDto findById(Long id) {
         return ConvertUtil.convert(getById(id), DictDto.class);
     }

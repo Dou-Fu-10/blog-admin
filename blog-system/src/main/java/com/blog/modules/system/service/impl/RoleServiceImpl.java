@@ -94,7 +94,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    @Cacheable(key = "'id:' + #p0")
     public RoleDto findById(Long id) {
         RoleDto role = ConvertUtil.convert(getById(id), RoleDto.class);
         role.setMenus(ConvertUtil.convertSet(menuMapper.selectLink(role.getId()), MenuDto.class));
@@ -221,7 +220,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    @Cacheable(key = "'auth:' + #p0.id")
     public List<GrantedAuthority> mapToGrantedAuthorities(UserDto user) {
         Set<String> permissions = new HashSet<>();
         // 如果是管理员直接返回
