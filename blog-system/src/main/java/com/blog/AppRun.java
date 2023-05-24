@@ -1,7 +1,8 @@
 package com.blog;
 
-import com.blog.storage.cloud.config.*;
 import com.blog.annotation.rest.AnonymousGetMapping;
+import com.blog.modules.tools.cloud.config.AliyunOssConfig;
+import com.blog.modules.tools.cloud.config.MinioConfig;
 import com.blog.utils.SpringContextHolder;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -28,10 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
         "com.blog.modules.mnt.mapper",
         "com.blog.modules.quartz.service.mapper",
         "com.blog.modules.system.service.mapper",
+        "com.blog.modules.tools.service.mapper",
         "com.blog.service.mapper",
 })
 @EnableTransactionManagement
-@EnableConfigurationProperties(value = {AliyunOssConfig.class, BaiduBosConfig.class, MinioConfig.class, QiniuKodoConfig.class, TencentCosConfig.class})
+@EnableConfigurationProperties(value = {AliyunOssConfig.class, MinioConfig.class})
 public class AppRun {
 
     public static void main(String[] args) {

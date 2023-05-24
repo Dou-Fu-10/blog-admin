@@ -6,12 +6,12 @@ import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
 import com.blog.commom.redis.service.RedisService;
 import com.blog.config.thread.ThreadPoolExecutorUtil;
-import com.blog.domain.vo.EmailVo;
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.domain.QuartzLog;
-import com.blog.modules.quartz.service.mapper.QuartzLogMapper;
 import com.blog.modules.quartz.service.QuartzJobService;
-import com.blog.service.EmailService;
+import com.blog.modules.quartz.service.mapper.QuartzLogMapper;
+import com.blog.modules.tools.domain.vo.EmailVo;
+import com.blog.modules.tools.service.EmailService;
 import com.blog.utils.SpringContextHolder;
 import com.blog.utils.StringUtils;
 import com.blog.utils.ThrowableUtil;
@@ -19,8 +19,12 @@ import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 参考人人开源，https://gitee.com/renrenio/renren-security

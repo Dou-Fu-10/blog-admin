@@ -3,15 +3,8 @@ package com.blog.modules.mnt.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-//import io.swagger.annotations.ApiModel;
-//import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
-import com.blog.base.CommonModel;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -22,10 +15,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@JsonIgnoreProperties(value = { "handler" })
+@JsonIgnoreProperties(value = {"handler"})
 @TableName("mnt_deploy_server")
 // @ApiModel(value="DeploysServers对象", description="应用与服务器部署关联")
-public class DeploysServers extends CommonModel<DeploysServers> implements Serializable{
+public class DeploysServers extends com.baomidou.mybatisplus.extension.activerecord.Model<DeploysServers> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 

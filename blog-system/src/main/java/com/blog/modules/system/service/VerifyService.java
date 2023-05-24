@@ -1,6 +1,6 @@
 package com.blog.modules.system.service;
 
-import com.blog.domain.vo.EmailVo;
+import com.blog.modules.tools.domain.vo.EmailVo;
 
 /**
  * @author ty

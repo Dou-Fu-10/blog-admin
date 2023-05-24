@@ -3,7 +3,6 @@ package com.blog.modules.logging.domain;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.annotation.*;
-import com.blog.base.CommonModel;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -13,8 +12,8 @@ import java.util.Date;
 
 /**
  * 日志实体类
-* @author ty
-*/
+ * @author ty
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,11 +21,11 @@ import java.util.Date;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_log")
-public class Log extends CommonModel<Log> implements Serializable {
+public class Log extends com.baomidou.mybatisplus.extension.activerecord.Model<Log> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "log_id", type= IdType.AUTO)
+    @TableId(value = "log_id", type = IdType.AUTO)
     private Long id;
 
     private String description;

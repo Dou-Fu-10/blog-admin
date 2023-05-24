@@ -7,13 +7,14 @@ import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
 import com.blog.commom.redis.service.RedisService;
-import lombok.RequiredArgsConstructor;
-import com.blog.domain.vo.EmailVo;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.system.service.VerifyService;
+import com.blog.modules.tools.domain.vo.EmailVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collections;
 
 /**

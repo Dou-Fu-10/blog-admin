@@ -1,28 +1,18 @@
 package com.blog.modules.quartz.domain;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.IdType;
-//import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.*;
 import lombok.experimental.Accessors;
-import com.blog.base.CommonModel;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
 * @author ty
-* 
-*/
+ *
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -30,17 +20,17 @@ import java.util.Date;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_quartz_log")
-public class QuartzLog extends CommonModel<QuartzLog> implements Serializable {
+public class QuartzLog extends com.baomidou.mybatisplus.extension.activerecord.Model<QuartzLog> implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value = "log_id", type= IdType.AUTO)
+    @TableId(value = "log_id", type = IdType.AUTO)
     private Long id;
 
     private String beanName;
 
-    @TableField(fill= FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     private String cronExpression;
