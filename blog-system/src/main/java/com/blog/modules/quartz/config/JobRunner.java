@@ -1,7 +1,7 @@
 package com.blog.modules.quartz.config;
 
 import com.blog.modules.quartz.domain.QuartzJob;
-import com.blog.modules.quartz.service.mapper.QuartzJobMapper;
+import com.blog.modules.quartz.mapper.QuartzJobMapper;
 import lombok.RequiredArgsConstructor;
 import com.blog.modules.quartz.utils.QuartzManage;
 import org.slf4j.Logger;

@@ -7,12 +7,11 @@ import com.blog.exception.BadRequestException;
 import com.blog.modules.tools.domain.EmailConfig;
 import com.blog.modules.tools.domain.vo.EmailVo;
 import com.blog.modules.tools.service.EmailService;
-import com.blog.modules.tools.service.mapper.EmailConfigMapper;
+import com.blog.modules.tools.mapper.EmailConfigMapper;
 import com.blog.utils.EncryptUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

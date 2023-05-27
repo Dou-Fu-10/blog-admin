@@ -9,7 +9,7 @@ import com.blog.config.thread.ThreadPoolExecutorUtil;
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.domain.QuartzLog;
 import com.blog.modules.quartz.service.QuartzJobService;
-import com.blog.modules.quartz.service.mapper.QuartzLogMapper;
+import com.blog.modules.quartz.mapper.QuartzLogMapper;
 import com.blog.modules.tools.domain.vo.EmailVo;
 import com.blog.modules.tools.service.EmailService;
 import com.blog.utils.SpringContextHolder;

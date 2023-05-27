@@ -3,8 +3,8 @@ package com.blog.modules.mnt.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.base.PageInfo;
 import com.blog.modules.mnt.domain.DeployHistory;
-import com.blog.modules.mnt.service.dto.DeployHistoryDto;
-import com.blog.modules.mnt.service.dto.DeployHistoryQueryParam;
+import com.blog.modules.mnt.domain.dto.DeployHistoryDto;
+import com.blog.modules.mnt.domain.dto.DeployHistoryQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 

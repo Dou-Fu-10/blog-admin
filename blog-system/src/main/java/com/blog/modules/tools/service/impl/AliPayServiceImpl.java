@@ -9,11 +9,10 @@ import com.blog.exception.BadRequestException;
 import com.blog.modules.tools.domain.AlipayConfig;
 import com.blog.modules.tools.domain.vo.TradeVo;
 import com.blog.modules.tools.service.AliPayService;
-import com.blog.modules.tools.service.mapper.AlipayConfigMapper;
+import com.blog.modules.tools.mapper.AlipayConfigMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

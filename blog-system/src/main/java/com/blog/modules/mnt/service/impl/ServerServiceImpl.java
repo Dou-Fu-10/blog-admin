@@ -11,8 +11,8 @@ import com.blog.utils.FileUtil;
 import com.blog.utils.ConvertUtil;
 import com.blog.modules.mnt.domain.Server;
 import com.blog.modules.mnt.service.ServerService;
-import com.blog.modules.mnt.service.dto.ServerDto;
-import com.blog.modules.mnt.service.dto.ServerQueryParam;
+import com.blog.modules.mnt.domain.dto.ServerDto;
+import com.blog.modules.mnt.domain.dto.ServerQueryParam;
 import com.blog.modules.mnt.mapper.ServerMapper;
 import com.blog.utils.PageUtil;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;

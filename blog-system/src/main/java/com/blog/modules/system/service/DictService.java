@@ -1,11 +1,11 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.service.dto.DictQueryParam;
+import com.blog.modules.system.domain.dto.DictQueryParam;
 
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.Dict;
-import com.blog.modules.system.service.dto.DictDto;
+import com.blog.modules.system.domain.dto.DictDto;
 import org.springframework.data.domain.Pageable;
 
 import jakarta.servlet.http.HttpServletResponse;

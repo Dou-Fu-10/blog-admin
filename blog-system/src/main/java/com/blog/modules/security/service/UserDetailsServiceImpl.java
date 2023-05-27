@@ -8,7 +8,7 @@ import com.blog.modules.security.service.dto.JwtUserDto;
 import com.blog.modules.system.service.DataService;
 import com.blog.modules.system.service.RoleService;
 import com.blog.modules.system.service.UserService;
-import com.blog.modules.system.service.dto.UserDto;
+import com.blog.modules.system.domain.dto.UserDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

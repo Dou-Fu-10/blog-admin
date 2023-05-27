@@ -1,8 +1,8 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.service.dto.DeptDto;
-import com.blog.modules.system.service.dto.DeptQueryParam;
+import com.blog.modules.system.domain.dto.DeptDto;
+import com.blog.modules.system.domain.dto.DeptQueryParam;
 import com.blog.modules.system.domain.Dept;
 
 import jakarta.servlet.http.HttpServletResponse;

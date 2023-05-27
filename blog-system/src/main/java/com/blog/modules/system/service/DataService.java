@@ -1,6 +1,6 @@
 package com.blog.modules.system.service;
 
-import com.blog.modules.system.service.dto.UserDto;
+import com.blog.modules.system.domain.dto.UserDto;
 
 import java.util.List;
 

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.base.PageInfo;
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.domain.QuartzLog;
-import com.blog.modules.quartz.service.dto.QuartzJobQueryParam;
-import com.blog.modules.quartz.service.dto.QuartzLogQueryParam;
+import com.blog.modules.quartz.domain.dto.QuartzJobQueryParam;
+import com.blog.modules.quartz.domain.dto.QuartzLogQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 

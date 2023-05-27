@@ -2,8 +2,8 @@ package com.blog.modules.mnt.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.blog.modules.mnt.service.DatabaseService;
-import com.blog.modules.mnt.service.dto.DatabaseDto;
-import com.blog.modules.mnt.service.dto.DatabaseQueryParam;
+import com.blog.modules.mnt.domain.dto.DatabaseDto;
+import com.blog.modules.mnt.domain.dto.DatabaseQueryParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.blog.base.PageInfo;
@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;

@@ -3,7 +3,7 @@ package com.blog.modules.tools.controller;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.tools.domain.LocalStorage;
 import com.blog.modules.tools.service.LocalStorageService;
-import com.blog.modules.tools.service.dto.LocalStorageQueryParam;
+import com.blog.modules.tools.domain.dto.LocalStorageQueryParam;
 import com.blog.utils.FileUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

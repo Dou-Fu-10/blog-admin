@@ -10,8 +10,8 @@ import com.blog.utils.ConvertUtil;
 import com.blog.utils.FileUtil;
 import com.blog.modules.mnt.domain.DeployHistory;
 import com.blog.modules.mnt.service.DeployHistoryService;
-import com.blog.modules.mnt.service.dto.DeployHistoryDto;
-import com.blog.modules.mnt.service.dto.DeployHistoryQueryParam;
+import com.blog.modules.mnt.domain.dto.DeployHistoryDto;
+import com.blog.modules.mnt.domain.dto.DeployHistoryQueryParam;
 import com.blog.modules.mnt.mapper.DeployHistoryMapper;
 import com.blog.utils.PageUtil;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;

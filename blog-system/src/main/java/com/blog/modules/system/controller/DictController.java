@@ -2,7 +2,7 @@ package com.blog.modules.system.controller;
 
 import com.blog.modules.system.domain.Dict;
 import com.blog.modules.system.service.DictService;
-import com.blog.modules.system.service.dto.DictQueryParam;
+import com.blog.modules.system.domain.dto.DictQueryParam;
 import lombok.RequiredArgsConstructor;
 import com.blog.modules.logging.annotation.Log;
 import com.blog.exception.BadRequestException;

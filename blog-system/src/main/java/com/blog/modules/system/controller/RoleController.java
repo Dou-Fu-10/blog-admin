@@ -2,9 +2,9 @@ package com.blog.modules.system.controller;
 
 import cn.hutool.core.lang.Dict;
 import com.blog.modules.system.service.RoleService;
-import com.blog.modules.system.service.dto.RoleDto;
-import com.blog.modules.system.service.dto.RoleQueryParam;
-import com.blog.modules.system.service.dto.RoleSmallDto;
+import com.blog.modules.system.domain.dto.RoleDto;
+import com.blog.modules.system.domain.dto.RoleQueryParam;
+import com.blog.modules.system.domain.dto.RoleSmallDto;
 import lombok.RequiredArgsConstructor;
 import com.blog.base.CommonEntity;
 import com.blog.modules.logging.annotation.Log;

@@ -3,7 +3,7 @@ package com.blog.modules.mnt.controller;
 import com.blog.modules.logging.annotation.Log;
 import com.blog.modules.mnt.domain.Server;
 import com.blog.modules.mnt.service.ServerService;
-import com.blog.modules.mnt.service.dto.ServerQueryParam;
+import com.blog.modules.mnt.domain.dto.ServerQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.base.PageInfo;
 import com.blog.modules.mnt.domain.Deploy;
 import com.blog.modules.mnt.domain.DeployHistory;
-import com.blog.modules.mnt.service.dto.DeployDto;
-import com.blog.modules.mnt.service.dto.DeployQueryParam;
+import com.blog.modules.mnt.domain.dto.DeployDto;
+import com.blog.modules.mnt.domain.dto.DeployQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 

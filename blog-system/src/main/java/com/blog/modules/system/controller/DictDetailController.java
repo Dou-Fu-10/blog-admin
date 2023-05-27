@@ -2,8 +2,8 @@ package com.blog.modules.system.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.blog.modules.system.service.DictDetailService;
-import com.blog.modules.system.service.dto.DictDetailDto;
-import com.blog.modules.system.service.dto.DictDetailQueryParam;
+import com.blog.modules.system.domain.dto.DictDetailDto;
+import com.blog.modules.system.domain.dto.DictDetailQueryParam;
 import lombok.RequiredArgsConstructor;
 import com.blog.modules.logging.annotation.Log;
 import com.blog.exception.BadRequestException;

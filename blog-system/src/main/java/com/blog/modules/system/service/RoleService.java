@@ -1,12 +1,12 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.service.dto.RoleDto;
-import com.blog.modules.system.service.dto.RoleQueryParam;
+import com.blog.modules.system.domain.dto.RoleDto;
+import com.blog.modules.system.domain.dto.RoleQueryParam;
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.Role;
-import com.blog.modules.system.service.dto.RoleSmallDto;
-import com.blog.modules.system.service.dto.UserDto;
+import com.blog.modules.system.domain.dto.RoleSmallDto;
+import com.blog.modules.system.domain.dto.UserDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 

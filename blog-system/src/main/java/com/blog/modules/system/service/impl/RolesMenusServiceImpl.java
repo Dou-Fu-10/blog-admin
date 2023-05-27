@@ -1,6 +1,6 @@
 package com.blog.modules.system.service.impl;
 
-import com.blog.modules.system.service.mapper.RolesMenusMapper;
+import com.blog.modules.system.mapper.RolesMenusMapper;
 import lombok.AllArgsConstructor;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.system.domain.RolesMenus;

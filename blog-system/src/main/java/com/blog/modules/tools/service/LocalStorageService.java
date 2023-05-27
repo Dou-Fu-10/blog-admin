@@ -2,8 +2,8 @@ package com.blog.modules.tools.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.tools.domain.LocalStorage;
-import com.blog.modules.tools.service.dto.LocalStorageDto;
-import com.blog.modules.tools.service.dto.LocalStorageQueryParam;
+import com.blog.modules.tools.domain.dto.LocalStorageDto;
+import com.blog.modules.tools.domain.dto.LocalStorageQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;

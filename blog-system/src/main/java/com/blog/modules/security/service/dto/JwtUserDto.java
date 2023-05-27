@@ -3,7 +3,7 @@ package com.blog.modules.security.service.dto;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import com.blog.modules.system.service.dto.UserDto;
+import com.blog.modules.system.domain.dto.UserDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;

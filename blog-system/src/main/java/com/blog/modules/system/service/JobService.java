@@ -1,8 +1,8 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.service.dto.JobDto;
-import com.blog.modules.system.service.dto.JobQueryParam;
+import com.blog.modules.system.domain.dto.JobDto;
+import com.blog.modules.system.domain.dto.JobQueryParam;
 
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.Job;

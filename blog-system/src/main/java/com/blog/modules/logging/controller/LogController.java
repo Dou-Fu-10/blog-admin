@@ -3,7 +3,7 @@ package com.blog.modules.logging.controller;
 
 import com.blog.modules.logging.annotation.Log;
 import com.blog.modules.logging.service.LogService;
-import com.blog.modules.logging.service.dto.LogQueryParam;
+import com.blog.modules.logging.domain.dto.LogQueryParam;
 import com.blog.utils.SecurityUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

@@ -2,8 +2,8 @@ package com.blog.modules.quartz.controller;
 
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.service.QuartzJobService;
-import com.blog.modules.quartz.service.dto.QuartzJobQueryParam;
-import com.blog.modules.quartz.service.dto.QuartzLogQueryParam;
+import com.blog.modules.quartz.domain.dto.QuartzJobQueryParam;
+import com.blog.modules.quartz.domain.dto.QuartzLogQueryParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.blog.modules.logging.annotation.Log;

@@ -2,7 +2,7 @@ package com.blog.modules.mnt.controller;
 
 import com.blog.modules.logging.annotation.Log;
 import com.blog.modules.mnt.service.DeployHistoryService;
-import com.blog.modules.mnt.service.dto.DeployHistoryQueryParam;
+import com.blog.modules.mnt.domain.dto.DeployHistoryQueryParam;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

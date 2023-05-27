@@ -1,8 +1,8 @@
 package com.blog.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.blog.modules.system.service.mapper.DictDetailMapper;
-import com.blog.modules.system.service.mapper.DictMapper;
+import com.blog.modules.system.mapper.DictDetailMapper;
+import com.blog.modules.system.mapper.DictMapper;
 import lombok.AllArgsConstructor;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
@@ -12,8 +12,8 @@ import com.blog.utils.CacheKey;
 import com.blog.utils.ConvertUtil;
 import com.blog.modules.system.domain.DictDetail;
 import com.blog.modules.system.service.DictDetailService;
-import com.blog.modules.system.service.dto.DictDetailDto;
-import com.blog.modules.system.service.dto.DictDetailQueryParam;
+import com.blog.modules.system.domain.dto.DictDetailDto;
+import com.blog.modules.system.domain.dto.DictDetailQueryParam;
 import com.blog.utils.PageUtil;
 import com.blog.commom.redis.service.RedisService;
 import org.springframework.cache.annotation.CacheConfig;

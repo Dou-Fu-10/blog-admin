@@ -4,13 +4,12 @@ import lombok.RequiredArgsConstructor;
 import com.blog.modules.system.domain.Dept;
 import com.blog.modules.system.service.DeptService;
 import com.blog.modules.system.service.RoleService;
-import com.blog.modules.system.service.dto.DeptDto;
+import com.blog.modules.system.domain.dto.DeptDto;
 import com.blog.modules.system.service.DataService;
-import com.blog.modules.system.service.dto.RoleSmallDto;
-import com.blog.modules.system.service.dto.UserDto;
+import com.blog.modules.system.domain.dto.RoleSmallDto;
+import com.blog.modules.system.domain.dto.UserDto;
 import com.blog.utils.enums.DataScopeEnum;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import java.util.*;
 

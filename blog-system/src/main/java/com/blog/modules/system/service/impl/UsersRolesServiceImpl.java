@@ -1,7 +1,7 @@
 package com.blog.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.blog.modules.system.service.mapper.UsersRolesMapper;
+import com.blog.modules.system.mapper.UsersRolesMapper;
 import lombok.AllArgsConstructor;
 import com.blog.modules.system.domain.UsersRoles;
 import com.blog.modules.system.service.UsersRolesService;

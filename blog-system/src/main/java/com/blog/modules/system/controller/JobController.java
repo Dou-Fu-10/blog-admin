@@ -2,7 +2,7 @@ package com.blog.modules.system.controller;
 
 import com.blog.modules.system.domain.Job;
 import com.blog.modules.system.service.JobService;
-import com.blog.modules.system.service.dto.JobQueryParam;
+import com.blog.modules.system.domain.dto.JobQueryParam;
 import lombok.RequiredArgsConstructor;
 import com.blog.modules.logging.annotation.Log;
 import com.blog.exception.BadRequestException;

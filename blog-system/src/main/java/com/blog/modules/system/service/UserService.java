@@ -1,8 +1,8 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.service.dto.UserDto;
-import com.blog.modules.system.service.dto.UserQueryParam;
+import com.blog.modules.system.domain.dto.UserDto;
+import com.blog.modules.system.domain.dto.UserQueryParam;
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.User;
 import org.springframework.data.domain.Pageable;
