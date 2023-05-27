@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @EnableAsync
 @RestController
-// @Apii(hidden = true)
 @SpringBootApplication
 @MapperScan(basePackages = {
-        "com.blog.modules.logging.service.mapper",
+        "com.blog.modules.logging.mapper",
         "com.blog.modules.mnt.mapper",
-        "com.blog.modules.quartz.service.mapper",
-        "com.blog.modules.system.service.mapper",
-        "com.blog.modules.tools.service.mapper",
+        "com.blog.modules.quartz.mapper",
+        "com.blog.modules.system.mapper",
+        "com.blog.modules.tools.mapper",
+        "com.blog.modules.blog.mapper",
         "com.blog.service.mapper",
 })
 @EnableTransactionManagement

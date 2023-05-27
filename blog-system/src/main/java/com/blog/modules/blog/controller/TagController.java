@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2023-05-27 20:01:07
  */
 @RestController
-@RequestMapping("/tag")
+@RequestMapping("/api/tag")
 public class TagController {
     /**
      * 服务对象

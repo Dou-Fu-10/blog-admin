@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2023-05-27 20:01:06
  */
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/api/article")
 public class ArticleController {
     /**
      * 服务对象

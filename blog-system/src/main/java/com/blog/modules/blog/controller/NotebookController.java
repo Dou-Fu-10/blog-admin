@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2023-05-27 20:01:07
  */
 @RestController
-@RequestMapping("/notebook")
+@RequestMapping("/api/notebook")
 public class NotebookController {
     /**
      * 服务对象
