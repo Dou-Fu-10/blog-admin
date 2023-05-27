@@ -3,27 +3,28 @@ package com.blog.modules.blog.entity;
 import java.util.Date;
 
 import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * (Tag)表实体类
  *
- * @author makejava
- * @since 2023-05-27 19:43:43
+ * @author IKUN
+ * @since 2023-05-27 19:58:24
  */
-@SuppressWarnings("serial")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("blog_tag")
-public class TagEntity  {
+public class TagEntity {
     /**
      * id
      */
-      @TableId
+    @TableId
     private Long id;
 
     /**
@@ -50,7 +51,6 @@ public class TagEntity  {
      * 1表示已删除，0表示未删除
      */
     private Integer deleteFlag;
-
 
 
 }

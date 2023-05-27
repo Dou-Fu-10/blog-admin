@@ -9,8 +9,8 @@ import com.blog.modules.blog.service.NotebookService;
 /**
  * (Notebook)表服务实现类
  *
- * @author makejava
- * @since 2023-05-27 19:43:43
+ * @author IKUN
+ * @since 2023-05-27 19:58:24
  */
 @Service("notebookService")
 public class NotebookServiceImpl extends ServiceImpl<NotebookMapper, NotebookEntity> implements NotebookService {

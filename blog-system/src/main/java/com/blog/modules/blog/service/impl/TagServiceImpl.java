@@ -9,8 +9,8 @@ import com.blog.modules.blog.service.TagService;
 /**
  * (Tag)表服务实现类
  *
- * @author makejava
- * @since 2023-05-27 19:43:44
+ * @author IKUN
+ * @since 2023-05-27 19:58:24
  */
 @Service("tagService")
 public class TagServiceImpl extends ServiceImpl<TagMapper, TagEntity> implements TagService {

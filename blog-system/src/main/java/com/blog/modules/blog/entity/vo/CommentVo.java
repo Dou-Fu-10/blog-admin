@@ -1,4 +1,4 @@
-package com.blog.modules.blog.entity;
+package com.blog.modules.blog.entity.vo;
 
 import java.util.Date;
 
@@ -14,17 +14,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * (Comment)表实体类
  *
  * @author IKUN
- * @since 2023-05-27 19:58:24
+ * @since 2023-05-27 22:06:35
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("blog_comment")
-public class CommentEntity {
+public class CommentVo {
     /**
      * 评论表
      */
-    @TableId
     private Object id;
 
     /**

@@ -9,8 +9,8 @@ import com.blog.modules.blog.service.ArticleService;
 /**
  * (Article)表服务实现类
  *
- * @author makejava
- * @since 2023-05-27 19:42:19
+ * @author IKUN
+ * @since 2023-05-27 19:58:23
  */
 @Service("articleService")
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity> implements ArticleService {

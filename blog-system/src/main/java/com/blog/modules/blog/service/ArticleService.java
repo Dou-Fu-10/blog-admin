@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * (Article)表服务接口
  *
- * @author makejava
- * @since 2023-05-27 19:42:19
+ * @author IKUN
+ * @since 2023-05-27 19:58:23
  */
 public interface ArticleService extends IService<ArticleEntity> {
 

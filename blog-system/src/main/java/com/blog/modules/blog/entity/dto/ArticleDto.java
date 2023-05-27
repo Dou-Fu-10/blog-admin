@@ -1,4 +1,4 @@
-package com.blog.modules.blog.entity;
+package com.blog.modules.blog.entity.dto;
 
 import java.util.Date;
 
@@ -14,17 +14,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * (Article)表实体类
  *
  * @author IKUN
- * @since 2023-05-27 19:58:23
+ * @since 2023-05-27 22:06:35
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("blog_article")
-public class ArticleEntity {
+public class ArticleDto {
     /**
      * 主键id
      */
-    @TableId
     private Long id;
 
     /**

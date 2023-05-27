@@ -1,4 +1,4 @@
-package com.blog.modules.blog.entity;
+package com.blog.modules.blog.entity.vo;
 
 import java.util.Date;
 
@@ -11,26 +11,24 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
- * (Notebook)表实体类
+ * (Categories)表实体类
  *
  * @author IKUN
- * @since 2023-05-27 19:58:24
+ * @since 2023-05-27 22:06:35
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("blog_notebook")
-public class NotebookEntity {
+public class CategoriesVo {
     /**
-     * id
+     * 分类id
      */
-    @TableId
     private Long id;
 
     /**
-     * 笔记
+     * 分类名
      */
-    private String notebook;
+    private String categoriesName;
     /**
      * 创建者
      */

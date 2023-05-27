@@ -1,28 +1,27 @@
 package com.blog.modules.blog.controller;
 
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.api.ApiController;
-import com.baomidou.mybatisplus.extension.api.R;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.service.CategoriesService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * (Categories)表控制层
  *
- * @author makejava
- * @since 2023-05-27 19:43:36
+ * @author IKUN
+ * @since 2023-05-27 20:01:06
  */
 @RestController
 @RequestMapping("/categories")
-public class CategoriesController extends ApiController {
+public class CategoriesController {
     /**
      * 服务对象
      */
@@ -32,13 +31,13 @@ public class CategoriesController extends ApiController {
     /**
      * 分页查询所有数据
      *
-     * @param page 分页对象
+     * @param page       分页对象
      * @param categories 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public R selectAll(Page<CategoriesEntity> page, CategoriesEntity categories) {
-        return success(this.categoriesService.page(page, new QueryWrapper<>(categories)));
+    public ResponseEntity<Object> selectAll(Page<CategoriesEntity> page, CategoriesEntity categories) {
+        return new ResponseEntity<>(this.categoriesService.page(page, new QueryWrapper<>(categories)), HttpStatus.OK);
     }
 
     /**
@@ -48,8 +47,8 @@ public class CategoriesController extends ApiController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public R selectOne(@PathVariable Serializable id) {
-        return success(this.categoriesService.getById(id));
+    public ResponseEntity<Object> selectOne(@PathVariable Serializable id) {
+        return new ResponseEntity<>(this.categoriesService.getById(id), HttpStatus.OK);
     }
 
     /**
@@ -59,8 +58,8 @@ public class CategoriesController extends ApiController {
      * @return 新增结果
      */
     @PostMapping
-    public R insert(@RequestBody CategoriesEntity categories) {
-        return success(this.categoriesService.save(categories));
+    public ResponseEntity<Object> insert(@RequestBody CategoriesEntity categories) {
+        return new ResponseEntity<>(this.categoriesService.save(categories), HttpStatus.OK);
     }
 
     /**
@@ -70,8 +69,8 @@ public class CategoriesController extends ApiController {
      * @return 修改结果
      */
     @PutMapping
-    public R update(@RequestBody CategoriesEntity categories) {
-        return success(this.categoriesService.updateById(categories));
+    public ResponseEntity<Object> update(@RequestBody CategoriesEntity categories) {
+        return new ResponseEntity<>(this.categoriesService.updateById(categories), HttpStatus.OK);
     }
 
     /**
@@ -81,8 +80,8 @@ public class CategoriesController extends ApiController {
      * @return 删除结果
      */
     @DeleteMapping
-    public R delete(@RequestParam("idList") List<Long> idList) {
-        return success(this.categoriesService.removeByIds(idList));
+    public ResponseEntity<Object> delete(@RequestParam("idList") List<Long> idList) {
+        return new ResponseEntity<>(this.categoriesService.removeByIds(idList), HttpStatus.OK);
     }
 }
 

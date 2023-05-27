@@ -9,8 +9,8 @@ import com.blog.modules.blog.service.CategoriesService;
 /**
  * (Categories)表服务实现类
  *
- * @author makejava
- * @since 2023-05-27 19:43:39
+ * @author IKUN
+ * @since 2023-05-27 19:58:23
  */
 @Service("categoriesService")
 public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, CategoriesEntity> implements CategoriesService {
