@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * (Categories)表实体类
  *
  * @author IKUN
- * @since 2023-05-27 22:06:35
+ * @since 2023-05-28 13:20:39
  */
 @Data
 @AllArgsConstructor
@@ -28,7 +28,23 @@ public class CategoriesVo {
     /**
      * 分类名
      */
-    private String categoriesName;
+    private String name;
+    /**
+     * 别名
+     */
+    private String alias;
+    /**
+     * 排序序号
+     */
+    private Integer taxis;
+    /**
+     * 父分类ID(0即是顶级父类)
+     */
+    private Long pid;
+    /**
+     * 备注
+     */
+    private String description;
     /**
      * 创建者
      */

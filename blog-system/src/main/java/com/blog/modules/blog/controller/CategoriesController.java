@@ -2,12 +2,14 @@ package com.blog.modules.blog.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.modules.blog.entity.CategoriesEntity;
+import com.blog.modules.blog.entity.dto.CategoriesDto;
 import com.blog.modules.blog.service.CategoriesService;
 import jakarta.annotation.Resource;
+import org.simpleframework.xml.core.Validate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -58,8 +60,8 @@ public class CategoriesController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Object> insert(@RequestBody CategoriesEntity categories) {
-        return new ResponseEntity<>(this.categoriesService.save(categories), HttpStatus.OK);
+    public ResponseEntity<Object> insert(@RequestBody @Validate CategoriesDto categories) {
+        return new ResponseEntity<>(this.categoriesService.save(categories) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
     /**
@@ -69,8 +71,8 @@ public class CategoriesController {
      * @return 修改结果
      */
     @PutMapping
-    public ResponseEntity<Object> update(@RequestBody CategoriesEntity categories) {
-        return new ResponseEntity<>(this.categoriesService.updateById(categories), HttpStatus.OK);
+    public ResponseEntity<Object> update(@RequestBody @Validate CategoriesDto categories) {
+        return new ResponseEntity<>(this.categoriesService.updateById(categories) ? "修改成功" : "修改失败", HttpStatus.OK);
     }
 
     /**

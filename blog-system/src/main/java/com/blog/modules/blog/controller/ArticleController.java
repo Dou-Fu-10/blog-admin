@@ -2,12 +2,15 @@ package com.blog.modules.blog.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.modules.blog.entity.ArticleEntity;
+import com.blog.modules.blog.entity.dto.ArticleDto;
 import com.blog.modules.blog.service.ArticleService;
 import jakarta.annotation.Resource;
+import jakarta.validation.constraints.NotNull;
+import org.simpleframework.xml.core.Validate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -58,8 +61,8 @@ public class ArticleController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Object> insert(@RequestBody ArticleEntity article) {
-        return new ResponseEntity<>(this.articleService.save(article), HttpStatus.OK);
+    public ResponseEntity<Object> insert(@RequestBody @Validate ArticleDto article) {
+        return new ResponseEntity<>(this.articleService.save(article) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
     /**
@@ -69,8 +72,8 @@ public class ArticleController {
      * @return 修改结果
      */
     @PutMapping
-    public ResponseEntity<Object> update(@RequestBody ArticleEntity article) {
-        return new ResponseEntity<>(this.articleService.updateById(article), HttpStatus.OK);
+    public ResponseEntity<Object> update(@RequestBody @Validate ArticleDto article) {
+        return new ResponseEntity<>(this.articleService.updateById(article) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
     /**
@@ -80,7 +83,7 @@ public class ArticleController {
      * @return 删除结果
      */
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam("idList") List<Long> idList) {
+    public ResponseEntity<Object> delete(@RequestParam("idList") List<@NotNull Long> idList) {
         return new ResponseEntity<>(this.articleService.removeByIds(idList), HttpStatus.OK);
     }
 }

@@ -4,8 +4,11 @@ import java.util.Date;
 
 import java.io.Serializable;
 
+import com.alipay.api.domain.DataEntry;
+import com.blog.base.CommonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,13 +17,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * (Categories)表实体类
  *
  * @author IKUN
- * @since 2023-05-27 19:58:23
+ * @since 2023-05-28 13:20:39
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("blog_categories")
-public class CategoriesEntity {
+public class CategoriesEntity extends CommonEntity<CategoriesEntity> {
     /**
      * 分类id
      */
@@ -30,23 +34,23 @@ public class CategoriesEntity {
     /**
      * 分类名
      */
-    private String categoriesName;
+    private String name;
     /**
-     * 创建者
+     * 别名
      */
-    private String createBy;
+    private String alias;
     /**
-     * 更新者
+     * 排序序号
      */
-    private String updateBy;
+    private Integer taxis;
     /**
-     * 创建日期
+     * 父分类ID(0即是顶级父类)
      */
-    private Date createTime;
+    private Long pid;
     /**
-     * 更新时间
+     * 备注
      */
-    private Date updateTime;
+    private String description;
     /**
      * 1表示已删除，0表示未删除
      */
