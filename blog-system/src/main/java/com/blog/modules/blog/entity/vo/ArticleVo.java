@@ -36,7 +36,7 @@ public class ArticleVo {
     /**
      * 是否置顶(1true/0fales)
      */
-    private Integer top;
+    private Boolean top;
     /**
      * 文章字数
      */
@@ -64,19 +64,19 @@ public class ArticleVo {
     /**
      * 草稿(1true/0fales)
      */
-    private Integer hide;
+    private Boolean hide;
     /**
      * 点赞量
      */
-    private Integer like;
+    private Integer favorite;
     /**
      * 文章是否审核(1true/0fales)
      */
-    private Integer checked;
+    private Boolean checked;
     /**
      * 允许评论(1true/0fales)
      */
-    private Integer allowRemark;
+    private Boolean allowRemark;
     /**
      * 创建者
      */

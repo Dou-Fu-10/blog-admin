@@ -1,16 +1,37 @@
 package com.blog.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * WebMvcConfigurer
@@ -52,19 +73,74 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
         registry.addResourceHandler("/file/**").addResourceLocations(pathUtl).setCachePeriod(0);
         registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/").setCachePeriod(0);
     }
-    
-//    @Override
-//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//        // 使用 fastjson 序列化，会导致 @JsonIgnore 失效，可以使用 @JSONField(serialize = false) 替换
-//        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
-//        List<MediaType> supportMediaTypeList = new ArrayList<>();
-//        supportMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);
-//        FastJsonConfig config = new FastJsonConfig();
-//        config.setDateFormat("yyyy-MM-dd HH:mm:ss");
-//        config.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
-//        converter.setFastJsonConfig(config);
-//        converter.setSupportedMediaTypes(supportMediaTypeList);
-//        converter.setDefaultCharset(StandardCharsets.UTF_8);
-//        converters.add(converter);
-//    }
+
+    /**
+     * DateTime格式化字符串
+     */
+    private static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * Date格式化字符串
+     */
+    private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
+
+    /**
+     * Time格式化字符串
+     */
+    private static final String DEFAULT_TIME_PATTERN = "HH:mm:ss";
+    /**
+     * 添加自定义转换器
+     * @param converters 转换器
+     */
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        ObjectMapper objectMapper = new ObjectMapper();
+        /**
+         * 序列换成json时,将所有的long变成string
+         * 因为js中得数字类型不能包含所有的java long值
+         */
+        SimpleModule simpleModule = new SimpleModule();
+        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
+        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        simpleModule.addSerializer(BigInteger.class, ToStringSerializer.instance);
+        simpleModule.addSerializer(BigDecimal.class, ToStringSerializer.instance);
+        simpleModule.addSerializer(Integer.class, ToStringSerializer.instance);
+
+        // 指定时区
+        objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        // 日期类型字符串处理
+        objectMapper.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_PATTERN));
+        objectMapper.setDateFormat(new SimpleDateFormat(DEFAULT_DATETIME_PATTERN));
+        objectMapper.registerModule(new JavaTimeModule());
+        // 关闭失败时用空对象替换
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+
+
+        // Java8日期日期处理
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATETIME_PATTERN)));
+        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_PATTERN)));
+        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_TIME_PATTERN)));
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATETIME_PATTERN)));
+        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_PATTERN)));
+        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_TIME_PATTERN)));
+        objectMapper.registerModule(javaTimeModule);
+
+        objectMapper.registerModule(simpleModule);
+        jackson2HttpMessageConverter.setObjectMapper(objectMapper);
+        converters.add(jackson2HttpMessageConverter);
+    }
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        // 忽略属性为 null 的字段
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        // 忽略属性未赋值的字段
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+        // 忽略属性为 "" 的字段
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        return objectMapper;
+    }
 }

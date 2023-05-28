@@ -1,21 +1,14 @@
 package com.blog.modules.blog.entity.dto;
 
-import java.util.Date;
-
-import java.io.Serializable;
-import java.util.Set;
-
-import com.alipay.api.domain.DataEntry;
-import com.blog.base.CommonDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.util.Date;
+import java.util.Set;
 
 /**
  * (Article)表实体类
@@ -44,7 +37,7 @@ public class ArticleDto  {
     /**
      * 是否置顶(1true/0fales)
      */
-    private Integer top;
+    private Boolean top;
     /**
      * 文章字数
      */
@@ -77,20 +70,20 @@ public class ArticleDto  {
     /**
      * 草稿(1true/0fales)
      */
-    private Integer hide;
+    private Boolean hide;
     /**
      * 点赞量
      */
     @JsonInclude
-    private Integer like;
+    private Integer favorite;
     /**
      * 文章是否审核(1true/0fales)
      */
-    private Integer checked;
+    private Boolean checked;
     /**
      * 允许评论(1true/0fales)
      */
-    private Integer allowRemark;
+    private Boolean allowRemark;
     /**
      * 创建者
      */
@@ -112,7 +105,16 @@ public class ArticleDto  {
     @JsonInclude
     private Date updateTime;
 
+    /**
+     * 分类 id
+     */
+    @NotNull
     private Set<Long> categoriesList;
+    /**
+     * 标签
+     */
+    @NotNull
+    private String label;
     /**
      * 1表示已删除，0表示未删除
      */

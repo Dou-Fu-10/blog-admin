@@ -1,13 +1,11 @@
 package com.blog.modules.blog.entity;
 
 
-import java.io.Serializable;
-
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
  * (ArticleCategories)表实体类
@@ -20,6 +18,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @NoArgsConstructor
 @TableName("blog_article_categories")
 public class ArticleCategoriesEntity {
+
+    public ArticleCategoriesEntity(Long aid, Long cid) {
+        this.aid = aid;
+        this.cid = cid;
+    }
+
     /**
      * 主键
      */
