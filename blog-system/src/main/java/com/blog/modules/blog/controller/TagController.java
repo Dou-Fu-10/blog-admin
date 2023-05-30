@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * (Tag)表控制层
@@ -80,8 +82,8 @@ public class TagController {
      * @return 删除结果
      */
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam("idList") List<Long> idList) {
-        return new ResponseEntity<>(this.tagService.removeByIds(idList), HttpStatus.OK);
+    public ResponseEntity<Object> delete(@RequestParam("idList") Set<Long> idList) {
+        return new ResponseEntity<>(this.tagService.removeByIds(idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet())) ? "删除成功" : "删除失败", HttpStatus.OK);
     }
 }
 

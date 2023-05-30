@@ -7,7 +7,6 @@ import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.entity.dto.CategoriesDto;
 import com.blog.modules.blog.service.CategoriesService;
 import jakarta.annotation.Resource;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.simpleframework.xml.core.Validate;
 import org.springframework.http.HttpStatus;
@@ -18,6 +17,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * (Categories)表控制层
@@ -47,15 +47,17 @@ public class CategoriesController {
     }
 
 
+
+
     /**
-     * 修改数据
+     * 修改文章类型  Map<类型id, Set<文章id>>
      *
-     * @param categoriesId 主键结合
+     * @param categoriesIdAndArticleList ap<类型id, Set<文章id>
      * @return 修改结果
      */
     @PutMapping("/updateCategories")
-    public ResponseEntity<Object> updateCategories(@RequestBody @Validate Map<Long, Set<Long>> categoriesId) {
-        return new ResponseEntity<>(this.categoriesService.updateCategories(categoriesId) ? "添加成功" : "添加失败", HttpStatus.OK);
+    public ResponseEntity<Object> updateArticleCategories(@RequestBody @Validate @NotNull Map<@NotNull Long, Set<@NotNull Long>> categoriesIdAndArticleList) {
+        return new ResponseEntity<>(this.categoriesService.updateArticleCategories(categoriesIdAndArticleList) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
     /**
@@ -99,7 +101,7 @@ public class CategoriesController {
      */
     @DeleteMapping
     public ResponseEntity<Object> delete(@RequestParam("idList") List<Long> idList) {
-        return new ResponseEntity<>(this.categoriesService.removeByIds(idList), HttpStatus.OK);
+        return new ResponseEntity<>(this.categoriesService.removeByIds(idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet())) ? "删除成功" : "删除失败", HttpStatus.OK);
     }
 }
 

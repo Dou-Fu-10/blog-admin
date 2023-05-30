@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * (Article)表控制层
@@ -77,6 +77,28 @@ public class ArticleController {
         return new ResponseEntity<>(this.articleService.updateById(article) ? "修改成功" : "修改失败", HttpStatus.OK);
     }
 
+    /**
+     * 修改文章是否发布 Map<发布, Set<文章id>>
+     *
+     * @param articleIdList 主键结合
+     * @return 修改结果
+     */
+    @PutMapping("/updateArticleHide")
+    public ResponseEntity<Object> updateArticleHide(@RequestBody @Validate @NotNull Map<@NotNull Boolean, Set<@NotNull Long>> articleIdList) {
+        return new ResponseEntity<>(this.articleService.updateArticleTopOrHide(articleIdList, false) ? "添加成功" : "添加失败", HttpStatus.OK);
+    }
+
+    /**
+     * 修改文章是否置顶 Map<是否自顶, Set<文章id>>
+     *
+     * @param articleIdList 主键结合
+     * @return 修改结果
+     */
+    @PutMapping("/updateArticleTop")
+    public ResponseEntity<Object> updateArticleTop(@RequestBody @Validate @NotNull Map<@NotNull Boolean, Set<@NotNull Long>> articleIdList) {
+        return new ResponseEntity<>(this.articleService.updateArticleTopOrHide(articleIdList, true) ? "添加成功" : "添加失败", HttpStatus.OK);
+    }
+
 
     /**
      * 删除数据
@@ -85,8 +107,8 @@ public class ArticleController {
      * @return 删除结果
      */
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam("idList") List<@NotNull Long> idList) {
-        return new ResponseEntity<>(this.articleService.removeByIds(idList), HttpStatus.OK);
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> idList) {
+        return new ResponseEntity<>(this.articleService.removeByIds(idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet())) ? "删除成功" : "删除失败", HttpStatus.OK);
     }
 }
 

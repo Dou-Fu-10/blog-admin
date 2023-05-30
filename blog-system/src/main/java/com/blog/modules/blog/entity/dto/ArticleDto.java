@@ -38,10 +38,12 @@ public class ArticleDto extends CommonDto {
     /**
      * 发布时间
      */
+    @NotNull
     private Date date;
     /**
      * 是否置顶(1true/0fales)
      */
+    @NotNull
     private Boolean top;
     /**
      * 文章字数
@@ -75,6 +77,7 @@ public class ArticleDto extends CommonDto {
     /**
      * 草稿(1true/0fales)
      */
+    @NotNull
     private Boolean hide;
     /**
      * 点赞量

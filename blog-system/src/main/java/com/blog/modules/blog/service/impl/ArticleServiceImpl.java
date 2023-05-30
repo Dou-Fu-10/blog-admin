@@ -1,6 +1,7 @@
 package com.blog.modules.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -9,6 +10,8 @@ import com.blog.modules.blog.entity.ArticleCategoriesEntity;
 import com.blog.modules.blog.entity.ArticleEntity;
 import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.entity.dto.ArticleDto;
+import com.blog.modules.blog.entity.vo.ArticleOrCategoriesVo;
+import com.blog.modules.blog.entity.vo.ArticleVo;
 import com.blog.modules.blog.mapper.ArticleMapper;
 import com.blog.modules.blog.service.ArticleCategoriesService;
 import com.blog.modules.blog.service.ArticleService;
@@ -52,20 +55,59 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
     }
 
     @Override
-    public Page<ArticleEntity> page(Page<ArticleEntity> page, ArticleDto article) {
-        Set<Long> categoriesList = article.getCategoriesList();
+    public Page<ArticleVo> page(Page<ArticleEntity> page, ArticleDto articleDto) {
+        Set<Long> categoriesList = articleDto.getCategoriesList();
         if (CollectionUtils.isNotEmpty(categoriesList)) {
-            article.setTitle(null);
+            articleDto.setTitle(null);
             LambdaQueryWrapper<ArticleCategoriesEntity> articleCategoriesEntityLambdaQueryWrapper = new LambdaQueryWrapper<>();
             articleCategoriesEntityLambdaQueryWrapper.in(ArticleCategoriesEntity::getCid, categoriesList);
             categoriesList = articleCategoriesService.list(articleCategoriesEntityLambdaQueryWrapper).stream().map(ArticleCategoriesEntity::getAid).collect(Collectors.toSet());
         }
-        ArticleEntity tempArticle = ConvertUtil.convert(article, ArticleEntity.class);
+        ArticleEntity tempArticle = ConvertUtil.convert(articleDto, ArticleEntity.class);
         tempArticle.setTitle(null);
         LambdaQueryWrapper<ArticleEntity> articleEntityQueryWrapper = new LambdaQueryWrapper<>(tempArticle);
-        articleEntityQueryWrapper.like(Objects.nonNull(article.getTitle()), ArticleEntity::getTitle, article.getTitle());
+        articleEntityQueryWrapper.like(Objects.nonNull(articleDto.getTitle()), ArticleEntity::getTitle, articleDto.getTitle());
         articleEntityQueryWrapper.in(CollectionUtils.isNotEmpty(categoriesList), ArticleEntity::getId, categoriesList);
-        return this.page(page, articleEntityQueryWrapper);
+        IPage<ArticleVo> convert = this.page(page, articleEntityQueryWrapper).convert(article -> ConvertUtil.convert(article, ArticleVo.class));
+        List<ArticleVo> articleVoList = convert.getRecords();
+        Set<Long> articleIdList = articleVoList.stream().map(ArticleVo::getId).collect(Collectors.toSet());
+        List<ArticleOrCategoriesVo> articleOrCategoriesVoList = getBaseMapper().getCategoriesByArticleId(articleIdList);
+        List<ArticleVo> articleVos = articleVoList.stream().peek(articleVo -> articleOrCategoriesVoList.forEach(articleOrCategoriesVo -> {
+            if (articleOrCategoriesVo.getAid().equals(articleVo.getId())) {
+                articleVo.getCategories().put(articleOrCategoriesVo.getCid(), articleOrCategoriesVo.getCname());
+            }
+        })).toList();
+
+        convert.setRecords(articleVos);
+        return (Page) convert;
+    }
+
+    @Override
+    public boolean updateArticleTopOrHide(Map<Boolean, Set<Long>> articleIdList, boolean isTop) {
+        if (articleIdList.isEmpty()) {
+            throw new BadRequestException("请选择正确的类型");
+        }
+        Set<Map.Entry<Boolean, Set<Long>>> entries = articleIdList.entrySet();
+        for (Map.Entry<Boolean, Set<Long>> entry : entries) {
+            // 获取分类id
+            Boolean top = entry.getKey();
+            // 文章id列表
+            Set<Long> articleList = entry.getValue();
+            Set<ArticleEntity> collect = articleList.stream()
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet()).stream().map(id -> {
+                        ArticleEntity articleEntity = new ArticleEntity();
+                        if (isTop) {
+                            articleEntity.setTop(top);
+                        } else {
+                            articleEntity.setHide(top);
+                        }
+                        articleEntity.setId(id);
+                        return articleEntity;
+                    }).collect(Collectors.toSet());
+            return updateBatchById(collect);
+        }
+        return true;
     }
 
 

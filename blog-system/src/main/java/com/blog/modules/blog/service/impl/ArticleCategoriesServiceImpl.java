@@ -1,9 +1,11 @@
 package com.blog.modules.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.blog.entity.ArticleCategoriesEntity;
+import com.blog.modules.blog.entity.vo.ArticleOrCategoriesVo;
 import com.blog.modules.blog.mapper.ArticleCategoriesMapper;
 import com.blog.modules.blog.service.ArticleCategoriesService;
 import com.blog.modules.blog.service.CategoriesService;
@@ -12,10 +14,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * (ArticleCategories)表服务实现类
@@ -32,11 +31,11 @@ public class ArticleCategoriesServiceImpl extends ServiceImpl<ArticleCategoriesM
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateCategories(Map<Long, Set<Long>> categoriesId) {
-        if (categoriesId.isEmpty()) {
+    public boolean updateCategories(Map<Long, Set<Long>> categoriesIdAndArticleList) {
+        if (categoriesIdAndArticleList.isEmpty()) {
             throw new BadRequestException("请选择正确的类型");
         }
-        Set<Map.Entry<Long, Set<Long>>> entries = categoriesId.entrySet();
+        Set<Map.Entry<Long, Set<Long>>> entries = categoriesIdAndArticleList.entrySet();
         for (Map.Entry<Long, Set<Long>> entry : entries) {
             // 获取分类id
             Long categories = entry.getKey();
@@ -51,7 +50,7 @@ public class ArticleCategoriesServiceImpl extends ServiceImpl<ArticleCategoriesM
                 for (Long articleId : articleList) {
                     articleCategoriesEntityArrayList.add(new ArticleCategoriesEntity(articleId, categories));
                 }
-                saveBatch(articleCategoriesEntityArrayList);
+                return saveBatch(articleCategoriesEntityArrayList);
             }
         }
         return true;

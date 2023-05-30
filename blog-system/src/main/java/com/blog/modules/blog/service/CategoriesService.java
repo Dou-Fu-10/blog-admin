@@ -1,10 +1,8 @@
 package com.blog.modules.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.blog.entity.ArticleEntity;
 import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.entity.dto.CategoriesDto;
-import com.blog.modules.blog.entity.vo.CategoriesVo;
 
 import java.util.Map;
 import java.util.Set;
@@ -39,10 +37,10 @@ public interface CategoriesService extends IService<CategoriesEntity> {
     boolean updateById(CategoriesDto categories);
 
     /**
-     * 修改数据
+     * 修改文章类型  Map<类型id, Set<文章id>>
      *
-     * @param categoriesId 主键结合
+     * @param categoriesIdAndArticleList ap<类型id, Set<文章id>
      * @return 修改结果
      */
-    boolean updateCategories(Map<Long, Set<Long>> categoriesId);
+    boolean updateArticleCategories(Map<Long, Set<Long>> categoriesIdAndArticleList);
 }

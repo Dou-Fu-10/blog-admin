@@ -1,12 +1,13 @@
 package com.blog.modules.blog.entity.vo;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * (Article)表实体类
@@ -79,21 +80,28 @@ public class ArticleVo {
      * 创建者
      */
     private String createBy;
+
+
+    private Map<Long, String> categories = new HashMap<>();
     /**
      * 更新者
      */
+    @JsonInclude
     private String updateBy;
     /**
      * 创建日期
      */
+    @JsonInclude
     private Date createTime;
     /**
      * 更新时间
      */
+    @JsonInclude
     private Date updateTime;
     /**
      * 1表示已删除，0表示未删除
      */
+    @JsonInclude
     private Integer deleteFlag;
 
 

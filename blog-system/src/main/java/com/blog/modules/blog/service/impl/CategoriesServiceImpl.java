@@ -52,8 +52,8 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
         return updateById(ConvertUtil.convert(categories, CategoriesEntity.class));
     }
     @Override
-    public boolean updateCategories(Map<Long, Set<Long>> categoriesId) {
-        return articleCategoriesService.updateCategories(categoriesId);
+    public boolean updateArticleCategories(Map<Long, Set<Long>> categoriesIdAndArticleList) {
+        return articleCategoriesService.updateCategories(categoriesIdAndArticleList);
     }
 
 }

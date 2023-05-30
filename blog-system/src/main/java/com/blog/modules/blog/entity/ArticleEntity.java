@@ -1,17 +1,14 @@
 package com.blog.modules.blog.entity;
 
-import java.util.Date;
-
-import java.io.Serializable;
-
-import com.alipay.api.domain.DataEntry;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.blog.base.CommonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.util.Date;
 
 /**
  * (Article)表实体类
@@ -25,6 +22,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @NoArgsConstructor
 @TableName("blog_article")
 public class ArticleEntity extends CommonEntity<ArticleEntity> {
+
     /**
      * 主键id
      */
