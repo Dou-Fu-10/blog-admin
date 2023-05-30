@@ -1,6 +1,8 @@
 package com.blog.modules.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.blog.entity.ArticleCategoriesEntity;
@@ -17,9 +19,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * (Article)表服务实现类
@@ -42,12 +43,31 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
 
     @Override
     public boolean updateById(ArticleDto article) {
+
         ArticleEntity articleEntity = getByTitle(article.getTitle());
         if (Objects.nonNull(articleEntity) && !articleEntity.getId().equals(article.getId())) {
             throw new BadRequestException("文章标题已存在");
         }
         return updateById(ConvertUtil.convert(article, ArticleEntity.class));
     }
+
+    @Override
+    public Page<ArticleEntity> page(Page<ArticleEntity> page, ArticleDto article) {
+        Set<Long> categoriesList = article.getCategoriesList();
+        if (CollectionUtils.isNotEmpty(categoriesList)) {
+            article.setTitle(null);
+            LambdaQueryWrapper<ArticleCategoriesEntity> articleCategoriesEntityLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            articleCategoriesEntityLambdaQueryWrapper.in(ArticleCategoriesEntity::getCid, categoriesList);
+            categoriesList = articleCategoriesService.list(articleCategoriesEntityLambdaQueryWrapper).stream().map(ArticleCategoriesEntity::getAid).collect(Collectors.toSet());
+        }
+        ArticleEntity tempArticle = ConvertUtil.convert(article, ArticleEntity.class);
+        tempArticle.setTitle(null);
+        LambdaQueryWrapper<ArticleEntity> articleEntityQueryWrapper = new LambdaQueryWrapper<>(tempArticle);
+        articleEntityQueryWrapper.like(Objects.nonNull(article.getTitle()), ArticleEntity::getTitle, article.getTitle());
+        articleEntityQueryWrapper.in(CollectionUtils.isNotEmpty(categoriesList), ArticleEntity::getId, categoriesList);
+        return this.page(page, articleEntityQueryWrapper);
+    }
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)

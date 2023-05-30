@@ -1,7 +1,6 @@
 package com.blog.modules.blog.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.modules.blog.entity.ArticleEntity;
 import com.blog.modules.blog.entity.dto.ArticleDto;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * (Article)表控制层
@@ -39,8 +40,8 @@ public class ArticleController {
      * @return 所有数据
      */
     @GetMapping
-    public ResponseEntity<Object> selectAll(Page<ArticleEntity> page, ArticleEntity article) {
-        return new ResponseEntity<>(this.articleService.page(page, new QueryWrapper<>(article)), HttpStatus.OK);
+    public ResponseEntity<Object> selectAll(Page<ArticleEntity> page, ArticleDto article) {
+        return new ResponseEntity<>(this.articleService.page(page, article), HttpStatus.OK);
     }
 
     /**
@@ -73,8 +74,9 @@ public class ArticleController {
      */
     @PutMapping
     public ResponseEntity<Object> update(@RequestBody @Validate ArticleDto article) {
-        return new ResponseEntity<>(this.articleService.updateById(article) ? "添加成功" : "添加失败", HttpStatus.OK);
+        return new ResponseEntity<>(this.articleService.updateById(article) ? "修改成功" : "修改失败", HttpStatus.OK);
     }
+
 
     /**
      * 删除数据

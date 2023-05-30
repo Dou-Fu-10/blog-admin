@@ -1,9 +1,13 @@
 package com.blog.modules.blog.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.modules.blog.entity.ArticleEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.blog.entity.dto.ArticleDto;
 import com.blog.modules.blog.entity.vo.ArticleVo;
+
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -33,4 +37,13 @@ public interface ArticleService extends IService<ArticleEntity> {
      * @return boolean
      */
     boolean updateById(ArticleDto article);
+    /**
+     * 分页查询所有数据
+     *
+     * @param page    分页对象
+     * @param article 查询实体
+     * @return 所有数据
+     */
+    Page<ArticleEntity> page(Page<ArticleEntity> page, ArticleDto article);
+
 }

@@ -6,6 +6,9 @@ import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.entity.dto.CategoriesDto;
 import com.blog.modules.blog.entity.vo.CategoriesVo;
 
+import java.util.Map;
+import java.util.Set;
+
 
 /**
  * (Categories)表服务接口
@@ -34,4 +37,12 @@ public interface CategoriesService extends IService<CategoriesEntity> {
      * @return 修改结果
      */
     boolean updateById(CategoriesDto categories);
+
+    /**
+     * 修改数据
+     *
+     * @param categoriesId 主键结合
+     * @return 修改结果
+     */
+    boolean updateCategories(Map<Long, Set<Long>> categoriesId);
 }

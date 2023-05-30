@@ -5,11 +5,15 @@ import com.blog.exception.BadRequestException;
 import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.entity.dto.CategoriesDto;
 import com.blog.modules.blog.mapper.CategoriesMapper;
+import com.blog.modules.blog.service.ArticleCategoriesService;
 import com.blog.modules.blog.service.CategoriesService;
 import com.blog.utils.ConvertUtil;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * (Categories)表服务实现类
@@ -19,6 +23,10 @@ import java.util.Objects;
  */
 @Service("categoriesService")
 public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, CategoriesEntity> implements CategoriesService {
+
+    @Resource
+    private ArticleCategoriesService articleCategoriesService;
+
     @Override
     public CategoriesEntity getByCategoriesName(String categoriesName) {
         return lambdaQuery().eq(CategoriesEntity::getName, categoriesName).one();
@@ -43,5 +51,10 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
     public boolean updateById(CategoriesDto categories) {
         return updateById(ConvertUtil.convert(categories, CategoriesEntity.class));
     }
+    @Override
+    public boolean updateCategories(Map<Long, Set<Long>> categoriesId) {
+        return articleCategoriesService.updateCategories(categoriesId);
+    }
+
 }
 

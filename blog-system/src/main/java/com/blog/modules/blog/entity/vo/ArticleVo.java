@@ -1,14 +1,12 @@
 package com.blog.modules.blog.entity.vo;
 
-import java.util.Date;
-
-import java.io.Serializable;
-
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.util.Date;
 
 /**
  * (Article)表实体类

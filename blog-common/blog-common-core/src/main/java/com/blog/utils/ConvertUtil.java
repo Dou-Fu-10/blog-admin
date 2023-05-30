@@ -2,6 +2,7 @@ package com.blog.utils;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.base.PageInfo;
 
 import java.util.List;

@@ -7,6 +7,8 @@ import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.entity.dto.CategoriesDto;
 import com.blog.modules.blog.service.CategoriesService;
 import jakarta.annotation.Resource;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.simpleframework.xml.core.Validate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * (Categories)表控制层
@@ -40,6 +44,18 @@ public class CategoriesController {
     @GetMapping
     public ResponseEntity<Object> selectAll(Page<CategoriesEntity> page, CategoriesEntity categories) {
         return new ResponseEntity<>(this.categoriesService.page(page, new QueryWrapper<>(categories)), HttpStatus.OK);
+    }
+
+
+    /**
+     * 修改数据
+     *
+     * @param categoriesId 主键结合
+     * @return 修改结果
+     */
+    @PutMapping("/updateCategories")
+    public ResponseEntity<Object> updateCategories(@RequestBody @Validate Map<Long, Set<Long>> categoriesId) {
+        return new ResponseEntity<>(this.categoriesService.updateCategories(categoriesId) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
     /**

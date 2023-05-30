@@ -1,10 +1,14 @@
 package com.blog.modules.blog.entity.dto;
 
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.blog.base.CommonDto;
+import com.blog.modules.blog.entity.vo.ArticleVo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -16,10 +20,11 @@ import java.util.Set;
  * @author IKUN
  * @since 2023-05-27 22:06:35
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticleDto  {
+public class ArticleDto extends CommonDto {
     /**
      * 主键id
      */
