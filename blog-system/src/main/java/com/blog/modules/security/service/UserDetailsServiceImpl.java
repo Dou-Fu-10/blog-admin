@@ -1,14 +1,14 @@
 package com.blog.modules.security.service;
 
-import lombok.RequiredArgsConstructor;
 import com.blog.exception.BadRequestException;
 import com.blog.exception.EntityNotFoundException;
 import com.blog.modules.security.config.bean.LoginProperties;
 import com.blog.modules.security.service.dto.JwtUserDto;
+import com.blog.modules.system.domain.dto.UserDto;
 import com.blog.modules.system.service.DataService;
 import com.blog.modules.system.service.RoleService;
 import com.blog.modules.system.service.UserService;
-import com.blog.modules.system.domain.dto.UserDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @RequiredArgsConstructor
 @Service("userDetailsService")

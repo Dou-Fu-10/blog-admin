@@ -1,18 +1,20 @@
 package com.blog.modules.quartz.utils;
 
+import com.blog.exception.BadRequestException;
 import com.blog.modules.quartz.domain.QuartzJob;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import com.blog.exception.BadRequestException;
 import org.quartz.*;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+
 import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 @Component

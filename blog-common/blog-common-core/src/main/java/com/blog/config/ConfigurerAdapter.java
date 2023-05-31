@@ -22,6 +22,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,8 @@ import java.util.TimeZone;
 /**
  * WebMvcConfigurer
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Configuration
 @EnableWebMvc

@@ -1,15 +1,16 @@
 package com.blog.modules.system.domain.dto;
 
-import lombok.Data;
 import com.blog.base.CommonDto;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 public class RoleDto extends CommonDto implements Serializable {
     private static final long serialVersionUID = 1L;

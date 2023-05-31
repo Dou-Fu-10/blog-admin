@@ -7,31 +7,30 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.blog.commom.redis.service.RedisService;
-import lombok.AllArgsConstructor;
-import com.blog.base.QueryHelpMybatisPlus;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.blog.base.QueryHelpMybatisPlus;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.system.domain.Dept;
 import com.blog.modules.system.domain.User;
-import com.blog.modules.system.service.DeptService;
-import com.blog.modules.system.service.RolesDeptsService;
 import com.blog.modules.system.domain.dto.DeptDto;
 import com.blog.modules.system.domain.dto.DeptQueryParam;
 import com.blog.modules.system.mapper.DeptMapper;
 import com.blog.modules.system.mapper.RoleMapper;
 import com.blog.modules.system.mapper.UserMapper;
+import com.blog.modules.system.service.DeptService;
+import com.blog.modules.system.service.RolesDeptsService;
 import com.blog.utils.CacheKey;
 import com.blog.utils.ConvertUtil;
 import com.blog.utils.FileUtil;
 import com.blog.utils.SecurityUtils;
 import com.blog.utils.enums.DataScopeEnum;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -40,7 +39,8 @@ import java.util.stream.Collectors;
 
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Service
 @AllArgsConstructor

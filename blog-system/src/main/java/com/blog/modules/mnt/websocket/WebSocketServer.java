@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @ServerEndpoint("/webSocket/{sid}")
 @Slf4j

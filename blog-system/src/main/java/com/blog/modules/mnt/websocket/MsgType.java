@@ -1,7 +1,8 @@
 package com.blog.modules.mnt.websocket;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public enum MsgType {
 	/** 连接 */

@@ -6,9 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
-* 场景值注解 用于标识参数字段 是场景值字段
-* @author ty
-*/
+ * 场景值注解 用于标识参数字段 是场景值字段
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Scene {

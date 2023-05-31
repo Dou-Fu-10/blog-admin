@@ -1,16 +1,16 @@
 package com.blog.modules.quartz.domain.dto;
 
-import lombok.Data;
-
-import java.util.List;
-import java.util.Date;
 import com.blog.annotation.Query;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+import java.util.List;
+
 /**
-* @author ty
-* 
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 public class QuartzJobQueryParam{
 

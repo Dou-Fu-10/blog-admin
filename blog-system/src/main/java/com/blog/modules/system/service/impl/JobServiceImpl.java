@@ -3,37 +3,38 @@ package com.blog.modules.system.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import lombok.AllArgsConstructor;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.base.PageInfo;
 import com.blog.base.QueryHelpMybatisPlus;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.exception.BadRequestException;
 import com.blog.exception.EntityExistException;
 import com.blog.modules.system.domain.Job;
 import com.blog.modules.system.domain.UsersJobs;
-import com.blog.modules.system.mapper.UsersJobsMapper;
-import com.blog.modules.system.service.JobService;
-import com.blog.modules.system.service.UsersJobsService;
 import com.blog.modules.system.domain.dto.JobDto;
 import com.blog.modules.system.domain.dto.JobQueryParam;
 import com.blog.modules.system.mapper.JobMapper;
+import com.blog.modules.system.mapper.UsersJobsMapper;
+import com.blog.modules.system.service.JobService;
+import com.blog.modules.system.service.UsersJobsService;
 import com.blog.utils.ConvertUtil;
 import com.blog.utils.FileUtil;
 import com.blog.utils.PageUtil;
-import com.blog.commom.redis.service.RedisService;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "job")

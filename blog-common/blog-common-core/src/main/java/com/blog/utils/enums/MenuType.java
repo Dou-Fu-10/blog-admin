@@ -5,8 +5,9 @@ import lombok.Getter;
 
 /**
  * 菜单类型：目录、菜单、按钮
- * 
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Getter
 @AllArgsConstructor

@@ -6,7 +6,9 @@ import java.util.List;
 
 /**
  * 数据权限服务类
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public interface DataService {
 

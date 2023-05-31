@@ -3,7 +3,8 @@ package com.blog.modules.system.service;
 import com.blog.modules.tools.domain.vo.EmailVo;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public interface VerifyService {
 

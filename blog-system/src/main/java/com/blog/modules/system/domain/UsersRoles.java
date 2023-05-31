@@ -3,13 +3,7 @@ package com.blog.modules.system.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-//import io.swagger.annotations.ApiModel;
-//import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -17,7 +11,8 @@ import java.io.Serializable;
 /**
  * 用户角色关联
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Data
 @Builder

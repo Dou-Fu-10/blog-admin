@@ -11,8 +11,9 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
- * @author ty
+ * @author IKUN
  * @description Rsa 工具类，公钥私钥生成，加解密
+ * @since 2023-05-31 21:25:43
  **/
 public class RsaUtils {
     

@@ -16,7 +16,8 @@ import java.util.List;
 /**
  * 阿里OSS云存储服务
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 public class AliyunOssStorageService extends CloudStorageService {

@@ -10,7 +10,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  * 翻译工具类
  */
 public class TranslatorUtil {

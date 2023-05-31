@@ -1,18 +1,16 @@
 package com.blog.modules.mnt.domain.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
-import java.sql.Timestamp;
 
 /**
-* @author ty
-* 
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)

@@ -1,8 +1,7 @@
 package com.blog.modules.blog.entity.dto;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.blog.base.CommonDto;
-import com.blog.modules.blog.entity.vo.ArticleVo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -33,32 +32,32 @@ public class ArticleDto extends CommonDto {
     /**
      * 文章标题
      */
-    @NotEmpty
+    @NotEmpty(message = "请填写文章标题")
     private String title;
     /**
      * 发布时间
      */
-    @NotNull
+    @NotNull(message = "请填写发布时间")
     private Date date;
     /**
      * 是否置顶(1true/0fales)
      */
-    @NotNull
+    @NotNull(message = "是否置顶")
     private Boolean top;
     /**
      * 文章字数
      */
-    @NotNull
+    @NotNull(message = "添加出错请联系管理员")
     private Long wordCount;
     /**
      * 文章内容
      */
-    @NotEmpty
+    @NotEmpty(message = "请填写文章内容")
     private String content;
     /**
      * 文章摘要
      */
-    @NotEmpty
+    @NotEmpty(message = "请填写文章摘要")
     private String excerpt;
     /**
      * 文章别名
@@ -67,22 +66,22 @@ public class ArticleDto extends CommonDto {
     /**
      * 评论数量
      */
-    @JsonInclude
+    @JsonIgnore
     private Integer commentNumber;
     /**
      * 阅读量
      */
-    @JsonInclude
+    @JsonIgnore
     private Integer views;
     /**
      * 草稿(1true/0fales)
      */
-    @NotNull
+    @NotNull(message = "文章是否是草稿")
     private Boolean hide;
     /**
      * 点赞量
      */
-    @JsonInclude
+    @JsonIgnore
     private Integer favorite;
     /**
      * 文章是否审核(1true/0fales)
@@ -95,38 +94,39 @@ public class ArticleDto extends CommonDto {
     /**
      * 创建者
      */
-    @JsonInclude
+    @JsonIgnore
     private String createBy;
     /**
      * 更新者
      */
-    @JsonInclude
+    @JsonIgnore
     private String updateBy;
     /**
      * 创建日期
      */
-    @JsonInclude
+    @JsonIgnore
     private Date createTime;
     /**
      * 更新时间
      */
-    @JsonInclude
+    @JsonIgnore
     private Date updateTime;
 
     /**
-     * 分类 id
+     * 分类
      */
-    @NotNull
+    @NotNull(message = "请填写至少一个分类")
     private Set<Long> categoriesList;
     /**
      * 标签
      */
-    @NotNull
-    private String label;
+    @NotNull(message = "请填写文章标题")
+    private Set<String> tagList;
+
     /**
      * 1表示已删除，0表示未删除
      */
-    @JsonInclude
+    @JsonIgnore
     private Integer deleteFlag;
 
 

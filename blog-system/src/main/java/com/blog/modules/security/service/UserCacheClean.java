@@ -4,8 +4,9 @@ import com.blog.utils.StringUtils;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ty
+ * @author IKUN
  * @apiNote 用于清理 用户登录信息缓存，为防止Spring循环依赖与安全考虑 ，单独构成工具类
+ * @since 2023-05-31 21:25:43
  */
 @Component
 public class UserCacheClean {

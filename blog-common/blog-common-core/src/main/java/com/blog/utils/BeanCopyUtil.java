@@ -14,7 +14,8 @@ import static java.util.stream.Collectors.toSet;
 /**
  * Bean复制工具类
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  **/
 public class BeanCopyUtil {
     public static <T> T copy(final Object source, final Class<T> clazz) {

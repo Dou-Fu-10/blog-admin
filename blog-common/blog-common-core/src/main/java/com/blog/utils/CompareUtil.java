@@ -8,9 +8,11 @@ import java.sql.Timestamp;
 import java.util.*;
 
 /**
-* 实体类差异化比较器，可以比较类变化字段，方便针对变化的数据进行日志记录
-* @author ty
-*/
+ * 实体类差异化比较器，可以比较类变化字段，方便针对变化的数据进行日志记录
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 public class CompareUtil {
     /**
      * 比较两个实体属性值，返回一个boolean,true则表时两个对象中的属性值无差异

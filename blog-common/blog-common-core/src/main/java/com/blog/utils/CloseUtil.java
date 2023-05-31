@@ -3,8 +3,9 @@ package com.blog.utils;
 import java.io.Closeable;
 
 /**
- * @author ty
+ * @author IKUN
  * @description 用于关闭各种连接，缺啥补啥
+ * @since 2023-05-31 21:25:43
  **/
 public class CloseUtil {
 

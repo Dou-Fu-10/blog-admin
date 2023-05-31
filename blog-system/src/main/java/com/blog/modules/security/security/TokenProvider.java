@@ -9,6 +9,7 @@ import com.blog.modules.security.config.bean.SecurityProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,8 +18,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -29,7 +28,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 @Component

@@ -8,7 +8,9 @@ import java.util.List;
 
 /**
  * 构建前端路由时用到
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

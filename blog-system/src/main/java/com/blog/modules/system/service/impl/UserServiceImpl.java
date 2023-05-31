@@ -5,33 +5,29 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.blog.base.PageInfo;
+import com.blog.base.QueryHelpMybatisPlus;
 import com.blog.commom.redis.service.RedisService;
+import com.blog.config.FileProperties;
+import com.blog.exception.BadRequestException;
+import com.blog.exception.EntityExistException;
+import com.blog.modules.security.service.OnlineUserService;
+import com.blog.modules.security.service.UserCacheClean;
+import com.blog.modules.system.domain.User;
+import com.blog.modules.system.domain.UsersJobs;
+import com.blog.modules.system.domain.UsersRoles;
+import com.blog.modules.system.domain.dto.*;
+import com.blog.modules.system.mapper.UserMapper;
+import com.blog.modules.system.mapper.UsersJobsMapper;
+import com.blog.modules.system.mapper.UsersRolesMapper;
 import com.blog.modules.system.service.DeptService;
 import com.blog.modules.system.service.UserService;
 import com.blog.modules.system.service.UsersJobsService;
 import com.blog.modules.system.service.UsersRolesService;
 import com.blog.utils.*;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import com.blog.base.PageInfo;
-import com.blog.base.QueryHelpMybatisPlus;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.blog.config.FileProperties;
-import com.blog.exception.BadRequestException;
-import com.blog.exception.EntityExistException;
-import com.blog.modules.system.domain.User;
-import com.blog.modules.system.domain.UsersJobs;
-import com.blog.modules.system.domain.UsersRoles;
-import com.blog.modules.system.mapper.UsersJobsMapper;
-import com.blog.modules.system.mapper.UsersRolesMapper;
-import com.blog.modules.system.domain.dto.DeptDto;
-import com.blog.modules.system.domain.dto.UserDto;
-import com.blog.modules.system.domain.dto.UserQueryParam;
-import com.blog.modules.security.service.OnlineUserService;
-import com.blog.modules.security.service.UserCacheClean;
-import com.blog.modules.system.domain.dto.DeptSmallDto;
-import com.blog.modules.system.domain.dto.JobSmallDto;
-import com.blog.modules.system.domain.dto.RoleSmallDto;
-import com.blog.modules.system.mapper.UserMapper;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -39,7 +35,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -47,8 +42,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "user")

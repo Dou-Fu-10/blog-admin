@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * 线程池配置属性类
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Data
 @Component

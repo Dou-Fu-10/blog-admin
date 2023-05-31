@@ -10,8 +10,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Mapper
 public interface DictDetailMapper extends CommonMapper<DictDetail> {
 

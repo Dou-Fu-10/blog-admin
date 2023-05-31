@@ -1,16 +1,18 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.domain.dto.DictDetailDto;
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.DictDetail;
+import com.blog.modules.system.domain.dto.DictDetailDto;
 import com.blog.modules.system.domain.dto.DictDetailQueryParam;
 import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 public interface DictDetailService  extends IService<DictDetail> {
 
     /**

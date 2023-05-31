@@ -6,8 +6,9 @@ import com.blog.exception.BadRequestException;
 
 /**
  * 验证工具
- * @author ty
- * 
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public class ValidationUtil{
 

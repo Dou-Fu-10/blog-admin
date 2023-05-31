@@ -1,7 +1,5 @@
 package com.blog.modules.tools.domain.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,9 +7,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
-* @author ty
-* 
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)

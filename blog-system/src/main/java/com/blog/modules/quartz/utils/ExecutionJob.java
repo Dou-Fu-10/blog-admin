@@ -8,8 +8,8 @@ import com.blog.commom.redis.service.RedisService;
 import com.blog.config.thread.ThreadPoolExecutorUtil;
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.domain.QuartzLog;
-import com.blog.modules.quartz.service.QuartzJobService;
 import com.blog.modules.quartz.mapper.QuartzLogMapper;
+import com.blog.modules.quartz.service.QuartzJobService;
 import com.blog.modules.tools.domain.vo.EmailVo;
 import com.blog.modules.tools.service.EmailService;
 import com.blog.utils.SpringContextHolder;
@@ -29,7 +29,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * 参考人人开源，https://gitee.com/renrenio/renren-security
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Async
 public class ExecutionJob extends QuartzJobBean {

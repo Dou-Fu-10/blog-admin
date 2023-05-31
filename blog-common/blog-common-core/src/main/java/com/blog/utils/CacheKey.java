@@ -2,8 +2,9 @@
 package com.blog.utils;
 
 /**
- * @author ty
+ * @author IKUN
  * @apiNote 关于缓存的Key集合
+ * @since 2023-05-31 21:25:43
  */
 public interface CacheKey {
     

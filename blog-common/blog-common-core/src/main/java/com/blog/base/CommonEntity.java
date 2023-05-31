@@ -12,7 +12,8 @@ import java.util.Date;
 /**
  * 抽象实体类 ：带有公共字段
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

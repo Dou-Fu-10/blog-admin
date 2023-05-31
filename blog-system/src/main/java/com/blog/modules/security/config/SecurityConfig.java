@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
@@ -33,7 +32,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import java.util.*;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Configuration
 @EnableWebSecurity

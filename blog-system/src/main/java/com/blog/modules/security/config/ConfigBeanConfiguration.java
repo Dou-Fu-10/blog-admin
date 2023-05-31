@@ -7,8 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * @author IKUN
  * @apiNote 配置文件转换Pojo类的 统一配置 类
- * @author ty
+ * @since 2023-05-31 21:25:43
  */
 @Configuration
 public class ConfigBeanConfiguration {

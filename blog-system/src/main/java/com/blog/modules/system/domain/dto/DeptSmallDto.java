@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 @NoArgsConstructor
 public class DeptSmallDto implements Serializable {

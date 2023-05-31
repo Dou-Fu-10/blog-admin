@@ -1,8 +1,8 @@
 package com.blog.modules.system.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.blog.modules.system.domain.User;
 import org.apache.ibatis.annotations.*;
 
@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 

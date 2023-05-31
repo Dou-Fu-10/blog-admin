@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 用于获取自定义线程池
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public class ThreadPoolExecutorUtil {
 

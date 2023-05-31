@@ -1,17 +1,18 @@
 package com.blog.modules.system.domain.dto;
 
+import com.blog.base.CommonDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Accessors;
-import com.blog.base.CommonDto;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 @Builder
 @AllArgsConstructor

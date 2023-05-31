@@ -9,9 +9,11 @@ import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
-* 公共抽象Mapper接口类
-* @author ty
-*/
+ * 公共抽象Mapper接口类
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Mapper
 public interface CommonMapper<E> extends BaseMapper<E> {
     default QueryChainWrapper<E> query() {

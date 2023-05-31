@@ -2,8 +2,8 @@ package com.blog.modules.quartz.config;
 
 import com.blog.modules.quartz.domain.QuartzJob;
 import com.blog.modules.quartz.mapper.QuartzJobMapper;
-import lombok.RequiredArgsConstructor;
 import com.blog.modules.quartz.utils.QuartzManage;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -13,7 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Component
 @RequiredArgsConstructor

@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author ty
-* 
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 public interface AppService  extends IService<App> {
 
     String CACHE_KEY = "app";

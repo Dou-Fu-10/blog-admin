@@ -4,12 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import com.blog.modules.security.config.bean.SecurityProperties;
 import com.blog.modules.security.service.OnlineUserService;
 import com.blog.modules.security.service.UserCacheClean;
-import io.jsonwebtoken.ExpiredJwtException;
 import com.blog.modules.security.service.dto.OnlineUserDto;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -17,13 +18,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public class TokenFilter extends GenericFilterBean {
     private static final Logger log = LoggerFactory.getLogger(TokenFilter.class);

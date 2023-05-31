@@ -1,24 +1,26 @@
 package com.blog.modules.system.controller;
 
-import com.blog.modules.system.domain.Dict;
-import com.blog.modules.system.service.DictService;
-import com.blog.modules.system.domain.dto.DictQueryParam;
-import lombok.RequiredArgsConstructor;
-import com.blog.modules.logging.annotation.Log;
 import com.blog.exception.BadRequestException;
+import com.blog.modules.logging.annotation.Log;
+import com.blog.modules.system.domain.Dict;
+import com.blog.modules.system.domain.dto.DictQueryParam;
+import com.blog.modules.system.service.DictService;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @RestController
 @RequiredArgsConstructor
 // @Api(tags = "系统：字典管理")

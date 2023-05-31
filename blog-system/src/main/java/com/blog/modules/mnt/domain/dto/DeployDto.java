@@ -1,9 +1,9 @@
 package com.blog.modules.mnt.domain.dto;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.blog.base.CommonDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.blog.base.CommonDto;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,8 +12,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 @NoArgsConstructor
 public class DeployDto extends CommonDto implements Serializable {

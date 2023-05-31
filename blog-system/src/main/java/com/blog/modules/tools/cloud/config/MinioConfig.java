@@ -6,7 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * Minio 文件存储
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  **/
 @Data
 @ConfigurationProperties(prefix = "minio")

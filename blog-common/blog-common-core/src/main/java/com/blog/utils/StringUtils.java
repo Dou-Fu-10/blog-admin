@@ -22,7 +22,8 @@ import java.util.Date;
 import java.util.Enumeration;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  * 字符串工具类, 继承org.apache.commons.lang3.StringUtils类
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {

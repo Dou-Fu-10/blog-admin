@@ -21,7 +21,8 @@ package com.blog.modules.mnt.util;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 @SuppressWarnings({"unchecked","all"})

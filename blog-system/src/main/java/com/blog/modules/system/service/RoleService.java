@@ -1,23 +1,24 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.domain.dto.RoleDto;
-import com.blog.modules.system.domain.dto.RoleQueryParam;
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.Role;
+import com.blog.modules.system.domain.dto.RoleDto;
+import com.blog.modules.system.domain.dto.RoleQueryParam;
 import com.blog.modules.system.domain.dto.RoleSmallDto;
 import com.blog.modules.system.domain.dto.UserDto;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 public interface RoleService  extends IService<Role> {
 
     /**

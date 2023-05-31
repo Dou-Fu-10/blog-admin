@@ -3,14 +3,13 @@ package com.blog.modules.quartz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.blog.modules.quartz.domain.QuartzJob;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
-* @author ty
-* 
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Mapper
 public interface QuartzJobMapper extends BaseMapper<QuartzJob> {
 

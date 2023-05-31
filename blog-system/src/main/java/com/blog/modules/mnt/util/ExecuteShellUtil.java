@@ -6,13 +6,16 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Vector;
 
 /**
  * 执行shell命令
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 public class ExecuteShellUtil {

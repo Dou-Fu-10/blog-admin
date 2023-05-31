@@ -7,7 +7,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 自定义线程名称
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Component
 public class TheadFactoryName implements ThreadFactory {

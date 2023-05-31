@@ -1,21 +1,23 @@
 package com.blog.modules.system.service.impl;
 
-import lombok.RequiredArgsConstructor;
 import com.blog.modules.system.domain.Dept;
-import com.blog.modules.system.service.DeptService;
-import com.blog.modules.system.service.RoleService;
 import com.blog.modules.system.domain.dto.DeptDto;
-import com.blog.modules.system.service.DataService;
 import com.blog.modules.system.domain.dto.RoleSmallDto;
 import com.blog.modules.system.domain.dto.UserDto;
+import com.blog.modules.system.service.DataService;
+import com.blog.modules.system.service.DeptService;
+import com.blog.modules.system.service.RoleService;
 import com.blog.utils.enums.DataScopeEnum;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 /**
- * @author ty
+ * @author IKUN
  * @description 数据权限服务实现
+ * @since 2023-05-31 21:25:43
  **/
 @Service
 @RequiredArgsConstructor

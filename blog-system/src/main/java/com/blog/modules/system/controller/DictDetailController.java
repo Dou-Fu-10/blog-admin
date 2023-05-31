@@ -1,12 +1,12 @@
 package com.blog.modules.system.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.blog.modules.system.service.DictDetailService;
+import com.blog.exception.BadRequestException;
+import com.blog.modules.logging.annotation.Log;
 import com.blog.modules.system.domain.dto.DictDetailDto;
 import com.blog.modules.system.domain.dto.DictDetailQueryParam;
+import com.blog.modules.system.service.DictDetailService;
 import lombok.RequiredArgsConstructor;
-import com.blog.modules.logging.annotation.Log;
-import com.blog.exception.BadRequestException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -15,13 +15,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @RestController
 @RequiredArgsConstructor
 // @Api(tags = "系统：字典详情管理")

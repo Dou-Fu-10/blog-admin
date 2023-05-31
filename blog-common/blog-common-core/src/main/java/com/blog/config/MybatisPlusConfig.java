@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 配置文件
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Configuration
 @MapperScan(basePackages ={"me.zhengjie.**.mapper"})

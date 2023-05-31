@@ -42,7 +42,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * 授权、根据token获取用户详细信息
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 @RestController

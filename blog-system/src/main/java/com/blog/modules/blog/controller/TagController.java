@@ -2,6 +2,7 @@ package com.blog.modules.blog.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.blog.modules.blog.entity.dto.TagDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -34,12 +35,12 @@ public class TagController {
      * 分页查询所有数据
      *
      * @param page 分页对象
-     * @param tag  查询实体
+     * @param tagDto  查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResponseEntity<Object> selectAll(Page<TagEntity> page, TagEntity tag) {
-        return new ResponseEntity<>(this.tagService.page(page, new QueryWrapper<>(tag)), HttpStatus.OK);
+    public ResponseEntity<Object> selectAll(Page<TagEntity> page, TagDto tagDto) {
+        return new ResponseEntity<>(this.tagService.page(page, tagDto), HttpStatus.OK);
     }
 
     /**

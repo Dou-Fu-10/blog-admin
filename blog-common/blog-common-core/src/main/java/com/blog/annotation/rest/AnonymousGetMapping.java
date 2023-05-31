@@ -13,8 +13,9 @@ import java.lang.annotation.*;
  * <p>
  * 支持匿名访问   GetMapping
  *
- * @author ty
+ * @author IKUN
  * @see RequestMapping
+ * @since 2023-05-31 21:25:43
  */
 @AnonymousAccess
 @Target(ElementType.METHOD)

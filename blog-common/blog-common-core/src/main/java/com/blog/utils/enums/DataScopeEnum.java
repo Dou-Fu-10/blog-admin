@@ -7,7 +7,9 @@ import lombok.Getter;
  * <p>
  * 数据权限枚举
  * </p>
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Getter
 @AllArgsConstructor

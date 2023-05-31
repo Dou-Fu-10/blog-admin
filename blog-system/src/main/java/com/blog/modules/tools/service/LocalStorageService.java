@@ -12,8 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 public interface LocalStorageService extends IService<LocalStorage> {
 
     /**

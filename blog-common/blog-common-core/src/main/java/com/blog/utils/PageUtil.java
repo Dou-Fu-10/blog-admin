@@ -14,7 +14,9 @@ import java.util.Map;
 
 /**
  * 分页工具
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public class PageUtil extends cn.hutool.core.util.PageUtil {
 

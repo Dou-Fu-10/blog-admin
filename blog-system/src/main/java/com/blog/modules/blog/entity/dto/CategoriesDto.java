@@ -1,5 +1,6 @@
 package com.blog.modules.blog.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -49,27 +50,27 @@ public class CategoriesDto {
     /**
      * 创建者
      */
-    @JsonInclude
+    @JsonIgnore
     private String createBy;
     /**
      * 更新者
      */
-    @JsonInclude
+    @JsonIgnore
     private String updateBy;
     /**
      * 创建日期
      */
-    @JsonInclude
+    @JsonIgnore
     private Date createTime;
     /**
      * 更新时间
      */
-    @JsonInclude
+    @JsonIgnore
     private Date updateTime;
     /**
      * 1表示已删除，0表示未删除
      */
-    @JsonInclude
+    @JsonIgnore
     private Integer deleteFlag;
 
 

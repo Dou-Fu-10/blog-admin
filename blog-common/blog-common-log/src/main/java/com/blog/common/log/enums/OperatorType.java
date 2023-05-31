@@ -2,8 +2,9 @@ package com.blog.common.log.enums;
 
 /**
  * 操作人类别
- * 
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public enum OperatorType
 {

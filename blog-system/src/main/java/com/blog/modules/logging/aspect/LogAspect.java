@@ -18,7 +18,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * 日志 注解切面
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Component
 @Aspect

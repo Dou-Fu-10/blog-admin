@@ -2,7 +2,6 @@ package com.blog.utils;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.base.PageInfo;
 
 import java.util.List;
@@ -11,7 +10,9 @@ import java.util.stream.Collectors;
 
 /**
  * 转换
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public class ConvertUtil {
     public static <T, S> T convert(final S s, Class<T> clz) {

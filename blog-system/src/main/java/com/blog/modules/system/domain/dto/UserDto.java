@@ -1,8 +1,8 @@
 package com.blog.modules.system.domain.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import lombok.Data;
 import com.blog.base.CommonDto;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,8 +10,9 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 public class UserDto extends CommonDto implements Serializable {
     private static final long serialVersionUID = 1L;

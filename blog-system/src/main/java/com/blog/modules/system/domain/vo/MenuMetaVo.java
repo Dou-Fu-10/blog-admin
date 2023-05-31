@@ -2,10 +2,12 @@ package com.blog.modules.system.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import java.io.Serializable;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Data
 @AllArgsConstructor

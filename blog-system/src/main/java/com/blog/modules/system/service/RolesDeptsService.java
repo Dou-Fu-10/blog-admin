@@ -6,8 +6,9 @@ import com.blog.modules.system.domain.RolesDepts;
 import java.util.List;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 public interface RolesDeptsService extends IService<RolesDepts> {
 
     List<Long> queryDeptIdByRoleId(Long id);

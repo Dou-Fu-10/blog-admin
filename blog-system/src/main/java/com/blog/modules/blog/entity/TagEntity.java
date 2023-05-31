@@ -25,6 +25,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @NoArgsConstructor
 @TableName("blog_tag")
 public class TagEntity extends CommonEntity<ArticleEntity> {
+
+    public TagEntity(String tagName) {
+        this.tagName = tagName;
+    }
+
     /**
      * id
      */

@@ -5,14 +5,14 @@ import com.blog.modules.system.domain.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Mapper
 public interface RoleMapper extends BaseMapper<Role> {
     @Select("SELECT r.role_id as id, r.* FROM sys_role r LEFT OUTER JOIN sys_users_roles ur ON r.role_id=ur.role_id LEFT OUTER JOIN sys_user u ON ur.user_id=u.user_id WHERE u.user_id=#{userId}")

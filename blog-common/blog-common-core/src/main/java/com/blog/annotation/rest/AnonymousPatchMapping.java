@@ -12,12 +12,13 @@ import java.lang.annotation.*;
  * methods.
  * * 支持匿名访问    PatchMapping
  *
- * @author ty
+ * @author IKUN
  * @see AnonymousGetMapping
  * @see AnonymousPostMapping
  * @see AnonymousPutMapping
  * @see AnonymousDeleteMapping
  * @see RequestMapping
+ * @since 2023-05-31 21:25:43
  */
 @AnonymousAccess
 @Target(ElementType.METHOD)

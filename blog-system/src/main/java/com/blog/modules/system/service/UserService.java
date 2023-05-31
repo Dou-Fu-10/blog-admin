@@ -1,22 +1,23 @@
 package com.blog.modules.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.system.domain.dto.UserDto;
-import com.blog.modules.system.domain.dto.UserQueryParam;
 import com.blog.base.PageInfo;
 import com.blog.modules.system.domain.User;
+import com.blog.modules.system.domain.dto.UserDto;
+import com.blog.modules.system.domain.dto.UserQueryParam;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 public interface UserService  extends IService<User> {
 
     /**

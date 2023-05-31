@@ -11,7 +11,9 @@ import java.util.logging.Logger;
 
 /**
  * 远程执行linux命令
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public class ScpClientUtil {
 

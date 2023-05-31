@@ -4,44 +4,41 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import lombok.AllArgsConstructor;
-import com.blog.base.QueryHelpMybatisPlus;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.blog.base.QueryHelpMybatisPlus;
+import com.blog.commom.redis.service.RedisService;
 import com.blog.exception.BadRequestException;
 import com.blog.exception.EntityExistException;
 import com.blog.modules.system.domain.Menu;
 import com.blog.modules.system.domain.User;
+import com.blog.modules.system.domain.dto.MenuDto;
+import com.blog.modules.system.domain.dto.MenuQueryParam;
+import com.blog.modules.system.domain.dto.RoleSmallDto;
+import com.blog.modules.system.domain.vo.MenuMetaVo;
+import com.blog.modules.system.domain.vo.MenuVo;
+import com.blog.modules.system.mapper.MenuMapper;
+import com.blog.modules.system.mapper.UserMapper;
 import com.blog.modules.system.service.MenuService;
 import com.blog.modules.system.service.RoleService;
 import com.blog.modules.system.service.RolesMenusService;
-import com.blog.modules.system.domain.dto.MenuDto;
-import com.blog.modules.system.domain.dto.MenuQueryParam;
-import com.blog.modules.system.domain.vo.MenuMetaVo;
-import com.blog.modules.system.domain.vo.MenuVo;
-import com.blog.modules.system.domain.dto.RoleSmallDto;
-import com.blog.modules.system.mapper.MenuMapper;
-import com.blog.modules.system.mapper.UserMapper;
-import com.blog.utils.CacheKey;
-import com.blog.utils.ConvertUtil;
-import com.blog.utils.FileUtil;
-import com.blog.commom.redis.service.RedisService;
-import com.blog.utils.StringUtils;
-import com.blog.utils.ValidationUtil;
+import com.blog.utils.*;
 import com.blog.utils.enums.MenuType;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Service
 @AllArgsConstructor
 @CacheConfig(cacheNames = "menu")

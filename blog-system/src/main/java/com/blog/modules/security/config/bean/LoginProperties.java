@@ -1,10 +1,10 @@
 package com.blog.modules.security.config.bean;
 
+import com.blog.exception.BadConfigurationException;
+import com.blog.utils.StringUtils;
 import com.wf.captcha.*;
 import com.wf.captcha.base.Captcha;
 import lombok.Data;
-import com.blog.exception.BadConfigurationException;
-import com.blog.utils.StringUtils;
 
 import java.awt.*;
 import java.util.Objects;
@@ -12,7 +12,8 @@ import java.util.Objects;
 /**
  * 配置文件读取
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Data
 public class LoginProperties {

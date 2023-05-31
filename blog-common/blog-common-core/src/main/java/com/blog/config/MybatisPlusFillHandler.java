@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Date;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Configuration
 public class MybatisPlusFillHandler implements MetaObjectHandler{

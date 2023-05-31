@@ -1,25 +1,21 @@
 package com.blog.modules.mnt.domain;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.IdType;
-//import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.blog.base.CommonEntity;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 @Builder
 @AllArgsConstructor

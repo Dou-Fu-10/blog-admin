@@ -5,12 +5,15 @@ import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 异步任务线程池装配类
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 @Configuration

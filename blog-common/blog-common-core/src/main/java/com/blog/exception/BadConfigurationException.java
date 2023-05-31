@@ -4,7 +4,8 @@ package com.blog.exception;
 /**
  * 统一关于错误配置信息 异常
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public class BadConfigurationException extends RuntimeException {
     /**

@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * Minio 文件服务
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  **/
 @Slf4j
 public class MinioStorageService extends CloudStorageService {

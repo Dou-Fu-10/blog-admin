@@ -8,8 +8,8 @@ import java.lang.annotation.*;
 /**
  * 自定义操作日志记录注解
  *
- * @author ty
- *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Target({ ElementType.PARAMETER, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

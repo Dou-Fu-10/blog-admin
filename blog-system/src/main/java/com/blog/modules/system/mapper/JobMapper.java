@@ -6,8 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Mapper
 public interface JobMapper extends BaseMapper<Job> {
     @Select("select j.job_id as id, j.* from sys_job where job_id = #{id}")

@@ -16,7 +16,9 @@ import java.util.List;
 
 /**
  * 获取当前登录的用户
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 public class SecurityUtils {

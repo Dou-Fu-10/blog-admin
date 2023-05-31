@@ -3,7 +3,8 @@ package com.blog.modules.security.config.bean;
 /**
  * 验证码配置枚举
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 
 public enum LoginCodeEnum {

@@ -1,15 +1,16 @@
 package com.blog.modules.system.domain.dto;
 
+import com.blog.annotation.Query;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
-import com.blog.annotation.Query;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
-* @author ty
-*/
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ */
 @Data
 public class MenuQueryParam{
 

@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Service(value = "el")
 public class ElPermissionConfig {

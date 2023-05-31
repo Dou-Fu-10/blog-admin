@@ -3,8 +3,9 @@ package com.blog.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author ty
- *  用于标记匿名访问方法
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
+ * 用于标记匿名访问方法
  */
 @Inherited
 @Documented

@@ -18,7 +18,8 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Slf4j
 public class QueryHelpMybatisPlus {

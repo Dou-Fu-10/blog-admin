@@ -3,7 +3,8 @@ package com.blog.modules.tools.utils;
 /**
  * 支付状态
  *
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public enum  AliPayStatusEnum {
 

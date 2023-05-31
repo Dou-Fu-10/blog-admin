@@ -7,7 +7,9 @@ import lombok.Getter;
  * <p>
  * 验证码业务场景对应的 Redis 中的 key
  * </p>
- * @author ty
+ *
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 @Getter
 @AllArgsConstructor

@@ -6,7 +6,8 @@ import com.blog.modules.tools.domain.vo.TradeVo;
 
 
 /**
- * @author ty
+ * @author IKUN
+ * @since 2023-05-31 21:25:43
  */
 public interface AliPayService extends IService<AlipayConfig> {
 
