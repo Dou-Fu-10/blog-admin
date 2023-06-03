@@ -33,6 +33,7 @@ public class ArticleTagEntity {
      * 文章id
      */
     private Long aid;
+
     /**
      * 标签id
      */

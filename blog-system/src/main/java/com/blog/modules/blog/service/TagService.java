@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.blog.entity.TagEntity;
 import com.blog.modules.blog.entity.dto.TagDto;
 import com.blog.modules.blog.entity.vo.TagVo;
+import com.blog.modules.logging.domain.Log;
 
 import java.util.List;
 import java.util.Set;
@@ -42,4 +43,11 @@ public interface TagService extends IService<TagEntity> {
      * @return 所有数据
      */
     Page<TagVo> page(Page<TagEntity> page, TagDto tagDto);
+
+    /**
+     * 按id 列表删除 标签
+     * @param idList id列表
+     * @return boolean
+     */
+    boolean removeByIds(Set<Long> idList);
 }

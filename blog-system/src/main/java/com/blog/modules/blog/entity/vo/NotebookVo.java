@@ -4,6 +4,7 @@ import java.util.Date;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,7 @@ public class NotebookVo {
     /**
      * 更新者
      */
+    @JsonIgnore
     private String updateBy;
     /**
      * 创建日期
@@ -44,10 +46,12 @@ public class NotebookVo {
     /**
      * 更新时间
      */
+    @JsonIgnore
     private Date updateTime;
     /**
      * 1表示已删除，0表示未删除
      */
+    @JsonIgnore
     private Integer deleteFlag;
 
 

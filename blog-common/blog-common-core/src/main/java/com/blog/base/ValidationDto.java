@@ -1,5 +1,6 @@
 package com.blog.base;
 
+import jakarta.validation.groups.Default;
 import lombok.Data;
 
 /**
@@ -11,71 +12,71 @@ import lombok.Data;
 @Data
 public abstract class ValidationDto {
 
-    private interface Delete {
+    public interface Delete extends Default {
     }
 
 
-    private interface DeleteBatchByIds {
+    public interface DeleteBatchByIds extends Default {
     }
 
 
-    private interface DeleteById {
+    public interface DeleteById extends Default {
     }
 
 
-    private interface DeleteByMap {
+    public interface DeleteByMap extends Default {
     }
 
 
-    private interface Insert {
+    public interface Insert extends Default {
     }
 
 
-    private interface SelectBatchByIds {
+    public interface SelectBatchByIds extends Default {
     }
 
 
-    private interface SelectById {
+    public interface SelectById extends Default {
     }
 
 
-    private interface SelectByMap {
+    public interface SelectByMap extends Default {
     }
 
 
-    private interface SelectCount {
+    public interface SelectCount extends Default {
     }
 
 
-    private interface SelectList {
+    public interface SelectList extends Default {
     }
 
 
-    private interface SelectMaps {
+    public interface SelectMaps extends Default {
     }
 
 
-    private interface SelectMapsPage {
+    public interface SelectMapsPage extends Default {
     }
 
 
-    private interface SelectObjs {
+    public interface SelectObjs extends Default {
     }
 
 
-    private interface SelectOne {
+    public interface SelectOne extends Default {
     }
 
 
-    private interface SelectPage {
+    public interface SelectPage extends Default {
     }
 
 
-    private interface Update {
+    public interface Update extends Default {
     }
 
 
-    private interface UpdateById {
+    public interface UpdateById extends Default {
     }
 
 

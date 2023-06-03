@@ -2,6 +2,7 @@ package com.blog.modules.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.blog.entity.ArticleTagEntity;
+import com.blog.modules.blog.entity.TagEntity;
 
 import java.util.List;
 import java.util.Set;
@@ -22,4 +23,21 @@ public interface ArticleTagService extends IService<ArticleTagEntity> {
      * @return 文章和标签的绑定
      */
     List<ArticleTagEntity> getArticleTagByTagIdList(Set<Long> tagIdList);
+
+    /**
+     * 通过文章id 获取对应的标签
+     *
+     * @param articleId 文章id
+     * @return 文章绑定标签
+     */
+    List<TagEntity> getArticleTagByArticleId(Long articleId);
+
+    /**
+     * 通过文章id 删除 和文章关联的标签
+     *
+     * @param articleId 文章id
+     * @return 是否成功
+     */
+    boolean removeByArticleId(Long articleId);
+
 }

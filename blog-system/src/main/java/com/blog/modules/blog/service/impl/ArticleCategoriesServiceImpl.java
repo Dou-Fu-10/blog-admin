@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.exception.BadRequestException;
 import com.blog.modules.blog.entity.ArticleCategoriesEntity;
-import com.blog.modules.blog.entity.vo.ArticleOrCategoriesVo;
+import com.blog.modules.blog.entity.CategoriesEntity;
 import com.blog.modules.blog.mapper.ArticleCategoriesMapper;
 import com.blog.modules.blog.service.ArticleCategoriesService;
 import com.blog.modules.blog.service.CategoriesService;
@@ -54,6 +54,16 @@ public class ArticleCategoriesServiceImpl extends ServiceImpl<ArticleCategoriesM
             }
         }
         return true;
+    }
+
+    @Override
+    public List<CategoriesEntity> getArticleCategoriesByArticleId(Long articleId) {
+        return getBaseMapper().getArticleCategoriesByArticleId(articleId);
+    }
+
+    @Override
+    public boolean removeByArticleId(Long articleId) {
+        return remove(Wrappers.<ArticleCategoriesEntity>lambdaQuery().eq(ArticleCategoriesEntity::getAid, articleId));
     }
 }
 

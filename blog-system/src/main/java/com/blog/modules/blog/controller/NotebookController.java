@@ -2,16 +2,18 @@ package com.blog.modules.blog.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.modules.blog.entity.NotebookEntity;
+import com.blog.modules.blog.entity.dto.NotebookDto;
+import com.blog.modules.blog.entity.vo.NotebookVo;
 import com.blog.modules.blog.service.NotebookService;
+import com.blog.utils.ConvertUtil;
 import jakarta.annotation.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,8 +40,9 @@ public class NotebookController {
      * @return 所有数据
      */
     @GetMapping
-    public ResponseEntity<Object> selectAll(Page<NotebookEntity> page, NotebookEntity notebook) {
-        return new ResponseEntity<>(this.notebookService.page(page, new QueryWrapper<>(notebook)), HttpStatus.OK);
+    public ResponseEntity<Object> selectAll(Page<NotebookEntity> page, NotebookDto notebook) {
+        Page<NotebookEntity> notebookEntityPage = this.notebookService.page(page, new QueryWrapper<>(ConvertUtil.convert(notebook, NotebookEntity.class)));
+        return new ResponseEntity<>(notebookEntityPage.convert(notebookEntity -> ConvertUtil.convert(notebookEntity, NotebookVo.class)), HttpStatus.OK);
     }
 
     /**
@@ -60,8 +63,8 @@ public class NotebookController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Object> insert(@RequestBody NotebookEntity notebook) {
-        return new ResponseEntity<>(this.notebookService.save(notebook), HttpStatus.OK);
+    public ResponseEntity<Object> insert(@RequestBody NotebookDto notebook) {
+        return new ResponseEntity<>(this.notebookService.save(ConvertUtil.convert(notebook, NotebookEntity.class)) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
     /**
@@ -71,8 +74,8 @@ public class NotebookController {
      * @return 修改结果
      */
     @PutMapping
-    public ResponseEntity<Object> update(@RequestBody NotebookEntity notebook) {
-        return new ResponseEntity<>(this.notebookService.updateById(notebook), HttpStatus.OK);
+    public ResponseEntity<Object> update(@RequestBody NotebookDto notebook) {
+        return new ResponseEntity<>(this.notebookService.updateById(ConvertUtil.convert(notebook, NotebookEntity.class)) ? "修改成功" : "修改失败", HttpStatus.OK);
     }
 
     /**
@@ -82,7 +85,7 @@ public class NotebookController {
      * @return 删除结果
      */
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam("idList") Set<Long> idList) {
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> idList) {
         return new ResponseEntity<>(this.notebookService.removeByIds(idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet())) ? "删除成功" : "删除失败", HttpStatus.OK);
     }
 }

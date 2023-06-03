@@ -1,10 +1,11 @@
 package com.blog.modules.blog.entity.dto;
 
 import com.blog.base.CommonDto;
+import com.blog.base.ValidationDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,37 +28,39 @@ public class ArticleDto extends CommonDto {
     /**
      * 主键id
      */
+    @Null(message = "请正确的填写信息", groups = ValidationDto.Insert.class)
+    @NotNull(message = "请正确的填写信息", groups = ValidationDto.Update.class)
     private Long id;
 
     /**
      * 文章标题
      */
-    @NotEmpty(message = "请填写文章标题")
+    @NotEmpty(message = "请填写文章标题", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private String title;
     /**
      * 发布时间
      */
-    @NotNull(message = "请填写发布时间")
+    @Null(message = "不能修改发布时间", groups = {ValidationDto.Update.class})
     private Date date;
     /**
      * 是否置顶(1true/0fales)
      */
-    @NotNull(message = "是否置顶")
+    @NotNull(message = "是否置顶", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private Boolean top;
     /**
      * 文章字数
      */
-    @NotNull(message = "添加出错请联系管理员")
+    @NotNull(message = "添加出错请联系管理员", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private Long wordCount;
     /**
      * 文章内容
      */
-    @NotEmpty(message = "请填写文章内容")
+    @NotEmpty(message = "请填写文章内容", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private String content;
     /**
      * 文章摘要
      */
-    @NotEmpty(message = "请填写文章摘要")
+    @NotEmpty(message = "请填写文章摘要", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private String excerpt;
     /**
      * 文章别名
@@ -115,12 +118,12 @@ public class ArticleDto extends CommonDto {
     /**
      * 分类
      */
-    @NotNull(message = "请填写至少一个分类")
+    @NotNull(message = "请填写至少一个分类", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private Set<Long> categoriesList;
     /**
      * 标签
      */
-    @NotNull(message = "请填写文章标题")
+    @NotNull(message = "请填写文章标题", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private Set<String> tagList;
 
     /**

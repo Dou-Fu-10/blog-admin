@@ -3,6 +3,7 @@ package com.blog.modules.blog.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.modules.blog.entity.ArticleTagEntity;
+import com.blog.modules.blog.entity.TagEntity;
 import com.blog.modules.blog.mapper.ArticleTagMapper;
 import com.blog.modules.blog.service.ArticleTagService;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,16 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
     public List<ArticleTagEntity> getArticleTagByTagIdList(Set<Long> tagIdList) {
         return list(Wrappers.<ArticleTagEntity>lambdaQuery().in(ArticleTagEntity::getTid, tagIdList));
     }
+
+    @Override
+    public List<TagEntity> getArticleTagByArticleId(Long articleId) {
+        return getBaseMapper().getArticleTagByArticleId(articleId);
+    }
+
+    @Override
+    public boolean removeByArticleId(Long articleId) {
+        return remove(Wrappers.<ArticleTagEntity>lambdaQuery().eq(ArticleTagEntity::getAid, articleId));
+    }
+
 }
 

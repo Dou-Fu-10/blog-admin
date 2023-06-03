@@ -1,20 +1,20 @@
 package com.blog.modules.blog.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.blog.modules.blog.entity.dto.TagDto;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.blog.base.ValidationDto;
 import com.blog.modules.blog.entity.TagEntity;
+import com.blog.modules.blog.entity.dto.TagDto;
 import com.blog.modules.blog.service.TagService;
+import com.blog.utils.ConvertUtil;
 import jakarta.annotation.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * (Tag)表控制层
@@ -61,8 +61,8 @@ public class TagController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Object> insert(@RequestBody TagEntity tag) {
-        return new ResponseEntity<>(this.tagService.save(tag), HttpStatus.OK);
+    public ResponseEntity<Object> insert(@RequestBody @Validated(ValidationDto.Insert.class) TagDto tag) {
+        return new ResponseEntity<>(this.tagService.save(ConvertUtil.convert(tag, TagEntity.class)), HttpStatus.OK);
     }
 
     /**
@@ -72,8 +72,8 @@ public class TagController {
      * @return 修改结果
      */
     @PutMapping
-    public ResponseEntity<Object> update(@RequestBody TagEntity tag) {
-        return new ResponseEntity<>(this.tagService.updateById(tag), HttpStatus.OK);
+    public ResponseEntity<Object> update(@RequestBody @Validated(ValidationDto.Update.class)  TagDto tag) {
+        return new ResponseEntity<>(this.tagService.updateById(ConvertUtil.convert(tag, TagEntity.class)), HttpStatus.OK);
     }
 
     /**
@@ -83,8 +83,8 @@ public class TagController {
      * @return 删除结果
      */
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam("idList") Set<Long> idList) {
-        return new ResponseEntity<>(this.tagService.removeByIds(idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet())) ? "删除成功" : "删除失败", HttpStatus.OK);
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> idList) {
+        return new ResponseEntity<>(this.tagService.removeByIds(idList) ? "删除成功" : "删除失败", HttpStatus.OK);
     }
 }
 

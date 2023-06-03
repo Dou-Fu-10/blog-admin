@@ -2,6 +2,7 @@ package com.blog.modules.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,6 +16,7 @@ import com.blog.modules.blog.service.TagService;
 import com.blog.utils.ConvertUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -47,6 +49,9 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, TagEntity> implements
         TagEntity tagEntity = ConvertUtil.convert(tagDto, TagEntity.class);
         // 获取 标签
         Page<TagEntity> tagEntityPage = page(page, new QueryWrapper<>(tagEntity));
+        if (CollectionUtils.isEmpty(tagEntityPage.getRecords())) {
+            return new Page<>();
+        }
         // 对分页进行转换
         IPage<TagVo> convert = tagEntityPage.convert(tag -> ConvertUtil.convert(tag, TagVo.class));
         // 获取 vo 列表
@@ -55,6 +60,9 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, TagEntity> implements
         Set<Long> tagIdList = tagVoList.stream().map(TagVo::getId).collect(Collectors.toSet());
         // 通过 标签id 获取和标签绑定的文章
         List<ArticleTagEntity> articleTagEntityList = articleTagService.getArticleTagByTagIdList(tagIdList);
+        if (CollectionUtils.isEmpty(articleTagEntityList)) {
+            return new Page<>();
+        }
         // 统计 标签 标签绑定了多少文章
         Map<Long, Integer> longListHashMap = new HashMap<>();
         articleTagEntityList.forEach(articleTagEntity -> {
@@ -77,7 +85,18 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, TagEntity> implements
             }
         });
 
-        return (Page)convert.setRecords(tagVoList);
+        return (Page) convert.setRecords(tagVoList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean removeByIds(Set<Long> idList) {
+        // 校验 id 字段是否在允许范围内
+        idList = idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet());
+        if (getBaseMapper().deleteBatchIds(idList) > 0) {
+            return articleTagService.remove(Wrappers.<ArticleTagEntity>lambdaQuery().in(ArticleTagEntity::getTid, idList));
+        }
+        return false;
     }
 }
 

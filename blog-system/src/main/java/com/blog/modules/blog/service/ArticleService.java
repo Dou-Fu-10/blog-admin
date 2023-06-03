@@ -55,4 +55,18 @@ public interface ArticleService extends IService<ArticleEntity> {
      * @return 修改结果
      */
     boolean updateArticleTopOrHide(Map<Boolean, Set<Long>> articleIdList, boolean isTop);
+
+    /**
+     * 通过id 删除文章
+     * @param idList id
+     * @return boolean
+     */
+    boolean removeByIds(Set<Long> idList);
+
+    /**
+     * 获取文章
+     * @param id 文章id
+     * @return 文章
+     */
+    ArticleVo getById(Long id);
 }

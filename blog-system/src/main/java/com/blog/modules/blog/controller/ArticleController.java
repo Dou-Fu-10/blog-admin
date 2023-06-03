@@ -2,14 +2,15 @@ package com.blog.modules.blog.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.blog.base.ValidationDto;
 import com.blog.modules.blog.entity.ArticleEntity;
 import com.blog.modules.blog.entity.dto.ArticleDto;
 import com.blog.modules.blog.service.ArticleService;
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotNull;
-import org.simpleframework.xml.core.Validate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -40,7 +41,7 @@ public class ArticleController {
      * @return 所有数据
      */
     @GetMapping
-    public ResponseEntity<Object> selectAll(Page<ArticleEntity> page, ArticleDto article) {
+    public ResponseEntity<Object> selectAll(Page<ArticleEntity> page, @Validated(ValidationDto.SelectPage.class) ArticleDto article) {
         return new ResponseEntity<>(this.articleService.page(page, article), HttpStatus.OK);
     }
 
@@ -51,7 +52,7 @@ public class ArticleController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<Object> selectOne(@PathVariable Serializable id) {
+    public ResponseEntity<Object> selectOne(@PathVariable Long id) {
         return new ResponseEntity<>(this.articleService.getById(id), HttpStatus.OK);
     }
 
@@ -62,7 +63,7 @@ public class ArticleController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Object> insert(@RequestBody @Validate ArticleDto article) {
+    public ResponseEntity<Object> insert(@RequestBody @Validated(ValidationDto.Insert.class) ArticleDto article) {
         return new ResponseEntity<>(this.articleService.save(article) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
@@ -73,7 +74,7 @@ public class ArticleController {
      * @return 修改结果
      */
     @PutMapping
-    public ResponseEntity<Object> update(@RequestBody @Validate ArticleDto article) {
+    public ResponseEntity<Object> update(@RequestBody @Validated(ValidationDto.Update.class) ArticleDto article) {
         return new ResponseEntity<>(this.articleService.updateById(article) ? "修改成功" : "修改失败", HttpStatus.OK);
     }
 
@@ -84,7 +85,7 @@ public class ArticleController {
      * @return 修改结果
      */
     @PutMapping("/updateArticleHide")
-    public ResponseEntity<Object> updateArticleHide(@RequestBody @Validate @NotNull Map<@NotNull Boolean, Set<@NotNull Long>> articleIdList) {
+    public ResponseEntity<Object> updateArticleHide(@RequestBody @Validated @NotNull Map<@NotNull Boolean, Set<@NotNull Long>> articleIdList) {
         return new ResponseEntity<>(this.articleService.updateArticleTopOrHide(articleIdList, false) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
@@ -95,7 +96,7 @@ public class ArticleController {
      * @return 修改结果
      */
     @PutMapping("/updateArticleTop")
-    public ResponseEntity<Object> updateArticleTop(@RequestBody @Validate @NotNull Map<@NotNull Boolean, Set<@NotNull Long>> articleIdList) {
+    public ResponseEntity<Object> updateArticleTop(@RequestBody @Validated @NotNull Map<@NotNull Boolean, Set<@NotNull Long>> articleIdList) {
         return new ResponseEntity<>(this.articleService.updateArticleTopOrHide(articleIdList, true) ? "添加成功" : "添加失败", HttpStatus.OK);
     }
 
@@ -108,7 +109,8 @@ public class ArticleController {
      */
     @DeleteMapping
     public ResponseEntity<Object> delete(@RequestBody Set<Long> idList) {
-        return new ResponseEntity<>(this.articleService.removeByIds(idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet())) ? "删除成功" : "删除失败", HttpStatus.OK);
+
+        return new ResponseEntity<>(this.articleService.removeByIds(idList) ? "删除成功" : "删除失败", HttpStatus.OK);
     }
 }
 

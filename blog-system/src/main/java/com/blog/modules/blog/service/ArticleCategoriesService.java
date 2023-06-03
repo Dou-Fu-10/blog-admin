@@ -1,9 +1,8 @@
 package com.blog.modules.blog.service;
 
-import com.blog.modules.blog.entity.ArticleCategoriesEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.blog.modules.blog.entity.vo.ArticleOrCategoriesVo;
-import com.blog.modules.blog.entity.vo.ArticleVo;
+import com.blog.modules.blog.entity.ArticleCategoriesEntity;
+import com.blog.modules.blog.entity.CategoriesEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -26,4 +25,19 @@ public interface ArticleCategoriesService extends IService<ArticleCategoriesEnti
     boolean updateCategories(Map<Long, Set<Long>> categoriesIdAndArticleList);
 
 
+    /**
+     * 通过
+     *
+     * @param articleId 文章id
+     * @return 分类列表
+     */
+    List<CategoriesEntity> getArticleCategoriesByArticleId(Long articleId);
+
+    /**
+     * 通过文章id
+     *
+     * @param articleId 文章id
+     * @return 是否成功
+     */
+    boolean removeByArticleId(Long articleId);
 }

@@ -49,7 +49,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-// @Api(tags = "系统：系统授权接口")
 public class AuthorizationController {
     private final SecurityProperties properties;
     private final RedisService redisService;
@@ -60,7 +59,6 @@ public class AuthorizationController {
     private LoginProperties loginProperties;
 
     @Log("用户登录")
-    // @ApiOperation("登录授权")
     @AnonymousPostMapping(value = "/login")
     public ResponseEntity<Object> login(@Validated @RequestBody AuthUserDto authUser, HttpServletRequest request) throws Exception {
         // 密码解密
@@ -99,13 +97,11 @@ public class AuthorizationController {
         return ResponseEntity.ok(authInfo);
     }
 
-    // @ApiOperation("获取用户信息")
     @GetMapping(value = "/info")
     public ResponseEntity<Object> getUserInfo() {
         return ResponseEntity.ok(SecurityUtils.getCurrentUser());
     }
 
-    // @ApiOperation("获取验证码")
     @AnonymousGetMapping(value = "/code")
     public ResponseEntity<Object> getCode() {
         if (!loginProperties.getLoginCode().getEnabled()) {
@@ -134,7 +130,6 @@ public class AuthorizationController {
         return ResponseEntity.ok(imgResult);
     }
 
-    // @ApiOperation("退出登录")
     @AnonymousDeleteMapping(value = "/logout")
     public ResponseEntity<Object> logout(HttpServletRequest request) {
         onlineUserService.logout(tokenProvider.getToken(request));
