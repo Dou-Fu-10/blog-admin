@@ -1,7 +1,6 @@
 package com.blog;
 
 import com.blog.annotation.rest.AnonymousGetMapping;
-import com.blog.modules.tools.cloud.config.AliyunOssConfig;
 import com.blog.modules.tools.cloud.config.MinioConfig;
 import com.blog.utils.SpringContextHolder;
 import org.mybatis.spring.annotation.MapperScan;
@@ -34,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
         "com.blog.service.mapper",
 })
 @EnableTransactionManagement
-@EnableConfigurationProperties(value = {AliyunOssConfig.class, MinioConfig.class})
+//@EnableConfigurationProperties(value = {MinioConfig.class})
 public class AppRun {
 
     public static void main(String[] args) {

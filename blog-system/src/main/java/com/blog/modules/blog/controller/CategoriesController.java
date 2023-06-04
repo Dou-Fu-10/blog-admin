@@ -98,7 +98,7 @@ public class CategoriesController {
      * @return 删除结果
      */
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam("idList") List<Long> idList) {
+    public ResponseEntity<Object> delete(@RequestBody List<Long> idList) {
         return new ResponseEntity<>(this.categoriesService.removeByIds(idList.stream().filter(id -> String.valueOf(id).length() < 20 && String.valueOf(id).length() > 1).limit(10).collect(Collectors.toSet())) ? "删除成功" : "删除失败", HttpStatus.OK);
     }
 }

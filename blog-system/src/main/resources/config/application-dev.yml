@@ -104,20 +104,6 @@ swagger:
 ip:
   local-parsing: true
 
-# 文件存储路径
-file:
-  mac:
-    path: ~/file/
-    avatar: ~/avatar/
-  linux:
-    path: /home/eladmin/file/
-    avatar: /home/eladmin/avatar/
-  windows:
-    path: C:\eladmin\file\
-    avatar: C:\eladmin\avatar\
-  # 文件大小 /M
-  maxSize: 100
-  avatarMaxSize: 5
 
 mybatis-plus:
   configuration:
@@ -131,3 +117,17 @@ mybatis-plus:
       logic-not-delete-value: 0
       # 全局逻辑删除字段值
       logic-delete-field: deleteFlag
+
+minio:
+  # 文件地址
+  endpoint: http://192.168.146.110:9000
+  # key
+  accessKey: PQQU5HOBMK59DLZY92P4
+  # 密钥
+  secretKey: c8ZaN+s+KTtmF3r3XpvQSzx1ERsRQmlbxm1mw+5I
+  # 桶名字
+  bucketName: images
+  # 最大上传文件
+  maxSize: 20485760
+  # 图片大小限制
+  imagesMaxSize: 10485760
