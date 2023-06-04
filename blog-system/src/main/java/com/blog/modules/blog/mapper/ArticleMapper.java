@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -27,10 +26,19 @@ public interface ArticleMapper extends BaseMapper<ArticleEntity> {
      * @return 文章绑定的类型
      */
     @Select("<script>" +
-            "SELECT `blog_article`.`id` AS aid,`blog_categories`.`id` AS cid,`blog_categories`.`name` AS cname FROM `blog_article`\n" +
-            "JOIN `blog_article_categories` ON `blog_article`.`id` = `blog_article_categories`.`aid`\n" +
-            "JOIN `blog_categories` ON `blog_article_categories`.`cid` = `blog_categories`.`id`\n" +
-            "WHERE `blog_article`.`id` IN " +
+            "SELECT \n" +
+            "  `blog_article`.`id` AS aid,\n" +
+            "  `blog_categories`.`id` AS cid,\n" +
+            "  `blog_categories`.`name` AS cname \n" +
+            "FROM\n" +
+            "  `blog_article` \n" +
+            "  JOIN `blog_article_categories` \n" +
+            "    ON `blog_article`.`id` = `blog_article_categories`.`aid` \n" +
+            "    AND `blog_article`.delete_flag = 0 \n" +
+            "  JOIN `blog_categories` \n" +
+            "    ON `blog_article_categories`.`cid` = `blog_categories`.`id` \n" +
+            "WHERE `blog_categories`.`delete_flag` = 0 \n" +
+            "  AND `blog_article`.`id` IN " +
             "<foreach collection='articleIdList' item='id' open='(' separator=',' close=')'>" +
             "#{id}" +
             "</foreach>" +

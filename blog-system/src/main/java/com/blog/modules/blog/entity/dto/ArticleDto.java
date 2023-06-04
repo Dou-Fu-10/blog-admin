@@ -43,7 +43,7 @@ public class ArticleDto extends CommonDto {
     @Null(message = "不能修改发布时间", groups = {ValidationDto.Update.class})
     private Date date;
     /**
-     * 是否置顶(1true/0fales)
+     * 是否置顶(1true置顶/0fales不置顶)
      */
     @NotNull(message = "是否置顶", groups = {ValidationDto.Insert.class, ValidationDto.Update.class})
     private Boolean top;
@@ -65,6 +65,7 @@ public class ArticleDto extends CommonDto {
     /**
      * 文章别名
      */
+    @Null(message = "别名由系统生成")
     private String alias;
     /**
      * 评论数量
@@ -77,7 +78,7 @@ public class ArticleDto extends CommonDto {
     @JsonIgnore
     private Integer views;
     /**
-     * 草稿(1true/0fales)
+     * 草稿(1true是草稿/0fales不是草稿)
      */
     @NotNull(message = "文章是否是草稿")
     private Boolean hide;
@@ -87,11 +88,11 @@ public class ArticleDto extends CommonDto {
     @JsonIgnore
     private Integer favorite;
     /**
-     * 文章是否审核(1true/0fales)
+     * 审核(1true审核完成/0fales没有审核)
      */
     private Boolean checked;
     /**
-     * 允许评论(1true/0fales)
+     * 允许评论(1true允许评论/0fales不允许评论)
      */
     private Boolean allowRemark;
     /**

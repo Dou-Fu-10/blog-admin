@@ -26,6 +26,11 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
     }
 
     @Override
+    public List<ArticleTagEntity> getArticleTagByArticleIdList(Set<Long> articleIdList) {
+        return list(Wrappers.<ArticleTagEntity>lambdaQuery().in(ArticleTagEntity::getAid, articleIdList));
+    }
+
+    @Override
     public List<TagEntity> getArticleTagByArticleId(Long articleId) {
         return getBaseMapper().getArticleTagByArticleId(articleId);
     }

@@ -1,5 +1,6 @@
 package com.blog.modules.blog.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
@@ -20,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -129,6 +132,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
         articleEntityQueryWrapper.like(StringUtils.isNoneBlank(articleDto.getTitle()), ArticleEntity::getTitle, articleDto.getTitle());
         // 分类id 部位为空即通过分类id 进行查询
         articleEntityQueryWrapper.in(CollectionUtils.isNotEmpty(categoriesList), ArticleEntity::getId, categoriesList);
+        articleEntityQueryWrapper.orderByDesc(ArticleEntity::getDate);
         // 对文章进行分页
         Page<ArticleEntity> articleEntityPage = this.page(page, articleEntityQueryWrapper);
         // 查询数据为空 直接返回空
@@ -232,6 +236,16 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
         return articleVo;
     }
 
+    @Override
+    public ArticleVo getAlias(String alias) {
+        // 文章别名 文章不能是草稿 文章需要审核通过
+        ArticleEntity articleEntity = getOne(Wrappers.<ArticleEntity>lambdaQuery().eq(ArticleEntity::getAlias, alias).eq(ArticleEntity::getHide, false).eq(ArticleEntity::getChecked, true));
+        if (Objects.isNull(articleEntity)) {
+            throw new BadRequestException("获取文章失败");
+        }
+        return ConvertUtil.convert(articleEntity, ArticleVo.class);
+    }
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -269,8 +283,29 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
             }
         }
         ArticleEntity convert = ConvertUtil.convert(article, ArticleEntity.class);
+        // 生成别名 给公共用户搜索
+        convert.setAlias(RandomUtil.randomString(10));
         // 将文章保存到数据库中
-        convert.insert();
+        // 当前时间戳
+        long currentTimeMillis = System.currentTimeMillis();
+        if (Objects.isNull(convert.getDate())) {
+            convert.setDate(new Date());
+        } else {
+            Date date = convert.getDate();
+            // 将时间戳转换为Instant
+            Instant instant = Instant.ofEpochMilli(currentTimeMillis);
+            // 获取三分钟后的Instant对象
+            Instant threeMinutesLater = instant.plus(Duration.ofMinutes(10));
+            // 获取毫秒级的时间戳
+            long time = threeMinutesLater.toEpochMilli();
+            if (date.getTime() < time) {
+                throw new BadRequestException("请设置10分钟以后的时间");
+            }
+        }
+
+        if (!convert.insert()) {
+            throw new BadRequestException("添加失败");
+        }
 
         // 文章id 和 分类id 绑定在一起
         Set<ArticleCategoriesEntity> articleCategoriesEntitySet = categoriesEntitieList.stream().map(categoriesEntity -> new ArticleCategoriesEntity(convert.getId(), categoriesEntity.getId())).collect(Collectors.toSet());

@@ -2,6 +2,7 @@ package com.blog.modules.blog.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.blog.annotation.rest.AnonymousGetMapping;
 import com.blog.base.ValidationDto;
 import com.blog.modules.blog.entity.ArticleEntity;
 import com.blog.modules.blog.entity.dto.ArticleDto;
@@ -44,6 +45,7 @@ public class ArticleController {
     public ResponseEntity<Object> selectAll(Page<ArticleEntity> page, @Validated(ValidationDto.SelectPage.class) ArticleDto article) {
         return new ResponseEntity<>(this.articleService.page(page, article), HttpStatus.OK);
     }
+
 
     /**
      * 通过主键查询单条数据

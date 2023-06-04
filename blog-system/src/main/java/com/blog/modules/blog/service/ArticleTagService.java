@@ -25,6 +25,14 @@ public interface ArticleTagService extends IService<ArticleTagEntity> {
     List<ArticleTagEntity> getArticleTagByTagIdList(Set<Long> tagIdList);
 
     /**
+     * 通过 文章id 列表 获取  文章和标签的绑定
+     *
+     * @param articleIdList 文章id列表
+     * @return 文章和标签的绑定
+     */
+    List<ArticleTagEntity> getArticleTagByArticleIdList(Set<Long> articleIdList);
+
+    /**
      * 通过文章id 获取对应的标签
      *
      * @param articleId 文章id

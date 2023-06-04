@@ -40,6 +40,7 @@ public class TagEntity extends CommonEntity<ArticleEntity> {
      * 标签名
      */
     private String tagName;
+
     /**
      * 1表示已删除，0表示未删除
      */

@@ -24,7 +24,7 @@ public interface ArticleCategoriesMapper extends BaseMapper<ArticleCategoriesEnt
      * @param articleId 文章id
      * @return 文章
      */
-    @Select("SELECT * FROM blog_categories WHERE id IN (SELECT `blog_article_categories`.`cid` FROM `blog_article_categories` WHERE `blog_article_categories`.`aid` = #{id})")
+    @Select("SELECT * FROM `blog_categories` WHERE `blog_categories`.`delete_flag` = 0 AND `blog_categories`.`id` IN (SELECT `blog_article_categories`.`cid` FROM `blog_article_categories` WHERE `blog_article_categories`.`aid` = #{id})")
     List<CategoriesEntity> getArticleCategoriesByArticleId(@Param("id") Long articleId);
 
 }

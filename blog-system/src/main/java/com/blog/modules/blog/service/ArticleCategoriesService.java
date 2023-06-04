@@ -2,6 +2,7 @@ package com.blog.modules.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.blog.entity.ArticleCategoriesEntity;
+import com.blog.modules.blog.entity.ArticleTagEntity;
 import com.blog.modules.blog.entity.CategoriesEntity;
 
 import java.util.List;
@@ -24,6 +25,21 @@ public interface ArticleCategoriesService extends IService<ArticleCategoriesEnti
      */
     boolean updateCategories(Map<Long, Set<Long>> categoriesIdAndArticleList);
 
+    /**
+     * 文章id 获取 与其绑定的分类
+     *
+     * @param articleIdList 文章id
+     * @return 文章和分类的绑定
+     */
+    List<ArticleCategoriesEntity> getArticleCategoriesByArticleIdList(Set<Long> articleIdList);
+
+    /**
+     * 文章id 获取 与其绑定的分类
+     *
+     * @param categoriesIdList 分类id
+     * @return 文章和分类的绑定
+     */
+    List<ArticleCategoriesEntity> getArticleCategoriesByCategoriesIdList(Set<Long> categoriesIdList);
 
     /**
      * 通过

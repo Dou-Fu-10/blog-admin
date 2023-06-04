@@ -51,7 +51,7 @@ public interface ArticleService extends IService<ArticleEntity> {
      * 修改文章是否置顶 Map<是否自顶,是否发布发布, Set<文章id>>
      *
      * @param articleIdList 主键结合
-     * @param isTop 是置顶
+     * @param isTop 是否置顶(1true置顶/0fales不置顶)
      * @return 修改结果
      */
     boolean updateArticleTopOrHide(Map<Boolean, Set<Long>> articleIdList, boolean isTop);
@@ -65,8 +65,16 @@ public interface ArticleService extends IService<ArticleEntity> {
 
     /**
      * 获取文章
+     *
      * @param id 文章id
      * @return 文章
      */
     ArticleVo getById(Long id);
+
+    /**
+     * 通过文章别名获取 文章信息
+     * @param alias 别名
+     * @return 文章信息
+     */
+    ArticleVo getAlias(String alias);
 }
