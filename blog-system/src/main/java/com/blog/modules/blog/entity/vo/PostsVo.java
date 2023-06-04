@@ -32,7 +32,7 @@ public class PostsVo {
     /**
      * 发布时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date date;
     /**
      * 是否置顶(1true置顶/0fales不置顶)

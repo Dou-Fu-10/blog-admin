@@ -11,11 +11,10 @@ import java.lang.annotation.*;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-@Target({ ElementType.PARAMETER, ElementType.METHOD })
+@Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Log
-{
+public @interface Log {
     /**
      * 模块
      */

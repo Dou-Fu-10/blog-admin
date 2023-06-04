@@ -43,19 +43,19 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
     private final LocalStorageMapper localStorageMapper;
 
     @Override
-    public Object queryAll(LocalStorageQueryParam query, Pageable pageable){
+    public Object queryAll(LocalStorageQueryParam query, Pageable pageable) {
         IPage<LocalStorage> page = PageUtil.toMybatisPage(pageable);
         IPage<LocalStorage> pageList = localStorageMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
         return ConvertUtil.convertPage(pageList, LocalStorageDto.class);
     }
 
     @Override
-    public List<LocalStorageDto> queryAll(LocalStorageQueryParam query){
+    public List<LocalStorageDto> queryAll(LocalStorageQueryParam query) {
         return ConvertUtil.convertList(localStorageMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), LocalStorageDto.class);
     }
 
     @Override
-    public LocalStorageDto findById(Long id){
+    public LocalStorageDto findById(Long id) {
         return ConvertUtil.convert(getById(id), LocalStorageDto.class);
     }
 
@@ -65,8 +65,8 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
         FileUtil.checkSize(properties.getMaxSize(), multipartFile.getSize());
         String suffix = FileUtil.getExtensionName(multipartFile.getOriginalFilename());
         String type = FileUtil.getFileType(suffix);
-        File file = FileUtil.upload(multipartFile, properties.getPath().getPath() + type +  File.separator);
-        if(ObjectUtil.isNull(file)){
+        File file = FileUtil.upload(multipartFile, properties.getPath().getPath() + type + File.separator);
+        if (ObjectUtil.isNull(file)) {
             throw new BadRequestException("上传失败");
         }
         try {
@@ -81,7 +81,7 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
             );
             localStorageMapper.insert(localStorage);
             return localStorage;
-        }catch (Exception e){
+        } catch (Exception e) {
             FileUtil.del(file);
             throw e;
         }
@@ -108,7 +108,7 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
     public void download(List<LocalStorageDto> queryAll, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
         for (LocalStorageDto localStorageDTO : queryAll) {
-            Map<String,Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("文件名", localStorageDTO.getRealName());
             map.put("备注名", localStorageDTO.getName());
             map.put("文件类型", localStorageDTO.getType());

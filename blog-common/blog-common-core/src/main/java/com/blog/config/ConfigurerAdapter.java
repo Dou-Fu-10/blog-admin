@@ -43,14 +43,28 @@ import java.util.TimeZone;
 @Configuration
 @EnableWebMvc
 public class ConfigurerAdapter implements WebMvcConfigurer {
-    
-    /** 文件配置 */
+
+    /**
+     * DateTime格式化字符串
+     */
+    private static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    /**
+     * Date格式化字符串
+     */
+    private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
+    /**
+     * Time格式化字符串
+     */
+    private static final String DEFAULT_TIME_PATTERN = "HH:mm:ss";
+    /**
+     * 文件配置
+     */
     private final FileProperties properties;
-    
+
     public ConfigurerAdapter(FileProperties properties) {
         this.properties = properties;
     }
-    
+
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -65,33 +79,20 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-    
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         FileProperties.ElPath path = properties.getPath();
-        String avatarUtl = "file:" + path.getAvatar().replace("\\","/");
-        String pathUtl = "file:" + path.getPath().replace("\\","/");
+        String avatarUtl = "file:" + path.getAvatar().replace("\\", "/");
+        String pathUtl = "file:" + path.getPath().replace("\\", "/");
         registry.addResourceHandler("/avatar/**").addResourceLocations(avatarUtl).setCachePeriod(0);
         registry.addResourceHandler("/file/**").addResourceLocations(pathUtl).setCachePeriod(0);
         registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/").setCachePeriod(0);
     }
 
     /**
-     * DateTime格式化字符串
-     */
-    private static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-
-    /**
-     * Date格式化字符串
-     */
-    private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
-
-    /**
-     * Time格式化字符串
-     */
-    private static final String DEFAULT_TIME_PATTERN = "HH:mm:ss";
-    /**
      * 添加自定义转换器
+     *
      * @param converters 转换器
      */
     @Override
@@ -119,7 +120,6 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
 
-
         // Java8日期日期处理
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATETIME_PATTERN)));
@@ -134,6 +134,7 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
         jackson2HttpMessageConverter.setObjectMapper(objectMapper);
         converters.add(jackson2HttpMessageConverter);
     }
+
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();

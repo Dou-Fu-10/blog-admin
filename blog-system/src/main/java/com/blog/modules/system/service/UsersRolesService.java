@@ -11,8 +11,11 @@ import java.util.List;
  */
 public interface UsersRolesService extends IService<UsersRoles> {
     List<Long> queryUserIdByRoleId(Long id);
+
     List<Long> queryRoleIdByUserId(Long id);
+
     boolean removeByRoleId(Long id);
+
     boolean removeByUserId(Long id);
 
 

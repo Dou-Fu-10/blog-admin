@@ -19,17 +19,11 @@ import lombok.NoArgsConstructor;
 @TableName("blog_article_categories")
 public class ArticleCategoriesEntity {
 
-    public ArticleCategoriesEntity(Long aid, Long cid) {
-        this.aid = aid;
-        this.cid = cid;
-    }
-
     /**
      * 主键
      */
     @TableId
     private Long id;
-
     /**
      * 文章id
      */
@@ -38,6 +32,10 @@ public class ArticleCategoriesEntity {
      * 分类id
      */
     private Long cid;
+    public ArticleCategoriesEntity(Long aid, Long cid) {
+        this.aid = aid;
+        this.cid = cid;
+    }
 
 
 }

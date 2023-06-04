@@ -11,7 +11,10 @@ import java.util.List;
  */
 public interface UsersJobsService extends IService<UsersJobs> {
     List<Long> queryUserIdByJobId(Long id);
+
     List<Long> queryJobIdByUserId(Long id);
+
     boolean removeByUserId(Long id);
+
     boolean removeByJobId(Long id);
 }

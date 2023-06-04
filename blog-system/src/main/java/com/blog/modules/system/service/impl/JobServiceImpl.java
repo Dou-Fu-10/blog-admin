@@ -54,7 +54,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     }
 
     @Override
-    public List<JobDto> queryAll(JobQueryParam query){
+    public List<JobDto> queryAll(JobQueryParam query) {
         return ConvertUtil.convertList(jobMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), JobDto.class);
     }
 
@@ -82,7 +82,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
 
     @Override
     @Transactional
-    public boolean updateById(Job resources){
+    public boolean updateById(Job resources) {
         Job job = lambdaQuery().eq(Job::getName, resources.getName()).one();
         if (job != null && ObjectUtil.notEqual(resources.getId(), job.getId())) {
             throw new EntityExistException(Job.class, "name", resources.getName());
@@ -92,17 +92,17 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
 
     @Override
     @Transactional
-    public boolean removeByIds(Set<Long> ids){
+    public boolean removeByIds(Set<Long> ids) {
         int ret = jobMapper.deleteBatchIds(ids);
-        for (Long id: ids) {
+        for (Long id : ids) {
             usersJobsService.removeByJobId(id);
         }
         return ret > 0;
     }
-    
+
     @Override
     @Transactional
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> ids = new HashSet<>(1);
         ids.add(id);
         return this.removeByIds(ids);
@@ -111,25 +111,25 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     @Override
     public void verification(Set<Long> ids) {
         int count = Math.toIntExact(usersJobsMapper.lambdaQuery().in(UsersJobs::getUserId, ids).count());
-        if(count > 0){
+        if (count > 0) {
             throw new BadRequestException("所选的岗位中存在用户关联，请解除关联再试！");
         }
     }
 
     @Override
     public void download(List<JobDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (JobDto job : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("岗位名称", job.getName());
-              map.put("岗位状态", job.getEnabled());
-              map.put("排序", job.getJobSort());
-              map.put("创建者", job.getCreateBy());
-              map.put("更新者", job.getUpdateBy());
-              map.put("创建日期", job.getCreateTime());
-              map.put("更新时间", job.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (JobDto job : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("岗位名称", job.getName());
+            map.put("岗位状态", job.getEnabled());
+            map.put("排序", job.getJobSort());
+            map.put("创建者", job.getCreateBy());
+            map.put("更新者", job.getUpdateBy());
+            map.put("创建日期", job.getCreateTime());
+            map.put("更新时间", job.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 }

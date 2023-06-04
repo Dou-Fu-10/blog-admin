@@ -6,8 +6,7 @@ package com.blog.common.log.enums;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public enum BusinessType
-{
+public enum BusinessType {
     /**
      * 其它
      */

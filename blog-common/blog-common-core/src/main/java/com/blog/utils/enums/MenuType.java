@@ -12,17 +12,17 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum MenuType {
-	FOLDER(0, "目录"), MENU(1, "菜单"), BUTTON(2, "按钮");
+    FOLDER(0, "目录"), MENU(1, "菜单"), BUTTON(2, "按钮");
 
-	private final int value;
-	private final String description;
+    private final int value;
+    private final String description;
 
-	public static MenuType find(int code) {
-		for (MenuType value : MenuType.values()) {
-			if (code == value.getValue()) {
-				return value;
-			}
-		}
-		return null;
-	}
+    public static MenuType find(int code) {
+        for (MenuType value : MenuType.values()) {
+            if (code == value.getValue()) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

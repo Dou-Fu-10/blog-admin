@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2023-05-31 21:25:43
  */
 @Configuration
-@MapperScan(basePackages ={"me.zhengjie.**.mapper"})
+@MapperScan(basePackages = {"me.zhengjie.**.mapper"})
 public class MybatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor paginationInterceptor() {

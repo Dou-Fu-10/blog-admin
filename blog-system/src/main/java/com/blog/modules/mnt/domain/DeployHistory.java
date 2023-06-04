@@ -53,7 +53,7 @@ public class DeployHistory extends com.baomidou.mybatisplus.extension.activereco
     // @ApiModelProperty(value = "部署编号")
     private Long deployId;
 
-    public void copyFrom(DeployHistory source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(DeployHistory source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

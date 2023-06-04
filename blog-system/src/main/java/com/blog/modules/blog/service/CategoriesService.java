@@ -17,10 +17,12 @@ import java.util.Set;
 public interface CategoriesService extends IService<CategoriesEntity> {
     /**
      * 通过文章标题查找文章
+     *
      * @param categoriesName 标题
      * @return 文章
      */
     CategoriesEntity getByCategoriesName(String categoriesName);
+
     /**
      * 新增数据
      *
@@ -28,6 +30,7 @@ public interface CategoriesService extends IService<CategoriesEntity> {
      * @return 新增结果
      */
     boolean save(CategoriesDto categories);
+
     /**
      * 修改数据
      *

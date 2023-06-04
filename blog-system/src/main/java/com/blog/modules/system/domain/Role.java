@@ -29,7 +29,7 @@ public class Role extends CommonEntity<Role> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value="role_id", type= IdType.AUTO)
+    @TableId(value = "role_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "名称")
@@ -45,7 +45,7 @@ public class Role extends CommonEntity<Role> implements Serializable {
     // @ApiModelProperty(value = "数据权限")
     private String dataScope;
 
-    public void copyFrom(Role source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Role source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

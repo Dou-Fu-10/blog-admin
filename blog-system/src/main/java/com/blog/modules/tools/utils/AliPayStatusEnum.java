@@ -6,18 +6,26 @@ package com.blog.modules.tools.utils;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public enum  AliPayStatusEnum {
+public enum AliPayStatusEnum {
 
-    /** 交易成功 */
+    /**
+     * 交易成功
+     */
     FINISHED("TRADE_FINISHED"),
 
-    /** 支付成功 */
+    /**
+     * 支付成功
+     */
     SUCCESS("TRADE_SUCCESS"),
 
-    /** 交易创建 */
+    /**
+     * 交易创建
+     */
     BUYER_PAY("WAIT_BUYER_PAY"),
 
-    /** 交易关闭 */
+    /**
+     * 交易关闭
+     */
     CLOSED("TRADE_CLOSED");
 
     private final String value;

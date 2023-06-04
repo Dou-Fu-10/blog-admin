@@ -30,7 +30,7 @@ public class Job extends CommonEntity<Job> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value="job_id", type= IdType.AUTO)
+    @TableId(value = "job_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "岗位名称")
@@ -44,7 +44,7 @@ public class Job extends CommonEntity<Job> implements Serializable {
     // @ApiModelProperty(value = "排序")
     private Integer jobSort;
 
-    public void copyFrom(Job source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Job source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

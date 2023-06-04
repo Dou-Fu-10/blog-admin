@@ -35,7 +35,7 @@ public class AlipayConfig extends com.baomidou.mybatisplus.extension.activerecor
     private String appId;
 
     // @ApiiModelProperty(value = "编码", hidden = true)
-    private String charset= "utf-8";
+    private String charset = "utf-8";
 
     // @ApiiModelProperty(value = "类型 固定格式json")
     private String format = "JSON";
@@ -65,7 +65,7 @@ public class AlipayConfig extends com.baomidou.mybatisplus.extension.activerecor
     // @ApiiModelProperty(value = "商户号")
     private String sysServiceProviderId;
 
-    public void copyFrom(AlipayConfig source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(AlipayConfig source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

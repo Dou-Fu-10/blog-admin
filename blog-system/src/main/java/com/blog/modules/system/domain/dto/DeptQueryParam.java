@@ -12,29 +12,39 @@ import java.util.List;
  * @since 2023-05-31 21:25:43
  */
 @Data
-public class DeptQueryParam{
+public class DeptQueryParam {
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private Long deptId;
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private Long pid;
 
     @Query(type = Query.Type.IS_NULL, propName = "pid")
     private Boolean pidIsNull;
 
-    /** 模糊 */
+    /**
+     * 模糊
+     */
     @Query(type = Query.Type.INNER_LIKE)
     private String name;
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private Boolean enabled;
 
-    /** BETWEEN */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    /**
+     * BETWEEN
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Query(type = Query.Type.BETWEEN)
     private List<Date> createTime;
 }

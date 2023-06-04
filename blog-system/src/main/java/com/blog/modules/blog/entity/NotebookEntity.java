@@ -1,17 +1,12 @@
 package com.blog.modules.blog.entity;
 
-import java.util.Date;
-
-import java.io.Serializable;
-
-import com.alipay.api.domain.DataEntry;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.blog.base.CommonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
  * (Notebook)表实体类

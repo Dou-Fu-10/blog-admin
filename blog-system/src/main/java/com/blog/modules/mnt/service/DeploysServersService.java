@@ -11,7 +11,10 @@ import java.util.List;
  */
 public interface DeploysServersService extends IService<DeploysServers> {
     List<Long> queryDeployIdByServerId(Long id);
+
     List<Long> queryServerIdByDeployId(Long id);
+
     boolean removeByDeployId(Long id);
+
     boolean removeByServerId(Long id);
 }

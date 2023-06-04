@@ -42,6 +42,21 @@ public class PostsController {
     private ArticleCategoriesService articleCategoriesService;
 
     /**
+     * @param tempMap
+     * @param fatherNodeList
+     */
+    private static void getChildNode(Map<Long, List<CategoriesVo>> tempMap, List<CategoriesVo> fatherNodeList) {
+        for (CategoriesVo categoriesVo : fatherNodeList) {
+            Long categoriesVoId = categoriesVo.getId();
+            if (tempMap.containsKey(categoriesVoId)) {
+                List<CategoriesVo> categoriesVoList = tempMap.get(categoriesVo.getId());
+                categoriesVo.getChildren().addAll(categoriesVoList);
+                getChildNode(tempMap, tempMap.get(categoriesVo.getId()));
+            }
+        }
+    }
+
+    /**
      * 用于 公共别名访问
      *
      * @param alias 别名
@@ -74,7 +89,7 @@ public class PostsController {
     @AnonymousGetMapping
     public ResponseEntity<Object> selectAll(Page<ArticleEntity> page) {
         // 获取分类数据
-        Page<ArticleEntity> articleEntityPage = this.articleService.page(page, Wrappers.<ArticleEntity>lambdaQuery().eq(ArticleEntity::getHide,false).eq(ArticleEntity::getChecked,true).orderByDesc(ArticleEntity::getDate));
+        Page<ArticleEntity> articleEntityPage = this.articleService.page(page, Wrappers.<ArticleEntity>lambdaQuery().eq(ArticleEntity::getHide, false).eq(ArticleEntity::getChecked, true).orderByDesc(ArticleEntity::getDate));
         if (CollectionUtils.isEmpty(articleEntityPage.getRecords())) {
             return new ResponseEntity<>(articleEntityPage, HttpStatus.OK);
         }
@@ -209,22 +224,6 @@ public class PostsController {
             getChildNode(tempMap, Collections.singletonList(s));
         }
         return resultList;
-    }
-
-
-    /**
-     * @param tempMap
-     * @param fatherNodeList
-     */
-    private static void getChildNode(Map<Long, List<CategoriesVo>> tempMap, List<CategoriesVo> fatherNodeList) {
-        for (CategoriesVo categoriesVo : fatherNodeList) {
-            Long categoriesVoId = categoriesVo.getId();
-            if (tempMap.containsKey(categoriesVoId)) {
-                List<CategoriesVo> categoriesVoList = tempMap.get(categoriesVo.getId());
-                categoriesVo.getChildren().addAll(categoriesVoList);
-                getChildNode(tempMap, tempMap.get(categoriesVo.getId()));
-            }
-        }
     }
 
 }

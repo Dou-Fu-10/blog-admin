@@ -47,10 +47,10 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
     }
 
     @Override
-    public List<AppDto> queryAll(AppQueryParam query){
+    public List<AppDto> queryAll(AppQueryParam query) {
         return ConvertUtil.convertList(getBaseMapper().selectList(QueryHelpMybatisPlus.getPredicate(query)), AppDto.class);
     }
-    
+
     @Override
     public AppDto findById(Long id) {
         return ConvertUtil.convert(getById(id), AppDto.class);
@@ -65,13 +65,14 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(App resources){
+    public boolean updateById(App resources) {
         verification(resources);
         int ret = getBaseMapper().updateById(resources);
         // delCaches(resources.id);
         return ret > 0;
     }
-    private void verification(App resources){
+
+    private void verification(App resources) {
         String opt = "/opt";
         String home = "/home";
         if (!(resources.getUploadPath().startsWith(opt) || resources.getUploadPath().startsWith(home))) {
@@ -87,14 +88,14 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
+    public boolean removeByIds(Set<Long> ids) {
         // delCaches(ids);
         return getBaseMapper().deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> set = new HashSet<>(1);
         set.add(id);
         return this.removeByIds(set);
@@ -113,22 +114,22 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
 
     @Override
     public void download(List<AppDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (AppDto app : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("应用名称", app.getName());
-              map.put("上传目录", app.getUploadPath());
-              map.put("部署路径", app.getDeployPath());
-              map.put("备份路径", app.getBackupPath());
-              map.put("应用端口", app.getPort());
-              map.put("启动脚本", app.getStartScript());
-              map.put("部署脚本", app.getDeployScript());
-              map.put("创建者", app.getCreateBy());
-              map.put("更新者", app.getUpdateBy());
-              map.put("创建日期", app.getCreateTime());
-              map.put("更新时间", app.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (AppDto app : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("应用名称", app.getName());
+            map.put("上传目录", app.getUploadPath());
+            map.put("部署路径", app.getDeployPath());
+            map.put("备份路径", app.getBackupPath());
+            map.put("应用端口", app.getPort());
+            map.put("启动脚本", app.getStartScript());
+            map.put("部署脚本", app.getDeployScript());
+            map.put("创建者", app.getCreateBy());
+            map.put("更新者", app.getUpdateBy());
+            map.put("创建日期", app.getCreateTime());
+            map.put("更新时间", app.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 }

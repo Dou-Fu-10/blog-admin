@@ -44,7 +44,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
     private final RedisService redisService;
 
     @Override
-    public PageInfo<QuartzJob> queryAll(QuartzJobQueryParam criteria, Pageable pageable){
+    public PageInfo<QuartzJob> queryAll(QuartzJobQueryParam criteria, Pageable pageable) {
         IPage<QuartzJob> page = PageUtil.toMybatisPage(pageable);
         IPage<QuartzJob> pageList = jobMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(criteria));
         PageInfo<QuartzJob> pageInfo = new PageInfo<>();
@@ -59,7 +59,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
     }
 
     @Override
-    public PageInfo<QuartzLog> queryAllLog(QuartzLogQueryParam criteria, Pageable pageable){
+    public PageInfo<QuartzLog> queryAllLog(QuartzLogQueryParam criteria, Pageable pageable) {
         IPage<QuartzLog> page = PageUtil.toMybatisPage(pageable);
         IPage<QuartzLog> pageList = logMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(criteria));
         PageInfo<QuartzLog> pageInfo = new PageInfo<>();
@@ -67,6 +67,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
         pageInfo.setTotalElements(pageList.getTotal());
         return pageInfo;
     }
+
     @Override
     public List<QuartzLog> queryAllLog(QuartzLogQueryParam criteria) {
         return logMapper.selectList(QueryHelpMybatisPlus.getPredicate(criteria));
@@ -86,7 +87,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(QuartzJob resources){
+    public boolean updateById(QuartzJob resources) {
         boolean ret = jobMapper.updateById(resources) > 0;
         // delCaches(resources.id);
         return ret;
@@ -94,14 +95,14 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
+    public boolean removeByIds(Set<Long> ids) {
         // delCaches(ids);
         return jobMapper.deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> set = new HashSet<>(1);
         set.add(id);
         return this.removeByIds(set);
@@ -142,7 +143,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
                 Thread.sleep(5000);
                 result = (Boolean) redisService.get(uuid);
             }
-            if(!result){
+            if (!result) {
                 redisService.del(uuid);
                 break;
             }
@@ -162,34 +163,34 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
 
     @Override
     public void download(List<QuartzJob> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (QuartzJob quartzJob : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("Spring Bean名称", quartzJob.getBeanName());
-              map.put("cron 表达式", quartzJob.getCronExpression());
-              map.put("状态：1暂停、0启用", quartzJob.getIsPause());
-              map.put("任务名称", quartzJob.getJobName());
-              map.put("方法名称", quartzJob.getMethodName());
-              map.put("参数", quartzJob.getParams());
-              map.put("备注", quartzJob.getDescription());
-              map.put("负责人", quartzJob.getPersonInCharge());
-              map.put("报警邮箱", quartzJob.getEmail());
-              map.put("子任务ID", quartzJob.getSubTask());
-              map.put("任务失败后是否暂停", quartzJob.getPauseAfterFailure());
-              map.put("创建者", quartzJob.getCreateBy());
-              map.put("更新者", quartzJob.getUpdateBy());
-              map.put("创建日期", quartzJob.getCreateTime());
-              map.put("更新时间", quartzJob.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (QuartzJob quartzJob : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("Spring Bean名称", quartzJob.getBeanName());
+            map.put("cron 表达式", quartzJob.getCronExpression());
+            map.put("状态：1暂停、0启用", quartzJob.getIsPause());
+            map.put("任务名称", quartzJob.getJobName());
+            map.put("方法名称", quartzJob.getMethodName());
+            map.put("参数", quartzJob.getParams());
+            map.put("备注", quartzJob.getDescription());
+            map.put("负责人", quartzJob.getPersonInCharge());
+            map.put("报警邮箱", quartzJob.getEmail());
+            map.put("子任务ID", quartzJob.getSubTask());
+            map.put("任务失败后是否暂停", quartzJob.getPauseAfterFailure());
+            map.put("创建者", quartzJob.getCreateBy());
+            map.put("更新者", quartzJob.getUpdateBy());
+            map.put("创建日期", quartzJob.getCreateTime());
+            map.put("更新时间", quartzJob.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 
     @Override
     public void downloadLog(List<QuartzLog> queryAllLog, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
         for (QuartzLog quartzLog : queryAllLog) {
-            Map<String,Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("任务名称", quartzLog.getJobName());
             map.put("Bean名称", quartzLog.getBeanName());
             map.put("执行方法", quartzLog.getMethodName());

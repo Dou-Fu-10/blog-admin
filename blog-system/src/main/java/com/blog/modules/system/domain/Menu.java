@@ -27,7 +27,7 @@ public class Menu extends CommonEntity<Menu> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value="menu_id", type= IdType.AUTO)
+    @TableId(value = "menu_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "上级菜单ID")
@@ -89,7 +89,7 @@ public class Menu extends CommonEntity<Menu> implements Serializable {
         return Objects.hash(id);
     }
 
-    public void copyFrom(Menu source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Menu source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

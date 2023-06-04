@@ -1,6 +1,7 @@
 package com.blog.base;
 
 //import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @Builder
 @Accessors(chain = true)
-public class PageInfo<T> implements Serializable{
+public class PageInfo<T> implements Serializable {
     // @ApidelProperty("总数量")
     private long totalElements;
 

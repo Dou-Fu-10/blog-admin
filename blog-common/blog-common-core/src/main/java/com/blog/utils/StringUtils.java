@@ -27,23 +27,21 @@ import java.util.Enumeration;
  * 字符串工具类, 继承org.apache.commons.lang3.StringUtils类
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
-    
+
     private static final Logger log = LoggerFactory.getLogger(StringUtils.class);
-    private static boolean ipLocal = false;
-    private static File file = null;
-    private static DbConfig config;
     private static final char SEPARATOR = '_';
     private static final char YAML_SEPARATOR = '-';
     private static final String UNKNOWN = "unknown";
-    
     private static final UserAgentAnalyzer userAgentAnalyzer = UserAgentAnalyzer
             .newBuilder()
             .hideMatcherLoadStats()
             .withCache(10000)
             .withField(UserAgent.AGENT_NAME_VERSION)
             .build();
-    
-    
+    private static boolean ipLocal = false;
+    private static File file = null;
+    private static DbConfig config;
+
     static {
         SpringContextHolder.addCallBacks(() -> {
             StringUtils.ipLocal = SpringContextHolder.getProperties("ip.local-parsing", false, Boolean.class);
@@ -62,23 +60,23 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             }
         });
     }
-    
+
     /**
      * Yaml key 驼峰命名法工具
      *
-     * @return yamlToCamelCase(" hello-world ") == "helloWorld"
+     * @return yamlToCamelCase(" hello - world ") == "helloWorld"
      */
     public static String yamlToCamelCase(String s) {
         if (s == null) {
             return null;
         }
-        if(StringUtils.containsAny(s, YAML_SEPARATOR)) {
+        if (StringUtils.containsAny(s, YAML_SEPARATOR)) {
             s = s.toLowerCase();
             StringBuilder sb = new StringBuilder(s.length());
             boolean yamlUpperCase = false;
             for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
-                
+
                 if (c == YAML_SEPARATOR) {
                     yamlUpperCase = true;
                 } else if (yamlUpperCase) {
@@ -92,7 +90,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return s;
     }
-    
+
     /**
      * 驼峰命名法工具
      *
@@ -104,14 +102,14 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         if (s == null) {
             return null;
         }
-        
+
         s = s.toLowerCase();
-        
+
         StringBuilder sb = new StringBuilder(s.length());
         boolean upperCase = false;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            
+
             if (c == SEPARATOR) {
                 upperCase = true;
             } else if (upperCase) {
@@ -121,10 +119,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
                 sb.append(c);
             }
         }
-        
+
         return sb.toString();
     }
-    
+
     /**
      * 驼峰命名法工具
      *
@@ -139,7 +137,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         s = toCamelCase(s);
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
-    
+
     /**
      * 驼峰命名法工具
      *
@@ -151,18 +149,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         if (s == null) {
             return null;
         }
-        
+
         StringBuilder sb = new StringBuilder();
         boolean upperCase = false;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            
+
             boolean nextUpperCase = true;
-            
+
             if (i < (s.length() - 1)) {
                 nextUpperCase = Character.isUpperCase(s.charAt(i + 1));
             }
-            
+
             if ((i > 0) && Character.isUpperCase(c)) {
                 if (!upperCase || !nextUpperCase) {
                     sb.append(SEPARATOR);
@@ -171,13 +169,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             } else {
                 upperCase = false;
             }
-            
+
             sb.append(Character.toLowerCase(c));
         }
-        
+
         return sb.toString();
     }
-    
+
     /**
      * 获取ip地址
      */
@@ -207,7 +205,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return ip;
     }
-    
+
     /**
      * 根据ip获取详细地址
      */
@@ -218,7 +216,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             return getHttpCityInfo(ip);
         }
     }
-    
+
     /**
      * 根据ip获取详细地址
      */
@@ -227,7 +225,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         JSONObject object = JSONUtil.parseObj(HttpUtil.get(api));
         return object.get("addr", String.class);
     }
-    
+
     /**
      * 根据ip获取详细地址
      */
@@ -247,12 +245,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return "";
     }
-    
+
     public static String getBrowser(HttpServletRequest request) {
         UserAgent.ImmutableUserAgent userAgent = userAgentAnalyzer.parse(request.getHeader("User-Agent"));
         return userAgent.get(UserAgent.AGENT_NAME_VERSION).getValue();
     }
-    
+
     /**
      * 获得当天是周几
      */
@@ -260,14 +258,14 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         String[] weekDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        
+
         int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
         if (w < 0) {
             w = 0;
         }
         return weekDays[w];
     }
-    
+
     /**
      * 获取当前机器的IP
      *
@@ -277,10 +275,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         try {
             InetAddress candidateAddress = null;
             // 遍历所有的网络接口
-            for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
+            for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
                 NetworkInterface anInterface = interfaces.nextElement();
                 // 在所有的接口下再遍历IP
-                for (Enumeration<InetAddress> inetAddresses = anInterface.getInetAddresses(); inetAddresses.hasMoreElements();) {
+                for (Enumeration<InetAddress> inetAddresses = anInterface.getInetAddresses(); inetAddresses.hasMoreElements(); ) {
                     InetAddress inetAddr = inetAddresses.nextElement();
                     // 排除loopback类型地址
                     if (!inetAddr.isLoopbackAddress()) {

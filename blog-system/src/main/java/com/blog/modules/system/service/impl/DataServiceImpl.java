@@ -29,6 +29,7 @@ public class DataServiceImpl implements DataService {
 
     /**
      * 用户角色改变时需清理缓存
+     *
      * @param user /
      * @return /
      */
@@ -57,11 +58,12 @@ public class DataServiceImpl implements DataService {
 
     /**
      * 获取自定义的数据权限
+     *
      * @param deptIds 部门ID
-     * @param role 角色
+     * @param role    角色
      * @return 数据权限ID
      */
-    public Set<Long> getCustomize(Set<Long> deptIds, RoleSmallDto role){
+    public Set<Long> getCustomize(Set<Long> deptIds, RoleSmallDto role) {
         Set<DeptDto> depts = deptService.findByRoleId(role.getId());
         for (DeptDto dept : depts) {
             deptIds.add(dept.getId());

@@ -6,8 +6,7 @@ package com.blog.common.log.enums;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public enum OperatorType
-{
+public enum OperatorType {
     /**
      * 其它
      */

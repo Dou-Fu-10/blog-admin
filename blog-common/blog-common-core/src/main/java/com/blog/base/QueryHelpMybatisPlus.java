@@ -33,21 +33,21 @@ public class QueryHelpMybatisPlus {
 
         // 数据权限验证
         DataPermission permission = query.getClass().getAnnotation(DataPermission.class);
-        if(permission != null){
+        if (permission != null) {
             // 获取数据权限
             List<Long> dataScopes = SecurityUtils.getCurrentUserDataScope();
-            if(CollectionUtil.isNotEmpty(dataScopes)){
+            if (CollectionUtil.isNotEmpty(dataScopes)) {
                 // 过滤场景
                 boolean ignoreScene = false;
-                if(ArrayUtil.isNotEmpty(permission.ignoreScene())) {
+                if (ArrayUtil.isNotEmpty(permission.ignoreScene())) {
                     boolean exits = query.getClass().isAnnotationPresent(Scene.class);
-                    if(exits) {
-                        for(Field field : query.getClass().getDeclaredFields()) {
+                    if (exits) {
+                        for (Field field : query.getClass().getDeclaredFields()) {
                             Scene scene = field.getAnnotation(Scene.class);
                             if (scene != null) {
                                 Object sceneValue = ReflectionUtils.getField(field, query);
-                                if(Objects.nonNull(sceneValue)) {
-                                    if(StringUtils.equalsAny(String.valueOf(sceneValue), permission.ignoreScene())) {
+                                if (Objects.nonNull(sceneValue)) {
+                                    if (StringUtils.equalsAny(String.valueOf(sceneValue), permission.ignoreScene())) {
                                         ignoreScene = true;
                                         break;
                                     }
@@ -55,14 +55,14 @@ public class QueryHelpMybatisPlus {
                             }
                         }
                     } else {
-                       throw new RuntimeException("需要用 @Scene 注解标识场景字段值, 根据字段对应的值判断是否忽略");
+                        throw new RuntimeException("需要用 @Scene 注解标识场景字段值, 根据字段对应的值判断是否忽略");
                     }
                 }
-                if(!ignoreScene) {
-                    if(StringUtils.isNotBlank(permission.joinName()) && StringUtils.isNotBlank(permission.fieldName())) {
+                if (!ignoreScene) {
+                    if (StringUtils.isNotBlank(permission.joinName()) && StringUtils.isNotBlank(permission.fieldName())) {
                         //Join join = root.join(permission.joinName(), JoinType.LEFT);
                         //list.add(getExpression(permission.fieldName(),join, root).in(dataScopes));
-                        
+
                         throw new RuntimeException("未实现");
                     } else if (StringUtils.isBlank(permission.joinName()) && StringUtils.isNotBlank(permission.fieldName())) {
                         //list.add(getExpression(permission.fieldName(),null, root).in(dataScopes));
@@ -110,26 +110,26 @@ public class QueryHelpMybatisPlus {
                             queryWrapper.eq(attributeName, val);
                             break;
                         case GREATER_THAN:
-                           queryWrapper.ge(finalAttributeName, val);
+                            queryWrapper.ge(finalAttributeName, val);
                             break;
                         case LESS_THAN:
                             queryWrapper.le(finalAttributeName, val);
                             break;
                         case LESS_THAN_NQ:
-                           queryWrapper.lt(finalAttributeName, val);
+                            queryWrapper.lt(finalAttributeName, val);
                             break;
                         case INNER_LIKE:
-                           queryWrapper.like(finalAttributeName, val);
+                            queryWrapper.like(finalAttributeName, val);
                             break;
                         case LEFT_LIKE:
-                           queryWrapper.likeLeft(finalAttributeName, val);
+                            queryWrapper.likeLeft(finalAttributeName, val);
                             break;
                         case RIGHT_LIKE:
-                           queryWrapper.likeRight(finalAttributeName, val);
+                            queryWrapper.likeRight(finalAttributeName, val);
                             break;
                         case IN:
                             if (CollUtil.isNotEmpty((Collection<Long>) val)) {
-                               queryWrapper.in(finalAttributeName, (Collection<Long>) val);
+                                queryWrapper.in(finalAttributeName, (Collection<Long>) val);
                             }
                             break;
                         case NOT_IN:
@@ -138,7 +138,7 @@ public class QueryHelpMybatisPlus {
                             }
                             break;
                         case NOT_EQUAL:
-                           queryWrapper.ne(finalAttributeName, val);
+                            queryWrapper.ne(finalAttributeName, val);
                             break;
                         case NOT_NULL:
                             queryWrapper.isNotNull(finalAttributeName);
@@ -148,7 +148,7 @@ public class QueryHelpMybatisPlus {
                             break;
                         case BETWEEN:
                             List<Object> between = new ArrayList<>((List<Object>) val);
-                           queryWrapper.between(finalAttributeName, between.get(0), between.get(1));
+                            queryWrapper.between(finalAttributeName, between.get(0), between.get(1));
                             break;
                         default:
                             break;

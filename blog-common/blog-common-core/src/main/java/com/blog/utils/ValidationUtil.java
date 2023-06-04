@@ -10,14 +10,14 @@ import com.blog.exception.BadRequestException;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public class ValidationUtil{
+public class ValidationUtil {
 
     /**
      * 验证空
      */
-    public static void isNull(Object obj, String entity, String parameter , Object value){
-        if(ObjectUtil.isNull(obj)){
-            String msg = entity + " 不存在: "+ parameter +" is "+ value;
+    public static void isNull(Object obj, String entity, String parameter, Object value) {
+        if (ObjectUtil.isNull(obj)) {
+            String msg = entity + " 不存在: " + parameter + " is " + value;
             throw new BadRequestException(msg);
         }
     }

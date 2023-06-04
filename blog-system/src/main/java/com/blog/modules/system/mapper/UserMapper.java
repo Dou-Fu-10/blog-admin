@@ -21,7 +21,7 @@ public interface UserMapper extends BaseMapper<User> {
      */
     @Results({
             @Result(column = "dept_id", property = "dept", one = @One(select = "me.zhengjie.modules.system.service.mapper.DeptMapper.selectLink")),
-            @Result(column = "job_id", property = "job", one = @One(select = "me.zhengjie.modules.system.service.mapper.JobMapper.selectLink")), })
+            @Result(column = "job_id", property = "job", one = @One(select = "me.zhengjie.modules.system.service.mapper.JobMapper.selectLink")),})
     @Select("select u.user_id as id, u.* from sys_user u ${ew.customSqlSegment}")
     User selectLink(@Param(Constants.WRAPPER) Wrapper<User> query);
 
@@ -86,13 +86,14 @@ public interface UserMapper extends BaseMapper<User> {
             + "<foreach item='item' index='index' collection='ids' open='(' separator=',' close=')'> #{item} </foreach>"
             + "</script>")
     int countByRoles(@Param("ids") Set<Long> ids);
-    
+
     /**
      * 根据角色中的部门查询
+     *
      * @param deptId /
      * @return /
      */
     @Select("SELECT u.user_id as id, u.* FROM sys_user u, sys_users_roles r, sys_roles_depts d WHERE "
             + "u.user_id = r.user_id AND r.role_id = d.role_id AND u.dept_id = #{deptId} group by u.user_id")
-    List<User> findByRoleDeptId(@Param("deptId")Long deptId);
+    List<User> findByRoleDeptId(@Param("deptId") Long deptId);
 }

@@ -29,7 +29,7 @@ public class App extends CommonEntity<App> implements Serializable {
 
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value = "app_id", type= IdType.AUTO)
+    @TableId(value = "app_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "应用名称")
@@ -53,7 +53,7 @@ public class App extends CommonEntity<App> implements Serializable {
     // @ApiModelProperty(value = "部署脚本")
     private String deployScript;
 
-    public void copyFrom(App source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(App source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

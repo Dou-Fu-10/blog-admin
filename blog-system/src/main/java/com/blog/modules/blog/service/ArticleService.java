@@ -20,6 +20,7 @@ public interface ArticleService extends IService<ArticleEntity> {
 
     /**
      * 创建文章
+     *
      * @param article 文章
      * @return boolean
      */
@@ -27,12 +28,15 @@ public interface ArticleService extends IService<ArticleEntity> {
 
     /**
      * 通过文章标题查找文章
+     *
      * @param title 标题
      * @return 文章
      */
     ArticleEntity getByTitle(String title);
+
     /**
      * 修改数据
+     *
      * @param article 文章
      * @return boolean
      */
@@ -51,13 +55,14 @@ public interface ArticleService extends IService<ArticleEntity> {
      * 修改文章是否置顶 Map<是否自顶,是否发布发布, Set<文章id>>
      *
      * @param articleIdList 主键结合
-     * @param isTop 是否置顶(1true置顶/0fales不置顶)
+     * @param isTop         是否置顶(1true置顶/0fales不置顶)
      * @return 修改结果
      */
     boolean updateArticleTopOrHide(Map<Boolean, Set<Long>> articleIdList, boolean isTop);
 
     /**
      * 通过id 删除文章
+     *
      * @param idList id
      * @return boolean
      */
@@ -73,6 +78,7 @@ public interface ArticleService extends IService<ArticleEntity> {
 
     /**
      * 通过文章别名获取 文章信息
+     *
      * @param alias 别名
      * @return 文章信息
      */

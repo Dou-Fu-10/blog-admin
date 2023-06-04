@@ -31,8 +31,8 @@ public class LocalStorageController {
 
     @GetMapping
     @PreAuthorize("@el.check('storage:list')")
-    public ResponseEntity<Object> query(LocalStorageQueryParam criteria, Pageable pageable){
-        return new ResponseEntity<>(localStorageService.queryAll(criteria,pageable),HttpStatus.OK);
+    public ResponseEntity<Object> query(LocalStorageQueryParam criteria, Pageable pageable) {
+        return new ResponseEntity<>(localStorageService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
     // @ApiOperation("导出数据")
@@ -45,17 +45,17 @@ public class LocalStorageController {
     // @ApiOperation("上传文件")
     @PostMapping
     @PreAuthorize("@el.check('storage:add')")
-    public ResponseEntity<Object> create(@RequestParam String name, @RequestParam("file") MultipartFile file){
+    public ResponseEntity<Object> create(@RequestParam String name, @RequestParam("file") MultipartFile file) {
         localStorageService.create(name, file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/pictures")
     // @ApiOperation("上传图片")
-    public ResponseEntity<Object> upload(@RequestParam MultipartFile file){
+    public ResponseEntity<Object> upload(@RequestParam MultipartFile file) {
         // 判断文件是否为图片
         String suffix = FileUtil.getExtensionName(file.getOriginalFilename());
-        if(!FileUtil.IMAGE.equals(FileUtil.getFileType(suffix))){
+        if (!FileUtil.IMAGE.equals(FileUtil.getFileType(suffix))) {
             throw new BadRequestException("只能上传图片");
         }
         LocalStorage localStorage = localStorageService.create(null, file);
@@ -65,7 +65,7 @@ public class LocalStorageController {
     // @ApiOperation("修改文件")
     @PutMapping
     @PreAuthorize("@el.check('storage:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody LocalStorage resources){
+    public ResponseEntity<Object> update(@Validated @RequestBody LocalStorage resources) {
         localStorageService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

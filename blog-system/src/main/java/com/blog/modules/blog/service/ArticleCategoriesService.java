@@ -2,7 +2,6 @@ package com.blog.modules.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.blog.modules.blog.entity.ArticleCategoriesEntity;
-import com.blog.modules.blog.entity.ArticleTagEntity;
 import com.blog.modules.blog.entity.CategoriesEntity;
 
 import java.util.List;

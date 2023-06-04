@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadPoolExecutorUtil {
 
-    public static ThreadPoolExecutor getPoll(){
+    public static ThreadPoolExecutor getPoll() {
         AsyncTaskProperties properties = SpringContextHolder.getBean(AsyncTaskProperties.class);
         return new ThreadPoolExecutor(
                 properties.getCorePoolSize(),

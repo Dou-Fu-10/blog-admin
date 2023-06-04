@@ -1,4 +1,3 @@
-
 package com.blog.utils;
 
 /**
@@ -7,12 +6,12 @@ package com.blog.utils;
  * @since 2023-05-31 21:25:43
  */
 public interface CacheKey {
-    
+
     /**
      * 用户
      */
     String USER_ID = "user::id:";
-    
+
     /**
      * 数据
      */
@@ -31,7 +30,7 @@ public interface CacheKey {
      * 角色信息
      */
     String ROLE_ID = "role::id:";
-    
+
     /**
      * 部门
      */
@@ -48,7 +47,6 @@ public interface CacheKey {
     String DICTDEAIL_DICTID = "dictDetail::dictId:";
     String DICT_ID = "dict::id:";
     String DICTDEAIL_DICTNAME = "dictDetail::name:";
-    
-    
-    
+
+
 }

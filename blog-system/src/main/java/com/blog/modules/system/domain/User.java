@@ -29,7 +29,7 @@ public class User extends CommonEntity<User> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value = "user_id", type= IdType.AUTO)
+    @TableId(value = "user_id", type = IdType.AUTO)
     @NotNull(groups = Update.class)
     private Long id;
 
@@ -72,7 +72,7 @@ public class User extends CommonEntity<User> implements Serializable {
     // @ApiModelProperty(value = "修改密码的时间")
     private Date pwdResetTime;
 
-    public <T> void copyFrom(T source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public <T> void copyFrom(T source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

@@ -12,13 +12,13 @@ import java.util.Date;
  * @since 2023-05-31 21:25:43
  */
 @Configuration
-public class MybatisPlusFillHandler implements MetaObjectHandler{
+public class MybatisPlusFillHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         Date currentTime = new Date();
         if (metaObject.hasSetter("createTime")) {
             Class<?> clazz = metaObject.getSetterType("createTime");
-            if(Long.class.getName().equals(clazz.getName())) {
+            if (Long.class.getName().equals(clazz.getName())) {
                 setFieldValByName("createTime", System.currentTimeMillis(), metaObject);
             } else {
                 setFieldValByName("createTime", currentTime, metaObject);
@@ -29,9 +29,9 @@ public class MybatisPlusFillHandler implements MetaObjectHandler{
         }
         if (metaObject.hasSetter("updateTime")) {
             Class<?> clazz = metaObject.getSetterType("updateTime");
-            if(Long.class.getName().equals(clazz.getName())) {
+            if (Long.class.getName().equals(clazz.getName())) {
                 setFieldValByName("updateTime", System.currentTimeMillis(), metaObject);
-            }else {
+            } else {
                 setFieldValByName("updateTime", currentTime, metaObject);
             }
         }
@@ -39,15 +39,15 @@ public class MybatisPlusFillHandler implements MetaObjectHandler{
             setFieldValByName("updateBy", getUsername(), metaObject);
         }
     }
-    
+
     @Override
     public void updateFill(MetaObject metaObject) {
         Date currentTime = new Date();
         if (metaObject.hasSetter("updateTime")) {
             Class<?> clazz = metaObject.getSetterType("updateTime");
-            if(Long.class.getName().equals(clazz.getName())) {
+            if (Long.class.getName().equals(clazz.getName())) {
                 setFieldValByName("updateTime", System.currentTimeMillis(), metaObject);
-            }else {
+            } else {
                 setFieldValByName("updateTime", currentTime, metaObject);
             }
         }

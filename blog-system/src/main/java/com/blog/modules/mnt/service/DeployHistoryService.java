@@ -22,20 +22,23 @@ public interface DeployHistoryService extends IService<DeployHistory> {
 
     /**
      * 查询数据分页
-     * @param query 条件
+     *
+     * @param query    条件
      * @param pageable 分页参数
      * @return PageInfo<DeployHistoryDto>
      */
     PageInfo<DeployHistoryDto> queryAll(DeployHistoryQueryParam query, Pageable pageable);
 
     /**
-    * 查询所有数据不分页
-    * @param query 条件参数
-    * @return List<DeployHistoryDto>
-    */
+     * 查询所有数据不分页
+     *
+     * @param query 条件参数
+     * @return List<DeployHistoryDto>
+     */
     List<DeployHistoryDto> queryAll(DeployHistoryQueryParam query);
 
     DeployHistory getById(Long id);
+
     DeployHistoryDto findById(Long id);
 
     /**
@@ -43,16 +46,20 @@ public interface DeployHistoryService extends IService<DeployHistory> {
      */
     @Override
     boolean save(DeployHistory resources);
+
     @Override
     boolean updateById(DeployHistory resources);
+
     boolean removeById(String id);
+
     boolean removeByIds(Set<String> ids);
 
     /**
-    * 导出数据
-    * @param all 待导出的数据
-    * @param response /
-    * @throws IOException /
-    */
+     * 导出数据
+     *
+     * @param all      待导出的数据
+     * @param response /
+     * @throws IOException /
+     */
     void download(List<DeployHistoryDto> all, HttpServletResponse response) throws IOException;
 }

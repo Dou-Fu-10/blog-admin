@@ -1,14 +1,10 @@
 package com.blog.modules.blog.entity.vo;
 
-import java.util.Date;
-
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.util.Date;
 
 /**
  * (Comment)表实体类

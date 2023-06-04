@@ -22,20 +22,23 @@ public interface DatabaseService extends IService<Database> {
 
     /**
      * 查询数据分页
-     * @param query 条件
+     *
+     * @param query    条件
      * @param pageable 分页参数
      * @return PageInfo<DatabaseDto>
      */
     PageInfo<DatabaseDto> queryAll(DatabaseQueryParam query, Pageable pageable);
 
     /**
-    * 查询所有数据不分页
-    * @param query 条件参数
-    * @return List<DatabaseDto>
-    */
+     * 查询所有数据不分页
+     *
+     * @param query 条件参数
+     * @return List<DatabaseDto>
+     */
     List<DatabaseDto> queryAll(DatabaseQueryParam query);
 
     Database getById(String id);
+
     DatabaseDto findById(String id);
 
     /**
@@ -43,17 +46,22 @@ public interface DatabaseService extends IService<Database> {
      */
     @Override
     boolean save(Database resources);
+
     @Override
     boolean updateById(Database resources);
+
     boolean removeById(String id);
+
     boolean removeByIds(Set<String> ids);
 
     boolean testConnection(Database resources);
+
     /**
-    * 导出数据
-    * @param all 待导出的数据
-    * @param response /
-    * @throws IOException /
-    */
+     * 导出数据
+     *
+     * @param all      待导出的数据
+     * @param response /
+     * @throws IOException /
+     */
     void download(List<DatabaseDto> all, HttpServletResponse response) throws IOException;
 }

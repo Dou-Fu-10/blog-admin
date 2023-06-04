@@ -50,7 +50,7 @@ public class Log extends com.baomidou.mybatisplus.extension.activerecord.Model<L
 
     private byte[] exceptionDetail;
 
-    @TableField(fill= FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     public Log(String logType, Long time) {
@@ -58,7 +58,7 @@ public class Log extends com.baomidou.mybatisplus.extension.activerecord.Model<L
         this.time = time;
     }
 
-    public void copyFrom(Log source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Log source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

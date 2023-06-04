@@ -31,7 +31,7 @@ public class EmailServiceImpl extends ServiceImpl<EmailConfigMapper, EmailConfig
     @Transactional(rollbackFor = Exception.class)
     public EmailConfig config(EmailConfig emailConfig, EmailConfig old) throws Exception {
         emailConfig.setId(1L);
-        if(!emailConfig.getPass().equals(old.getPass())){
+        if (!emailConfig.getPass().equals(old.getPass())) {
             // 对称加密
             emailConfig.setPass(EncryptUtils.desEncrypt(emailConfig.getPass()));
         }
@@ -46,8 +46,8 @@ public class EmailServiceImpl extends ServiceImpl<EmailConfigMapper, EmailConfig
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void send(EmailVo emailVo, EmailConfig emailConfig){
-        if(emailConfig == null || emailConfig.getId() == null){
+    public void send(EmailVo emailVo, EmailConfig emailConfig) {
+        if (emailConfig == null || emailConfig.getId() == null) {
             throw new BadRequestException("请先配置，再操作");
         }
         // 封装
@@ -64,7 +64,7 @@ public class EmailServiceImpl extends ServiceImpl<EmailConfigMapper, EmailConfig
         } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
-        account.setFrom(emailConfig.getUser()+"<"+emailConfig.getFromUser()+">");
+        account.setFrom(emailConfig.getUser() + "<" + emailConfig.getFromUser() + ">");
         // ssl方式发送
         account.setSslEnable(true);
         // 使用STARTTLS安全连接
@@ -81,7 +81,7 @@ public class EmailServiceImpl extends ServiceImpl<EmailConfigMapper, EmailConfig
                     //关闭session
                     .setUseGlobalSession(false)
                     .send();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
     }

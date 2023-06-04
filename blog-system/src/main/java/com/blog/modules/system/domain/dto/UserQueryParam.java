@@ -14,9 +14,11 @@ import java.util.Set;
  * @since 2023-05-31 21:25:43
  */
 @Data
-public class UserQueryParam{
+public class UserQueryParam {
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private Long userId;
 
@@ -28,11 +30,13 @@ public class UserQueryParam{
     @Query(blurry = "email,username,nickName")
     private String blurry;
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private Boolean enabled;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Query(type = Query.Type.BETWEEN)
     private List<Date> createTime;
 }

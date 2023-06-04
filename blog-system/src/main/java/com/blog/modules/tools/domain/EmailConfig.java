@@ -50,7 +50,7 @@ public class EmailConfig extends com.baomidou.mybatisplus.extension.activerecord
     // @ApiiModelProperty(value = "发件者用户名")
     private String user;
 
-    public void copyFrom(EmailConfig source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(EmailConfig source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

@@ -206,6 +206,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         ids.add(id);
         return removeByIds(ids);
     }
+
     @Override
     public List<Dept> findByPid(long pid) {
         return lambdaQuery().eq(Dept::getPid, pid).list();

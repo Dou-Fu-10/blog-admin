@@ -45,7 +45,7 @@ public class DeployHistoryServiceImpl extends ServiceImpl<DeployHistoryMapper, D
     }
 
     @Override
-    public List<DeployHistoryDto> queryAll(DeployHistoryQueryParam query){
+    public List<DeployHistoryDto> queryAll(DeployHistoryQueryParam query) {
         return ConvertUtil.convertList(deployHistoryMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), DeployHistoryDto.class);
     }
 
@@ -67,7 +67,7 @@ public class DeployHistoryServiceImpl extends ServiceImpl<DeployHistoryMapper, D
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(DeployHistory resources){
+    public boolean updateById(DeployHistory resources) {
         int ret = deployHistoryMapper.updateById(resources);
         // delCaches(resources.id);
         return ret > 0;
@@ -75,14 +75,14 @@ public class DeployHistoryServiceImpl extends ServiceImpl<DeployHistoryMapper, D
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<String> ids){
+    public boolean removeByIds(Set<String> ids) {
         // delCaches(ids);
         return deployHistoryMapper.deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(String id){
+    public boolean removeById(String id) {
         Set<String> set = new HashSet<>(1);
         set.add(id);
         return this.removeByIds(set);
@@ -101,16 +101,16 @@ public class DeployHistoryServiceImpl extends ServiceImpl<DeployHistoryMapper, D
 
     @Override
     public void download(List<DeployHistoryDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (DeployHistoryDto deployHistory : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("应用名称", deployHistory.getAppName());
-              map.put("部署日期", deployHistory.getDeployDate());
-              map.put("部署用户", deployHistory.getDeployUser());
-              map.put("服务器IP", deployHistory.getIp());
-              map.put("部署编号", deployHistory.getDeployId());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (DeployHistoryDto deployHistory : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("应用名称", deployHistory.getAppName());
+            map.put("部署日期", deployHistory.getDeployDate());
+            map.put("部署用户", deployHistory.getDeployUser());
+            map.put("服务器IP", deployHistory.getIp());
+            map.put("部署编号", deployHistory.getDeployId());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 }

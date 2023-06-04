@@ -15,34 +15,28 @@ import java.nio.charset.StandardCharsets;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T>
-{
+public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T> {
     public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
     private final Class<T> clazz;
 
 
-    public FastJson2JsonRedisSerializer(Class<T> clazz)
-    {
+    public FastJson2JsonRedisSerializer(Class<T> clazz) {
         super();
         this.clazz = clazz;
     }
 
     @Override
-    public byte[] serialize(T t) throws SerializationException
-    {
-        if (t == null)
-        {
+    public byte[] serialize(T t) throws SerializationException {
+        if (t == null) {
             return new byte[0];
         }
         return JSON.toJSONString(t, JSONWriter.Feature.WriteClassName).getBytes(DEFAULT_CHARSET);
     }
 
     @Override
-    public T deserialize(byte[] bytes) throws SerializationException
-    {
-        if (bytes == null || bytes.length == 0)
-        {
+    public T deserialize(byte[] bytes) throws SerializationException {
+        if (bytes == null || bytes.length == 0) {
             return null;
         }
         String str = new String(bytes, DEFAULT_CHARSET);

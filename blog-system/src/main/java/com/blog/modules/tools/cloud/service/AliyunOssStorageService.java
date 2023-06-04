@@ -24,7 +24,7 @@ public class AliyunOssStorageService extends CloudStorageService {
 
     private final AliyunOssConfig config;
 
-    public AliyunOssStorageService(AliyunOssConfig config){
+    public AliyunOssStorageService(AliyunOssConfig config) {
         this.config = config;
     }
 
@@ -47,15 +47,15 @@ public class AliyunOssStorageService extends CloudStorageService {
             CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
             // 创建存储空间。
             ossClient.createBucket(createBucketRequest);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException("创建Bucket失败", e);
         } finally {
-            if(ossClient != null) {
+            if (ossClient != null) {
                 // 关闭OSSClient。
                 ossClient.shutdown();
             }
         }
-        
+
     }
 
     /**
@@ -79,8 +79,8 @@ public class AliyunOssStorageService extends CloudStorageService {
                 ossClient.shutdown();
             }
         }
-        
-        
+
+
     }
 
     /**
@@ -90,7 +90,7 @@ public class AliyunOssStorageService extends CloudStorageService {
      * @return 文件保存路径
      */
     public String getSavePath(String fileUrl) {
-        return fileUrl.substring(config.getDomain().length()+1);
+        return fileUrl.substring(config.getDomain().length() + 1);
     }
 
     /**
@@ -113,7 +113,7 @@ public class AliyunOssStorageService extends CloudStorageService {
                 ossClient.shutdown();
             }
         }
-        
+
     }
 
     /**
@@ -175,19 +175,19 @@ public class AliyunOssStorageService extends CloudStorageService {
         // 创建OSSClient实例
         OSS ossClient = new OSSClientBuilder().build(config.getEndPoint(), config.getAccessKeyId(), config.getAccessKeySecret());
         try {
-            savePath = buildSavePath(config.getRootPath(),savePath);
+            savePath = buildSavePath(config.getRootPath(), savePath);
             //上传文件到oss
             ossClient.putObject(config.getBucketName(), savePath, inputStream);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("上传文件失败，请检查配置信息", e);
-        }finally {
+        } finally {
             if (ossClient != null) {
                 ossClient.shutdown();
             }
         }
         return config.getDomain() + "/" + savePath;//返回文件的访问URL地址
     }
-    
+
     public OSS getOSSClient() {
         return new OSSClientBuilder().build(config.getEndPoint(), config.getAccessKeyId(), config.getAccessKeySecret());
     }

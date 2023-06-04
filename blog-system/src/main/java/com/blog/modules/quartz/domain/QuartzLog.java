@@ -47,7 +47,7 @@ public class QuartzLog extends com.baomidou.mybatisplus.extension.activerecord.M
 
     private Long time;
 
-    public void copyFrom(QuartzLog source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(QuartzLog source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

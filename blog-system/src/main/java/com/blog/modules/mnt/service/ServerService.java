@@ -22,21 +22,25 @@ public interface ServerService extends IService<Server> {
 
     /**
      * 查询数据分页
-     * @param query 条件
+     *
+     * @param query    条件
      * @param pageable 分页参数
      * @return PageInfo<ServerDto>
      */
     PageInfo<ServerDto> queryAll(ServerQueryParam query, Pageable pageable);
 
     /**
-    * 查询所有数据不分页
-    * @param query 条件参数
-    * @return List<ServerDto>
-    */
+     * 查询所有数据不分页
+     *
+     * @param query 条件参数
+     * @return List<ServerDto>
+     */
     List<ServerDto> queryAll(ServerQueryParam query);
 
     Server getById(Long id);
+
     ServerDto findById(Long id);
+
     ServerDto findByIp(String ip);
 
     /**
@@ -44,18 +48,22 @@ public interface ServerService extends IService<Server> {
      */
     @Override
     boolean save(Server resources);
+
     @Override
     boolean updateById(Server resources);
+
     boolean removeById(Long id);
+
     boolean removeByIds(Set<Long> ids);
 
     Boolean testConnect(Server resources);
 
     /**
-    * 导出数据
-    * @param all 待导出的数据
-    * @param response /
-    * @throws IOException /
-    */
+     * 导出数据
+     *
+     * @param all      待导出的数据
+     * @param response /
+     * @throws IOException /
+     */
     void download(List<ServerDto> all, HttpServletResponse response) throws IOException;
 }

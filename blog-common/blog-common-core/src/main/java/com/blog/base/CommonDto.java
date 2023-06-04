@@ -13,7 +13,7 @@ import java.util.Date;
  * @since 2023-05-31 21:25:43
  */
 @Data
-public abstract class CommonDto implements Serializable{
+public abstract class CommonDto implements Serializable {
 
     private String createBy;
 

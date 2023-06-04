@@ -29,7 +29,7 @@ public class Server extends CommonEntity<Server> implements Serializable {
 
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value="server_id", type= IdType.AUTO)
+    @TableId(value = "server_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "账号")
@@ -47,7 +47,7 @@ public class Server extends CommonEntity<Server> implements Serializable {
     // @ApiModelProperty(value = "端口")
     private Integer port;
 
-    public void copyFrom(Server source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Server source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

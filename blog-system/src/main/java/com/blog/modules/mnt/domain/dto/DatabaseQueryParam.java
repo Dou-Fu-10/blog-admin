@@ -12,18 +12,24 @@ import java.util.List;
  * @since 2023-05-31 21:25:43
  */
 @Data
-public class DatabaseQueryParam{
+public class DatabaseQueryParam {
 
-    /** 模糊 */
+    /**
+     * 模糊
+     */
     @Query(blurry = "name,userName,jdbcUrl")
     private String blurry;
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private String jdbcUrl;
 
-    /** BETWEEN */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    /**
+     * BETWEEN
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Query(type = Query.Type.BETWEEN)
     private List<Date> createTime;
 }

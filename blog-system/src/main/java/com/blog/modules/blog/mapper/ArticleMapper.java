@@ -43,6 +43,6 @@ public interface ArticleMapper extends BaseMapper<ArticleEntity> {
             "#{id}" +
             "</foreach>" +
             "</script>")
-    List<ArticleOrCategoriesVo> getCategoriesByArticleId(@Param("articleIdList")Set<Long> articleIdList);
+    List<ArticleOrCategoriesVo> getCategoriesByArticleId(@Param("articleIdList") Set<Long> articleIdList);
 }
 

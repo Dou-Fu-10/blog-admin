@@ -46,7 +46,7 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, Database> i
     }
 
     @Override
-    public List<DatabaseDto> queryAll(DatabaseQueryParam query){
+    public List<DatabaseDto> queryAll(DatabaseQueryParam query) {
         return ConvertUtil.convertList(databaseMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), DatabaseDto.class);
     }
 
@@ -68,7 +68,7 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, Database> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(Database resources){
+    public boolean updateById(Database resources) {
         int ret = databaseMapper.updateById(resources);
         // delCaches(resources.id);
         return ret > 0;
@@ -76,14 +76,14 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, Database> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<String> ids){
+    public boolean removeByIds(Set<String> ids) {
         // delCaches(ids);
         return databaseMapper.deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(String id){
+    public boolean removeById(String id) {
         Set<String> set = new HashSet<>(1);
         set.add(id);
         return this.removeByIds(set);
@@ -112,19 +112,19 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, Database> i
 
     @Override
     public void download(List<DatabaseDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (DatabaseDto database : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("名称", database.getName());
-              map.put("jdbc连接", database.getJdbcUrl());
-              map.put("账号", database.getUserName());
-              map.put("密码", database.getPwd());
-              map.put("创建者", database.getCreateBy());
-              map.put("更新者", database.getUpdateBy());
-              map.put("创建时间", database.getCreateTime());
-              map.put("更新时间", database.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (DatabaseDto database : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("名称", database.getName());
+            map.put("jdbc连接", database.getJdbcUrl());
+            map.put("账号", database.getUserName());
+            map.put("密码", database.getPwd());
+            map.put("创建者", database.getCreateBy());
+            map.put("更新者", database.getUpdateBy());
+            map.put("创建时间", database.getCreateTime());
+            map.put("更新时间", database.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 }

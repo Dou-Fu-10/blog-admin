@@ -26,29 +26,29 @@ public class LocalStorage extends CommonEntity<LocalStorage> implements Serializ
     private static final long serialVersionUID = 1L;
 
 
-   // @ApiModelProperty(value = "ID")
-    @TableId(value = "storage_id", type= IdType.AUTO)
+    // @ApiModelProperty(value = "ID")
+    @TableId(value = "storage_id", type = IdType.AUTO)
     private Long id;
 
-   // @ApiModelProperty(value = "文件真实的名称")
+    // @ApiModelProperty(value = "文件真实的名称")
     private String realName;
 
-   // @ApiModelProperty(value = "文件名")
+    // @ApiModelProperty(value = "文件名")
     private String name;
 
-   // @ApiModelProperty(value = "后缀")
+    // @ApiModelProperty(value = "后缀")
     private String suffix;
 
-   // @ApiModelProperty(value = "路径")
+    // @ApiModelProperty(value = "路径")
     private String path;
 
-   // @ApiModelProperty(value = "类型")
+    // @ApiModelProperty(value = "类型")
     private String type;
 
-   // @ApiModelProperty(value = "大小")
+    // @ApiModelProperty(value = "大小")
     private String size;
 
-    public LocalStorage(String realName,String name, String suffix, String path, String type, String size) {
+    public LocalStorage(String realName, String name, String suffix, String path, String type, String size) {
         this.realName = realName;
         this.name = name;
         this.suffix = suffix;
@@ -56,7 +56,8 @@ public class LocalStorage extends CommonEntity<LocalStorage> implements Serializ
         this.type = type;
         this.size = size;
     }
-    public void copyFrom(LocalStorage source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+
+    public void copyFrom(LocalStorage source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

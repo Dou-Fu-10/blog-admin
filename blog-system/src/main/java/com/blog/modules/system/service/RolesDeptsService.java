@@ -12,7 +12,10 @@ import java.util.List;
 public interface RolesDeptsService extends IService<RolesDepts> {
 
     List<Long> queryDeptIdByRoleId(Long id);
+
     List<Long> queryRoleIdByDeptId(Long id);
+
     boolean removeByRoleId(Long id);
+
     boolean removeByDeptId(Long id);
 }

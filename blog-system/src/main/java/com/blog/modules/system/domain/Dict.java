@@ -28,7 +28,7 @@ import java.io.Serializable;
 public class Dict extends CommonEntity<Dict> implements Serializable {
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value = "dict_id", type= IdType.AUTO)
+    @TableId(value = "dict_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "字典名称")
@@ -38,7 +38,7 @@ public class Dict extends CommonEntity<Dict> implements Serializable {
     // @ApiModelProperty(value = "描述")
     private String description;
 
-    public void copyFrom(Dict source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Dict source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

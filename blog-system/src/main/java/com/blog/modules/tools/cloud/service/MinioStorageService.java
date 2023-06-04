@@ -20,10 +20,10 @@ import java.util.List;
  **/
 @Slf4j
 public class MinioStorageService extends CloudStorageService {
-    
+
     @Autowired
     private MinioConfig minioConfig;
-    
+
     @Override
     void createBucket(String bucketName) {
         MinioClient minioClient = getMinioClient();
@@ -35,7 +35,7 @@ public class MinioStorageService extends CloudStorageService {
             throw new RuntimeException("创建Bucket失败", e);
         }
     }
-    
+
     @Override
     void deleteBucket(String bucketName) {
         MinioClient minioClient = getMinioClient();
@@ -45,6 +45,7 @@ public class MinioStorageService extends CloudStorageService {
             throw new RuntimeException("删除Bucket失败", e);
         }
     }
+
     /**
      * 通过文件URL反向解析文件保存路径
      *
@@ -54,7 +55,7 @@ public class MinioStorageService extends CloudStorageService {
     public String getSavePath(String fileUrl) {
         return fileUrl.substring(minioConfig.getDomain().length() + 1);
     }
-    
+
     @Override
     public void deleteFile(String fileUrl) {
         MinioClient minioClient = getMinioClient();
@@ -67,13 +68,13 @@ public class MinioStorageService extends CloudStorageService {
             throw new RuntimeException("删除File失败", e);
         }
     }
-    
+
     @Override
     public void deleteFile(List<String> fileUrlList) {
         MinioClient minioClient = getMinioClient();
         try {
             List<DeleteObject> keys = new ArrayList<>();
-            fileUrlList.forEach(item-> keys.add(new DeleteObject(getSavePath(item))));
+            fileUrlList.forEach(item -> keys.add(new DeleteObject(getSavePath(item))));
             minioClient.removeObjects(RemoveObjectsArgs.builder()
                     .bucket(minioConfig.getBucketName()).objects(keys)
                     .build());
@@ -81,7 +82,7 @@ public class MinioStorageService extends CloudStorageService {
             throw new RuntimeException("批量删除File失败", e);
         }
     }
-    
+
     @Override
     public boolean exist(String fileUrl) {
         String objectName = getSavePath(fileUrl);
@@ -89,7 +90,7 @@ public class MinioStorageService extends CloudStorageService {
         try {
             GetObjectResponse object = minioClient.getObject(GetObjectArgs.builder().bucket(minioConfig.getBucketName())
                     .object(objectName).build());
-            if(StringUtils.isNotEmpty(object.object())) {
+            if (StringUtils.isNotEmpty(object.object())) {
                 return true;
             }
         } catch (Exception e) {
@@ -97,18 +98,18 @@ public class MinioStorageService extends CloudStorageService {
         }
         return false;
     }
-    
+
     @Override
     public String upload(byte[] data, String savePath) {
         return upload(new ByteArrayInputStream(data), savePath, data.length);
     }
-    
+
     @Deprecated
     @Override
     public String upload(InputStream inputStream, String savePath) {
         return null;
     }
-    
+
     @Override
     public String upload(InputStream inputStream, String savePath, long size) {
         MinioClient minioClient = getMinioClient();
@@ -121,7 +122,7 @@ public class MinioStorageService extends CloudStorageService {
         }
         return minioConfig.getDomain() + "/" + savePath;//返回文件的访问URL地址
     }
-    
+
     public MinioClient getMinioClient() {
         return MinioClient.builder()
                 .endpoint(minioConfig.getEndpoint())

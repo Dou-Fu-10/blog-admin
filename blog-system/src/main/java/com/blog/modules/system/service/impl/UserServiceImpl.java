@@ -70,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         List<UserDto> userDtos = ConvertUtil.convertList(pageData.getRecords(), UserDto.class);
         if (pageData.getTotal() > 0) {
             Map<Long, DeptDto> deptMap = deptService.queryAll().parallelStream()
-                    .collect(Collectors.toMap(DeptDto::getId, Function.identity(), (x,y) -> x));
+                    .collect(Collectors.toMap(DeptDto::getId, Function.identity(), (x, y) -> x));
 
             Map<Long, Set<UsersRoles>> usersRolesMap = usersRolesService.lambdaQuery()
                     .in(UsersRoles::getUserId, userDtos.stream().map(UserDto::getId).collect(Collectors.toSet()))
@@ -106,7 +106,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public List<UserDto> queryAll(UserQueryParam query){
+    public List<UserDto> queryAll(UserQueryParam query) {
         return ConvertUtil.convertList(userMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), UserDto.class);
     }
 
@@ -123,7 +123,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User getByUsername(String userName) {
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        userLambdaQueryWrapper.eq(User::getUsername,userName);
+        userLambdaQueryWrapper.eq(User::getUsername, userName);
         User user = getOne(userLambdaQueryWrapper);
         /*if (user == null) {
             throw new EntityNotFoundException(User.class, "username", userName);
@@ -146,6 +146,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private User getByEmail(String email) {
         return lambdaQuery().eq(User::getEmail, email).one();
     }
+
     private User getByPhone(String phone) {
         return lambdaQuery().eq(User::getPhone, phone).one();
     }
@@ -211,17 +212,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //usersRolesService.getUsersRoleList(resources.getId());
         // 如果用户的角色改变
         //if (!resources.getRoles().equals(xxxx.getRoles())) {
-            redisService.del(CacheKey.DATA_USER + resources.getId());
-            redisService.del(CacheKey.MENU_USER + resources.getId());
-            redisService.del(CacheKey.ROLE_AUTH + resources.getId());
+        redisService.del(CacheKey.DATA_USER + resources.getId());
+        redisService.del(CacheKey.MENU_USER + resources.getId());
+        redisService.del(CacheKey.ROLE_AUTH + resources.getId());
         //}
 
         // 如果用户名称修改
-        if(!resources.getUsername().equals(user.getUsername())){
+        if (!resources.getUsername().equals(user.getUsername())) {
             throw new BadRequestException("不能修改用户名");
         }
         // 如果用户被禁用，则清除用户登录信息
-        if(!resources.getEnabled()){
+        if (!resources.getEnabled()) {
             onlineUserService.kickOutForUsername(resources.getUsername());
         }
         if (CollectionUtils.isNotEmpty(resources.getRoles())) {
@@ -277,8 +278,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 验证文件上传的格式
         String image = "gif jpg png jpeg";
         String fileType = FileUtil.getExtensionName(multipartFile.getOriginalFilename());
-        if(fileType != null && !image.contains(fileType)){
-            throw new BadRequestException("文件格式错误！, 仅支持 " + image +" 格式");
+        if (fileType != null && !image.contains(fileType)) {
+            throw new BadRequestException("文件格式错误！, 仅支持 " + image + " 格式");
         }
         User user = getByUsername(SecurityUtils.getCurrentUsername());
         String oldPath = user.getAvatarPath();
@@ -325,8 +326,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
-        for (Long id: ids) {
+    public boolean removeByIds(Set<Long> ids) {
+        for (Long id : ids) {
             User user = getById(id);
             delCaches(user.getId(), user.getUsername());
             usersRolesService.removeByUserId(id);
@@ -337,7 +338,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> ids = new HashSet<>(1);
         ids.add(id);
         return this.removeByIds(ids);
@@ -345,28 +346,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public void download(List<UserDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (UserDto user : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("部门名称", user.getDeptId());
-              map.put("用户名", user.getUsername());
-              map.put("昵称", user.getNickName());
-              map.put("性别", user.getGender());
-              map.put("手机号码", user.getPhone());
-              map.put("邮箱", user.getEmail());
-              map.put("头像地址", user.getAvatarName());
-              map.put("头像真实路径", user.getAvatarPath());
-              map.put("密码", user.getPassword());
-              map.put("是否为admin账号", user.getIsAdmin());
-              map.put("状态：1启用、0禁用", user.getEnabled());
-              map.put("创建者", user.getCreateBy());
-              map.put("更新着", user.getUpdateBy());
-              map.put("修改密码的时间", user.getPwdResetTime());
-              map.put("创建日期", user.getCreateTime());
-              map.put("更新时间", user.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (UserDto user : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("部门名称", user.getDeptId());
+            map.put("用户名", user.getUsername());
+            map.put("昵称", user.getNickName());
+            map.put("性别", user.getGender());
+            map.put("手机号码", user.getPhone());
+            map.put("邮箱", user.getEmail());
+            map.put("头像地址", user.getAvatarName());
+            map.put("头像真实路径", user.getAvatarPath());
+            map.put("密码", user.getPassword());
+            map.put("是否为admin账号", user.getIsAdmin());
+            map.put("状态：1启用、0禁用", user.getEnabled());
+            map.put("创建者", user.getCreateBy());
+            map.put("更新着", user.getUpdateBy());
+            map.put("修改密码的时间", user.getPwdResetTime());
+            map.put("创建日期", user.getCreateTime());
+            map.put("更新时间", user.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 
     /**

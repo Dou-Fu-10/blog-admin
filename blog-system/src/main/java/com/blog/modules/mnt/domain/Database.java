@@ -29,7 +29,7 @@ public class Database extends CommonEntity<Database> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value = "db_id", type= IdType.ASSIGN_ID)
+    @TableId(value = "db_id", type = IdType.ASSIGN_ID)
     private String id;
 
     // @ApiModelProperty(value = "名称")
@@ -48,7 +48,7 @@ public class Database extends CommonEntity<Database> implements Serializable {
     @NotBlank
     private String pwd;
 
-    public void copyFrom(Database source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Database source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

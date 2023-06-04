@@ -10,8 +10,9 @@ public interface VerifyService {
 
     /**
      * 发送验证码
+     *
      * @param email /
-     * @param key /
+     * @param key   /
      * @return /
      */
     EmailVo sendEmail(String email, String key);
@@ -19,8 +20,9 @@ public interface VerifyService {
 
     /**
      * 验证
+     *
      * @param code /
-     * @param key /
+     * @param key  /
      */
     void validated(String key, String code);
 }

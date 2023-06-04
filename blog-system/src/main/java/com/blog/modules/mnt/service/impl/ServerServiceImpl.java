@@ -46,7 +46,7 @@ public class ServerServiceImpl extends ServiceImpl<ServerMapper, Server> impleme
     }
 
     @Override
-    public List<ServerDto> queryAll(ServerQueryParam query){
+    public List<ServerDto> queryAll(ServerQueryParam query) {
         return ConvertUtil.convertList(serverMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), ServerDto.class);
     }
 
@@ -73,7 +73,7 @@ public class ServerServiceImpl extends ServiceImpl<ServerMapper, Server> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(Server resources){
+    public boolean updateById(Server resources) {
         int ret = serverMapper.updateById(resources);
         // delCaches(resources.id);
         return ret > 0;
@@ -81,14 +81,14 @@ public class ServerServiceImpl extends ServiceImpl<ServerMapper, Server> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
+    public boolean removeByIds(Set<Long> ids) {
         // delCaches(ids);
         return serverMapper.deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> set = new HashSet<>(1);
         set.add(id);
         return this.removeByIds(set);
@@ -108,11 +108,11 @@ public class ServerServiceImpl extends ServiceImpl<ServerMapper, Server> impleme
     public Boolean testConnect(Server resources) {
         ExecuteShellUtil executeShellUtil = null;
         try {
-            executeShellUtil = new ExecuteShellUtil(resources.getIp(), resources.getAccount(), resources.getPassword(),resources.getPort());
-            return executeShellUtil.execute("ls")==0;
+            executeShellUtil = new ExecuteShellUtil(resources.getIp(), resources.getAccount(), resources.getPassword(), resources.getPort());
+            return executeShellUtil.execute("ls") == 0;
         } catch (Exception e) {
             return false;
-        }finally {
+        } finally {
             if (executeShellUtil != null) {
                 executeShellUtil.close();
             }
@@ -121,20 +121,20 @@ public class ServerServiceImpl extends ServiceImpl<ServerMapper, Server> impleme
 
     @Override
     public void download(List<ServerDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (ServerDto server : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("账号", server.getAccount());
-              map.put("IP地址", server.getIp());
-              map.put("名称", server.getName());
-              map.put("密码", server.getPassword());
-              map.put("端口", server.getPort());
-              map.put("创建者", server.getCreateBy());
-              map.put("更新者", server.getUpdateBy());
-              map.put("创建时间", server.getCreateTime());
-              map.put("更新时间", server.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (ServerDto server : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("账号", server.getAccount());
+            map.put("IP地址", server.getIp());
+            map.put("名称", server.getName());
+            map.put("密码", server.getPassword());
+            map.put("端口", server.getPort());
+            map.put("创建者", server.getCreateBy());
+            map.put("更新者", server.getUpdateBy());
+            map.put("创建时间", server.getCreateTime());
+            map.put("更新时间", server.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 }

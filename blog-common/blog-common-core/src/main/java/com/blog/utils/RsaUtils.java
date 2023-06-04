@@ -16,9 +16,9 @@ import java.security.spec.X509EncodedKeySpec;
  * @since 2023-05-31 21:25:43
  **/
 public class RsaUtils {
-    
+
     private static final String SRC = "123456";
-    
+
     public static void main(String[] args) throws Exception {
         System.out.println("\n");
         RsaKeyPair keyPair = generateKeyPair();
@@ -30,7 +30,7 @@ public class RsaUtils {
         test2(keyPair);
         System.out.println("\n");
     }
-    
+
     /**
      * 公钥加密私钥解密
      */
@@ -48,9 +48,10 @@ public class RsaUtils {
         }
         System.out.println("***************** 公钥加密私钥解密结束 *****************");
     }
-    
+
     /**
      * 私钥加密公钥解密
+     *
      * @throws Exception /
      */
     private static void test2(RsaKeyPair keyPair) throws Exception {
@@ -67,12 +68,12 @@ public class RsaUtils {
         }
         System.out.println("***************** 私钥加密公钥解密结束 *****************");
     }
-    
+
     /**
      * 公钥解密
      *
      * @param publicKeyText 公钥
-     * @param text 待解密的信息
+     * @param text          待解密的信息
      * @return /
      * @throws Exception /
      */
@@ -85,12 +86,12 @@ public class RsaUtils {
         byte[] result = doLongerCipherFinal(Cipher.DECRYPT_MODE, cipher, Base64.decodeBase64(text));
         return new String(result);
     }
-    
+
     /**
      * 私钥加密
      *
      * @param privateKeyText 私钥
-     * @param text 待加密的信息
+     * @param text           待加密的信息
      * @return /
      * @throws Exception /
      */
@@ -103,12 +104,12 @@ public class RsaUtils {
         byte[] result = doLongerCipherFinal(Cipher.ENCRYPT_MODE, cipher, text.getBytes());
         return Base64.encodeBase64String(result);
     }
-    
+
     /**
      * 私钥解密
      *
      * @param privateKeyText 私钥
-     * @param text 待解密的文本
+     * @param text           待解密的文本
      * @return /
      * @throws Exception /
      */
@@ -121,12 +122,12 @@ public class RsaUtils {
         byte[] result = doLongerCipherFinal(Cipher.DECRYPT_MODE, cipher, Base64.decodeBase64(text));
         return new String(result);
     }
-    
+
     /**
      * 公钥加密
      *
      * @param publicKeyText 公钥
-     * @param text 待加密的文本
+     * @param text          待加密的文本
      * @return /
      */
     public static String encryptByPublicKey(String publicKeyText, String text) throws Exception {
@@ -138,8 +139,8 @@ public class RsaUtils {
         byte[] result = doLongerCipherFinal(Cipher.ENCRYPT_MODE, cipher, text.getBytes());
         return Base64.encodeBase64String(result);
     }
-    
-    private static byte[] doLongerCipherFinal(int opMode,Cipher cipher, byte[] source) throws Exception {
+
+    private static byte[] doLongerCipherFinal(int opMode, Cipher cipher, byte[] source) throws Exception {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         if (opMode == Cipher.DECRYPT_MODE) {
             out.write(cipher.doFinal(source));
@@ -155,7 +156,7 @@ public class RsaUtils {
         out.close();
         return out.toByteArray();
     }
-    
+
     /**
      * 构建RSA密钥对
      *
@@ -172,28 +173,28 @@ public class RsaUtils {
         String privateKeyString = Base64.encodeBase64String(rsaPrivateKey.getEncoded());
         return new RsaKeyPair(publicKeyString, privateKeyString);
     }
-    
-    
+
+
     /**
      * RSA密钥对对象
      */
     public static class RsaKeyPair {
-        
+
         private final String publicKey;
         private final String privateKey;
-        
+
         public RsaKeyPair(String publicKey, String privateKey) {
             this.publicKey = publicKey;
             this.privateKey = privateKey;
         }
-        
+
         public String getPublicKey() {
             return publicKey;
         }
-        
+
         public String getPrivateKey() {
             return privateKey;
         }
-        
+
     }
 }

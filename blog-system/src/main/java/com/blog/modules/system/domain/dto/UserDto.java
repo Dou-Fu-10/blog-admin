@@ -40,10 +40,10 @@ public class UserDto extends CommonDto implements Serializable {
     private String avatarName;
 
     private String avatarPath;
-    
+
     @JSONField(serialize = false)
     private String password;
-    
+
     @JSONField(serialize = false)
     private Boolean isAdmin;
 

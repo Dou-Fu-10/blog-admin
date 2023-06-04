@@ -29,10 +29,10 @@ public @interface DataPermission {
      * Entity 中与部门关联的字段名称
      */
     String joinName() default "";
-    
+
     /**
-    * 忽略场景配置
-    * 与 @Scene 配合使用
-    */
+     * 忽略场景配置
+     * 与 @Scene 配合使用
+     */
     String[] ignoreScene() default {};
 }

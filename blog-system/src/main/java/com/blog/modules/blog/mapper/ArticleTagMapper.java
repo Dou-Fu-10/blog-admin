@@ -25,6 +25,6 @@ public interface ArticleTagMapper extends BaseMapper<ArticleTagEntity> {
      * @return 文章绑定标签
      */
     @Select("SELECT * FROM `blog_tag` WHERE id IN (SELECT `blog_article_tag`.`tid` FROM `blog_article_tag` WHERE `blog_article_tag`.`aid` = #{id})")
-    List<TagEntity> getArticleTagByArticleId(@Param("id")Long articleId);
+    List<TagEntity> getArticleTagByArticleId(@Param("id") Long articleId);
 }
 

@@ -32,21 +32,21 @@ public class BeanCopyUtil {
             throw new RuntimeException("copy error", e);
         }
     }
-    
+
     public static <E, V> List<V> copyListToList(List<E> source, Class<V> clazz) {
         return source.stream().map(pojo -> copy(pojo, clazz)).collect(toList());
     }
-    
+
     public static <E, V> Set<V> copyListToSet(List<E> source, Class<V> clazz) {
         return source.stream().map(pojo -> copy(pojo, clazz)).collect(toSet());
     }
-    
-    public static String[] getNullPropertyNames (Object source) {
+
+    public static String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
-        
+
         Set<String> emptyNames = new HashSet<String>();
-        for(java.beans.PropertyDescriptor pd : pds) {
+        for (java.beans.PropertyDescriptor pd : pds) {
             Object srcValue = src.getPropertyValue(pd.getName());
             if (srcValue == null) {
                 emptyNames.add(pd.getName());
@@ -55,8 +55,8 @@ public class BeanCopyUtil {
         String[] result = new String[emptyNames.size()];
         return emptyNames.toArray(result);
     }
-    
-    public static void copyPropertiesIgnoreNull(Object src, Object target){
+
+    public static void copyPropertiesIgnoreNull(Object src, Object target) {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     }
 }

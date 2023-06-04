@@ -11,7 +11,10 @@ import java.util.List;
  */
 public interface RolesMenusService extends IService<RolesMenus> {
     List<Long> queryMenuIdByRoleId(Long id);
+
     List<Long> queryRoleIdByMenuId(Long id);
+
     boolean removeByRoleId(Long id);
+
     boolean removeByMenuId(Long id);
 }

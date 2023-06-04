@@ -24,12 +24,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_quartz_job")
 public class QuartzJob extends CommonEntity<QuartzJob> implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     public static final String JOB_KEY = "JOB_KEY";
-
+    private static final long serialVersionUID = 1L;
     // @ApiModelProperty(value = "ID")
-    @TableId(value = "job_id", type= IdType.AUTO)
+    @TableId(value = "job_id", type = IdType.AUTO)
     private Long id;
 
 
@@ -71,7 +69,7 @@ public class QuartzJob extends CommonEntity<QuartzJob> implements Serializable {
     private Boolean pauseAfterFailure;
 
 
-    public void copyFrom(QuartzJob source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(QuartzJob source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

@@ -1,16 +1,12 @@
 package com.blog.modules.blog.entity;
 
-import java.util.Date;
-
-import java.io.Serializable;
-
-import com.alipay.api.domain.DataEntry;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 /**
  * (Comment)表实体类
@@ -22,7 +18,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("blog_comment")
-public class CommentEntity  {
+public class CommentEntity {
     /**
      * 评论表
      */

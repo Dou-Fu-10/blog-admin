@@ -5,10 +5,11 @@
 
 ### 已完成新特性
 
-- [x] 集成[screw-pro](https://gitee.com/rayson517/screw-pro) 强大的数据库表结构文档生成, 可以导出HTML/WORD/MD/EXCEL。 
+- [x] 集成[screw-pro](https://gitee.com/rayson517/screw-pro) 强大的数据库表结构文档生成, 可以导出HTML/WORD/MD/EXCEL。
 - [x] 集成腾讯云/阿里云/百度云/SFTP/FTP/Minio等文件存储服务。
 
 # eladmin-plus
+
 eladmin的mybatis-plus移植版本。目前更新到2021年8月。<br>
 
 对应前端vue: [eladmin-plus/eladmin-ui](https://gitee.com/rayson517/eladmin-plus/tree/master/eladmin-ui)
@@ -18,6 +19,7 @@ eladmin的mybatis-plus移植版本。目前更新到2021年8月。<br>
 想了解功能模块的说明，demo地址，文档，UI截图，可以参考原项目。
 
 #### 主要特性
+
 - 使用最新技术栈，社区资源丰富。
 - 高效率开发，代码生成器可一键生成前后端代码
 - 支持数据字典，可方便地对一些状态进行管理
@@ -33,9 +35,9 @@ eladmin的mybatis-plus移植版本。目前更新到2021年8月。<br>
 
 项目的发展离不开你的支持，请作者喝杯咖啡吧☕
 <div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://images.gitee.com/uploads/images/2021/0730/075815_7679f643_1436870.jpeg"  width="200" height="260" ><img src="https://images.gitee.com/uploads/images/2021/0730/075751_9b32be37_1436870.jpeg" width="200" height="260" ></div>
- 
 
-####  系统功能
+#### 系统功能
+
 - 用户管理：提供用户的相关配置，新增用户后，默认密码为123456
 - 角色管理：对权限与菜单进行分配，可根据部门设置角色的数据权限
 - 菜单管理：已实现菜单动态路由，后端可配置化，支持多级菜单
@@ -53,6 +55,7 @@ eladmin的mybatis-plus移植版本。目前更新到2021年8月。<br>
 - 运维管理：一键部署你的应用
 
 #### 项目结构
+
 项目采用按功能分模块的开发方式，结构如下
 
 - `eladmin-common` 为系统的公共模块，各种工具类，公共配置存在该模块
@@ -86,6 +89,5 @@ eladmin的mybatis-plus移植版本。目前更新到2021年8月。<br>
 - eladmin-generator 系统代码生成模块
 - eladmin-ui 系统前端Vue代码
 ```
-
 
 **原项目地址：**  [https://github.com/elunez/eladmin](https://github.com/elunez/eladmin)

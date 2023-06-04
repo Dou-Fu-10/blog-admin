@@ -12,13 +12,17 @@ import java.util.List;
  * @since 2023-05-31 21:25:43
  */
 @Data
-public class AppQueryParam{
+public class AppQueryParam {
 
-    /** 模糊 */
+    /**
+     * 模糊
+     */
     @Query(type = Query.Type.INNER_LIKE)
     private String name;
-    /** BETWEEN */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    /**
+     * BETWEEN
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Query(type = Query.Type.BETWEEN)
     private List<Date> createTime;
 }

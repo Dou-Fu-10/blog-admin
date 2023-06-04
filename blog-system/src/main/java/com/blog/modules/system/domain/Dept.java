@@ -30,7 +30,7 @@ public class Dept extends CommonEntity<Dept> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value="dept_id", type= IdType.AUTO)
+    @TableId(value = "dept_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "上级部门")
@@ -50,7 +50,7 @@ public class Dept extends CommonEntity<Dept> implements Serializable {
     @NotNull
     private Boolean enabled;
 
-    public void copyFrom(Dept source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Dept source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

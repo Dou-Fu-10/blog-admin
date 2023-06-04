@@ -18,26 +18,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("blog_article_tag")
 public class ArticleTagEntity {
-    public ArticleTagEntity(Long aid, Long tid) {
-        this.aid = aid;
-        this.tid = tid;
-    }
-
     /**
      * 主键
      */
     @TableId
     private Long id;
-
     /**
      * 文章id
      */
     private Long aid;
-
     /**
      * 标签id
      */
     private Long tid;
+
+    public ArticleTagEntity(Long aid, Long tid) {
+        this.aid = aid;
+        this.tid = tid;
+    }
 
 
 }

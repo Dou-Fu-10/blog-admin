@@ -40,7 +40,7 @@ public class DeployDto extends CommonDto implements Serializable {
     private String status;
 
     public String getServers() {
-        if(CollectionUtil.isNotEmpty(deploys)){
+        if (CollectionUtil.isNotEmpty(deploys)) {
             return deploys.stream().map(ServerDto::getName).collect(Collectors.joining(","));
         }
         return servers;

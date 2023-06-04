@@ -8,16 +8,20 @@ import lombok.Data;
  * @since 2023-05-31 21:25:43
  */
 @Data
-public class DictQueryParam{
+public class DictQueryParam {
 
     @Query(blurry = "name,description")
     private String blurry;
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private Long dictId;
 
-    /** 模糊 */
+    /**
+     * 模糊
+     */
     @Query(type = Query.Type.INNER_LIKE)
     private String name;
 }

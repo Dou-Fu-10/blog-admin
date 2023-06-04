@@ -17,25 +17,27 @@ import java.util.Set;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public interface AppService  extends IService<App> {
+public interface AppService extends IService<App> {
 
     String CACHE_KEY = "app";
 
     /**
-    * 查询数据分页
-    * @param query 条件
-    * @param pageable 分页参数
-    * @return PageInfo<AppDto>
-    */
+     * 查询数据分页
+     *
+     * @param query    条件
+     * @param pageable 分页参数
+     * @return PageInfo<AppDto>
+     */
     PageInfo<AppDto> queryAll(AppQueryParam query, Pageable pageable);
 
     /**
-    * 查询所有数据不分页
-    * @param query 条件参数
-    * @return List<AppDto>
-    */
+     * 查询所有数据不分页
+     *
+     * @param query 条件参数
+     * @return List<AppDto>
+     */
     List<AppDto> queryAll(AppQueryParam query);
-    
+
     AppDto findById(Long id);
 
     /**
@@ -43,16 +45,20 @@ public interface AppService  extends IService<App> {
      */
     @Override
     boolean save(App resources);
+
     @Override
     boolean updateById(App resources);
+
     boolean removeById(Long id);
+
     boolean removeByIds(Set<Long> ids);
 
     /**
-    * 导出数据
-    * @param all 待导出的数据
-    * @param response /
-    * @throws IOException /
-    */
+     * 导出数据
+     *
+     * @param all      待导出的数据
+     * @param response /
+     * @throws IOException /
+     */
     void download(List<AppDto> all, HttpServletResponse response) throws IOException;
 }

@@ -64,7 +64,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
         IPage<Deploy> page = PageUtil.toMybatisPage(pageable);
         IPage<Deploy> pageList = deployMapper.selectPage(page, QueryHelpMybatisPlus.getPredicate(query));
         PageInfo<DeployDto> pi = ConvertUtil.convertPage(pageList, DeployDto.class);
-        for (DeployDto dd: pi.getContent() ) {
+        for (DeployDto dd : pi.getContent()) {
             dd.setApp(appService.findById(dd.getAppId()));
             dd.setDeploys(new HashSet<>(ConvertUtil.convertList(serverMapper.lambdaQuery()
                     .in(Server::getId, deploysServersService.queryServerIdByDeployId(dd.getId()))
@@ -74,9 +74,9 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
     }
 
     @Override
-    public List<DeployDto> queryAll(DeployQueryParam query){
+    public List<DeployDto> queryAll(DeployQueryParam query) {
         List<DeployDto> list = ConvertUtil.convertList(deployMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), DeployDto.class);
-        for (DeployDto dd: list) {
+        for (DeployDto dd : list) {
             dd.setApp(appService.findById(dd.getAppId()));
             dd.setDeploys(new HashSet<>(ConvertUtil.convertList(serverMapper.lambdaQuery()
                     .in(Server::getId, deploysServersService.queryServerIdByDeployId(dd.getId()))
@@ -110,7 +110,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
         if (deploy.getId() != null) {
             deploysServersService.removeByDeployId(deploy.getId());
         }
-        for (ServerDto server: resources.getDeploys()) {
+        for (ServerDto server : resources.getDeploys()) {
             DeploysServers ds = new DeploysServers();
             ds.setDeployId(deploy.getId());
             ds.setServerId(server.getId());
@@ -121,14 +121,14 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(DeployDto resources){
+    public boolean updateById(DeployDto resources) {
         Deploy deploy = ConvertUtil.convert(resources, Deploy.class);
         deploy.setAppId(resources.getApp().getId());
         int ret = deployMapper.updateById(deploy);
         if (deploy.getId() != null) {
             deploysServersService.removeByDeployId(deploy.getId());
         }
-        for (ServerDto server: resources.getDeploys()) {
+        for (ServerDto server : resources.getDeploys()) {
             DeploysServers ds = new DeploysServers();
             ds.setDeployId(deploy.getId());
             ds.setServerId(server.getId());
@@ -139,17 +139,17 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
+    public boolean removeByIds(Set<Long> ids) {
         // delCaches(ids);
-        for (Long id: ids) {
+        for (Long id : ids) {
             deploysServersService.removeByDeployId(id);
         }
         return deployMapper.deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> set = new HashSet<>(1);
         set.add(id);
         return this.removeByIds(set);
@@ -168,17 +168,17 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
 
     @Override
     public void download(List<DeployDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (DeployDto deploy : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("应用编号", deploy.getApp().getId());
-              map.put("创建者", deploy.getCreateBy());
-              map.put("更新者", deploy.getUpdateBy());
-                map.put(" createTime",  deploy.getCreateTime());
-              map.put("更新时间", deploy.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (DeployDto deploy : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("应用编号", deploy.getApp().getId());
+            map.put("创建者", deploy.getCreateBy());
+            map.put("更新者", deploy.getUpdateBy());
+            map.put(" createTime", deploy.getCreateTime());
+            map.put("更新时间", deploy.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 
     @Override
@@ -188,7 +188,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
 
     /**
      * @param fileSavePath 本机路径
-     * @param id ID
+     * @param id           ID
      */
     private void deployApp(String fileSavePath, Long id) {
 
@@ -231,7 +231,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
                 stopApp(port, executeShellUtil);
                 sendMsg("备份原来应用", MsgType.INFO);
                 //备份应用
-                backupApp(executeShellUtil, ip, app.getDeployPath()+FILE_SEPARATOR, app.getName(), app.getBackupPath()+FILE_SEPARATOR, id);
+                backupApp(executeShellUtil, ip, app.getDeployPath() + FILE_SEPARATOR, app.getName(), app.getBackupPath() + FILE_SEPARATOR, id);
             }
             sendMsg("部署应用", MsgType.INFO);
             //部署文件,并启动应用
@@ -239,12 +239,12 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
             executeShellUtil.execute(deployScript);
             sleep(3);
             sendMsg("应用部署中，请耐心等待部署结果，或者稍后手动查看部署状态", MsgType.INFO);
-            int i  = 0;
+            int i = 0;
             boolean result = false;
             // 由于启动应用需要时间，所以需要循环获取状态，如果超过30次，则认为是启动失败
-            while (i++ < count){
+            while (i++ < count) {
                 result = checkIsRunningStatus(port, executeShellUtil);
-                if(result){
+                if (result) {
                     break;
                 }
                 // 休眠6秒
@@ -260,7 +260,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
         try {
             Thread.sleep(second * 1000L);
         } catch (InterruptedException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -285,7 +285,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
     /**
      * 停App
      *
-     * @param port 端口
+     * @param port             端口
      * @param executeShellUtil /
      */
     private void stopApp(int port, ExecuteShellUtil executeShellUtil) {
@@ -297,20 +297,20 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
     /**
      * 指定端口程序是否在运行
      *
-     * @param port 端口
+     * @param port             端口
      * @param executeShellUtil /
      * @return true 正在运行  false 已经停止
      */
     private boolean checkIsRunningStatus(int port, ExecuteShellUtil executeShellUtil) {
         String result = executeShellUtil.executeForResult(String.format("fuser -n tcp %d", port));
-        return result.indexOf("/tcp:")>0;
+        return result.indexOf("/tcp:") > 0;
     }
 
     private void sendMsg(String msg, MsgType msgType) {
         try {
             WebSocketServer.sendInfo(new SocketMsg(msg, msgType), "deploy");
         } catch (IOException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -338,11 +338,12 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
 
     private boolean checkFile(ExecuteShellUtil executeShellUtil, AppDto appDTO) {
         String result = executeShellUtil.executeForResult("find " + appDTO.getDeployPath() + " -name " + appDTO.getName());
-        return result.indexOf(appDTO.getName())>0;
+        return result.indexOf(appDTO.getName()) > 0;
     }
 
     /**
      * 启动服务
+     *
      * @param resources /
      * @return /
      */
@@ -360,12 +361,12 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
             executeShellUtil.execute(app.getStartScript());
             sleep(3);
             sendMsg("应用启动中，请耐心等待启动结果，或者稍后手动查看运行状态", MsgType.INFO);
-            int i  = 0;
+            int i = 0;
             boolean result = false;
             // 由于启动应用需要时间，所以需要循环获取状态，如果超过30次，则认为是启动失败
-            while (i++ < count){
+            while (i++ < count) {
                 result = checkIsRunningStatus(app.getPort(), executeShellUtil);
-                if(result){
+                if (result) {
                     break;
                 }
                 // 休眠6秒
@@ -380,6 +381,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
 
     /**
      * 停止服务
+     *
      * @param resources /
      * @return /
      */
@@ -419,7 +421,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
             sendMsg("应用信息不存在：" + resources.getAppName(), MsgType.ERROR);
             throw new BadRequestException("应用信息不存在：" + resources.getAppName());
         }
-        String backupPath = app.getBackupPath()+FILE_SEPARATOR;
+        String backupPath = app.getBackupPath() + FILE_SEPARATOR;
         backupPath += resources.getAppName() + FILE_SEPARATOR + deployDate;
         //这个是服务器部署路径
         String deployPath = app.getDeployPath();
@@ -442,12 +444,12 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
         sendMsg("启动应用", MsgType.INFO);
         executeShellUtil.execute(app.getStartScript());
         sendMsg("应用启动中，请耐心等待启动结果，或者稍后手动查看启动状态", MsgType.INFO);
-        int i  = 0;
+        int i = 0;
         boolean result = false;
         // 由于启动应用需要时间，所以需要循环获取状态，如果超过30次，则认为是启动失败
-        while (i++ < count){
+        while (i++ < count) {
             result = checkIsRunningStatus(app.getPort(), executeShellUtil);
-            if(result){
+            if (result) {
                 break;
             }
             // 休眠6秒
@@ -466,7 +468,7 @@ public class DeployServiceImpl extends ServiceImpl<DeployMapper, Deploy> impleme
             sendMsg("IP对应服务器信息不存在：" + ip, MsgType.ERROR);
             throw new BadRequestException("IP对应服务器信息不存在：" + ip);
         }
-        return new ExecuteShellUtil(ip, ServerDto.getAccount(), ServerDto.getPassword(),ServerDto.getPort());
+        return new ExecuteShellUtil(ip, ServerDto.getAccount(), ServerDto.getPassword(), ServerDto.getPort());
     }
 
     private ScpClientUtil getScpClientUtil(String ip) {

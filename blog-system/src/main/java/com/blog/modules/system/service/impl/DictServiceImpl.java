@@ -50,7 +50,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     }
 
     @Override
-    public List<DictDto> queryAll(DictQueryParam query){
+    public List<DictDto> queryAll(DictQueryParam query) {
         return ConvertUtil.convertList(dictMapper.selectList(QueryHelpMybatisPlus.getPredicate(query)), DictDto.class);
     }
 
@@ -72,13 +72,13 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(Dict resources){
+    public boolean updateById(Dict resources) {
         return dictMapper.updateById(resources) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
+    public boolean removeByIds(Set<Long> ids) {
         List<Dict> dicts = dictMapper.selectBatchIds(ids);
         boolean ret = dictMapper.deleteBatchIds(ids) > 0;
         for (Dict dict : dicts) {
@@ -90,28 +90,29 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> ids = new HashSet<>(1);
         ids.add(id);
         return removeByIds(ids);
     }
+
     @Override
     public void download(List<DictDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (DictDto dict : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("字典名称", dict.getName());
-              map.put("描述", dict.getDescription());
-              map.put("创建者", dict.getCreateBy());
-              map.put("更新者", dict.getUpdateBy());
-              map.put("创建日期", dict.getCreateTime());
-              map.put("更新时间", dict.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (DictDto dict : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("字典名称", dict.getName());
+            map.put("描述", dict.getDescription());
+            map.put("创建者", dict.getCreateBy());
+            map.put("更新者", dict.getUpdateBy());
+            map.put("创建日期", dict.getCreateTime());
+            map.put("更新时间", dict.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 
-    private void delCaches(Dict dict){
+    private void delCaches(Dict dict) {
         redisService.del(CacheKey.DICTDEAIL_DICTNAME + dict.getName());
         redisService.del(CacheKey.DICTDEAIL_DICTID + dict.getId());
         redisService.del(CacheKey.DICT_ID + dict.getId());

@@ -19,15 +19,15 @@ public interface CommonMapper<E> extends BaseMapper<E> {
     default QueryChainWrapper<E> query() {
         return ChainWrappers.queryChain(this);
     }
-    
+
     default LambdaQueryChainWrapper<E> lambdaQuery() {
         return ChainWrappers.lambdaQueryChain(this);
     }
-    
+
     default UpdateChainWrapper<E> update() {
         return ChainWrappers.updateChain(this);
     }
-    
+
     default LambdaUpdateChainWrapper<E> lambdaUpdate() {
         return ChainWrappers.lambdaUpdateChain(this);
     }

@@ -19,7 +19,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class AsyncTaskExecutePool implements AsyncConfigurer {
 
-    /** 注入配置类 */
+    /**
+     * 注入配置类
+     */
     private final AsyncTaskProperties config;
 
     public AsyncTaskExecutePool(AsyncTaskProperties config) {
@@ -49,8 +51,8 @@ public class AsyncTaskExecutePool implements AsyncConfigurer {
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return (throwable, method, objects) -> {
-            log.error("===="+throwable.getMessage()+"====", throwable);
-            log.error("exception method:"+method.getName());
+            log.error("====" + throwable.getMessage() + "====", throwable);
+            log.error("exception method:" + method.getName());
         };
     }
 }

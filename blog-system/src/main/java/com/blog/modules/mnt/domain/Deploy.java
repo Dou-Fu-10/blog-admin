@@ -29,13 +29,13 @@ public class Deploy extends CommonEntity<Deploy> implements Serializable {
 
 
     // @ApiModelProperty(value = "ID")
-    @TableId(value="deploy_id", type= IdType.AUTO)
+    @TableId(value = "deploy_id", type = IdType.AUTO)
     private Long id;
 
     // @ApiModelProperty(value = "应用编号")
     private Long appId;
 
-    public void copyFrom(Deploy source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copyFrom(Deploy source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

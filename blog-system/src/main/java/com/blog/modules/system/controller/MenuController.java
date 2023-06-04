@@ -33,67 +33,67 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/menus")
 public class MenuController {
 
+    private static final String ENTITY_NAME = "menu";
     private final MenuService menuService;
     private final MenuMapper menuMapper;
-    private static final String ENTITY_NAME = "menu";
 
     // @ApiOperation("查询菜单")
     @GetMapping
     @PreAuthorize("@el.check('menu:list')")
     public ResponseEntity<Object> query(MenuQueryParam criteria) throws Exception {
         List<MenuDto> menuDtoList = menuService.queryAll(criteria, true);
-        return new ResponseEntity<>(PageUtil.toPage(menuDtoList, menuDtoList.size()),HttpStatus.OK);
+        return new ResponseEntity<>(PageUtil.toPage(menuDtoList, menuDtoList.size()), HttpStatus.OK);
     }
 
     // @ApiOperation("返回全部的菜单")
     @GetMapping(value = "/lazy")
     @PreAuthorize("@el.check('menu:list','roles:list')")
-    public ResponseEntity<Object> query(@RequestParam Long pid){
-        return new ResponseEntity<>(menuService.getMenus(pid),HttpStatus.OK);
+    public ResponseEntity<Object> query(@RequestParam Long pid) {
+        return new ResponseEntity<>(menuService.getMenus(pid), HttpStatus.OK);
     }
 
     @GetMapping(value = "/build")
     // @ApiOperation("获取前端所需菜单")
-    public ResponseEntity<Object> buildMenus(){
+    public ResponseEntity<Object> buildMenus() {
         List<MenuDto> menuDtoList = menuService.findByUser(SecurityUtils.getCurrentUserId());
         List<MenuDto> menuDtos = menuService.buildTree(menuDtoList);
-        return new ResponseEntity<>(menuService.buildMenus(menuDtos),HttpStatus.OK);
+        return new ResponseEntity<>(menuService.buildMenus(menuDtos), HttpStatus.OK);
     }
-    
+
     // @ApiOperation("根据菜单ID返回所有子节点ID，包含自身ID")
     @GetMapping(value = "/child")
     @PreAuthorize("@el.check('menu:list','roles:list')")
-    public ResponseEntity<Object> child(@RequestParam Long id){
+    public ResponseEntity<Object> child(@RequestParam Long id) {
         Set<Menu> menuSet = new HashSet<>();
         List<MenuDto> menuList = menuService.getMenus(id);
         menuSet.add(menuService.getById(id));
         menuSet = menuService.getChildMenus(ConvertUtil.convertList(menuList, Menu.class), menuSet);
         Set<Long> ids = menuSet.stream().map(Menu::getId).collect(Collectors.toSet());
-        return new ResponseEntity<>(ids,HttpStatus.OK);
+        return new ResponseEntity<>(ids, HttpStatus.OK);
     }
-    
+
     // @ApiOperation("查询菜单:根据ID获取同级与上级数据")
     @PostMapping("/superior")
     @PreAuthorize("@el.check('menu:list')")
     public ResponseEntity<Object> getSuperior(@RequestBody List<Long> ids) {
         Set<MenuDto> menuDtos = new LinkedHashSet<>();
-        if(CollectionUtil.isNotEmpty(ids)){
+        if (CollectionUtil.isNotEmpty(ids)) {
             for (Long id : ids) {
                 MenuDto menuDto = menuService.findById(id);
                 menuDtos.addAll(menuService.getSuperior(menuDto, new ArrayList<>()));
             }
-            return new ResponseEntity<>(menuService.buildTree(new ArrayList<>(menuDtos)),HttpStatus.OK);
+            return new ResponseEntity<>(menuService.buildTree(new ArrayList<>(menuDtos)), HttpStatus.OK);
         }
-        return new ResponseEntity<>(menuService.getMenus(null),HttpStatus.OK);
+        return new ResponseEntity<>(menuService.getMenus(null), HttpStatus.OK);
     }
 
     @Log("新增菜单")
     // @ApiOperation("新增菜单")
     @PostMapping
     @PreAuthorize("@el.check('menu:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody Menu resources){
+    public ResponseEntity<Object> create(@Validated @RequestBody Menu resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new "+ ENTITY_NAME +" cannot already have an ID");
+            throw new BadRequestException("A new " + ENTITY_NAME + " cannot already have an ID");
         }
         menuService.save(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -103,7 +103,7 @@ public class MenuController {
     // @ApiOperation("修改菜单")
     @PutMapping
     @PreAuthorize("@el.check('menu:edit')")
-    public ResponseEntity<Object> update(@Validated(Menu.Update.class) @RequestBody Menu resources){
+    public ResponseEntity<Object> update(@Validated(Menu.Update.class) @RequestBody Menu resources) {
         menuService.updateById(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -112,7 +112,7 @@ public class MenuController {
     // @ApiOperation("删除菜单")
     @DeleteMapping
     @PreAuthorize("@el.check('menu:del')")
-    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids){
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {
         Set<Menu> menuSet = new HashSet<>();
         for (Long id : ids) {
             List<MenuDto> menuList = menuService.getMenus(id);

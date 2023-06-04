@@ -28,8 +28,8 @@ import java.util.*;
 @RequestMapping("/api/dept")
 public class DeptController {
 
-    private final DeptService deptService;
     private static final String ENTITY_NAME = "dept";
+    private final DeptService deptService;
 
     // @ApiOperation("导出部门数据")
     @GetMapping(value = "/download")
@@ -43,29 +43,29 @@ public class DeptController {
     @PreAuthorize("@el.check('user:list','dept:list')")
     public ResponseEntity<Object> query(DeptQueryParam criteria) throws Exception {
         List<DeptDto> deptDtos = deptService.queryAll(criteria, true);
-        return new ResponseEntity<>(PageUtil.toPage(deptDtos, deptDtos.size()),HttpStatus.OK);
+        return new ResponseEntity<>(PageUtil.toPage(deptDtos, deptDtos.size()), HttpStatus.OK);
     }
 
     // @ApiOperation("查询部门:根据ID获取同级与上级数据")
     @PostMapping("/superior")
     @PreAuthorize("@el.check('user:list','dept:list')")
     public ResponseEntity<Object> getSuperior(@RequestBody List<Long> ids) {
-        Set<DeptDto> deptDtos  = new LinkedHashSet<>();
+        Set<DeptDto> deptDtos = new LinkedHashSet<>();
         for (Long id : ids) {
             DeptDto deptDto = deptService.findById(id);
             List<DeptDto> depts = deptService.getSuperior(deptDto, new ArrayList<>());
             deptDtos.addAll(depts);
         }
-        return new ResponseEntity<>(deptService.buildTree(new ArrayList<>(deptDtos)),HttpStatus.OK);
+        return new ResponseEntity<>(deptService.buildTree(new ArrayList<>(deptDtos)), HttpStatus.OK);
     }
 
     @Log("新增部门")
     // @ApiOperation("新增部门")
     @PostMapping
     @PreAuthorize("@el.check('dept:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody Dept resources){
+    public ResponseEntity<Object> create(@Validated @RequestBody Dept resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new "+ ENTITY_NAME +" cannot already have an ID");
+            throw new BadRequestException("A new " + ENTITY_NAME + " cannot already have an ID");
         }
         deptService.save(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -75,7 +75,7 @@ public class DeptController {
     // @ApiOperation("修改部门")
     @PutMapping
     @PreAuthorize("@el.check('dept:edit')")
-    public ResponseEntity<Object> update(@Validated(Dept.Update.class) @RequestBody Dept resources){
+    public ResponseEntity<Object> update(@Validated(Dept.Update.class) @RequestBody Dept resources) {
         deptService.updateById(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -84,12 +84,12 @@ public class DeptController {
     // @ApiOperation("删除部门")
     @DeleteMapping
     @PreAuthorize("@el.check('dept:del')")
-    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids){
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {
         Set<Long> deptIds = new HashSet<>();
         for (Long id : ids) {
             List<Dept> deptList = deptService.findByPid(id);
             deptIds.add(deptService.findById(id).getId());
-            if(CollectionUtil.isNotEmpty(deptList)){
+            if (CollectionUtil.isNotEmpty(deptList)) {
                 deptIds = deptService.getDeleteDepts(deptList, deptIds);
             }
         }

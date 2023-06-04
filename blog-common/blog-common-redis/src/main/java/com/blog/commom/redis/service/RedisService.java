@@ -203,7 +203,7 @@ public class RedisService {
     public List<Object> multiGet(List<String> keys) {
         List<Object> list = redisTemplate.opsForValue().multiGet(Sets.newHashSet(keys));
         List<@Nullable Object> resultList = Lists.newArrayList();
-        Optional.ofNullable(list).ifPresent(e-> list.forEach(ele-> Optional.ofNullable(ele).ifPresent(resultList::add)));
+        Optional.ofNullable(list).ifPresent(e -> list.forEach(ele -> Optional.ofNullable(ele).ifPresent(resultList::add)));
         return resultList;
     }
 

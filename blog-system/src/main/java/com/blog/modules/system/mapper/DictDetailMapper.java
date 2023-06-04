@@ -17,5 +17,6 @@ import java.util.List;
 public interface DictDetailMapper extends CommonMapper<DictDetail> {
 
     List<DictDetailDto> getDictDetailsByDictName(@Param("dictName") String dictName);
+
     IPage<DictDetailDto> getDictDetailsByDictName(@Param("dictName") String dictName, IPage<DictDetailDto> page);
 }

@@ -25,14 +25,15 @@ public abstract class CommonEntity<T extends Model<?>> extends Model<T> implemen
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
-    @TableField(fill= FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
-    @TableField(fill= FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /* 分组校验 */
-    public @interface Create {}
+    public @interface Create {
+    }
 
     /* 分组校验 */
     public @interface Update {

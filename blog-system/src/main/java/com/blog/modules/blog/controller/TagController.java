@@ -34,8 +34,8 @@ public class TagController {
     /**
      * 分页查询所有数据
      *
-     * @param page 分页对象
-     * @param tagDto  查询实体
+     * @param page   分页对象
+     * @param tagDto 查询实体
      * @return 所有数据
      */
     @GetMapping
@@ -72,7 +72,7 @@ public class TagController {
      * @return 修改结果
      */
     @PutMapping
-    public ResponseEntity<Object> update(@RequestBody @Validated(ValidationDto.Update.class)  TagDto tag) {
+    public ResponseEntity<Object> update(@RequestBody @Validated(ValidationDto.Update.class) TagDto tag) {
         return new ResponseEntity<>(this.tagService.updateById(ConvertUtil.convert(tag, TagEntity.class)), HttpStatus.OK);
     }
 

@@ -16,37 +16,45 @@ import java.util.Set;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public interface DictService  extends IService<Dict> {
+public interface DictService extends IService<Dict> {
 
     /**
-    * 查询数据分页
-    * @param query 条件
-    * @param pageable 分页参数
-    * @return map[totalElements, content]
-    */
+     * 查询数据分页
+     *
+     * @param query    条件
+     * @param pageable 分页参数
+     * @return map[totalElements, content]
+     */
     PageInfo<DictDto> queryAll(DictQueryParam query, Pageable pageable);
 
     /**
-    * 查询所有数据不分页
-    * @param query 条件参数
-    * @return List<DictDto>
-    */
+     * 查询所有数据不分页
+     *
+     * @param query 条件参数
+     * @return List<DictDto>
+     */
     List<DictDto> queryAll(DictQueryParam query);
 
     Dict getById(Long id);
+
     DictDto findById(Long id);
+
     @Override
     boolean save(Dict resources);
+
     @Override
     boolean updateById(Dict resources);
+
     boolean removeById(Long id);
+
     boolean removeByIds(Set<Long> ids);
 
     /**
-    * 导出数据
-    * @param all 待导出的数据
-    * @param response /
-    * @throws IOException /
-    */
+     * 导出数据
+     *
+     * @param all      待导出的数据
+     * @param response /
+     * @throws IOException /
+     */
     void download(List<DictDto> all, HttpServletResponse response) throws IOException;
 }

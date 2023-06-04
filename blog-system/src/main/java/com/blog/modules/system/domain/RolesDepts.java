@@ -20,10 +20,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@JsonIgnoreProperties(value = { "handler" })
+@JsonIgnoreProperties(value = {"handler"})
 @TableName("sys_roles_depts")
 // @ApiModel(value="RolesDepts对象", description="角色部门关联")
-public class RolesDepts implements Serializable{
+public class RolesDepts implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // @ApiModelProperty(value = "角色ID")

@@ -1,9 +1,6 @@
 package com.blog.modules.blog.entity.vo;
 
-import com.blog.base.ValidationDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * (Article)表实体类

@@ -12,21 +12,27 @@ import java.util.List;
  * @since 2023-05-31 21:25:43
  */
 @Data
-public class RoleQueryParam{
+public class RoleQueryParam {
 
     @Query(blurry = "name,description")
     private String blurry;
 
-    /** 精确 */
+    /**
+     * 精确
+     */
     @Query
     private Long roleId;
 
-    /** 模糊 */
+    /**
+     * 模糊
+     */
     @Query(type = Query.Type.INNER_LIKE)
     private String name;
 
-    /** BETWEEN */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    /**
+     * BETWEEN
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Query(type = Query.Type.BETWEEN)
     private List<Date> createTime;
 }

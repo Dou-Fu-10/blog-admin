@@ -37,16 +37,16 @@ public class ServerDeployController {
 
     // @ApiOperation(value = "查询服务器")
     @GetMapping
-	@PreAuthorize("@el.check('serverDeploy:list')")
-    public ResponseEntity<Object> query(ServerQueryParam criteria, Pageable pageable){
-    	return new ResponseEntity<>(serverDeployService.queryAll(criteria,pageable),HttpStatus.OK);
+    @PreAuthorize("@el.check('serverDeploy:list')")
+    public ResponseEntity<Object> query(ServerQueryParam criteria, Pageable pageable) {
+        return new ResponseEntity<>(serverDeployService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
     @Log("新增服务器")
     // @ApiOperation(value = "新增服务器")
     @PostMapping
-	@PreAuthorize("@el.check('serverDeploy:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody Server resources){
+    @PreAuthorize("@el.check('serverDeploy:add')")
+    public ResponseEntity<Object> create(@Validated @RequestBody Server resources) {
         serverDeployService.save(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -54,26 +54,26 @@ public class ServerDeployController {
     @Log("修改服务器")
     // @ApiOperation(value = "修改服务器")
     @PutMapping
-	@PreAuthorize("@el.check('serverDeploy:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody Server resources){
+    @PreAuthorize("@el.check('serverDeploy:edit')")
+    public ResponseEntity<Object> update(@Validated @RequestBody Server resources) {
         serverDeployService.updateById(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Log("删除服务器")
     // @ApiOperation(value = "删除Server")
-	@DeleteMapping
-	@PreAuthorize("@el.check('serverDeploy:del')")
-    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids){
+    @DeleteMapping
+    @PreAuthorize("@el.check('serverDeploy:del')")
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {
         serverDeployService.removeByIds(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-	@Log("测试连接服务器")
-	// @ApiOperation(value = "测试连接服务器")
-	@PostMapping("/testConnect")
-	@PreAuthorize("@el.check('serverDeploy:add')")
-	public ResponseEntity<Object> testConnect(@Validated @RequestBody Server resources){
-		return new ResponseEntity<>(serverDeployService.testConnect(resources),HttpStatus.CREATED);
-	}
+    @Log("测试连接服务器")
+    // @ApiOperation(value = "测试连接服务器")
+    @PostMapping("/testConnect")
+    @PreAuthorize("@el.check('serverDeploy:add')")
+    public ResponseEntity<Object> testConnect(@Validated @RequestBody Server resources) {
+        return new ResponseEntity<>(serverDeployService.testConnect(resources), HttpStatus.CREATED);
+    }
 }

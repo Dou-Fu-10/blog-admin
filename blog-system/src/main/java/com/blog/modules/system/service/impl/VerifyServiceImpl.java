@@ -25,9 +25,9 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class VerifyServiceImpl implements VerifyService {
 
+    private final RedisService redisService;
     @Value("${code.expiration}")
     private Long expiration;
-    private final RedisService redisService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -38,19 +38,19 @@ public class VerifyServiceImpl implements VerifyService {
         // 如果不存在有效的验证码，就创建一个新的
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
         Template template = engine.getTemplate("email/email.ftl");
-        Object oldCode =  redisService.get(redisKey);
-        if(oldCode == null){
-            String code = RandomUtil.randomNumbers (6);
+        Object oldCode = redisService.get(redisKey);
+        if (oldCode == null) {
+            String code = RandomUtil.randomNumbers(6);
             // 存入缓存
-            if(!redisService.set(redisKey, code, expiration)){
+            if (!redisService.set(redisKey, code, expiration)) {
                 throw new BadRequestException("服务异常，请联系网站负责人");
             }
-            content = template.render(Dict.create().set("code",code));
-            emailVo = new EmailVo(Collections.singletonList(email),"EL-ADMIN后台管理系统",content);
-        // 存在就再次发送原来的验证码
+            content = template.render(Dict.create().set("code", code));
+            emailVo = new EmailVo(Collections.singletonList(email), "EL-ADMIN后台管理系统", content);
+            // 存在就再次发送原来的验证码
         } else {
-            content = template.render(Dict.create().set("code",oldCode));
-            emailVo = new EmailVo(Collections.singletonList(email),"EL-ADMIN后台管理系统",content);
+            content = template.render(Dict.create().set("code", oldCode));
+            emailVo = new EmailVo(Collections.singletonList(email), "EL-ADMIN后台管理系统", content);
         }
         return emailVo;
     }
@@ -58,7 +58,7 @@ public class VerifyServiceImpl implements VerifyService {
     @Override
     public void validated(String key, String code) {
         Object value = redisService.get(key);
-        if(value == null || !value.toString().equals(code)){
+        if (value == null || !value.toString().equals(code)) {
             throw new BadRequestException("无效验证码");
         } else {
             redisService.del(key);

@@ -16,15 +16,16 @@ import java.util.Set;
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-public interface JobService  extends IService<Job> {
+public interface JobService extends IService<Job> {
 
     PageInfo<JobDto> queryAll(JobQueryParam query, Pageable pageable);
 
     /**
-    * 查询所有数据不分页
-    * @param query 条件参数
-    * @return List<JobDto>
-    */
+     * 查询所有数据不分页
+     *
+     * @param query 条件参数
+     * @return List<JobDto>
+     */
     List<JobDto> queryAll(JobQueryParam query);
 
     List<JobDto> queryAll();
@@ -36,17 +37,22 @@ public interface JobService  extends IService<Job> {
      */
     @Override
     boolean save(Job resources);
+
     @Override
     boolean updateById(Job resources);
+
     boolean removeById(Long id);
+
     boolean removeByIds(Set<Long> ids);
 
     void verification(Set<Long> ids);
+
     /**
-    * 导出数据
-    * @param all 待导出的数据
-    * @param response /
-    * @throws IOException /
-    */
+     * 导出数据
+     *
+     * @param all      待导出的数据
+     * @param response /
+     * @throws IOException /
+     */
     void download(List<JobDto> all, HttpServletResponse response) throws IOException;
 }

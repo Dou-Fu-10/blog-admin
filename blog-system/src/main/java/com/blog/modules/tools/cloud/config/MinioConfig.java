@@ -12,14 +12,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "minio")
 public class MinioConfig {
-    
+
     private String endpoint;
     private String accessKey;
     private String secretKey;
     private int partSize;
-    
+
     private String bucketName;
     private String rootPath;
     private String domain;
-    
+
 }

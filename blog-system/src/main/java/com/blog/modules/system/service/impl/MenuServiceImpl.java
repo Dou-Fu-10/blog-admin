@@ -62,7 +62,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             query.setPidIsNull(null);
         }
         QueryWrapper wrapper = QueryHelpMybatisPlus.getPredicate(query);
-        
+
         if (!(isQuery && notEmpty)) {
             wrapper.or(true).eq("pid", 0);
         }
@@ -71,7 +71,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     @Override
-    public List<MenuDto> queryAll(MenuQueryParam query){
+    public List<MenuDto> queryAll(MenuQueryParam query) {
         return queryAll(query, true);
     }
 
@@ -131,7 +131,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateById(Menu resources){
+    public boolean updateById(Menu resources) {
         if (resources.getId().equals(resources.getPid())) {
             throw new BadRequestException("上级不能为自己");
         }
@@ -196,19 +196,19 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         delCaches(resources.getId(), pid);
         return ret > 0;
     }
-    
+
     @Override
     public Set<Menu> getChildMenus(List<Menu> menuList, Set<Menu> menuSet) {
         for (Menu menu : menuList) {
             menuSet.add(menu);
             List<Menu> menus = lambdaQuery().eq(Menu::getPid, menu.getId()).list();
-            if(CollectionUtil.isNotEmpty(menus)){
+            if (CollectionUtil.isNotEmpty(menus)) {
                 getChildMenus(menus, menuSet);
             }
         }
         return menuSet;
     }
-    
+
     @Override
     public Set<Menu> getDeleteMenus(List<Menu> menuList, Set<Menu> menuSet) {
         // 递归找出待删除的菜单
@@ -224,8 +224,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeByIds(Set<Long> ids){
-        for (Long id: ids) {
+    public boolean removeByIds(Set<Long> ids) {
+        for (Long id : ids) {
             Menu menu = getById(id);
             delCaches(menu.getId(), menu.getPid());
             rolesMenusService.removeByMenuId(id);
@@ -235,10 +235,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         }
         return menuMapper.deleteBatchIds(ids) > 0;
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeById(Long id){
+    public boolean removeById(Long id) {
         Set<Long> set = new HashSet<>(1);
         set.add(id);
         return this.removeByIds(set);
@@ -329,8 +329,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                     if (menuDTO.getPid() == null) {
                         menuVo.setComponent(
                                 StringUtils.isEmpty(menuDTO.getComponent()) ? "Layout" : menuDTO.getComponent());
-                    // 如果不是一级菜单，并且菜单类型为目录，则代表是多级菜单
-                    }else if(menuDTO.getType() == 0){
+                        // 如果不是一级菜单，并且菜单类型为目录，则代表是多级菜单
+                    } else if (menuDTO.getType() == 0) {
                         menuVo.setComponent(StringUtils.isEmpty(menuDTO.getComponent()) ? "ParentView" : menuDTO.getComponent());
                     } else if (!StringUtils.isEmpty(menuDTO.getComponent())) {
                         menuVo.setComponent(menuDTO.getComponent());
@@ -392,31 +392,31 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         redisService.delByKeys(CacheKey.MENU_USER, users.stream().map(User::getId).collect(Collectors.toSet()));
         redisService.del(CacheKey.MENU_PID + (pid == null ? 0 : pid));
     }
-    
+
     @Override
     public void download(List<MenuDto> all, HttpServletResponse response) throws IOException {
-      List<Map<String, Object>> list = new ArrayList<>();
-      for (MenuDto menu : all) {
-        Map<String,Object> map = new LinkedHashMap<>();
-              map.put("上级菜单ID", menu.getPid());
-              map.put("子菜单数目", menu.getSubCount());
-              map.put("菜单类型", menu.getType());
-              map.put("菜单标题", menu.getTitle());
-              map.put("组件名称", menu.getComponentName());
-              map.put("组件", menu.getComponent());
-              map.put("排序", menu.getMenuSort());
-              map.put("图标", menu.getIcon());
-              map.put("链接地址", menu.getPath());
-              map.put("是否外链", menu.getIFrame());
-              map.put("缓存", menu.getCache());
-              map.put("隐藏", menu.getHidden());
-              map.put("权限", menu.getPermission());
-              map.put("创建者", menu.getCreateBy());
-              map.put("更新者", menu.getUpdateBy());
-              map.put("创建日期", menu.getCreateTime());
-              map.put("更新时间", menu.getUpdateTime());
-        list.add(map);
-      }
-      FileUtil.downloadExcel(list, response);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (MenuDto menu : all) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("上级菜单ID", menu.getPid());
+            map.put("子菜单数目", menu.getSubCount());
+            map.put("菜单类型", menu.getType());
+            map.put("菜单标题", menu.getTitle());
+            map.put("组件名称", menu.getComponentName());
+            map.put("组件", menu.getComponent());
+            map.put("排序", menu.getMenuSort());
+            map.put("图标", menu.getIcon());
+            map.put("链接地址", menu.getPath());
+            map.put("是否外链", menu.getIFrame());
+            map.put("缓存", menu.getCache());
+            map.put("隐藏", menu.getHidden());
+            map.put("权限", menu.getPermission());
+            map.put("创建者", menu.getCreateBy());
+            map.put("更新者", menu.getUpdateBy());
+            map.put("创建日期", menu.getCreateTime());
+            map.put("更新时间", menu.getUpdateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 }
