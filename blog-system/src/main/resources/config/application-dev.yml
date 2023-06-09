@@ -1,8 +1,16 @@
 #配置数据源
 spring:
+  data:
+    redis:
+      repositories:
+        enabled: false
+      timeout: 5000
+      database: ${REDIS_DB:0}
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
   datasource:
       driverClassName: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.146.110:3306/blog_admin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+      url: jdbc:mysql://127.0.0.1:3306/blog_admin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
       username: root
       password: root
       druid:
@@ -98,7 +106,7 @@ generator:
 
 #是否开启 swagger-ui
 swagger:
-  enabled: true
+  enabled: false
 
 # IP 本地解析
 ip:
@@ -120,7 +128,7 @@ mybatis-plus:
 
 minio:
   # 文件地址
-  endpoint: http://192.168.146.110:9000
+  endpoint: http://127.0.0.1:9000
   # key
   accessKey: PQQU5HOBMK59DLZY92P4
   # 密钥

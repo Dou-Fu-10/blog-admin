@@ -1,20 +1,26 @@
 #配置数据源
 spring:
+  data:
+    redis:
+      repositories:
+        enabled: false
+      timeout: 5000
+      database: 0
+      host: 127.0.0.1
+      port: 6379
   datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/blog_admin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+    username: root
+    password: root
     druid:
       db-type: com.alibaba.druid.pool.DruidDataSource
-      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      url: jdbc:log4jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:eladmin}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
-      username: ${DB_USER:root}
-      password: ${DB_PWD:123456}
       # 初始连接数
       initial-size: 5
       # 最小连接数
       min-idle: 15
       # 最大连接数
       max-active: 30
-      # 是否自动回收超时连接
-      remove-abandoned: true
       # 超时时间(以秒数为单位)
       remove-abandoned-timeout: 180
       # 获取连接超时时间
@@ -40,8 +46,6 @@ spring:
         enabled: true
         url-pattern: /druid/*
         reset-enable: false
-        login-username: admin
-        login-password: 123456
       filter:
         stat:
           enabled: true
@@ -64,7 +68,7 @@ login:
     # 是否启用验证码
     enabled: true
     #  验证码类型配置 查看 LoginProperties 类
-    code-type: arithmetic
+    code-type: spec
     #  登录图形验证码有效时间/分钟
     expiration: 2
     #  验证码高度
@@ -72,8 +76,8 @@ login:
     #  验证码宽度
     height: 36
     # 内容长度
-    length: 2
-    # 字体名称，为空则使用默认字体，如遇到线上乱码，设置其他字体即可
+    length: 4
+    # 字体名称，为空则使用默认字体
     font-name:
     # 字体大小
     font-size: 25
@@ -85,47 +89,53 @@ jwt:
   token-start-with: Bearer
   # 必须使用最少88位的Base64对该令牌进行编码
   base64-secret: ZmQ0ZGI5NjQ0MDQwY2I4MjMxY2Y3ZmI3MjdhN2ZmMjNhODViOTg1ZGE0NTBjMGM4NDA5NzYxMjdjOWMwYWRmZTBlZjlhNGY3ZTg4Y2U3YTE1ODVkZDU5Y2Y3OGYwZWE1NzUzNWQ2YjFjZDc0NGMxZWU2MmQ3MjY1NzJmNTE0MzI=
-  # 令牌过期时间 此处单位/毫秒 ，默认2小时，可在此网站生成 https://www.convertworld.com/zh-hans/time/milliseconds.html
-  token-validity-in-seconds: 7200000
+  # 令牌过期时间 此处单位/毫秒 ，默认4小时，可在此网站生成 https://www.convertworld.com/zh-hans/time/milliseconds.html
+  token-validity-in-seconds: 14400000
   # 在线用户key
   online-key: online-token-
   # 验证码
   code-key: code-key-
-  # token 续期检查时间范围（默认30分钟，单位默认毫秒），在token即将过期的一段时间内用户操作了，则给用户的token续期
+  # token 续期检查时间范围（默认30分钟，单位毫秒），在token即将过期的一段时间内用户操作了，则给用户的token续期
   detect: 1800000
-  # 续期时间范围，默认 1小时，这里单位毫秒
+  # 续期时间范围，默认1小时，单位毫秒
   renew: 3600000
-
-# IP 本地解析
-ip:
-  local-parsing: false
 
 #是否允许生成代码，生产环境设置为false
 generator:
-  enabled: false
-
-#如果生产环境要开启swagger，需要配置请求地址
-#springfox:
-#  documentation:
-#    swagger:
-#      v2:
-#        host: # 接口域名或外网ip
+  enabled: true
 
 #是否开启 swagger-ui
 swagger:
   enabled: false
 
-# 文件存储路径
-file:
-  mac:
-    path: ~/file/
-    avatar: ~/avatar/
-  linux:
-    path: /home/eladmin/file/
-    avatar: /home/eladmin/avatar/
-  windows:
-    path: C:\eladmin\file\
-    avatar: C:\eladmin\avatar\
-  # 文件大小 /M
-  maxSize: 100
-  avatarMaxSize: 5
+# IP 本地解析
+ip:
+  local-parsing: true
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    db-config:
+      id-type: assign_id
+      # 1 代表已删除，不配置默认是1，也可修改配置
+      logic-delete-value: 1
+      # 0 代表未删除，不配置默认是0，也可修改配置
+      logic-not-delete-value: 0
+      # 全局逻辑删除字段值
+      logic-delete-field: deleteFlag
+
+minio:
+  # 文件地址
+  endpoint: http://127.0.0.1:9000
+  # key
+  accessKey: 1yffqbZD7SbcokRLGVT6
+  # 密钥
+  secretKey: BZthtVh3TDhmdJ1TGsXlxU7fHbWcv31PDQN9d13d
+  # 桶名字
+  bucketName: images
+  # 最大上传文件
+  maxSize: 20485760
+  # 图片大小限制
+  imagesMaxSize: 10485760

@@ -10,14 +10,6 @@ spring:
     active: dev
   jackson:
     time-zone: GMT+8
-  data:
-    redis:
-      repositories:
-        enabled: false
-      timeout: 5000
-      database: ${REDIS_DB:0}
-      host: ${REDIS_HOST:127.0.0.1}
-      port: ${REDIS_PORT:6379}
   servlet:
     multipart:
       max-file-size: 5MB
