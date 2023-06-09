@@ -116,15 +116,6 @@ ip:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
-  global-config:
-    db-config:
-      id-type: assign_id
-      # 1 代表已删除，不配置默认是1，也可修改配置
-      logic-delete-value: 1
-      # 0 代表未删除，不配置默认是0，也可修改配置
-      logic-not-delete-value: 0
-      # 全局逻辑删除字段值
-      logic-delete-field: deleteFlag
 
 minio:
   # 文件地址
