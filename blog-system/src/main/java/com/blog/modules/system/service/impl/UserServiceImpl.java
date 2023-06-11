@@ -25,6 +25,7 @@ import com.blog.modules.system.service.DeptService;
 import com.blog.modules.system.service.UserService;
 import com.blog.modules.system.service.UsersJobsService;
 import com.blog.modules.system.service.UsersRolesService;
+import com.blog.modules.tools.cloud.service.MinioServer;
 import com.blog.utils.*;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -62,6 +63,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private final UsersJobsService usersJobsService;
     private final UsersRolesMapper usersRolesMapper;
     private final UsersJobsMapper usersJobsMapper;
+    private final MinioServer minioServer;
 
     @Override
     public PageInfo<UserDto> queryAll(UserQueryParam query, Pageable pageable) {
@@ -273,27 +275,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public Map<String, String> updateAvatar(MultipartFile multipartFile) {
-        // 文件大小验证
-        FileUtil.checkSize(properties.getAvatarMaxSize(), multipartFile.getSize());
-        // 验证文件上传的格式
-        String image = "gif jpg png jpeg";
-        String fileType = FileUtil.getExtensionName(multipartFile.getOriginalFilename());
-        if (fileType != null && !image.contains(fileType)) {
-            throw new BadRequestException("文件格式错误！, 仅支持 " + image + " 格式");
-        }
+
+
         User user = getByUsername(SecurityUtils.getCurrentUsername());
-        String oldPath = user.getAvatarPath();
-        File file = FileUtil.upload(multipartFile, properties.getPath().getAvatar());
-        user.setAvatarName(file.getName());
-        user.setAvatarPath(Objects.requireNonNull(file).getPath());
-        userMapper.updateById(user);
-        if (StrUtil.isNotBlank(oldPath)) {
-            FileUtil.del(oldPath);
+
+        if (Objects.isNull(user)){
+            throw new BadRequestException("请上传正确的图片");
         }
+
+//        String oldPath = user.getAvatarPath();
+        String file = minioServer.uploadImages(multipartFile);
+        user.setAvatarName(file);
+        user.setAvatarPath(file);
+        userMapper.updateById(user);
+//        if (StrUtil.isNotBlank(oldPath)) {
+//            FileUtil.del(oldPath);
+//        }
         flushCache(user.getUsername());
-        return new HashMap<String, String>() {
+        return new HashMap<>(1) {
             {
-                put("avatar", file.getName());
+                put("avatar", file);
             }
         };
     }
