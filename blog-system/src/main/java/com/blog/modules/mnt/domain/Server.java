@@ -28,23 +28,35 @@ public class Server extends CommonEntity<Server> implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "server_id", type = IdType.AUTO)
     private Long id;
 
-    // @ApiModelProperty(value = "账号")
+    /**
+     * 账号
+     */
     private String account;
 
-    // @ApiModelProperty(value = "IP地址")
+    /**
+     * IP地址
+     */
     private String ip;
 
-    // @ApiModelProperty(value = "名称")
+    /**
+     * 名称
+     */
     private String name;
 
-    // @ApiModelProperty(value = "密码")
+    /**
+     * 密码
+     */
     private String password;
 
-    // @ApiModelProperty(value = "端口")
+    /**
+     * 端口
+     */
     private Integer port;
 
     public void copyFrom(Server source) {

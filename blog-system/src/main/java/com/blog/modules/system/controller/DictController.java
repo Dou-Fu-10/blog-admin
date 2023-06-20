@@ -18,41 +18,50 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
+ * 系统：字典管理
+ *
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
 @RestController
 @RequiredArgsConstructor
-// @Api(tags = "系统：字典管理")
 @RequestMapping("/api/dict")
 public class DictController {
 
     private static final String ENTITY_NAME = "dict";
     private final DictService dictService;
 
-    // @ApiOperation("导出字典数据")
+    /**
+     * 导出字典数据
+     */
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('dict:list')")
     public void download(HttpServletResponse response, DictQueryParam criteria) throws IOException {
         dictService.download(dictService.queryAll(criteria), response);
     }
 
-    // @ApiOperation("查询字典")
+    /**
+     * 查询字典
+     */
     @GetMapping(value = "/all")
     @PreAuthorize("@el.check('dict:list')")
     public ResponseEntity<Object> queryAll() {
         return new ResponseEntity<>(dictService.queryAll(new DictQueryParam()), HttpStatus.OK);
     }
 
-    // @ApiOperation("查询字典")
+    /**
+     * 查询字典
+     */
     @GetMapping
     @PreAuthorize("@el.check('dict:list')")
     public ResponseEntity<Object> query(DictQueryParam query, Pageable pageable) {
         return new ResponseEntity<>(dictService.queryAll(query, pageable), HttpStatus.OK);
     }
 
+    /**
+     * 新增字典
+     */
     @Log("新增字典")
-    // @ApiOperation("新增字典")
     @PostMapping
     @PreAuthorize("@el.check('dict:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody Dict resources) {
@@ -63,8 +72,10 @@ public class DictController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * 修改字典
+     */
     @Log("修改字典")
-    // @ApiOperation("修改字典")
     @PutMapping
     @PreAuthorize("@el.check('dict:edit')")
     public ResponseEntity<Object> update(@RequestBody Dict resources) {
@@ -72,8 +83,10 @@ public class DictController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 删除字典
+     */
     @Log("删除字典")
-    // @ApiOperation("删除字典")
     @DeleteMapping
     @PreAuthorize("@el.check('dict:del')")
     public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {

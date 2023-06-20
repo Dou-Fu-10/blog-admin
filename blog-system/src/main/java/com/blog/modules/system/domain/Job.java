@@ -29,19 +29,27 @@ import java.io.Serializable;
 public class Job extends CommonEntity<Job> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "job_id", type = IdType.AUTO)
     private Long id;
 
-    // @ApiModelProperty(value = "岗位名称")
+    /**
+     * 岗位名称
+     */
     @NotBlank
     private String name;
 
-    // @ApiModelProperty(value = "岗位状态")
+    /**
+     * 岗位状态
+     */
     @NotNull
     private Boolean enabled;
 
-    // @ApiModelProperty(value = "排序")
+    /**
+     * 排序
+     */
     private Integer jobSort;
 
     public void copyFrom(Job source) {

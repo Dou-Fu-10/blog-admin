@@ -24,10 +24,10 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
+ * 运维：数据库管理
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
-// @Api(tags = "运维：数据库管理")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/database")
@@ -36,22 +36,36 @@ public class DatabaseController {
     private final String fileSavePath = FileUtil.getTmpDirPath() + "/";
     private final DatabaseService databaseService;
 
-    // @ApiOperation("导出数据库数据")
+    /**
+     * 导出数据库数据
+     * @param response
+     * @param criteria
+     * @throws IOException
+     */
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('database:list')")
     public void download(HttpServletResponse response, DatabaseQueryParam criteria) throws IOException {
         databaseService.download(databaseService.queryAll(criteria), response);
     }
 
-    // @ApiOperation(value = "查询数据库")
+    /**
+     * 查询数据库
+     * @param criteria
+     * @param pageable
+     * @return
+     */
     @GetMapping
     @PreAuthorize("@el.check('database:list')")
     public ResponseEntity<Object> query(DatabaseQueryParam criteria, Pageable pageable) {
         return new ResponseEntity<>(databaseService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
+    /**
+     * 新增数据库
+     * @param resources
+     * @return
+     */
     @Log("新增数据库")
-    // @ApiOperation(value = "新增数据库")
     @PostMapping
     @PreAuthorize("@el.check('database:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody Database resources) {
@@ -59,8 +73,12 @@ public class DatabaseController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * 修改数据库
+     * @param resources
+     * @return
+     */
     @Log("修改数据库")
-    // @ApiOperation(value = "修改数据库")
     @PutMapping
     @PreAuthorize("@el.check('database:edit')")
     public ResponseEntity<Object> update(@Validated @RequestBody Database resources) {
@@ -68,8 +86,12 @@ public class DatabaseController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 删除数据库
+     * @param ids
+     * @return
+     */
     @Log("删除数据库")
-    // @ApiOperation(value = "删除数据库")
     @DeleteMapping
     @PreAuthorize("@el.check('database:del')")
     public ResponseEntity<Object> delete(@RequestBody Set<String> ids) {
@@ -77,16 +99,26 @@ public class DatabaseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * 测试数据库链接
+     * @param resources
+     * @return
+     */
     @Log("测试数据库链接")
-    // @ApiOperation(value = "测试数据库链接")
     @PostMapping("/testConnect")
     @PreAuthorize("@el.check('database:testConnect')")
     public ResponseEntity<Object> testConnect(@Validated @RequestBody Database resources) {
         return new ResponseEntity<>(databaseService.testConnection(resources), HttpStatus.CREATED);
     }
 
+    /**
+     * 执行SQL脚本
+     * @param file
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("执行SQL脚本")
-    // @ApiOperation(value = "执行SQL脚本")
     @PostMapping(value = "/upload")
     @PreAuthorize("@el.check('database:add')")
     public ResponseEntity<Object> upload(@RequestBody MultipartFile file, HttpServletRequest request) throws Exception {

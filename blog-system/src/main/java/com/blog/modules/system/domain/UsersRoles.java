@@ -22,15 +22,18 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties(value = {"handler"})
 @TableName("sys_users_roles")
-// @ApiModel(value="UsersRoles对象", description="用户角色关联")
 public class UsersRoles implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // @ApiModelProperty(value = "用户ID")
+    /**
+     * 用户ID
+     */
     @TableField(value = "user_id")
     private Long userId;
 
-    // @ApiModelProperty(value = "角色ID")
+    /**
+     * 角色ID
+     */
     @TableField(value = "role_id")
     private Long roleId;
 }

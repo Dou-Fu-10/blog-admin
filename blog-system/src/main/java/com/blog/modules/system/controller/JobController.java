@@ -18,34 +18,41 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
+ * 系统：岗位管理
+ *
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
 @RestController
 @RequiredArgsConstructor
-// @Api(tags = "系统：岗位管理")
 @RequestMapping("/api/job")
 public class JobController {
 
     private static final String ENTITY_NAME = "job";
     private final JobService jobService;
 
-    // @ApiOperation("导出岗位数据")
+    /**
+     * 导出岗位数据
+     */
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('job:list')")
     public void download(HttpServletResponse response, JobQueryParam criteria) throws IOException {
         jobService.download(jobService.queryAll(criteria), response);
     }
 
-    // @ApiOperation("查询岗位")
+    /**
+     * 查询岗位
+     */
     @GetMapping
     @PreAuthorize("@el.check('job:list','user:list')")
     public ResponseEntity<Object> query(JobQueryParam criteria, Pageable pageable) {
         return new ResponseEntity<>(jobService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
+    /**
+     * 新增岗位
+     */
     @Log("新增岗位")
-    // @ApiOperation("新增岗位")
     @PostMapping
     @PreAuthorize("@el.check('job:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody Job resources) {
@@ -56,8 +63,10 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * 修改岗位
+     */
     @Log("修改岗位")
-    // @ApiOperation("修改岗位")
     @PutMapping
     @PreAuthorize("@el.check('job:edit')")
     public ResponseEntity<Object> update(@Validated(Job.Update.class) @RequestBody Job resources) {
@@ -65,8 +74,10 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 删除岗位
+     */
     @Log("删除岗位")
-    // @ApiOperation("删除岗位")
     @DeleteMapping
     @PreAuthorize("@el.check('job:del')")
     public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {

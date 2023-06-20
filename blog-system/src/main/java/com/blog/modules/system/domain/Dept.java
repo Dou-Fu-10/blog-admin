@@ -29,24 +29,36 @@ import java.io.Serializable;
 public class Dept extends CommonEntity<Dept> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "dept_id", type = IdType.AUTO)
     private Long id;
 
-    // @ApiModelProperty(value = "上级部门")
+    /**
+     * 上级部门
+     */
     private Long pid;
 
-    // @ApiModelProperty(value = "子部门数目")
+    /**
+     * 子部门数目
+     */
     private Integer subCount;
 
-    // @ApiModelProperty(value = "名称")
+    /**
+     * 名称
+     */
     @NotBlank
     private String name;
 
-    // @ApiModelProperty(value = "排序")
+    /**
+     * 排序
+     */
     private Integer deptSort;
 
-    // @ApiModelProperty(value = "状态")
+    /**
+     * 状态
+     */
     @NotNull
     private Boolean enabled;
 

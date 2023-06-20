@@ -28,23 +28,33 @@ public class Database extends CommonEntity<Database> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "db_id", type = IdType.ASSIGN_ID)
     private String id;
 
-    // @ApiModelProperty(value = "名称")
+    /**
+     * 名称
+     */
     @NotBlank
     private String name;
 
-    // @ApiModelProperty(value = "jdbc连接")
+    /**
+     * jdbc连接
+     */
     @NotBlank
     private String jdbcUrl;
 
-    // @ApiModelProperty(value = "账号")
+    /**
+     * 账号
+     */
     @NotBlank
     private String userName;
 
-    // @ApiModelProperty(value = "密码")
+    /**
+     * 密码
+     */
     @NotBlank
     private String pwd;
 

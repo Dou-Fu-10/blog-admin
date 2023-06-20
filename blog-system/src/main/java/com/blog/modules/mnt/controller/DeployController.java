@@ -25,11 +25,11 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * 运维：部署管理
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
 @RestController
-// @Api(tags = "运维：部署管理")
 @RequiredArgsConstructor
 @RequestMapping("/api/deploy")
 public class DeployController {
@@ -38,22 +38,36 @@ public class DeployController {
     private final DeployService deployService;
 
 
-    // @ApiOperation("导出部署数据")
+    /**
+     * 导出部署数据
+     * @param response
+     * @param criteria
+     * @throws IOException
+     */
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('database:list')")
     public void download(HttpServletResponse response, DeployQueryParam criteria) throws IOException {
         deployService.download(deployService.queryAll(criteria), response);
     }
 
-    // @ApiOperation(value = "查询部署")
+    /**
+     * 查询部署
+     * @param criteria
+     * @param pageable
+     * @return
+     */
     @GetMapping
     @PreAuthorize("@el.check('deploy:list')")
     public ResponseEntity<Object> query(DeployQueryParam criteria, Pageable pageable) {
         return new ResponseEntity<>(deployService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
+    /**
+     * 新增部署
+     * @param resources
+     * @return
+     */
     @Log("新增部署")
-    // @ApiOperation(value = "新增部署")
     @PostMapping
     @PreAuthorize("@el.check('deploy:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody DeployDto resources) {
@@ -61,8 +75,12 @@ public class DeployController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * 修改部署
+     * @param resources
+     * @return
+     */
     @Log("修改部署")
-    // @ApiOperation(value = "修改部署")
     @PutMapping
     @PreAuthorize("@el.check('deploy:edit')")
     public ResponseEntity<Object> update(@Validated @RequestBody DeployDto resources) {
@@ -70,8 +88,12 @@ public class DeployController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 删除部署
+     * @param ids
+     * @return
+     */
     @Log("删除部署")
-    // @ApiOperation(value = "删除部署")
     @DeleteMapping
     @PreAuthorize("@el.check('deploy:del')")
     public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {
@@ -79,8 +101,14 @@ public class DeployController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * 上传文件部署
+     * @param file
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("上传文件部署")
-    // @ApiOperation(value = "上传文件部署")
     @PostMapping(value = "/upload")
     @PreAuthorize("@el.check('deploy:edit')")
     public ResponseEntity<Object> upload(@RequestBody MultipartFile file, HttpServletRequest request) throws Exception {
@@ -103,8 +131,12 @@ public class DeployController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
+    /**
+     * 系统还原
+     * @param resources
+     * @return
+     */
     @Log("系统还原")
-    // @ApiOperation(value = "系统还原")
     @PostMapping(value = "/serverReduction")
     @PreAuthorize("@el.check('deploy:edit')")
     public ResponseEntity<Object> serverReduction(@Validated @RequestBody DeployHistory resources) {
@@ -112,8 +144,12 @@ public class DeployController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 服务运行状态
+     * @param resources
+     * @return
+     */
     @Log("服务运行状态")
-    // @ApiOperation(value = "服务运行状态")
     @PostMapping(value = "/serverStatus")
     @PreAuthorize("@el.check('deploy:edit')")
     public ResponseEntity<Object> serverStatus(@Validated @RequestBody DeployDto resources) {
@@ -121,8 +157,12 @@ public class DeployController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 启动服务
+     * @param resources
+     * @return
+     */
     @Log("启动服务")
-    // @ApiOperation(value = "启动服务")
     @PostMapping(value = "/startServer")
     @PreAuthorize("@el.check('deploy:edit')")
     public ResponseEntity<Object> startServer(@Validated @RequestBody DeployDto resources) {
@@ -130,8 +170,12 @@ public class DeployController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 停止服务
+     * @param resources
+     * @return
+     */
     @Log("停止服务")
-    // @ApiOperation(value = "停止服务")
     @PostMapping(value = "/stopServer")
     @PreAuthorize("@el.check('deploy:edit')")
     public ResponseEntity<Object> stopServer(@Validated @RequestBody DeployDto resources) {

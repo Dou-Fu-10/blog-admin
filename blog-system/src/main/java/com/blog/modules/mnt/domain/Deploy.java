@@ -28,11 +28,15 @@ public class Deploy extends CommonEntity<Deploy> implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "deploy_id", type = IdType.AUTO)
     private Long id;
 
-    // @ApiModelProperty(value = "应用编号")
+    /**
+     * 应用编号
+     */
     private Long appId;
 
     public void copyFrom(Deploy source) {

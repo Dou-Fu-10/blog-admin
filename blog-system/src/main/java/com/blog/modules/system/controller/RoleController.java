@@ -25,12 +25,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
+ * 系统：角色管理
+ *
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
 @RestController
 @RequiredArgsConstructor
-// @Api(tags = "系统：角色管理")
 @RequestMapping("/api/roles")
 public class RoleController {
 
@@ -38,79 +39,97 @@ public class RoleController {
 
     private static final String ENTITY_NAME = "role";
 
-    // @ApiOperation("获取单个role")
+    /**
+     * 获取单个role
+     */
     @GetMapping(value = "/{id}")
     @PreAuthorize("@el.check('roles:list')")
-    public ResponseEntity<Object> query(@PathVariable Long id){
+    public ResponseEntity<Object> query(@PathVariable Long id) {
         return new ResponseEntity<>(roleService.findById(id), HttpStatus.OK);
     }
 
-    // @ApiOperation("导出角色数据")
+    /**
+     * 导出角色数据
+     */
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('role:list')")
     public void download(HttpServletResponse response, RoleQueryParam criteria) throws IOException {
         roleService.download(roleService.queryAll(criteria), response);
     }
 
-    // @ApiOperation("返回全部的角色")
+    /**
+     * 返回全部的角色
+     */
     @GetMapping(value = "/all")
     @PreAuthorize("@el.check('roles:list','user:add','user:edit')")
-    public ResponseEntity<Object> query(){
-        return new ResponseEntity<>(roleService.queryAll(),HttpStatus.OK);
+    public ResponseEntity<Object> query() {
+        return new ResponseEntity<>(roleService.queryAll(), HttpStatus.OK);
     }
 
-    // @ApiOperation("查询角色")
+    /**
+     * 查询角色
+     */
     @GetMapping
     @PreAuthorize("@el.check('roles:list')")
-    public ResponseEntity<Object> query(RoleQueryParam criteria, Pageable pageable){
-        return new ResponseEntity<>(roleService.queryAll(criteria,pageable),HttpStatus.OK);
+    public ResponseEntity<Object> query(RoleQueryParam criteria, Pageable pageable) {
+        return new ResponseEntity<>(roleService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
-    // @ApiOperation("获取用户级别")
+    /**
+     * 获取用户级别
+     */
     @GetMapping(value = "/level")
-    public ResponseEntity<Object> getLevel(){
-        return new ResponseEntity<>(Dict.create().set("level", getLevels(null)),HttpStatus.OK);
+    public ResponseEntity<Object> getLevel() {
+        return new ResponseEntity<>(Dict.create().set("level", getLevels(null)), HttpStatus.OK);
     }
 
+    /**
+     * 新增角色
+     */
     @Log("新增角色")
-    // @ApiOperation("新增角色")
     @PostMapping
     @PreAuthorize("@el.check('roles:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody RoleDto resources){
+    public ResponseEntity<Object> create(@Validated @RequestBody RoleDto resources) {
         if (resources.getId() != null) {
-            throw new BadRequestException("A new "+ ENTITY_NAME +" cannot already have an ID");
+            throw new BadRequestException("A new " + ENTITY_NAME + " cannot already have an ID");
         }
         getLevels(resources.getLevel());
         roleService.save(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * 修改角色
+     */
     @Log("修改角色")
-    // @ApiOperation("修改角色")
     @PutMapping
     @PreAuthorize("@el.check('roles:edit')")
-    public ResponseEntity<Object> update(@Validated(CommonEntity.Update.class) @RequestBody RoleDto resources){
+    public ResponseEntity<Object> update(@Validated(CommonEntity.Update.class) @RequestBody RoleDto resources) {
         getLevels(resources.getLevel());
         roleService.updateById(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 修改角色菜单
+     */
     @Log("修改角色菜单")
-    // @ApiOperation("修改角色菜单")
     @PutMapping(value = "/menu")
     @PreAuthorize("@el.check('roles:edit')")
-    public ResponseEntity<Object> updateMenu(@RequestBody RoleDto resources){
+    public ResponseEntity<Object> updateMenu(@RequestBody RoleDto resources) {
         RoleDto role = roleService.findById(resources.getId());
         getLevels(role.getLevel());
         roleService.updateMenu(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 删除角色
+     */
     @Log("删除角色")
-    // @ApiOperation("删除角色")
     @DeleteMapping
     @PreAuthorize("@el.check('roles:del')")
-    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids){
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {
         for (Long id : ids) {
             RoleDto role = roleService.findById(id);
             getLevels(role.getLevel());

@@ -30,27 +30,39 @@ public class DeployHistory extends com.baomidou.mybatisplus.extension.activereco
     private static final long serialVersionUID = 1L;
 
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "history_id", type = IdType.ASSIGN_ID)
     private String id;
 
-    // @ApiModelProperty(value = "应用名称")
+    /**
+     * 应用名称
+     */
     @NotBlank
     private String appName;
 
-    // @ApiModelProperty(value = "部署日期")
+    /**
+     * 部署日期
+     */
     @NotNull
     private Date deployDate;
 
-    // @ApiModelProperty(value = "部署用户")
+    /**
+     * 部署用户
+     */
     @NotBlank
     private String deployUser;
 
-    // @ApiModelProperty(value = "服务器IP")
+    /**
+     * 服务器IP
+     */
     @NotBlank
     private String ip;
 
-    // @ApiModelProperty(value = "部署编号")
+    /**
+     * 部署编号
+     */
     private Long deployId;
 
     public void copyFrom(DeployHistory source) {

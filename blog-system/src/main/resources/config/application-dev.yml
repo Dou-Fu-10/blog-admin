@@ -119,11 +119,11 @@ mybatis-plus:
 
 minio:
   # 文件地址
-  endpoint: http://127.0.0.1:9000
+  endpoint: http://192.168.146.110:9000
   # key
-  accessKey: PQQU5HOBMK59DLZY92P4
+  accessKey: 7ET58ISWWL78V1HBYN3W
   # 密钥
-  secretKey: c8ZaN+s+KTtmF3r3XpvQSzx1ERsRQmlbxm1mw+5I
+  secretKey: toKbaAYr+Pj6FWHu61+KUe2bt8jdX6fDq+53m3Mt
   # 桶名字
   bucketName: images
   # 最大上传文件

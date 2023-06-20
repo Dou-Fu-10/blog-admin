@@ -24,7 +24,9 @@ public class QuartzLog extends com.baomidou.mybatisplus.extension.activerecord.M
     private static final long serialVersionUID = 1L;
 
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "log_id", type = IdType.AUTO)
     private Long id;
 

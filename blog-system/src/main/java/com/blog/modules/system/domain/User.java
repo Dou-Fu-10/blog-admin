@@ -28,48 +28,74 @@ import java.util.Date;
 public class User extends CommonEntity<User> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "user_id", type = IdType.AUTO)
     @NotNull(groups = Update.class)
     private Long id;
 
-    // @ApiModelProperty(value = "部门名称")
+    /**
+     * 部门名称
+     */
     private Long deptId;
 
-    // @ApiModelProperty(value = "用户名")
+    /**
+     * 用户名
+     */
     @NotBlank
     private String username;
 
-    // @ApiModelProperty(value = "昵称")
+    /**
+     * 昵称
+     */
     private String nickName;
 
-    // @ApiModelProperty(value = "性别")
+    /**
+     * 性别
+     */
     private String gender;
 
-    // @ApiModelProperty(value = "手机号码")
+    /**
+     * 手机号码
+     */
     @NotBlank
     private String phone;
 
-    // @ApiModelProperty(value = "邮箱")
+    /**
+     * 邮箱
+     */
     @NotBlank
     private String email;
 
-    // @ApiModelProperty(value = "头像地址")
+    /**
+     * 头像地址
+     */
     private String avatarName;
 
-    // @ApiModelProperty(value = "头像真实路径")
+    /**
+     * 头像真实路径
+     */
     private String avatarPath;
 
-    // @ApiModelProperty(value = "密码")
+    /**
+     * 密码
+     */
     private String password;
 
-    // @ApiModelProperty(value = "是否为admin账号")
+    /**
+     * 是否为admin账号
+     */
     private Boolean isAdmin;
 
-    // @ApiModelProperty(value = "状态：1启用、0禁用")
+    /**
+     * 状态：1启用、0禁用
+     */
     private Boolean enabled;
 
-    // @ApiModelProperty(value = "修改密码的时间")
+    /**
+     * 修改密码的时间
+     */
     private Date pwdResetTime;
 
     public <T> void copyFrom(T source) {

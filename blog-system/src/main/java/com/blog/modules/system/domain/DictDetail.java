@@ -30,27 +30,37 @@ import java.io.Serializable;
 @TableName("sys_dict_detail")
 public class DictDetail extends CommonEntity<DictDetail> implements Serializable {
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "detail_id", type = IdType.AUTO)
     private Long id;
 
     @NotNull
     private Long dictId;
 
-    // @ApiModelProperty(value = "字典id")
+    /**
+     * 字典id
+     */
     @NotNull
     @TableField(exist = false)
     private DictSmallDto dict;
 
-    // @ApiModelProperty(value = "字典标签")
+    /**
+     * 字典标签
+     */
     @NotBlank
     private String label;
 
-    // @ApiModelProperty(value = "字典值")
+    /**
+     * 字典值
+     */
     @NotBlank
     private String value;
 
-    // @ApiModelProperty(value = "排序")
+    /**
+     * 排序
+     */
     private Integer dictSort;
 
     public void copyFrom(DictDetail source) {

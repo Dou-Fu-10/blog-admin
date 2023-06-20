@@ -10,19 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 系统-服务监控管理
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
 @RestController
 @RequiredArgsConstructor
-// @Api(tags = "系统-服务监控管理")
 @RequestMapping("/api/monitor")
 public class MonitorController {
 
     private final MonitorService serverService;
 
+    /**
+     * 查询服务监控
+     * @return
+     */
     @GetMapping
-    // @ApiOperation("查询服务监控")
     @PreAuthorize("@el.check('monitor:list')")
     public ResponseEntity<Object> query(){
         return new ResponseEntity<>(serverService.getServers(),HttpStatus.OK);

@@ -27,15 +27,21 @@ import java.io.Serializable;
 @TableName("sys_dict")
 public class Dict extends CommonEntity<Dict> implements Serializable {
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "dict_id", type = IdType.AUTO)
     private Long id;
 
-    // @ApiModelProperty(value = "字典名称")
+    /**
+     * 字典名称
+     */
     @NotBlank
     private String name;
 
-    // @ApiModelProperty(value = "描述")
+    /**
+     * 描述
+     */
     private String description;
 
     public void copyFrom(Dict source) {

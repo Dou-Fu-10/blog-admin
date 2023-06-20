@@ -15,33 +15,47 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
+ * 运维：部署历史管理
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
 @RestController
 @RequiredArgsConstructor
-// @Api(tags = "运维：部署历史管理")
 @RequestMapping("/api/deployHistory")
 public class DeployHistoryController {
 
     private final DeployHistoryService deployhistoryService;
 
-    // @ApiOperation("导出部署历史数据")
+    /**
+     * 导出部署历史数据
+     * @param response
+     * @param criteria
+     * @throws IOException
+     */
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('deployHistory:list')")
     public void download(HttpServletResponse response, DeployHistoryQueryParam criteria) throws IOException {
         deployhistoryService.download(deployhistoryService.queryAll(criteria), response);
     }
 
-    // @ApiOperation(value = "查询部署历史")
+    /**
+     * 查询部署历史
+     * @param criteria
+     * @param pageable
+     * @return
+     */
     @GetMapping
     @PreAuthorize("@el.check('deployHistory:list')")
     public ResponseEntity<Object> query(DeployHistoryQueryParam criteria, Pageable pageable) {
         return new ResponseEntity<>(deployhistoryService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
+    /**
+     * 删除部署历史
+     * @param ids
+     * @return
+     */
     @Log("删除DeployHistory")
-    // @ApiOperation(value = "删除部署历史")
     @DeleteMapping
     @PreAuthorize("@el.check('deployHistory:del')")
     public ResponseEntity<Object> delete(@RequestBody Set<String> ids) {

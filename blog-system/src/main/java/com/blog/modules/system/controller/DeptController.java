@@ -19,26 +19,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 /**
+ * 系统：部门管理
  * @author IKUN
  * @since 2023-05-31 21:25:43
  */
 @RestController
 @RequiredArgsConstructor
-// @Api(tags = "系统：部门管理")
 @RequestMapping("/api/dept")
 public class DeptController {
 
     private static final String ENTITY_NAME = "dept";
     private final DeptService deptService;
 
-    // @ApiOperation("导出部门数据")
+    /**
+     * 导出部门数据
+     */
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('dept:list')")
     public void download(HttpServletResponse response, DeptQueryParam criteria) throws Exception {
         deptService.download(deptService.queryAll(criteria, false), response);
     }
 
-    // @ApiOperation("查询部门")
+    /**
+     * 查询部门
+     */
     @GetMapping
     @PreAuthorize("@el.check('user:list','dept:list')")
     public ResponseEntity<Object> query(DeptQueryParam criteria) throws Exception {
@@ -46,7 +50,9 @@ public class DeptController {
         return new ResponseEntity<>(PageUtil.toPage(deptDtos, deptDtos.size()), HttpStatus.OK);
     }
 
-    // @ApiOperation("查询部门:根据ID获取同级与上级数据")
+    /**
+     * 查询部门:根据ID获取同级与上级数据
+     */
     @PostMapping("/superior")
     @PreAuthorize("@el.check('user:list','dept:list')")
     public ResponseEntity<Object> getSuperior(@RequestBody List<Long> ids) {
@@ -59,8 +65,10 @@ public class DeptController {
         return new ResponseEntity<>(deptService.buildTree(new ArrayList<>(deptDtos)), HttpStatus.OK);
     }
 
+    /**
+     * 新增部门
+     */
     @Log("新增部门")
-    // @ApiOperation("新增部门")
     @PostMapping
     @PreAuthorize("@el.check('dept:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody Dept resources) {
@@ -71,8 +79,10 @@ public class DeptController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * 修改部门
+     */
     @Log("修改部门")
-    // @ApiOperation("修改部门")
     @PutMapping
     @PreAuthorize("@el.check('dept:edit')")
     public ResponseEntity<Object> update(@Validated(Dept.Update.class) @RequestBody Dept resources) {
@@ -80,8 +90,10 @@ public class DeptController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 删除部门
+     */
     @Log("删除部门")
-    // @ApiOperation("删除部门")
     @DeleteMapping
     @PreAuthorize("@el.check('dept:del')")
     public ResponseEntity<Object> delete(@RequestBody Set<Long> ids) {

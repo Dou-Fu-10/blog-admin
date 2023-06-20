@@ -26,50 +26,78 @@ import java.util.Objects;
 public class Menu extends CommonEntity<Menu> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // @ApiModelProperty(value = "ID")
+    /**
+     * ID
+     */
     @TableId(value = "menu_id", type = IdType.AUTO)
     private Long id;
 
-    // @ApiModelProperty(value = "上级菜单ID")
+    /**
+     * 上级菜单ID
+     */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Long pid;
 
-    // @ApiModelProperty(value = "子菜单数目")
+    /**
+     * 子菜单数目
+     */
     private Integer subCount;
 
-    // @ApiModelProperty(value = "菜单类型")
+    /**
+     * 菜单类型
+     */
     private Integer type;
 
-    // @ApiModelProperty(value = "菜单标题")
+    /**
+     * 菜单标题
+     */
     private String title;
 
-    // @ApiModelProperty(value = "组件名称")
+    /**
+     * 组件名称
+     */
     @TableField(value = "name")
     private String componentName;
 
-    // @ApiModelProperty(value = "组件")
+    /**
+     * 组件
+     */
     private String component;
 
-    // @ApiModelProperty(value = "排序")
+    /**
+     * 排序
+     */
     private Integer menuSort;
 
-    // @ApiModelProperty(value = "图标")
+    /**
+     * 图标
+     */
     private String icon;
 
-    // @ApiModelProperty(value = "链接地址")
+    /**
+     * 链接地址
+     */
     private String path;
 
-    // @ApiModelProperty(value = "是否外链")
+    /**
+     * 是否外链
+     */
     private Boolean iFrame;
 
-    // @ApiModelProperty(value = "缓存")
+    /**
+     * 缓存
+     */
     @TableField(value = "`cache`")
     private Boolean cache;
 
-    // @ApiModelProperty(value = "隐藏")
+    /**
+     * 隐藏
+     */
     private Boolean hidden;
 
-    // @ApiModelProperty(value = "权限")
+    /**
+     * 权限
+     */
     private String permission;
 
     @Override
