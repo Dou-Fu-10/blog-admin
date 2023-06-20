@@ -59,6 +59,6 @@ public class AppRun {
      */
     @AnonymousGetMapping("/api/test")
     public String index() {
-        return "Backend service started successfully";
+        return "测试连接性";
     }
 }
