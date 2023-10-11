@@ -5,14 +5,15 @@ spring:
       repositories:
         enabled: false
       timeout: 5000
-      database: ${REDIS_DB:0}
-      host: ${REDIS_HOST:127.0.0.1}
-      port: ${REDIS_PORT:6379}
+      database: 0
+      host: localhost
+      port: 6379
+      password: 123456
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/blog_admin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+    url: jdbc:mysql://localhost:3306/blog_admin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
     username: root
-    password: root
+    password: mall123456
     druid:
       db-type: com.alibaba.druid.pool.DruidDataSource
       # 初始连接数
@@ -120,11 +121,11 @@ mybatis-plus:
 
 minio:
   # 文件地址
-  endpoint: http://127.0.0.1:9000
+  endpoint: http://localhost:9000
   # key
-  accessKey: 1yffqbZD7SbcokRLGVT6
+  accessKey: OQKO6Z7CJcAa3IP10VSO
   # 密钥
-  secretKey: BZthtVh3TDhmdJ1TGsXlxU7fHbWcv31PDQN9d13d
+  secretKey: DexvmvcpTHRoX87r1hebbaqmECzNRJ275CjaRtCz
   # 桶名字
   bucketName: images
   # 最大上传文件
